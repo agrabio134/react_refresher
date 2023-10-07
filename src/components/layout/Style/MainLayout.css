@@ -1,0 +1,43 @@
+.main_router {
+  border: 1px solid #000;
+  display: grid;
+  grid-template-columns: 1fr 3fr;
+}
+.header_logo {
+  border: 1px solid #00ff37;
+}
+
+.main_nav {
+  border: 1px solid #fd0000;
+  display: flex;
+  justify-content: center;
+  padding: 15px;
+}
+.nav_list {
+  border: 1px solid #ff9a00;
+  display: flex;
+  justify-content: space-around;
+  list-style: none;
+  width: 10%;
+  margin: 0 5px ;
+}
+.nav_list:nth-child(4) {
+    margin-left: 30%;
+  }
+.sub_container {
+  border: 1px solid #ff9a00;
+  display: grid;
+  grid-template-columns: 3fr 1fr;
+}
+
+.main_page {
+  border: 1px solid #0004ff;
+  height: 100vh;
+}
+
+.side_bar {
+  border: 1px solid #ff00ea;
+}
+.footer {
+  border: 1px solid #00c3ff;
+}
