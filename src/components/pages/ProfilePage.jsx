@@ -9,30 +9,90 @@ const ProfilePage = () => {
 
   const [currentPage, setCurrentPage] = useState("login");
   const { isLogin, toggleLogin } = useAuth(); // Use the hook to access the global state
+
   // check token
 
   const [token, setToken] = useState(localStorage.getItem("authToken")); // Retrieve the token
 
-  // Add a state variable to listen for changes in isLogin
-  const [loginStatusChanged, setLoginStatusChanged] = useState(false);
-
   const handleLogout = () => {
     localStorage.removeItem("authToken");
     toggleLogin(false); // Update the global state to indicate logout
+    window.location.reload();
   };
 
-  // check if user is logged in
-
-  const checkLogin = () => {
-    return isLogin ? (
+  // navigation button for signup and login
+  const handleButtonNav = () => {
+    return (
       <>
-        <h1>You are logged in</h1>
-        <button onClick={handleLogout}>Logout</button>
+        <button onClick={() => setCurrentPage("signup")}>Signup</button>
+        <button onClick={() => setCurrentPage("login")}>Login</button>
       </>
-    ) : (
-      <h1>You are not logged in</h1>
     );
   };
+
+  // render page
+  const renderPage = () => {
+    switch (currentPage) {
+      case "signup":
+        return (
+          <>
+            {handleButtonNav()}
+            <SigupSection />
+          </>
+        );
+      case "login":
+        return (
+          <>
+            {handleButtonNav()}
+            <LoginSection />
+          </>
+        );
+      default:
+        return (
+          <>
+            {handleButtonNav()}
+            <LoginSection />
+          </>
+        );
+    }
+  };
+
+  const getUser = async () => {
+    const url = "http://localhost/api/getuser";
+    const data = { token: decodedToken };
+    const response = await fetch(url, data, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ token: decodedToken }),
+    });
+    console.log(response);
+    // Extract and parse the response text
+    const responseDataText = await response.text();
+    console.log("Response Data:", responseDataText);
+
+    
+  };
+
+  const checkLogin = () => {
+    console.log(getUser());
+
+    if (token) {
+      console.log("token", decodedToken);
+
+      return (
+        <>
+          {/* <h1>Profile Page</h1> */}
+          <h2>Welcome {decodedToken.firstname}</h2>
+          <button onClick={handleLogout}>Logout</button>
+        </>
+      );
+    } else {
+      return <> {renderPage()}</>;
+    }
+  };
+
   useEffect(() => {
     // Simulate a 1-second loading delay
     const delay = setTimeout(() => {
@@ -47,27 +107,17 @@ const ProfilePage = () => {
           setDecodedToken(decodedToken);
           setIsLoading(false); // Set loading to false
           toggleLogin(true); // Update local state
+          // console.log(decodedToken);
         }
       } else {
         setIsLoading(false); // Set loading to false
         toggleLogin(false); // Update local state
       }
-    }, 500); // 1-second delay
+    }, 500); // .5-second delay
 
     // Clear the timeout if the component unmounts
     return () => clearTimeout(delay);
   }, []);
-
-  // render page
-  const renderPage = () => {
-    if (isLogin) {
-      return checkLogin();
-    } else if (currentPage === "signup") {
-      return <SigupSection />;
-    } else if (currentPage === "login") {
-      return <LoginSection />;
-    }
-  };
 
   return (
     <>
@@ -76,15 +126,8 @@ const ProfilePage = () => {
         // Display a preloader while loading
         <div>Loading...</div>
       ) : (
-
-      <div>
-        <button onClick={() => setCurrentPage("signup")}>Signup</button>
-        <button onClick={() => setCurrentPage("login")}>Login</button>
-        {/* add logout  */}
-
-        {renderPage()}
-      </div>
-        )}
+        <div>{checkLogin()}</div>
+      )}
     </>
   );
 };
@@ -190,7 +233,7 @@ const LoginSection = () => {
     });
   };
 
-  const handleSubmit = async (event) => {
+  const handleLoginSubmit = async (event) => {
     event.preventDefault();
     console.log(formData);
 
@@ -223,6 +266,7 @@ const LoginSection = () => {
           // Login successful, update the isLogin state
           toggleLogin(); // Update the global state
           console.log("Login successful");
+          window.location.reload();
         } catch (error) {
           console.error("An error occurred while parsing JSON:", error);
         }
@@ -238,7 +282,7 @@ const LoginSection = () => {
   return (
     <>
       <h1>Login Page</h1>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleLoginSubmit}>
         <div>
           <label htmlFor="email">Email</label>
           <input
