@@ -3,7 +3,7 @@ import "./Style/MainLayout.css";
 import HomePage from "../pages/HomePage";
 import AboutPage from "../pages/AboutUs";
 import ServicePage from "../pages/ServicePage";
-import ProfilePage from "../pages/ProfilePage";
+import ProfilePage from "../pages/Profile/ProfilePage";
 
 const MainLayout = () => {
   return (
@@ -14,10 +14,18 @@ const MainLayout = () => {
           <div className="main_router">
             <div className="header_logo">Logo</div>
             <div className="main_nav">
-              <Link to="/" className="nav_list">Home</Link>
-              <Link to="service"  className="nav_list">Service</Link>
-              <Link to="about"  className="nav_list">About</Link>
-              <Link to="profile"  className="nav_list">Profile</Link>
+              <Link to="/" className="nav_list">
+                Home
+              </Link>
+              <Link to="service" className="nav_list">
+                Service
+              </Link>
+              <Link to="about" className="nav_list">
+                About
+              </Link>
+              <Link to="profile" className="nav_list">
+                Profile
+              </Link>
             </div>
           </div>
           <div className="sub_container">
@@ -26,7 +34,7 @@ const MainLayout = () => {
                 <Route path="/" element={<HomePage />} />
                 <Route path="/service" element={<ServicePage />} />
                 <Route path="/about" element={<AboutPage />} />
-                <Route path="/profile" element={<ProfilePage />} />
+                <Route path="/profile" element={<ProfilePage/>} />
               </Routes>
             </div>
             <div className="side_bar">Sidebar</div>
