@@ -7,10 +7,13 @@ const SigupSection = () => {
   const { isLogin } = useAuth(); // Use the hook to access the global state
 
   const [formData, setFormData] = useState({
-    firstname: "",
-    lastname: "",
+    fname: "",
+    lname: "",
+    contact: "",
+    address: "",
     email: "",
     password: "",
+    confirmPass: "",
   });
 
   const handleChange = (event) => {
@@ -58,6 +61,7 @@ const SigupSection = () => {
     console.log(formData);
 
     // add useEffect to check if email already exists
+
     try {
       const response = await fetch("http://localhost/api/users", {
         method: "POST",
@@ -71,6 +75,34 @@ const SigupSection = () => {
       const responseDataText = await response.json();
       console.log("Response Data:", responseDataText);
 
+      if (response.status === 404) {
+        console.log("No data found in users.");
+        if (formData.password !== formData.confirmPass) {
+          Swal.fire({
+            title: "Password does not match",
+            icon: "error",
+            confirmButtonText: "Okay",
+          }).then((result) => {
+            if (result.isConfirmed) {
+              return;
+            }
+          });
+        } else if (formData.password.length < 8) {
+          Swal.fire({
+            title: "Password must be at least 8 characters",
+            icon: "error",
+            confirmButtonText: "Okay",
+          }).then((result) => {
+            if (result.isConfirmed) {
+              return;
+            }
+          });
+        } else {
+          validatedSignup();
+        }
+        return;
+      }
+
       let isEmailExists = false;
       responseDataText.payload.forEach((item) => {
         if (item.email === formData.email) {
@@ -78,11 +110,15 @@ const SigupSection = () => {
         }
       });
       // if data is empty then alert user
+
       if (
-        (formData.firstname === "",
-        formData.lastname === "",
+        (formData.fname === "",
+        formData.lname === "",
+        formData.contact === "",
+        formData.address === "",
         formData.email === "",
-        formData.password === "")
+        formData.password === "",
+        formData.confirmPass === "")
       ) {
         Swal.fire({
           title: "Please fill all fields",
@@ -104,7 +140,29 @@ const SigupSection = () => {
           }
         });
       } else {
-        validatedSignup();
+        if (formData.password !== formData.confirmPass) {
+          Swal.fire({
+            title: "Password does not match",
+            icon: "error",
+            confirmButtonText: "Okay",
+          }).then((result) => {
+            if (result.isConfirmed) {
+              return;
+            }
+          });
+        } else if (formData.password.length < 8) {
+          Swal.fire({
+            title: "Password must be at least 8 characters",
+            icon: "error",
+            confirmButtonText: "Okay",
+          }).then((result) => {
+            if (result.isConfirmed) {
+              return;
+            }
+          });
+        } else {
+          validatedSignup();
+        }
       }
     } catch (error) {
       console.error("An error occurred", error);
@@ -116,23 +174,39 @@ const SigupSection = () => {
       <h1>Signup Page</h1>
       <form onSubmit={handleSubmit}>
         <div>
-          <label htmlFor="firstname">First Name</label>
+          <label htmlFor="fname">First Name</label>
           <input
             type="text"
-            name="firstname"
-            value={formData.firstname}
+            name="fname"
+            value={formData.fname}
             onChange={handleChange}
           />
-          <label htmlFor="lastname">Last Name</label>
+          <label htmlFor="lname">Last Name</label>
           <input
             type="text"
-            name="lastname"
-            value={formData.lastname}
+            name="lname"
+            value={formData.lname}
             onChange={handleChange}
           />
+
+          <label htmlFor="contact">Contact Number</label>
+          <input
+            type="tel"
+            name="contact"
+            value={formData.contact}
+            onChange={handleChange}
+          />
+          <label htmlFor="address">Address</label>
+          <input
+            type="text"
+            name="address"
+            value={formData.address}
+            onChange={handleChange}
+          />
+
           <label htmlFor="email">Email</label>
           <input
-            type="text"
+            type="email"
             name="email"
             value={formData.email}
             onChange={handleChange}
@@ -142,8 +216,30 @@ const SigupSection = () => {
             type="password"
             name="password"
             value={formData.password}
+            pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{,}"
+            title="Must contain at least one number and one uppercase and lowercase letter"
+            required
             onChange={handleChange}
           />
+
+          <label htmlFor="confirmPass">Confirm Password</label>
+          <input
+            type="password"
+            name="confirmPass"
+            value={formData.confirmPass}
+            onChange={handleChange}
+          />
+
+          <input
+            type="checkbox"
+            id="termsAndConditions"
+            name="termsAndConditions"
+            required
+          />
+          <label htmlFor="termsAndConditions">
+            I accept the terms and conditions
+          </label>
+
           <input type="submit" value="Signup" />
         </div>
       </form>

@@ -9,7 +9,7 @@ import Swal from "sweetalert2";
 const ProfilePage = () => {
   const [decodedToken, setDecodedToken] = useState(null);
   const [isLoading, setIsLoading] = useState(true); // Loading state
-  const [userFirstName, setUserFirstName] = useState("");
+  const [userFullName, setUserFullName] = useState("");
 
   const [currentPage, setCurrentPage] = useState("login");
   const { isLogin, toggleLogin } = useAuth(); // Use the hook to access the global state
@@ -94,6 +94,9 @@ const ProfilePage = () => {
           queryIdToken = value;
         });
 
+
+        // console.log(queryIdToken);
+
         const url = "http://localhost/api/getuser/" + queryIdToken;
 
         try {
@@ -123,19 +126,21 @@ const ProfilePage = () => {
               parsedJson = JSON.parse("{" + json + "}"); // Add '{' and '}' to the middle objects
             }
             if (parsedJson.payload && parsedJson.payload.length > 0) {
-              setUserFirstName(parsedJson.payload[0].firstname); 
+              setUserFullName(parsedJson.payload[0].fname + " " + parsedJson.payload[0].Lname); 
             }
           });
+
         } catch (error) {
           console.error("Error fetching data:", error);
         }
       };
+
 // call the getUser function
       getUser(); 
 
       return (
         <>
-          <h2>Welcome {userFirstName}</h2>
+          <h2>Welcome {userFullName}</h2>
           <button onClick={handleLogout}>Logout</button>
         </>
       );

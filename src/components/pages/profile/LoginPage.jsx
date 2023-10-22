@@ -89,7 +89,6 @@ const LoginSection = () => {
             name="email"
             value={formData.email}
             onChange={handleChange}
-
             required
           />
           <label htmlFor="password">Password</label>
