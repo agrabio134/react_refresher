@@ -9,6 +9,7 @@ import Swal from "sweetalert2";
 const ProfilePage = () => {
   const [decodedToken, setDecodedToken] = useState(null);
   const [isLoading, setIsLoading] = useState(true); // Loading state
+  const [userFirstName, setUserFirstName] = useState("");
 
   const [currentPage, setCurrentPage] = useState("login");
   const { isLogin, toggleLogin } = useAuth(); // Use the hook to access the global state
@@ -84,37 +85,62 @@ const ProfilePage = () => {
     }
   };
 
-  const getUser = async () => {
-    const url = "http://localhost/api/getuser";
-    const data = { token: decodedToken };
-    const response = await fetch(url, data, {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ token: decodedToken }),
-    });
-    // console.log(response);
-    // Extract and parse the response text
-    const responseDataText = await response.text();
-    // console.log("Response Data:", responseDataText);
-  };
-
   const checkLogin = () => {
-    // console.log(getUser());
-
     if (token) {
-      // console.log("token", decodedToken);
+      const getUser = async () => {
+        let queryIdToken = "";
+
+        Object.values(decodedToken).forEach((value) => {
+          queryIdToken = value;
+        });
+
+        const url = "http://localhost/api/getuser/" + queryIdToken;
+
+        try {
+          const response = await fetch(url, {
+            method: "GET",
+            headers: {
+              "Content-Type": "application/json",
+            },
+          });
+
+          if (!response.ok) {
+            throw new Error("Network response was not ok");
+          }
+
+          const result = await response.text(); // Get the raw response as text
+
+          // Split the response into separate JSON objects
+          const jsonObjects = result.split("}{");
+
+          jsonObjects.forEach((json, index) => {
+            let parsedJson;
+            if (index === 0) {
+              parsedJson = JSON.parse(json + "}"); // Add '}' back to the first object
+            } else if (index === jsonObjects.length - 1) {
+              parsedJson = JSON.parse("{" + json); // Add '{' back to the last object
+            } else {
+              parsedJson = JSON.parse("{" + json + "}"); // Add '{' and '}' to the middle objects
+            }
+            if (parsedJson.payload && parsedJson.payload.length > 0) {
+              setUserFirstName(parsedJson.payload[0].firstname); 
+            }
+          });
+        } catch (error) {
+          console.error("Error fetching data:", error);
+        }
+      };
+// call the getUser function
+      getUser(); 
 
       return (
         <>
-          {/* <h1>Profile Page</h1> */}
-          <h2>Welcome {decodedToken.firstname}</h2>
+          <h2>Welcome {userFirstName}</h2>
           <button onClick={handleLogout}>Logout</button>
         </>
       );
     } else {
-      return <> {renderPage()}</>;
+      return renderPage();
     }
   };
 
