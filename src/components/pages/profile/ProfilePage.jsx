@@ -126,7 +126,7 @@ const ProfilePage = () => {
               parsedJson = JSON.parse("{" + json + "}"); // Add '{' and '}' to the middle objects
             }
             if (parsedJson.payload && parsedJson.payload.length > 0) {
-              setUserFullName(parsedJson.payload[0].fname + " " + parsedJson.payload[0].Lname); 
+              setUserFullName(parsedJson.payload[0].fname + " " + parsedJson.payload[0].lname); 
             }
           });
 
