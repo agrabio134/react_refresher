@@ -4,6 +4,7 @@ import HomePage from "../pages/HomePage";
 import AboutPage from "../pages/AboutUs";
 import ServicePage from "../pages/ServicePage";
 import ProfilePage from "../pages/Profile/ProfilePage";
+import VerifyEmail from "../Auth/VerifyEmail";
 
 const MainLayout = () => {
   return (
@@ -35,6 +36,7 @@ const MainLayout = () => {
                 <Route path="/service" element={<ServicePage />} />
                 <Route path="/about" element={<AboutPage />} />
                 <Route path="/profile" element={<ProfilePage/>} />
+                <Route path="/verify-email" element={<VerifyEmail />} />
               </Routes>
             </div>
             <div className="side_bar">Sidebar</div>

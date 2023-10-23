@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { useAuth } from "../../Auth/AuthContext"; // Import the useAuth hook3.
 import Swal from "sweetalert2";
-import { Form } from "react-router-dom";
 
 const SigupSection = () => {
   const { isLogin } = useAuth(); // Use the hook to access the global state
@@ -41,7 +40,8 @@ const SigupSection = () => {
           confirmButtonText: "Okay",
         }).then((result) => {
           if (result.isConfirmed) {
-            window.location.reload();
+            const userEmail = formData.email;
+            window.location.href = `/verify-email?email=${userEmail}`; // Pass the email as a parameter
           }
         });
       } else {

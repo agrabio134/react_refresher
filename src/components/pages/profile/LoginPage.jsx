@@ -21,7 +21,7 @@ const LoginSection = () => {
   const handleLoginSubmit = async (event) => {
     event.preventDefault();
     console.log(formData);
-
+  
     try {
       const response = await fetch("http://localhost/api/login", {
         method: "POST",
@@ -30,27 +30,21 @@ const LoginSection = () => {
         },
         body: JSON.stringify(formData),
       });
-
-      // console.log(response);
-
+  
       if (response.ok) {
-        // Extract and parse the response text
         const responseDataText = await response.text();
         console.log("Response Data:", responseDataText);
-
-        // Remove "null" from the end of responseDataText
+  
         const trimmedResponseDataText = responseDataText.replace(/null$/, "");
-
+  
         try {
-          // Parse the JSON response data
           const response2 = JSON.parse(trimmedResponseDataText);
           console.log("Response:", response2);
-          // Store the token in localStorage
+  
           localStorage.setItem("authToken", response2.payload.token);
-
-          // Login successful, update the isLogin state
-          toggleLogin(); // Update the global state
-          // console.log("Login successful");
+  
+          toggleLogin();
+  
           Swal.fire({
             title: "Login successful",
             icon: "success",
@@ -64,19 +58,37 @@ const LoginSection = () => {
           console.error("An error occurred while parsing JSON:", error);
         }
       } else {
-        // Handle errors, e.g., display error messages to the user
-
-        Swal.fire({
-          title: "Login failed",
-          icon: "error",
-          text: "Invalid email or password",
-          confirmButtonText: "Okay",
-        });
+        let responseDataText;
+        try {
+          responseDataText = await response.text();
+          console.log("Response Data:", responseDataText);
+        } catch (error) {
+          console.error("An error occurred while reading the response text:", error);
+          return;
+        }
+  
+        if (response.status === 403) {
+          Swal.fire({
+            title: "Login failed",
+            icon: "error",
+            text: "Email not verified. Please verify your email first.",
+            confirmButtonText: "Okay",
+          });
+        } else {
+          Swal.fire({
+            title: "Login failed",
+            icon: "error",
+            text: "Invalid email or password",
+            confirmButtonText: "Okay",
+          });
+        }
       }
     } catch (error) {
       console.error("An error occurred", error);
     }
   };
+  
+  
 
   return (
     <>
