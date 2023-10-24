@@ -23,6 +23,22 @@ const SigupSection = () => {
     });
   };
 
+  const sendVerificationEmail = async () => {
+    const response = await fetch(
+      "http://localhost/api/sent_verification_email/" + formData.email,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    
+    );
+
+    // console.log("test if email is sent");
+    // console.log(formData.email);
+  }
+
   const validatedSignup = async () => {
     try {
       const response = await fetch("http://localhost/api/register", {
@@ -41,7 +57,10 @@ const SigupSection = () => {
         }).then((result) => {
           if (result.isConfirmed) {
             const userEmail = formData.email;
+            // sendVerificationEmail();
+
             window.location.href = `/verify-email?email=${userEmail}`; // Pass the email as a parameter
+            
           }
         });
       } else {
@@ -59,6 +78,8 @@ const SigupSection = () => {
     // if empty field then alert user
 
     console.log(formData);
+    sendVerificationEmail();
+
 
     // add useEffect to check if email already exists
 

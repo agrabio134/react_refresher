@@ -39,6 +39,11 @@ const VerifyEmail = () => {
       });
   }, [userEmail]);
 
+ 
+
+
+
+
   return (
     <div>
       <h1>Please Verify your email address</h1>

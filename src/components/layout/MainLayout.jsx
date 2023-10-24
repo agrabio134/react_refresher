@@ -5,6 +5,8 @@ import AboutPage from "../pages/AboutUs";
 import ServicePage from "../pages/ServicePage";
 import ProfilePage from "../pages/Profile/ProfilePage";
 import VerifyEmail from "../Auth/VerifyEmail";
+import EmailVerifiedComponent from "../Auth/SuccessMsg";
+import AlreadyVerifiedComponent from "../Auth/ErrorVerification";
 
 const MainLayout = () => {
   return (
@@ -37,6 +39,8 @@ const MainLayout = () => {
                 <Route path="/about" element={<AboutPage />} />
                 <Route path="/profile" element={<ProfilePage/>} />
                 <Route path="/verify-email" element={<VerifyEmail />} />
+                <Route path="/email-verified" element={<EmailVerifiedComponent />} />
+                <Route path="/already-verified" element={<AlreadyVerifiedComponent />} />
               </Routes>
             </div>
             <div className="side_bar">Sidebar</div>
