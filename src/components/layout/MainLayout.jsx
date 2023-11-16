@@ -1,12 +1,13 @@
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import "./Style/MainLayout.css";
 import HomePage from "../pages/HomePage";
-import AboutPage from "../pages/AboutUs";
+// import AboutPage from "../pages/AboutUs";
 import ServicePage from "../pages/ServicePage";
 import ProfilePage from "../pages/Profile/ProfilePage";
 import VerifyEmail from "../Auth/VerifyEmail";
 import EmailVerifiedComponent from "../Auth/SuccessMsg";
 import AlreadyVerifiedComponent from "../Auth/ErrorVerification";
+import BlogPage from "../pages/BlogPage";
 
 const MainLayout = () => {
   return (
@@ -23,8 +24,8 @@ const MainLayout = () => {
               <Link to="service" className="nav_list">
                 Service
               </Link>
-              <Link to="about" className="nav_list">
-                About
+              <Link to="blogs" className="nav_list">
+                Blog
               </Link>
               <Link to="profile" className="nav_list">
                 Profile
@@ -36,7 +37,7 @@ const MainLayout = () => {
               <Routes>
                 <Route path="/" element={<HomePage />} />
                 <Route path="/service" element={<ServicePage />} />
-                <Route path="/about" element={<AboutPage />} />
+                <Route path="/blogs" element={<BlogPage />} />
                 <Route path="/profile" element={<ProfilePage/>} />
                 <Route path="/verify-email" element={<VerifyEmail />} />
                 <Route path="/email-verified" element={<EmailVerifiedComponent />} />
