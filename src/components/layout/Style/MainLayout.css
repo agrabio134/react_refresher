@@ -9,30 +9,49 @@
 }
 
 html  {
-  font-size: 62.5%;
   overflow-x: hidden;
   scroll-padding-top: 9rem;
   scroll-behavior: smooth;
 }
 
-.main_router {
-  border: 1px solid #000;
+.top_header_section {
   display: grid;
   grid-template-columns: 1fr 3fr;
-  background-color: #e12454;
+  background-color: #ebf5f5;
+  height: 51px;
+  align-items: center;
+}
+.top_header_content {
+  display: flex;
+  justify-content: space-around;
+  list-style: none;
+  font-size: 16px;
+  color: black;
+}
+
+.main_router {
+  display: grid;
+  grid-template-columns: 1fr 3fr;
+  background-color: #FFA4B5;
+  height: 69.4px;
+  align-items: center;
 }
 .header_logo {
-  border: 1px solid #00ff37;
+
+  padding-left: 80px;
+}
+
+.header_logo img {
+  height: 69.4px;
+  width: 69.4px;
 }
 
 .main_nav {
-  border: 1px solid #fd0000;
   display: flex;
   justify-content: center;
   padding: 15px;
 }
 .nav_list {
-  border: 1px solid #ff9a00;
   display: flex;
   justify-content: space-around;
   list-style: none;
@@ -46,17 +65,11 @@ html  {
     margin-left: 30%;
   }
 .sub_container {
-  border: 1px solid #ff9a00;
   display: grid;
 }
 
 .main_page {
-  border: 1px solid #0004ff;
   height: 100vh;
-}
-
-.side_bar {
-  border: 1px solid #ff00ea;
 }
 .footer {
   border: 1px solid #00c3ff;

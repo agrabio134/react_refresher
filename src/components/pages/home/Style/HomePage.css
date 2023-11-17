@@ -14,8 +14,14 @@ section{
 .home .content{
 	max-width: 60rem;
 }
-.home .content h3{
-	font-size: 6rem;
+.home .content h4{
+	font-size: 36px;
+	text-transform: uppercase;
+	color: #fff;
+}
+
+.home .content h2{
+	font-size: 54px;
 	text-transform: uppercase;
 	color: #fff;
 }
@@ -26,4 +32,12 @@ section{
 	font-weight: lighter;
 	line-height: 1.8;
 	padding: 1rem 0;
+}
+
+.btn {
+	background-color: #FFA4B5;
+	font-size: 16px;
+	padding: 10px 22px 10px 22px;
+	border-radius: 30px;
+	text-transform: uppercase;
 }

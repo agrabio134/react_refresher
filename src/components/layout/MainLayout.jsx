@@ -16,8 +16,15 @@ const MainLayout = () => {
       {/* make a layout for routes */}
       <div className="main_container">
         <Router>
+          <div className="top_header_section">
+              <div className="top_header_content">
+              <div className="email">happypaws@example.com</div>
+              </div>
+          </div>
           <div className="main_router">
-            <div className="header_logo">Logo</div>
+            <div className="header_logo">
+              <img src="src/assets/img/logo.png" alt="" />
+              </div>
             <div className="main_nav">
               <Link to="/" className="nav_list">
                 Home
