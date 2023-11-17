@@ -26,10 +26,11 @@ section{
 	color: #fff;
 }
 .home .content p{
-	font-size: 2rem;
+	font-size: 16px;
 	text-transform: uppercase;
 	color: #fff;
 	font-weight: lighter;
+	width: 40rem;
 	line-height: 1.8;
 	padding: 1rem 0;
 }
