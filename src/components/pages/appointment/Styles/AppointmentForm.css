@@ -1,0 +1,30 @@
+/* AppointmentForm.css */
+
+/* Make the calendar larger */
+.react-datepicker {
+    width: 300px; /* Adjust the width according to your needs */
+  }
+  
+  /* Position the calendar on the left side */
+  .static-calendar {
+    margin-right: 20px; /* Add some margin for spacing */
+    float: left;
+  }
+  
+  /* Style other components as needed */
+  label {
+    display: block;
+    margin-bottom: 10px;
+  }
+  
+  select {
+    margin-bottom: 10px;
+  }
+  
+  button {
+    background-color: #007bff;
+    color: #fff;
+    padding: 8px 12px;
+    cursor: pointer;
+  }
+  

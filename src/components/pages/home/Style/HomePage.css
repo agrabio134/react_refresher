@@ -6,7 +6,7 @@ section{
 	min-height: 100vh;
 	display: flex;
 	align-items: center;
-	background: url(../../../img/home.jpg);
+	background: url(../../../../assets/img/home.jpg);
 	background-size: cover;
 	background-position: center;
 }
