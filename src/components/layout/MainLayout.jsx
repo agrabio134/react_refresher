@@ -44,7 +44,6 @@ const MainLayout = () => {
                 <Route path="/already-verified" element={<AlreadyVerifiedComponent />} />
               </Routes>
             </div>
-            <div className="side_bar">Sidebar</div>
           </div>
         </Router>
         <div className="footer">Footer</div>

@@ -1,0 +1,29 @@
+section{
+    padding:2rem 7%;
+}
+
+.home{
+	min-height: 100vh;
+	display: flex;
+	align-items: center;
+	background: url(../../../img/home.jpg);
+	background-size: cover;
+	background-position: center;
+}
+
+.home .content{
+	max-width: 60rem;
+}
+.home .content h3{
+	font-size: 6rem;
+	text-transform: uppercase;
+	color: #fff;
+}
+.home .content p{
+	font-size: 2rem;
+	text-transform: uppercase;
+	color: #fff;
+	font-weight: lighter;
+	line-height: 1.8;
+	padding: 1rem 0;
+}
