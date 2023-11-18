@@ -1,4 +1,5 @@
 import AboutPage from "./AboutUs";
+import ServicePage from "./Service";
 import "./Style/HomePage.css";
 
 const HomePage = () => {
@@ -13,7 +14,9 @@ const HomePage = () => {
         </div>
       </section>
       <AboutPage />
-    </>
+      <ServicePage />
+      
+      </>
   );
 };
 

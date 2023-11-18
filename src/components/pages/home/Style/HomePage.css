@@ -17,13 +17,13 @@ section{
 .home .content h4{
 	font-size: 36px;
 	text-transform: uppercase;
-	color: #fff;
+	color: black;
 }
 
 .home .content h2{
 	font-size: 54px;
 	text-transform: uppercase;
-	color: #fff;
+	color: #F50057;
 }
 .home .content p{
 	font-size: 16px;
@@ -36,7 +36,7 @@ section{
 }
 
 .btn {
-	background-color: #FFA4B5;
+	background-color: #F50057;
 	font-size: 16px;
 	padding: 10px 22px 10px 22px;
 	border-radius: 30px;

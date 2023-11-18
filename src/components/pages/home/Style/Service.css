@@ -1,0 +1,107 @@
+
+h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
+    font-family: "Roboto", sans-serif;
+    line-height: 1.1;
+    font-weight: 500;
+    color: #222222;
+    margin: 0;
+    padding: 0;
+}
+
+h6, .h6 {
+    font-size: 28px;
+}
+
+h5, .h5 {
+    font-size: 30px;
+}
+
+.h6 {
+    display: block;
+    font-size: 0.67em;
+    margin-block-start: 2.33em;
+    margin-block-end: 2.33em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+    font-weight: bold;
+}
+
+.h5 {
+    display: block;
+    font-size: 0.83em;
+    margin-block-start: 1.67em;
+    margin-block-end: 1.67em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+    font-weight: bold;
+}
+
+p {
+    display: block;
+    margin-block-start: 1em;
+    margin-block-end: 1em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+}
+
+p {
+    margin-top: 0;
+    margin-bottom: 1rem;
+}
+
+p {
+    margin: 0;
+}
+
+p {
+    color: #808080;
+}
+
+
+section{
+    padding:2rem 7%;
+}
+
+
+.main_service_container {
+    background-color: #ebf5f5;
+    padding: 100px 0px;
+}
+
+.home1-section-heading1 {
+    color: #e12454;
+    text-align: center;
+    padding-bottom: 12px;
+}
+
+.home1-section-heading2 {
+    text-align: center;
+    font-weight: 600;
+}
+
+.main_service_container .service_content_container p {
+    text-align: center;
+    padding-top: 10px;
+}
+
+.service-section {
+    display: flex;
+    justify-content: center;
+
+}
+
+.service_item_container {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px 150px 20px 150px;
+}
+
+
+.service_content {
+    text-align: center;
+    width: 30%;
+    padding: 100px;
+    background-color: #fff;
+    box-sizing: border-box;
+    border-radius: 20px;
+}
