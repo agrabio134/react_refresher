@@ -17,34 +17,60 @@ html{
 
 section{
     padding:2rem 7%;
+    height: 571px;
 }
 
-.about .row{
+.about-img .row{
 	display: flex;
 	align-items: center;
 	flex-wrap: wrap;
 }
-.about .row .image{
+.about-img .row .image{
 	flex: 1 1 45rem;
 }
-.about .row .content{
+.about-img .row .content{
 	flex: 1 1 45rem;
 	padding: 2rem;
 }
-.about .row .content h3{
+.about-img .row .content h3{
 	font-size: 3rem;
 	color: #F50057;
 }
-.about .row .content p{
+.about-img .row .content p{
 	font-size: 1.6rem;
 	color: black;
 	padding: 1rem 0;
 	line-height: 1.8;
 }
-.about .row .image img{
- width: 100%;
+.about-img .row .image img{
+    height: 55rem;
+    width: 55rem;
 }
 
-.about {
+.about-img {
     background-color: #ffffff;
 }
+
+.about-main {    
+    display: flex;
+    justify-content: center;
+    height: 251px;
+    background-color: #ffffff;
+}
+ .container {
+    margin-left: 25rem;
+    margin-right: 25rem;
+    
+ }
+
+ .row1 {
+    display: flex;
+    justify-content: center;
+
+  }
+
+  .column {
+    text-align: center;
+    padding: 100px;
+    height: 251px;
+  }

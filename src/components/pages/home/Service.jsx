@@ -13,19 +13,19 @@ const ServicePage = () => {
               <div className="service_item,">
                 <div className="service_item_container">
                   <div className="service_content">
-                      <h2>Grooming </h2>
+                      <h5>Grooming </h5>
                       <p>It is a long established fact that a reader
                                               will be distracted by the readable the
                                               content of a page when looking.</p>
                   </div>
                   <div className="service_content">
-                      <h2>Check Up</h2>
+                      <h5>Check Up</h5>
                       <p>It is a long established fact that a reader
                                               will be distracted by the readable the
                                               content of a page when looking.</p>
                   </div>
                   <div className="service_content">
-                      <h2>Unknown</h2>
+                      <h5>Unknown</h5>
                       <p>It is a long established fact that a reader
                                               will be distracted by the readable the
                                               content of a page when looking.</p>

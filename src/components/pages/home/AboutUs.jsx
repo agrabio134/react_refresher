@@ -3,8 +3,25 @@ import "./Style/AboutUs.css";
 const AboutPage = () => {
   return (
     <>
-            <section className="about" id="about">
-
+        <div className="about-main">
+           <div className="container">
+            <div className="row1">
+            <div className="column">
+              <h2>Column 1</h2>
+            <p>Some text..</p>
+          </div>
+          <div className="column">
+            <h2>Column 2</h2>
+            <p>Some text..</p>
+          </div>
+          <div className="column">
+            <h2>Column 3</h2>
+            <p>Some text..</p>
+          </div>
+          </div>
+           </div>
+        </div>
+        <section className="about-img" id="about">
         <div className="row">
           <div className="image">
 
