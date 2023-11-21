@@ -1,31 +1,58 @@
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import "./Style/MainLayout.css";
-import HomePage from "../pages/home/HomePage";
-// import AboutPage from "../pages/AboutUs";
-import ServicePage from "../pages/ServicePage";
-import ProfilePage from "../pages/Profile/ProfilePage";
-import VerifyEmail from "../Auth/VerifyEmail";
-import EmailVerifiedComponent from "../Auth/SuccessMsg";
-import AlreadyVerifiedComponent from "../Auth/ErrorVerification";
-import BlogPage from "../pages/blog/BlogPage";
-import AppointmentForm from "../pages/appointment/AppointmentForm";
-import GalleryPage from "../pages/gallery/GalleryPage";
+import AppRoutes from "./AppRoutes";
+import { useState, useEffect } from "react";
+import { useAuth } from "../Auth/AuthContext"; // Import the useAuth hook
+import jwt_decode from "jwt-decode";
 
 const MainLayout = () => {
+  const { isLogin, toggleLogin } = useAuth(); // Use the hook to access the global state
+
+  useEffect(() => {
+    const storedToken = localStorage.getItem("authToken");
+
+    if (storedToken) {
+      const decodedToken = jwt_decode(storedToken);
+
+      if (decodedToken.exp * 1000 < Date.now()) {
+        localStorage.removeItem("authToken");
+        toggleLogin(false); // Update the global state to indicate logout
+      } else {
+        toggleLogin(true); // Update the global state
+      }
+    }
+  }, []);
+
   return (
     <>
-      {/* make a layout for routes */}
       <div className="main_container">
         <Router>
           <div className="top_header_section">
-              <div className="top_header_content">
+            <div className="top_header_content">
               <div className="email">happypaws@example.com</div>
+              <div className="auth_container">
+                {/* Conditionally render Profile or Login/Signup based on authentication status */}
+                {isLogin ? (
+                  <Link to="profile" className="auth_item">
+                    Profile
+                  </Link>
+                ) : (
+                  <>
+                    <Link to="/auth/login" className="auth_item">
+                      Login
+                    </Link>
+                    <Link to="/auth/signup" className="auth_item">
+                      Signup
+                    </Link>
+                  </>
+                )}
               </div>
+            </div>
           </div>
           <div className="main_router">
             <div className="header_logo">
-              <img src="src/assets/img/logo.png" alt="" />
-              </div>
+              <img src="/src/assets/img/logo.png" alt="" />
+            </div>
             <div className="main_nav">
               <Link to="/" className="nav_list">
                 Home
@@ -33,33 +60,17 @@ const MainLayout = () => {
               <Link to="/appointments" className="nav_list">
                 Appointment
               </Link>
-              {/* <Link to="service" className="nav_list">
-                Service
-              </Link> */}
               <Link to="blogs" className="nav_list">
                 Blog
               </Link>
               <Link to="gallery" className="nav_list">
                 Gallery
               </Link>
-              <Link to="profile" className="nav_list">
-                Profile
-              </Link>
             </div>
           </div>
           <div className="sub_container">
             <div className="main_page">
-              <Routes>
-                <Route path="/" element={<HomePage />} />
-                <Route path="/appointments" element={<AppointmentForm />} />
-                {/* <Route path="/service" element={<ServicePage />} /> */}
-                <Route path="/blogs" element={<BlogPage />} />
-                <Route path="/gallery" element={<GalleryPage/>} />
-                <Route path="/profile" element={<ProfilePage/>} />
-                <Route path="/verify-email" element={<VerifyEmail />} />
-                <Route path="/email-verified" element={<EmailVerifiedComponent />} />
-                <Route path="/already-verified" element={<AlreadyVerifiedComponent />} />
-              </Routes>
+              <AppRoutes />
             </div>
           </div>
         </Router>

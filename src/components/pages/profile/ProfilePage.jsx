@@ -1,8 +1,6 @@
 import { useState, useEffect } from "react";
 import { useAuth } from "../../Auth/AuthContext"; // Import the useAuth hook3.
 import jwt_decode from "jwt-decode"; // You can use a JWT decoding library like jwt-decode
-import LoginSection from "./LoginPage";
-import SigupSection from "./SignupPage";
 import Swal from "sweetalert2";
 
 // create a signup page
@@ -49,42 +47,7 @@ const ProfilePage = () => {
   };
 
   // navigation button for signup and login
-  const handleButtonNav = () => {
-    return (
-      <>
-        <button onClick={() => setCurrentPage("signup")}>Signup</button>
-        <button onClick={() => setCurrentPage("login")}>Login</button>
-      </>
-    );
-  };
-
-  // render page
-  const renderPage = () => {
-    switch (currentPage) {
-      case "signup":
-        return (
-          <>
-            {handleButtonNav()}
-            <SigupSection />
-          </>
-        );
-      case "login":
-        return (
-          <>
-            {handleButtonNav()}
-            <LoginSection />
-          </>
-        );
-      default:
-        return (
-          <>
-            {handleButtonNav()}
-            <LoginSection />
-          </>
-        );
-    }
-  };
-
+  
   const checkLogin = () => {
     if (token) {
       const getUser = async () => {
@@ -145,7 +108,18 @@ const ProfilePage = () => {
         </>
       );
     } else {
-      return renderPage();
+
+      window.location.href = "/auth/login";
+      // You can also return a message or UI indicating redirection
+      return (
+        <div>
+          <p>Redirecting to login page...</p>
+        </div>
+      );
+
+
+      
+      ;
     }
   };
 

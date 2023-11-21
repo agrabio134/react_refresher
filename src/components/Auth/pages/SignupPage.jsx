@@ -1,8 +1,8 @@
 import { useState } from "react";
-import { useAuth } from "../../Auth/AuthContext"; // Import the useAuth hook3.
+import { useAuth } from "../AuthContext"; // Import the useAuth hook3.
 import Swal from "sweetalert2";
 
-const SigupSection = () => {
+const SignupPage = () => {
   const { isLogin } = useAuth(); // Use the hook to access the global state
 
   const [formData, setFormData] = useState({
@@ -14,6 +14,10 @@ const SigupSection = () => {
     password: "",
     confirmPass: "",
   });
+
+  if (isLogin) {
+    window.location.href = "/";
+  }
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -268,4 +272,4 @@ const SigupSection = () => {
   );
 };
 
-export default SigupSection;
+export default SignupPage;

@@ -1,7 +1,7 @@
 const GalleryPage = () => {
     return (
       <>
-        <h1>Blog Page</h1>
+        <h1>Gallery Page</h1>
       </>
     );
   };

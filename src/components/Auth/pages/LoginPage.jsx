@@ -1,15 +1,18 @@
 import { useState } from "react";
-import { useAuth } from "../../Auth/AuthContext"; // Import the useAuth hook3.
+import { useAuth } from "../AuthContext"; // Import the useAuth hook3.
 import Swal from "sweetalert2";
 
-const LoginSection = () => {
-  const { toggleLogin } = useAuth(); // Use the hook to access the global state
+const LoginPage = () => {
+  const { toggleLogin, isLogin } = useAuth(); // Use the hook to access the global state
 
   const [formData, setFormData] = useState({
     email: "",
     password: "",
   });
 
+  if (isLogin) {
+    window.location.href = "/";
+  }
   const handleChange = (event) => {
     const { name, value } = event.target;
     setFormData({
@@ -20,7 +23,7 @@ const LoginSection = () => {
 
   const handleLoginSubmit = async (event) => {
     event.preventDefault();
-    console.log(formData);
+    // console.log(formData);
   
     try {
       const response = await fetch("http://localhost/api/login", {
@@ -51,7 +54,7 @@ const LoginSection = () => {
             confirmButtonText: "Okay",
           }).then((result) => {
             if (result.isConfirmed) {
-              window.location.reload();
+              window.location.href = "/";
             }
           });
         } catch (error) {
@@ -118,4 +121,4 @@ const LoginSection = () => {
   );
 };
 
-export default LoginSection;
+export default LoginPage;
