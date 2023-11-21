@@ -9,6 +9,7 @@ import EmailVerifiedComponent from "../Auth/SuccessMsg";
 import AlreadyVerifiedComponent from "../Auth/ErrorVerification";
 import BlogPage from "../pages/blog/BlogPage";
 import AppointmentForm from "../pages/appointment/AppointmentForm";
+import GalleryPage from "../pages/gallery/GalleryPage";
 
 const MainLayout = () => {
   return (
@@ -32,11 +33,14 @@ const MainLayout = () => {
               <Link to="/appointments" className="nav_list">
                 Appointment
               </Link>
-              <Link to="service" className="nav_list">
+              {/* <Link to="service" className="nav_list">
                 Service
-              </Link>
+              </Link> */}
               <Link to="blogs" className="nav_list">
                 Blog
+              </Link>
+              <Link to="gallery" className="nav_list">
+                Gallery
               </Link>
               <Link to="profile" className="nav_list">
                 Profile
@@ -48,8 +52,9 @@ const MainLayout = () => {
               <Routes>
                 <Route path="/" element={<HomePage />} />
                 <Route path="/appointments" element={<AppointmentForm />} />
-                <Route path="/service" element={<ServicePage />} />
+                {/* <Route path="/service" element={<ServicePage />} /> */}
                 <Route path="/blogs" element={<BlogPage />} />
+                <Route path="/gallery" element={<GalleryPage/>} />
                 <Route path="/profile" element={<ProfilePage/>} />
                 <Route path="/verify-email" element={<VerifyEmail />} />
                 <Route path="/email-verified" element={<EmailVerifiedComponent />} />
