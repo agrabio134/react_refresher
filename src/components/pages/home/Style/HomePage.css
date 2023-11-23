@@ -1,14 +1,13 @@
-section{
-    padding:2rem 7%;
-}
-
 .home{
+	margin-top: 50px;
 	min-height: 100vh;
 	display: flex;
 	align-items: center;
-	background: url(../../../../assets/img/home.jpg);
+	background: url(../../../../assets/img/h1.jpg);
 	background-size: cover;
-	background-position: center;
+	/* background-position: center; */
+	background-repeat: no-repeat;
+	background-attachment: fixed;
 }
 
 .home .content{
@@ -28,8 +27,7 @@ section{
 .home .content p{
 	font-size: 16px;
 	text-transform: uppercase;
-	color: #fff;
-	font-weight: lighter;
+	color: black;
 	width: 40rem;
 	line-height: 1.8;
 	padding: 1rem 0;

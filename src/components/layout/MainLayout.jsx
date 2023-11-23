@@ -27,6 +27,7 @@ const MainLayout = () => {
     <>
       <div className="main_container">
         <Router>
+          <div className="header_fixed">
           <div className="top_header_section">
             <div className="top_header_content">
               <div className="email">happypaws@example.com</div>
@@ -67,6 +68,7 @@ const MainLayout = () => {
                 Gallery
               </Link>
             </div>
+          </div>
           </div>
           <div className="sub_container">
             <div className="main_page">

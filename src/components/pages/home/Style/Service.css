@@ -64,7 +64,10 @@ section{
 
 
 .main_service_container {
-    background-color: #ebf5f5;
+	background: url(../../../../assets/img/h2.jpg);
+	background-size: cover;
+	background-repeat: no-repeat;
+	background-attachment: fixed;
     padding: 100px 0px;
 }
 

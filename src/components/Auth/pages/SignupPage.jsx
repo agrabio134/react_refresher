@@ -196,6 +196,7 @@ const SignupPage = () => {
 
   return (
     <>
+    <div className="color">
       <h1>Signup Page</h1>
       <form onSubmit={handleSubmit}>
         <div>
@@ -267,7 +268,7 @@ const SignupPage = () => {
 
           <input type="submit" value="Signup" />
         </div>
-      </form>
+      </form></div>
     </>
   );
 };

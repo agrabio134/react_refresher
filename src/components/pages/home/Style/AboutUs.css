@@ -1,4 +1,13 @@
-*{
+/* h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
+    font-family: "Roboto", sans-serif;
+    line-height: 1.1;
+    font-weight: 500;
+    color: #222222;
+    margin: 0;
+    padding: 0;
+} */
+
+/* *{
     font-family: 'Roboto', sans-serif;
     margin:0; padding:0;
     box-sizing: border-box;
@@ -6,28 +15,28 @@
     text-decoration: none;
     text-transform: capitalize;
     transition: .2s linear;
-}
+} */
 
 html{
-    font-size: 62.5%;
+    /* font-size: 62.5%; */
     overflow-x: hidden;
     scroll-padding-top: 9rem;
     scroll-behavior: smooth;
 }
 
-section{
+/* section{
     padding:2rem 7%;
     height: 571px;
-}
+} */
 
 .about-img .row{
 	display: flex;
 	align-items: center;
 	flex-wrap: wrap;
 }
-.about-img .row .image{
+/* .about-img .row .image{
 	flex: 1 1 45rem;
-}
+} */
 .about-img .row .content{
 	flex: 1 1 45rem;
 	padding: 2rem;
@@ -43,8 +52,8 @@ section{
 	line-height: 1.8;
 }
 .about-img .row .image img{
-    height: 55rem;
-    width: 55rem;
+    height: auto;
+    width: 35rem;
 }
 
 .about-img {
@@ -57,11 +66,11 @@ section{
     height: 251px;
     background-color: #ffffff;
 }
- .container {
+ /* .container {
     margin-left: 25rem;
     margin-right: 25rem;
     
- }
+ } */
 
  .row1 {
     display: flex;
@@ -70,7 +79,17 @@ section{
   }
 
   .column {
+    border-color: #F50057;
+    border-style: solid;
     text-align: center;
     padding: 100px;
-    height: 251px;
+    min-height: 251px;
+  }
+
+  .column h5 {
+    font-size: 24px;
+  }
+
+  .column p {
+    font-size: 16px;
   }
