@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
 import Swal from "sweetalert2";
+import jwt_decode from "jwt-decode";
 
 const AppointmentForm = () => {
   const [selectedDate, setSelectedDate] = useState(new Date());
@@ -10,6 +11,8 @@ const AppointmentForm = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [hasPendingAppointment, setHasPendingAppointment] = useState(false);
   const [bookedTimeSlots, setBookedTimeSlots] = useState([]);
+  const [pets, setPets] = useState([]);
+  const [selectedPet, setSelectedPet] = useState("");
 
   useEffect(() => {
     fetchTimeSlots(selectedDate);
@@ -19,7 +22,7 @@ const AppointmentForm = () => {
   const fetchTimeSlots = async (date) => {
     try {
       const formattedDate = date.toISOString().split("T")[0];
-  
+
       const response = await fetch(
         `http://localhost/api/get_available_time_slots/${formattedDate}`
       );
@@ -31,7 +34,7 @@ const AppointmentForm = () => {
         timeSlotsEndIndex + 1
       );
       const parsedTimeSlots = JSON.parse(timeSlotsJSON);
-  
+
       const bookedResponse = await fetch(
         `http://localhost/api/get_booked_time_slots/${formattedDate}`
       );
@@ -39,7 +42,7 @@ const AppointmentForm = () => {
       const bookedTimeSlotsArray = Array.isArray(bookedTimeSlotsData)
         ? bookedTimeSlotsData
         : [];
-  
+
       setTimeSlots(parsedTimeSlots);
       setBookedTimeSlots(bookedTimeSlotsArray);
     } catch (error) {
@@ -172,6 +175,7 @@ const AppointmentForm = () => {
           date: selectedDate.toISOString().split("T")[0],
           time: selectedTimeSlot,
           user_Id: userId,
+          pet_Id: selectedPet,
         }),
       });
 
@@ -201,6 +205,62 @@ const AppointmentForm = () => {
     return `${formattedHours}:${minutes} ${period}`;
   };
 
+  // PET
+
+  useEffect(() => {
+    fetchPets();
+  }, []); // Fetch pets when the component mounts
+
+  const handlePetChange = (petId) => {
+    setSelectedPet(petId);
+  };
+
+  const authToken = localStorage.getItem("authToken");
+  const decodedToken = jwt_decode(authToken);
+
+  const userId = decodedToken ? decodedToken.user_id : null;
+
+  // console.log(userId);
+
+  // get user id
+
+  const fetchPets = async () => {
+    try {
+      const response = await fetch(`http://localhost/api/get_user_pets/${userId}`);
+      const result = await response.text(); // Get the raw response as text
+
+      // Split the response into separate JSON objects
+      const jsonObjects = result.split("}{");
+
+      // Handle each JSON object separately
+      jsonObjects.forEach((json, index) => {
+        let parsedJson;
+
+        // Add '{' and '}' back to the first and last objects
+        if (index === 0) {
+          json = json + "}";
+        } else if (index === jsonObjects.length - 1) {
+          json = "{" + json;
+        }
+
+        try {
+          parsedJson = JSON.parse(json);
+          if (parsedJson.payload && parsedJson.payload.length > 0) {
+            setPets(parsedJson.payload);
+            // console.log("Pets successfully fetched:", parsedJson);
+          }
+        } catch (jsonError) {
+          // Handle the case where parsing as JSON failed
+          console.error("Error parsing JSON:", jsonError);
+          console.log("Raw response:", json);
+          throw new Error("Failed to parse JSON response");
+        }
+      });
+    } catch (error) {
+      console.error("Error fetching pets:", error);
+    }
+  };
+
   return (
     <div>
       <label>Select Date:</label>
@@ -224,6 +284,22 @@ const AppointmentForm = () => {
             disabled={bookedTimeSlots.includes(time) || isSubmitting}
           >
             {formatTimeSlotLabel(time)}
+          </option>
+        ))}
+      </select>
+
+      <label>Select Pet:</label>
+      <select
+        value={selectedPet}
+        onChange={(e) => handlePetChange(e.target.value)}
+        disabled={isSubmitting}
+      >
+        <option value="" disabled>
+          Select a pet
+        </option>
+        {pets.map((pet) => (
+          <option key={pet.id} value={pet.id}>
+            {pet.name} - {pet.type}
           </option>
         ))}
       </select>
