@@ -38,58 +38,157 @@ html{
 	flex: 1 1 45rem;
 } */
 .about-img .row .content{
-	flex: 1 1 45rem;
+	flex: 1 1 43rem;
 	padding: 2rem;
+
+  border: solid red;
 }
-.about-img .row .content h3{
-	font-size: 3rem;
+.about-img .row .content h6{
+	font-size: 28px;
 	color: #F50057;
+  padding-bottom: 12px;
 }
 .about-img .row .content p{
-	font-size: 1.6rem;
+	font-size: 16px;
 	color: black;
 	padding: 1rem 0;
 	line-height: 1.8;
 }
-.about-img .row .image img{
+
+.about-img .row .image{
+  height: auto;
+  width: 35rem;
+  background-color: blue;
+}
+
+.about-img .row .image-section img{
     height: auto;
-    width: 35rem;
+    width: 20rem;
 }
 
 .about-img {
-    background-color: #ffffff;
-}
-
-.about-main {    
     display: flex;
     justify-content: center;
-    height: 251px;
+    align-self: center;
+    align-items: center;
+    align-content: center;
     background-color: #ffffff;
+    height: 100%;
 }
+
  /* .container {
     margin-left: 25rem;
     margin-right: 25rem;
     
  } */
 
- .row1 {
-    display: flex;
-    justify-content: center;
+ .about-img .image-section {
+  border: solid red;
+  width: 636px;
+  height: auto;
+ }
 
-  }
+.about-img .image-section .image-content {
+  background-color: #e12454;
+  color: #ffffff;
+  width: 280px;
+  position: relative;
+  left: 0;
+  padding: 20px 0px;
+  border-radius: 20px;
+  left: 180px;
+  top: -150px;
+}
 
-  .column {
-    border-color: #F50057;
-    border-style: solid;
-    text-align: center;
-    padding: 100px;
-    min-height: 251px;
-  }
+.about-img .image-section .image-content .logo-icon {
+  width: 70px;
+  height: 70px;
+  background-color: #ffffff;
+  border-radius: 50%;
+  text-align: center;
+  line-height: 70px;
+  position: absolute;
+  top: -25px;
+  left: 240px;
+  box-shadow: 0px 3px 10px #7b7b7b6e;
+}
 
-  .column h5 {
-    font-size: 24px;
-  }
+.about-img .image-section .image-content .logo-icon img {
+  width: 45px;
+}
+img, svg {
+  vertical-align: middle;
+}
+*, ::after, ::before {
+  box-sizing: border-box;
+}
 
-  .column p {
-    font-size: 16px;
-  }
+user agent stylesheet
+img {
+  overflow-clip-margin: content-box;
+  overflow: clip;
+}
+
+.about-img .image-section .image-content .content-box {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+ul {
+  padding: 0px;
+  list-style-type: none;
+}
+ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+/* dl, ol, ul {
+  margin-top: 0;
+  margin-bottom: 1rem;
+}
+ol, ul {
+  padding-left: 2rem;
+} */
+
+.about-img .image-section .image-content h5 {
+  color: #ffffff;
+  padding-left: 32px;
+  padding-bottom: 15px;
+
+}
+
+/* .plr-50 {
+  padding: 0;
+}
+
+.plr-50 {
+  padding: 0px 50px;
+} */
+.row {
+  --bs-gutter-x: 1.5rem;
+  --bs-gutter-y: 0;
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: calc(var(--bs-gutter-y) * -1);
+  margin-right: calc(var(--bs-gutter-x)/ -2);
+  margin-left: calc(var(--bs-gutter-x)/ -2);
+}
+
+@media (max-width: 580px) {
+.about-img .image-section .image-content {
+    left: 30px;
+    top: 0;
+}
+}
+ .content h4 {
+  line-height: 40px;
+  font-size: 30px;
+}
+
+.py-3 {
+  padding-top: 1rem!important;
+  padding-bottom: 1rem!important;  
+  color: #808080; 
+  margin: 0;
+}

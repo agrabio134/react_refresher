@@ -3,36 +3,59 @@ import "./Style/AboutUs.css";
 const AboutPage = () => {
   return (
     <>
-        <div className="about-main">
-           <div className="container">
-            <div className="row1">
-            <div className="column">
-              <h5>Column 1</h5>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
-          </div>
-          <div className="column">
-            <h5>Column 2</h5>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
-          </div>
-          <div className="column">
-            <h5>Column 3</h5>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
-          </div>
-          </div>
-           </div>
-        </div>
         <section className="about-img" id="about">
         <div className="row">
-          <div className="image">
+        <div class="image-section ps-rel ">
+        <img src="src/assets/img/aboutus.png" alt="" />
+                  <div class="image-content ">
+                     <h5>Open Hours</h5>
+                     <ul class="content-box">
+                        <li>
+                           <ul>
+                              <li>Monday :</li>
+                              <li>Tuesday :</li>
+                              <li>Wednesday :</li>
+                              <li>Tuesday :</li>
+                              <li>Thursday :</li>
+                              <li>Friday :</li>
+                              <li>Saturday :</li>
+                           </ul>
+                        </li>
+                        <li>
+                           <ul>
+                              <li>08.00 - 10.00</li>
+                              <li>08.00 - 10.00</li>
+                              <li>08.00 - 10.00</li>
+                              <li>08.00 - 10.00</li>
+                              <li>08.00 - 10.00</li>
+                              <li>08.00 - 10.00</li>
+                              <li>08.00 - 10.00</li>
+                           </ul>
+                        </li>
+                     </ul>
+                     <div class="logo-icon">
+                     <img src="src/assets/img/logo.png" alt="" />
+                     </div>
+                  </div>
+               </div>
+          {/* <img src="src/assets/img/aboutus.png" alt="" /> */}
 
-          <img src="src/assets/img/aboutus.png" alt="" />
 
-          </div>
           <div className="content">        
-            <h3>About Us</h3>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatibus qui ea ullam, enim tempora ipsum fuga alias quae ratione a officiis id temporibus autem? Quod nemo facilis cupiditate. Ex, vel?</p>
-            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Odit amet enim quod veritatis, nihil voluptas culpa! Neque consectetur obcaecati sapiente?</p>
-            <a className="btn">learn more</a>
+            <h6>About Us</h6>
+            <h4>Professional Health and Medical
+                     Care in Full Measure
+                  </h4>
+                  <p class="py-3">
+                     It is a long established fact that a reader will be distracted by the readable content of a
+                     page when looking at its layout. The point of using Lorem Ipsum is that it has a
+                     more-or-less normal distribution of letters, as opposed to using 'Content here, content
+                     here', making it look like readable English.
+                  </p>
+                  <p>
+                     It is a long established fact that a reader will be distracted by the readable
+                     content of a page when looking at its layout.
+                  </p>
           </div>
         </div>
       </section>

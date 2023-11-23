@@ -12,31 +12,48 @@
 
 .home .content{
 	max-width: 60rem;
+	border: solid red;
 }
 .home .content h4{
 	font-size: 36px;
+	line-height: 35px;
 	text-transform: uppercase;
 	color: black;
 }
 
 .home .content h2{
-	font-size: 54px;
-	text-transform: uppercase;
+	padding-top: 20px;
+    font-size: 54px;
+	color: black;
+	width: 45rem;
+}
+
+.home .content h2 .span{
 	color: #F50057;
 }
+
 .home .content p{
 	font-size: 16px;
-	text-transform: uppercase;
 	color: black;
-	width: 40rem;
 	line-height: 1.8;
-	padding: 1rem 0;
+	width: 500px;
+    padding-top: 20px;
 }
 
 .btn {
 	background-color: #F50057;
 	font-size: 16px;
 	padding: 10px 22px 10px 22px;
+	margin-top: 1.5rem!important;
 	border-radius: 30px;
 	text-transform: uppercase;
+    display: inline-block;
+    background-color: #e12454;
+    color: #fff;
+    text-transform: capitalize;
+    position: relative;
+    z-index: 99;
+    overflow: hidden;
+    border: none;
 }
+

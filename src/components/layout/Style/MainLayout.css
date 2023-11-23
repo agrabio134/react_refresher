@@ -37,7 +37,7 @@ html  {
 
 .main_router {
   display: grid;
-  grid-template-columns: 1.5fr 3fr;
+  grid-template-columns: 1fr 1fr;
   background-color: #F50057;
   height: 69.4px;
   align-items: center;
@@ -87,6 +87,7 @@ html  {
 .header_fixed {
   position: fixed;
   width: 100%;
+  z-index: 10000;
 }
 
 
