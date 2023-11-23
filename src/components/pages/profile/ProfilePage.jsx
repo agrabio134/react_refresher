@@ -2,6 +2,8 @@ import { useState, useEffect } from "react";
 import { useAuth } from "../../Auth/AuthContext"; // Import the useAuth hook3.
 import jwt_decode from "jwt-decode";
 import Swal from "sweetalert2";
+import AddPetForm from "./AddPetForm";
+import PetTable from "./PetTable";
 
 // create a signup page
 const ProfilePage = () => {
@@ -19,9 +21,16 @@ const ProfilePage = () => {
   const [petAge, setPetAge] = useState("");
   const [petList, setPetList] = useState([]);
 
-
   // add PET
   const handleAddPet = async () => {
+    if (petName === "" || petType === "" || petBreed === "" || petAge === "") {
+      Swal.fire({
+        title: "Error",
+        text: "Please fill in all fields.",
+        icon: "error",
+      });
+      return;
+    }
     const petData = {
       name: petName,
       type: petType,
@@ -29,7 +38,6 @@ const ProfilePage = () => {
       age: petAge,
       user_id: decodedToken, // Assuming decodedToken contains user information
     };
-
 
     try {
       const response = await fetch("http://localhost/api/addpet", {
@@ -67,41 +75,145 @@ const ProfilePage = () => {
     }
   };
 
+  const handleUpdatePet = (petId) => {
+    // Implement your update logic here
+    console.log(`Update pet with ID: ${petId}`);
+  };
+
+  const handleDeletePet = (petId) => {
+    // Show confirmation dialog
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You will not be able to recover this pet!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonText: "Yes, delete it!",
+      cancelButtonText: "No, cancel!",
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        // If the user confirms, proceed with the delete action
+        try {
+          const response = await fetch(
+            `http://localhost/api/delete_pet/${petId}`,
+            {
+              method: "DELETE",
+              headers: {
+                "Content-Type": "application/json",
+                              },
+              
+              
+            }
+          );
+
+          // console.log("Delete response:", response);
+
+
+          if (!response.ok) {
+            throw new Error("Failed to delete pet");
+          }
+
+          // Update the pet list after successful deletion
+          setPetList((prevPetList) =>
+            prevPetList.filter((pet) => pet.id !== petId)
+          );
+
+          Swal.fire({
+            title: "Deleted!",
+            text: "Your pet has been deleted.",
+            icon: "success",
+          });
+        } catch (error) {
+          console.error("Error deleting pet:", error);
+          Swal.fire({
+            title: "Error",
+            text: "Failed to delete pet. Please try again.",
+            icon: "error",
+          });
+        }
+      } else if (result.dismiss === Swal.DismissReason.cancel) {
+        Swal.fire({
+          title: "Cancelled",
+          text: "Your pet is safe :)",
+          icon: "info",
+          confirmButtonText: "Okay",
+        });
+      }
+    });
+  };
+
   // const user_id = decodedToken.user_id;
 
-
+  
   const user_id = decodedToken ? decodedToken.user_id : null;
 
+  useEffect(() => {
+    const abortController = new AbortController();
+    const signal = abortController.signal;
+
   if (user_id !== null) {
-    console.log(user_id);
+    // console.log(user_id);
+
+    // Only fetch user pets if user_id is not null
+    const fetchUserPets = async () => {
+      try {
+        const response = await fetch(
+          `http://localhost/api/get_user_pets/${user_id}`,
+          {
+            method: "GET",
+            headers: {
+              "Content-Type": "application/json",
+            },
+          }
+        );
+
+        if (!response.ok) {
+          throw new Error(`Failed to fetch pets. Status: ${response.status}`);
+        }
+
+        const result = await response.text(); // Get the raw response as text
+        // console.log(result); // Log the response content
+
+        // Parse the response as JSON
+        const jsonObjects = result.split("}{").map((json, index, array) => {
+          // Add '}' back to the first object and '{' back to the last object
+          return index === 0
+            ? json + "}"
+            : index === array.length - 1
+            ? "{" + json
+            : "{" + json + "}";
+        });
+
+        // Parse each JSON object
+        jsonObjects.forEach((json) => {
+          try {
+            const parsedResult = JSON.parse(json);
+
+            if (parsedResult.payload) {
+              setPetList(parsedResult.payload);
+            } else {
+            }
+          } catch (jsonError) {
+            // console.error("Error parsing JSON:", jsonError);
+          }
+        });
+      } catch (error) {
+        console.error("Error fetching pet data:", error);
+      }
+    };
+
+    fetchUserPets();
   } else {
     console.error("decodedToken is null or undefined");
   }
 
-  
-  // get pet by user id
-  const fetchUserPets = async () => {
-    try {
-      const response = await fetch("http://localhost/api/get_user_pets/26" , {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
+  return () => abortController.abort();
+}, [user_id]);
 
-      if (!response.ok) {
-        throw new Error("Failed to fetch pets");
-      }
 
-      const result = await response.json();
-      setPetList(result.data); // Assuming the pet data is in the 'data' property
-      console.log(result.data);
 
-    } catch (error) {
-      console.error("Error fetching pet data:", error);
-    }
-  };
-
+    // Cleanup function to cancel the request when the component unmounts
+ 
+  // Fetch user data and set loading state
   useEffect(() => {
     const delay = setTimeout(() => {
       if (token) {
@@ -115,20 +227,17 @@ const ProfilePage = () => {
           setDecodedToken(decodedToken);
           setIsLoading(false);
           toggleLogin(true);
-          fetchUserPets(); // Fetch pets when the component mounts
         }
       } else {
         setIsLoading(false);
         toggleLogin(false);
       }
-    }, 500);
+    }, 1000);
 
     return () => clearTimeout(delay);
   }, []);
 
   // check token
-
-  
 
   const [token, setToken] = useState(localStorage.getItem("authToken")); // Retrieve the token
 
@@ -222,56 +331,23 @@ const ProfilePage = () => {
           <h2>Welcome {userFullName}</h2>
           <button onClick={handleLogout}>Logout</button>
 
-          {/* Step 3: Add Pet Form */}
-          <h2>Add Pet</h2>
-          <form onSubmit={(e) => e.preventDefault()}>
-            <label>
-              Name:
-              <input
-                type="text"
-                value={petName}
-                onChange={(e) => setPetName(e.target.value)}
-                required
-              />
-            </label>
-            <label>
-              Type:
-              <input
-                type="text"
-                value={petType}
-                onChange={(e) => setPetType(e.target.value)}
-                required
-              />
-            </label>
-            <label>
-              Breed:
-              <input
-                type="text"
-                value={petBreed}
-                onChange={(e) => setPetBreed(e.target.value)}
-                required
-              />
-            </label>
-            <label>
-              Age:
-              <input
-                type="numbers"
-                value={petAge}
-                onChange={(e) => setPetAge(e.target.value)}
-                required
-              />
-            </label>
-            <button onClick={handleAddPet}>Add Pet</button>
-          </form>
 
-          <h2>Your Pets</h2>
-          <ul>
-            {petList.map((pet) => (
-              <li key={pet.id}>
-                <strong>Name:</strong> {pet.name}, <strong>Type:</strong> {pet.type}, <strong>Breed:</strong> {pet.breed}, <strong>Age:</strong> {pet.age}
-              </li>
-            ))}
-          </ul>
+<AddPetForm
+            petName={petName}
+            setPetName={setPetName}
+            petType={petType}
+            setPetType={setPetType}
+            petBreed={petBreed}
+            setPetBreed={setPetBreed}
+            petAge={petAge}
+            setPetAge={setPetAge}
+            handleAddPet={handleAddPet}
+          />
+          <PetTable
+            petList={petList}
+            handleUpdatePet={handleUpdatePet}
+            handleDeletePet={handleDeletePet}
+          />
         </>
       );
     } else {
