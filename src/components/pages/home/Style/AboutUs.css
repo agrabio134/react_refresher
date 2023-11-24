@@ -63,7 +63,8 @@ html{
 
 .about-img .row .image-section img{
     height: auto;
-    width: 20rem;
+    width: 18rem;
+    border-radius: 20px;
 }
 
 .about-img {

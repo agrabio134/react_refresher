@@ -1,6 +1,8 @@
 import AboutPage from "./AboutUs";
-import "./Style/HomePage.css";
+import HowItWorksPage from "./HowItWorks";
 import WhyHappyPawsPage from "./WhyHappyPaws";
+import "./Style/HomePage.css";
+
 
 const HomePage = () => {
   return (
@@ -17,6 +19,7 @@ const HomePage = () => {
       </section>
       <AboutPage />
       <WhyHappyPawsPage/>
+      <HowItWorksPage />
       
       </>
   );

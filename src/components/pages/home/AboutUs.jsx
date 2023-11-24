@@ -6,7 +6,7 @@ const AboutPage = () => {
         <section className="about-img" id="about">
         <div className="row">
         <div class="image-section ps-rel ">
-        <img src="src/assets/img/aboutus.png" alt="" />
+        <img src="src/assets/img/time.jpg" alt="" />
                   <div class="image-content ">
                      <h5>Open Hours</h5>
                      <ul class="content-box">
@@ -34,7 +34,7 @@ const AboutPage = () => {
                         </li>
                      </ul>
                      <div class="logo-icon">
-                     <img src="src/assets/img/logo.png" alt="" />
+                     <img src="src/assets/img/247.png" alt="" />
                      </div>
                   </div>
                </div>

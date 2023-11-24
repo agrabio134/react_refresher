@@ -68,49 +68,60 @@ section{
 	background-size: cover;
 	background-repeat: no-repeat;
 	background-attachment: fixed;
-    padding: 100px 0px;
 }
 
 .home1-section-heading1 {
     color: #e12454;
     text-align: center;
     padding-bottom: 12px;
+    border: solid red;
 }
 
 .home1-section-heading2 {
+    color: black;
     text-align: center;
     font-weight: 600;
+    border: solid blue;
 }
 
 .main_service_container .service_content_container p {
     text-align: center;
-    padding-top: 10px;
+    margin: 20px 50px 50px 0px;
+    width: 100%;
+    border: solid green;
 }
 
 .service-section {
     display: flex;
     justify-content: center;
+    border: solid yellow;
+    margin: 50px;
 
 }
 
 .service_item_container {
     display: flex;
-    justify-content: space-between;
-    padding: 20px 150px 20px 150px;
+    justify-content: space-around;
+    border: solid violet;
 }
 
 
 .service_content {
     text-align: center;
     width: 30%;
-    padding: 100px;
+    height: auto;
+    padding: 25px;
     background-color: #fff;
     box-sizing: border-box;
     border-radius: 10px;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    border: solid orange;
 }
 
-.service_conten h5 {
-    padding-top: 60px;
+.service_content h5 {
+    margin-top: 50px;
+    color: black;
+    font-weight: 600;
     font-size: 24px;
+    border: solid red;
 }
