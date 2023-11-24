@@ -242,7 +242,7 @@ const AppointmentForm = () => {
         }
       });
     } catch (error) {
-      console.error("Error fetching pets:", error);
+      // console.error("Error fetching pets:", error);
     }
   };
 
