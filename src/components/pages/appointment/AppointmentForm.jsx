@@ -19,6 +19,18 @@ const AppointmentForm = () => {
     checkPendingAppointment(selectedDate);
   }, [selectedDate]);
 
+//   const authToken = localStorage.getItem("authToken");
+// let userId = null;
+
+try {
+  const decodedToken = jwt_decode(authToken);
+  userId = decodedToken ? decodedToken.user_id : null;
+} catch (error) {
+  console.error("Error decoding authentication token:", error);
+  // Handle the error, e.g., redirect to the login page
+  window.location.href = "/auth/login";
+}
+
   const fetchTimeSlots = async (date) => {
     try {
       const formattedDate = date.toISOString().split("T")[0];
@@ -83,7 +95,7 @@ const AppointmentForm = () => {
         confirmButtonText: "Okay",
       }).then((result) => {
         if (result.isConfirmed) {
-          window.location.href = "/profile";
+          window.location.href = "/auth/login"; // Corrected navigation
         }
       });
       return;
