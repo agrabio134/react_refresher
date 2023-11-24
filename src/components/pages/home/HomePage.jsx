@@ -1,6 +1,8 @@
 import AboutPage from "./AboutUs";
 import HowItWorksPage from "./HowItWorks";
 import WhyHappyPawsPage from "./WhyHappyPaws";
+import ServicePage from "./Service";
+
 import "./Style/HomePage.css";
 
 
@@ -18,9 +20,10 @@ const HomePage = () => {
         </div>
       </section>
       <AboutPage />
-      <WhyHappyPawsPage/>
+      <WhyHappyPawsPage />
+      <ServicePage />
       <HowItWorksPage />
-      
+    
       </>
   );
 };

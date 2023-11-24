@@ -63,14 +63,8 @@ section{
 }
 
 
-.main_whyhp_container {
-    background-color: #ebf5f5;
-    border-bottom-width: 2px;
-    border-bottom-color: #eaeaea;
-    border-bottom-style: solid;
-    border-top-width: 2px;
-    border-top-color: #eaeaea;
-    border-top-style: solid;
+.main_service_container {
+    background-color: #fff;
 }
 
 /* .home1-section-heading1 {
@@ -80,57 +74,57 @@ section{
     border: solid red;
 } */
 
-.whyhp-home-section-heading2 {
+.home1-section-heading2 {
     color: black;
     text-align: center;
     font-weight: 600;
-    /* border: solid blue; */
+    border: solid blue;
 }
 
-.whyhp-home-section-heading2 span {
+.home1-section-heading2 span {
     color: #F50057;
 }
 
-.main_whyhp_container .whyhp_content_container p {
+.main_service_container .service_content_container p {
     text-align: center;
     margin-top: 10px;
     /* margin: 20px 50px 50px 0px; */
     width: 100%;
-    /* border: solid green; */
+    border: solid green;
 }
 
-.whyhp-section {
-    display: flex;
-    justify-content: center;
-    /* border: solid yellow; */
+.service-section {
+    border: solid yellow;
     /* margin: 50px; */
+    
 
 }
 
-.whyhp_item_container {
+.service_item_container {
     display: flex;
     justify-content: space-around;
-    /* border: solid violet; */
+    flex-wrap: wrap;
+    border: solid violet;
 }
 
 
-.whyhp_content {
+.service_content {
     margin-top: 10px;
     text-align: center;
     width: 32.5%;
     height: auto;
-    background-color: #fff;
     padding: 25px;
+    background-color: #fff;
     box-sizing: border-box;
     border-radius: 5px;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-    /* border: solid orange; */
+    border: solid orange;
 }
 
-.whyhp_content h5 {
+.service_content h5 {
     /* margin-top: 50px; */
     color: black;
     font-weight: 600;
     font-size: 24px;
-    /* border: solid red; */
+    border: solid red;
 }

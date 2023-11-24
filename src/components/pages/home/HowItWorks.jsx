@@ -44,23 +44,23 @@ const HowItWorksPage = () => {
 
   return (
     <>
-      <section className="main_service_container">
+      <section className="main_hiw_container">
         <div className="slideshow-container">
           <div className="mySlides fade">
             <div className="numbertext">1 / 3</div>
-            <img src="src/assets/img/time.jpg" alt="" />
+            <img src="src/assets/img/HIW1.jpg" alt="" />
             <div className="text">Caption Text</div>
           </div>
 
           <div className="mySlides fade">
             <div className="numbertext">2 / 3</div>
-            <img src="src/assets/img/time.jpg" alt="" />
+            <img src="src/assets/img/HIW2.jpg" alt="" />
             <div className="text">Caption Two</div>
           </div>
 
           <div className="mySlides fade">
             <div className="numbertext">3 / 3</div>
-            <img src="src/assets/img/time.jpg" alt="" />
+            <img src="src/assets/img/HIW3.jpg" alt="" />
             <div className="text">Caption Three</div>
           </div>
 
@@ -73,7 +73,7 @@ const HowItWorksPage = () => {
         </div>
         <br />
 
-        <div>
+        <div className='dotalign'>
           <span className="dot" onClick={() => currentSlide(1)}></span>
           <span className="dot" onClick={() => currentSlide(2)}></span>
           <span className="dot" onClick={() => currentSlide(3)}></span>

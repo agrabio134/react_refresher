@@ -41,7 +41,7 @@ html{
 	flex: 1 1 43rem;
 	padding: 2rem;
 
-  border: solid red;
+  /* border: solid red; */
 }
 .about-img .row .content h6{
 	font-size: 28px;
@@ -58,7 +58,7 @@ html{
 .about-img .row .image{
   height: auto;
   width: 35rem;
-  background-color: blue;
+  /* background-color: blue; */
 }
 
 .about-img .row .image-section img{
@@ -68,13 +68,14 @@ html{
 }
 
 .about-img {
+  padding-top: 100px;
     display: flex;
     justify-content: center;
     align-self: center;
     align-items: center;
     align-content: center;
     background-color: #ffffff;
-    height: 100%;
+    /* height: 100%; */
 }
 
  /* .container {
@@ -84,7 +85,7 @@ html{
  } */
 
  .about-img .image-section {
-  border: solid red;
+  /* border: solid red; */
   width: 636px;
   height: auto;
  }

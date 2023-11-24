@@ -83,3 +83,18 @@
   @media only screen and (max-width: 300px) {
     .prev, .next,.text {font-size: 11px}
   }
+  .mySlides img {
+    width: 1000px;
+    height: 500px;
+  }
+
+  .dotalign {
+    text-align: center;
+  }
+
+  .main_hiw_container {
+    background: url(../../../../assets/img/h2.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+  }
