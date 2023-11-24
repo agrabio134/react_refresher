@@ -74,49 +74,118 @@ const AppointmentForm = () => {
   };
 
   const handleAppointmentSubmit = async () => {
+    const authToken = localStorage.getItem("authToken");
+
+    if (!authToken) {
+      // Show alert and redirect to login if not logged in
+      Swal.fire({
+        title: "Error",
+        icon: "error",
+        text: "You must be logged in to make an appointment.",
+        confirmButtonText: "Okay",
+      }).then((result) => {
+        if (result.isConfirmed) {
+          window.location.href = "/auth/login";
+        }
+      });
+      return;
+    }
+
+    let userId;
+
+    try {
+      const response = await fetch(
+        `http://localhost/api/get_user_id/${authToken}`,
+        {
+          method: "GET",
+        }
+      );
+
+      const responseData = await response.text();
+      const jsonObjects = responseData.split("}{").map((obj, index, array) => {
+        return index < array.length - 1 ? `${obj}}` : obj;
+      });
+
+      for (let i = 0; i < jsonObjects.length; i++) {
+        const jsonObject = jsonObjects[i];
+
+        try {
+          const data = JSON.parse(jsonObject);
+
+          if (
+            data.status &&
+            data.status.remarks === "success" &&
+            data.payload &&
+            typeof data.payload[0] !== "undefined" &&
+            typeof data.payload[0].id !== "undefined"
+          ) {
+            userId = data.payload[0].id;
+            break;
+          }
+        } catch (error) {
+          console.error("Error parsing JSON:", error);
+        }
+      }
+
+      if (!userId) {
+        console.error(
+          "Error fetching user ID: No valid user ID found in the response"
+        );
+        Swal.fire({
+          icon: "error",
+          title: "Error",
+          text: "Failed to fetch user ID. No valid user ID found in the response.",
+        });
+      }
+    } catch (error) {
+      console.error("Error fetching user ID:", error);
+      Swal.fire({
+        icon: "error",
+        title: "Error",
+        text: "Failed to fetch user ID. Please try again.",
+      });
+    }
+
     setIsSubmitting(true);
 
     try {
-      // Check if the user is logged in (has authToken)
-      const authToken = localStorage.getItem("authToken");
-      if (authToken) {
-        const userId = getUserIdFromToken(authToken);
-        if (hasPendingAppointment) {
-          Swal.fire({
-            icon: "error",
-            title: "Error",
-            text: "You already have a pending appointment. You can only have one appointment at a time.",
-          });
-          return;
-        }
-
-        if (bookedTimeSlots.includes(selectedTimeSlot)) {
-          Swal.fire({
-            icon: "error",
-            title: "Error",
-            text: "The selected time slot is already booked. Please choose another time.",
-          });
-          return;
-        }
-
-        await createAppointment(authToken, userId);
-
+      if (hasPendingAppointment) {
         Swal.fire({
-          icon: "success",
-          title: "Success",
-          text: "Appointment created successfully.",
+          icon: "error",
+          title: "Error",
+          text: "You already have a pending appointment. You can only have one appointment at a time.",
         });
-      } else {
-        // Code for handling appointments when the user is not logged in
-        // Adjust this part based on your requirements for non-authenticated users
-        await createNonAuthenticatedAppointment(selectedDate, selectedTimeSlot, selectedPet);
-
-        Swal.fire({
-          icon: "success",
-          title: "Success",
-          text: "Appointment created successfully for non-authenticated user.",
-        });
+        return;
       }
+
+      if (bookedTimeSlots.includes(selectedTimeSlot)) {
+        Swal.fire({
+          icon: "error",
+          title: "Error",
+          text: "The selected time slot is already booked. Please choose another time.",
+        });
+        return;
+      }
+
+      await fetch("http://localhost/api/create_appointments", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${authToken}`,
+        },
+        body: JSON.stringify({
+          date: selectedDate.toISOString().split("T")[0],
+          time: selectedTimeSlot,
+          user_Id: userId,
+          pet_Id: selectedPet,
+        }),
+      });
+
+      Swal.fire({
+        icon: "success",
+        title: "Success",
+        text: "Appointment created successfully.",
+      });
     } catch (error) {
       console.error("Error creating appointment:", error);
       Swal.fire({
@@ -148,16 +217,12 @@ const AppointmentForm = () => {
     setSelectedPet(petId);
   };
 
-  const authToken = localStorage.getItem("authToken");
-  const decodedToken = jwt_decode(authToken);
-
-  const userId = decodedToken ? decodedToken.user_id : null;
-
-  // console.log(userId);
-
-  // get user id
 
   const fetchPets = async () => {
+    const authToken = localStorage.getItem("authToken");
+    const decodedToken = jwt_decode(authToken);
+  
+    const userId = decodedToken ? decodedToken.user_id : null;
     try {
       const response = await fetch(`http://localhost/api/get_user_pets/${userId}`);
       const result = await response.text(); // Get the raw response as text
