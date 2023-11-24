@@ -262,50 +262,60 @@ const AppointmentForm = () => {
   };
 
   return (
-    <div>
-      <label>Select Date:</label>
-      <Calendar
-        onChange={handleDateChange}
-        value={selectedDate}
-        className="static-calendar"
-        minDate={new Date()}
-      />
+    <div className="appointment-form-container">
+      <div className="form-group">
+        <label>Select Date:</label>
+        <Calendar
+          onChange={handleDateChange}
+          value={selectedDate}
+          className="static-calendar"
+          minDate={new Date()}
+        />
+      </div>
 
-      <label>Select Time Slot:</label>
-      <select
-        value={selectedTimeSlot}
-        onChange={(e) => handleTimeSlotChange(e.target.value)}
+      <div className="form-group">
+        <label>Select Time Slot:</label>
+        <select
+          value={selectedTimeSlot}
+          onChange={(e) => handleTimeSlotChange(e.target.value)}
+          disabled={isSubmitting}
+        >
+          {timeSlots.map((time) => (
+            <option
+              key={time}
+              value={time}
+              disabled={bookedTimeSlots.includes(time) || isSubmitting}
+            >
+              {formatTimeSlotLabel(time)}
+            </option>
+          ))}
+        </select>
+      </div>
+
+      <div className="form-group">
+        <label>Select Pet:</label>
+        <select
+          value={selectedPet}
+          onChange={(e) => handlePetChange(e.target.value)}
+          disabled={isSubmitting}
+        >
+          <option value="" disabled>
+            Select a pet
+          </option>
+          {pets.map((pet) => (
+            <option key={pet.id} value={pet.id}>
+              {pet.name} - {pet.type}
+            </option>
+          ))}
+        </select>
+      </div>
+
+      <button
+        className="submit-button"
+        onClick={handleAppointmentSubmit}
         disabled={isSubmitting}
       >
-        {timeSlots.map((time) => (
-          <option
-            key={time}
-            value={time}
-            disabled={bookedTimeSlots.includes(time) || isSubmitting}
-          >
-            {formatTimeSlotLabel(time)}
-          </option>
-        ))}
-      </select>
-
-      <label>Select Pet:</label>
-      <select
-        value={selectedPet}
-        onChange={(e) => handlePetChange(e.target.value)}
-        disabled={isSubmitting}
-      >
-        <option value="" disabled>
-          Select a pet
-        </option>
-        {pets.map((pet) => (
-          <option key={pet.id} value={pet.id}>
-            {pet.name} - {pet.type}
-          </option>
-        ))}
-      </select>
-
-      <button onClick={handleAppointmentSubmit} disabled={isSubmitting}>
-        {isSubmitting ? "Submitting..." : "Submit Appointment"}
+        {isSubmitting ? 'Submitting...' : 'Submit Appointment'}
       </button>
 
       {hasPendingAppointment && <p>You have a pending appointment.</p>}
