@@ -84,11 +84,11 @@ html  {
   border: 1px solid #00c3ff;
 }
 
-.header_fixed {
+/* .header_fixed {
   position: fixed;
   width: 100%;
   z-index: 10000;
-}
+} */
 
 .nav_list:hover {
   height: 100%;
