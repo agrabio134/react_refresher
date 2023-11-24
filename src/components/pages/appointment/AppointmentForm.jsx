@@ -74,117 +74,49 @@ const AppointmentForm = () => {
   };
 
   const handleAppointmentSubmit = async () => {
-    const authToken = localStorage.getItem("authToken");
-    if (!authToken) {
-      Swal.fire({
-        title: "Error",
-        icon: "error",
-        text: "You must be logged in to make an appointment.",
-        confirmButtonText: "Okay",
-      }).then((result) => {
-        if (result.isConfirmed) {
-          // Redirect to login page
-          window.location.href = "/auth/login";
-        }
-      });
-      return;
-    }
-
-    let userId;
-
-    try {
-      const response = await fetch(
-        `http://localhost/api/get_user_id/${authToken}`,
-        {
-          method: "GET",
-        }
-      );
-
-      const responseData = await response.text();
-      const jsonObjects = responseData.split("}{").map((obj, index, array) => {
-        return index < array.length - 1 ? `${obj}}` : obj;
-      });
-
-      for (let i = 0; i < jsonObjects.length; i++) {
-        const jsonObject = jsonObjects[i];
-
-        try {
-          const data = JSON.parse(jsonObject);
-
-          if (
-            data.status &&
-            data.status.remarks === "success" &&
-            data.payload &&
-            typeof data.payload[0] !== "undefined" &&
-            typeof data.payload[0].id !== "undefined"
-          ) {
-            userId = data.payload[0].id;
-            break;
-          }
-        } catch (error) {
-          console.error("Error parsing JSON:", error);
-        }
-      }
-
-      if (!userId) {
-        console.error(
-          "Error fetching user ID: No valid user ID found in the response"
-        );
-        Swal.fire({
-          icon: "error",
-          title: "Error",
-          text: "Failed to fetch user ID. No valid user ID found in the response.",
-        });
-      }
-    } catch (error) {
-      console.error("Error fetching user ID:", error);
-      Swal.fire({
-        icon: "error",
-        title: "Error",
-        text: "Failed to fetch user ID. Please try again.",
-      });
-    }
-
     setIsSubmitting(true);
 
     try {
-      if (hasPendingAppointment) {
+      // Check if the user is logged in (has authToken)
+      const authToken = localStorage.getItem("authToken");
+      if (authToken) {
+        const userId = getUserIdFromToken(authToken);
+        if (hasPendingAppointment) {
+          Swal.fire({
+            icon: "error",
+            title: "Error",
+            text: "You already have a pending appointment. You can only have one appointment at a time.",
+          });
+          return;
+        }
+
+        if (bookedTimeSlots.includes(selectedTimeSlot)) {
+          Swal.fire({
+            icon: "error",
+            title: "Error",
+            text: "The selected time slot is already booked. Please choose another time.",
+          });
+          return;
+        }
+
+        await createAppointment(authToken, userId);
+
         Swal.fire({
-          icon: "error",
-          title: "Error",
-          text: "You already have a pending appointment. You can only have one appointment at a time.",
+          icon: "success",
+          title: "Success",
+          text: "Appointment created successfully.",
         });
-        return;
-      }
+      } else {
+        // Code for handling appointments when the user is not logged in
+        // Adjust this part based on your requirements for non-authenticated users
+        await createNonAuthenticatedAppointment(selectedDate, selectedTimeSlot, selectedPet);
 
-      if (bookedTimeSlots.includes(selectedTimeSlot)) {
         Swal.fire({
-          icon: "error",
-          title: "Error",
-          text: "The selected time slot is already booked. Please choose another time.",
+          icon: "success",
+          title: "Success",
+          text: "Appointment created successfully for non-authenticated user.",
         });
-        return;
       }
-
-      await fetch("http://localhost/api/create_appointments", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${authToken}`,
-        },
-        body: JSON.stringify({
-          date: selectedDate.toISOString().split("T")[0],
-          time: selectedTimeSlot,
-          user_Id: userId,
-          pet_Id: selectedPet,
-        }),
-      });
-
-      Swal.fire({
-        icon: "success",
-        title: "Success",
-        text: "Appointment created successfully.",
-      });
     } catch (error) {
       console.error("Error creating appointment:", error);
       Swal.fire({
@@ -206,24 +138,38 @@ const AppointmentForm = () => {
     return `${formattedHours}:${minutes} ${period}`;
   };
 
+  // PET
+
   useEffect(() => {
     fetchPets();
-  }, []);
+  }, []); // Fetch pets when the component mounts
 
   const handlePetChange = (petId) => {
     setSelectedPet(petId);
   };
 
+  const authToken = localStorage.getItem("authToken");
+  const decodedToken = jwt_decode(authToken);
+
+  const userId = decodedToken ? decodedToken.user_id : null;
+
+  // console.log(userId);
+
+  // get user id
+
   const fetchPets = async () => {
     try {
       const response = await fetch(`http://localhost/api/get_user_pets/${userId}`);
-      const result = await response.text();
+      const result = await response.text(); // Get the raw response as text
 
+      // Split the response into separate JSON objects
       const jsonObjects = result.split("}{");
 
+      // Handle each JSON object separately
       jsonObjects.forEach((json, index) => {
         let parsedJson;
 
+        // Add '{' and '}' back to the first and last objects
         if (index === 0) {
           json = json + "}";
         } else if (index === jsonObjects.length - 1) {
@@ -234,15 +180,17 @@ const AppointmentForm = () => {
           parsedJson = JSON.parse(json);
           if (parsedJson.payload && parsedJson.payload.length > 0) {
             setPets(parsedJson.payload);
+            // console.log("Pets successfully fetched:", parsedJson);
           }
         } catch (jsonError) {
+          // Handle the case where parsing as JSON failed
           console.error("Error parsing JSON:", jsonError);
           console.log("Raw response:", json);
           throw new Error("Failed to parse JSON response");
         }
       });
     } catch (error) {
-      // console.error("Error fetching pets:", error);
+      console.error("Error fetching pets:", error);
     }
   };
 
