@@ -5,11 +5,11 @@ const AboutPage = () => {
     <>
         <section className="about-img" id="about">
         <div className="row">
-        <div class="image-section ps-rel ">
+        <div className="image-section ps-rel ">
         <img src="src/assets/img/time.jpg" alt="" />
-                  <div class="image-content ">
+                  <div className="image-content ">
                      <h5>Open Hours</h5>
-                     <ul class="content-box">
+                     <ul className="content-box">
                         <li>
                            <ul>
                               <li>Monday :</li>
@@ -33,7 +33,7 @@ const AboutPage = () => {
                            </ul>
                         </li>
                      </ul>
-                     <div class="logo-icon">
+                     <div className="logo-icon">
                      <img src="src/assets/img/247.png" alt="" />
                      </div>
                   </div>
@@ -46,7 +46,7 @@ const AboutPage = () => {
             <h4>Professional Health and Medical
                      Care in Full Measure
                   </h4>
-                  <p class="py-3">
+                  <p className="py-3">
                      It is a long established fact that a reader will be distracted by the readable content of a
                      page when looking at its layout. The point of using Lorem Ipsum is that it has a
                      more-or-less normal distribution of letters, as opposed to using 'Content here, content

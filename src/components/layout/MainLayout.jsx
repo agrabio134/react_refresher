@@ -26,7 +26,7 @@ const MainLayout = () => {
   return (
     <>
       <div className="main_container">
-        <Router>
+        {/* <Router> */}
           <div className="header_fixed">
           <div className="top_header_section">
             <div className="top_header_content">
@@ -75,7 +75,7 @@ const MainLayout = () => {
               <AppRoutes />
             </div>
           </div>
-        </Router>
+        {/* </Router> */}
         <div className="footer">Footer</div>
       </div>
     </>
