@@ -1,18 +1,42 @@
 // AdminDashboardLayout.jsx
 import React from 'react';
-import { Layout, Menu } from 'antd';
+import { Layout, Menu, Button  } from 'antd';
 import {
   UserOutlined,
   BarChartOutlined,
   CalendarOutlined,
   FileOutlined,
+  LogoutOutlined 
 } from '@ant-design/icons';
+import Swal from 'sweetalert2';
 import { Link } from 'react-router-dom';
 import '../Styles/AdminLayout.css'; // Import the CSS file
 
 const { Sider, Content } = Layout;
 
 const AdminDashboardLayout = ({ children }) => {
+  const handleLogout = () => {
+    Swal.fire({
+      title: "Are you sure you want to logout?",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonText: "Logout",
+      cancelButtonText: "Cancel",
+    }).then((result) => {
+      if (result.isConfirmed) {
+    localStorage.removeItem("adminAuthToken");
+    window.location.href = "/admin/login";
+      } else if (result.dismiss === Swal.DismissReason.cancel) {
+        Swal.fire({
+          title: "Cancelled",
+          icon: "error",
+          confirmButtonText: "Okay",
+        });
+      }
+      
+    }
+    );
+  };
   return (
     <Layout style={{ minHeight: '100vh' }}>
       <Sider width={130} theme="dark">
@@ -41,6 +65,16 @@ const AdminDashboardLayout = ({ children }) => {
               <FileOutlined className="menu-item-icon" />
               Documents
             </Link>
+          </Menu.Item>
+          <Menu.Item key="5" className="menu-item-logout">
+            <Button
+              type="text"
+              icon={<LogoutOutlined />}
+              className="logout-button"
+              onClick={handleLogout}
+            >
+              Logout
+            </Button>
           </Menu.Item>
         </Menu>
       </Sider>

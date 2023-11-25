@@ -21,4 +21,19 @@
     font-size: 1rem;
     margin-bottom: 8px;
   }
-  
+  /* Add styles for the new logout button */
+.menu-item-logout {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 16px;
+}
+
+.logout-button {
+  color: #fff;
+  font-size: 1rem;
+}
+
+.logout-button:hover {
+  color: #1890ff; /* Change the color on hover as desired */
+}
