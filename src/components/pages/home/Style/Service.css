@@ -78,7 +78,7 @@ section{
     color: black;
     text-align: center;
     font-weight: 600;
-    border: solid blue;
+    /* border: solid blue; */
 }
 
 .home1-section-heading2 span {
@@ -90,11 +90,11 @@ section{
     margin-top: 10px;
     /* margin: 20px 50px 50px 0px; */
     width: 100%;
-    border: solid green;
+    /* border: solid green; */
 }
 
 .service-section {
-    border: solid yellow;
+    /* border: solid yellow; */
     /* margin: 50px; */
     
 
@@ -104,11 +104,14 @@ section{
     display: flex;
     justify-content: space-around;
     flex-wrap: wrap;
-    border: solid violet;
+    /* border: solid violet; */
 }
 
 
 .service_content {
+    border-width: 2px;
+    border-color: #eaeaea;
+    border-style: solid;
     margin-top: 10px;
     text-align: center;
     width: 32.5%;
@@ -116,15 +119,38 @@ section{
     padding: 25px;
     background-color: #fff;
     box-sizing: border-box;
-    border-radius: 5px;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-    border: solid orange;
+    /* border-radius: 5px; */
+    /* box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19); */
+    /* border: solid orange; */
 }
 
 .service_content h5 {
     /* margin-top: 50px; */
     color: black;
-    font-weight: 600;
+    /* font-weight: 600; */
     font-size: 24px;
-    border: solid red;
+    /* border: solid red; */
 }
+
+.fa-solid {
+    font-size: 65px;
+    padding: 15px;
+    color: #F50057;
+}
+
+.service_content:hover {
+    background-color: #F50057;
+}
+
+.service_content:hover .fa-solid{
+    color: white;
+}
+
+.service_content:hover h5{
+    color: white;
+}
+.service_content:hover p{
+    color: white;
+}
+
+
