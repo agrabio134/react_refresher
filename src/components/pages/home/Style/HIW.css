@@ -3,6 +3,7 @@
     max-width: 1000px;
     position: relative;
     margin: auto;
+    border: solid yellow;
   }
   
   /* Next & previous buttons */
@@ -84,8 +85,8 @@
     .prev, .next,.text {font-size: 11px}
   }
   .mySlides img {
-    width: 1000px;
-    height: 500px;
+    width: 650px;
+    height: 350px;
   }
 
   .dotalign {
@@ -98,3 +99,20 @@
     background-repeat: no-repeat;
     background-attachment: fixed;
   }
+
+  .whole_hiw_container {
+    margin: 100px;
+  border: solid red;
+  }
+
+  .hiw_container {
+    display: flex;
+    justify-content: center;
+    background-color: white;
+    padding: 10px;
+
+  }
+
+.hiw_content {
+  border: solid blue;
+}
