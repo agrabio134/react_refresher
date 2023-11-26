@@ -1,0 +1,103 @@
+
+section{
+    padding:2rem 7%;
+}
+
+
+.main_footer_container {
+	background: url(../../../../assets/img/footer.jpg);
+}
+
+.footer-content-container{
+    /* border: solid blue; */
+}
+
+.footer-content {
+    display: flex;
+    justify-content: space-between;
+}
+
+.footer-content h1 {
+    font-size: 24px;
+    padding-bottom: 25px;
+    color: #fff;
+}
+
+/* .happy-paws-content {
+    border: solid green;
+} */
+
+.quick-links-content {
+    display: flex;
+    flex-direction: column;
+    color: #fff;
+    /* border: solid orange; */
+}
+
+.quick-links-content a {
+    display: flex;
+    padding-top: 5px;
+    text-decoration: none;
+    flex-direction: column;
+    color: #fff;
+    /* border: solid orange; */
+}
+
+.contactus-content {
+    display: flex;
+    flex-direction: column;
+    /* border: solid violet; */
+}
+
+.contacus-details h6 {
+    display: flex;
+    color: white;
+    align-self: center;
+    font-size: 16px;
+    padding: 10px;
+}
+
+.contacus-details .fa-solid{
+    padding: 0;
+    display: flex;
+    color: white;
+    align-self: center;
+    font-size: 20px;
+}
+
+
+.contacus-details {
+    display: flex;
+    color: white;
+}
+
+
+/* .followus-content {
+    border: solid brown;
+} */
+
+.followus-icon {
+    padding-top: 10px;
+    display: flex;
+    justify-content: space-between;
+
+}
+
+.followus-icon .fa-brands {
+    color: white;
+    font-size: 25px;
+    padding: 0;
+}
+
+.copyrigt-content {
+    margin-top: 50px;
+    display: flex;
+    justify-content: center;
+    border-top: 2px solid #516c75;
+}
+
+.copyrigt-content h6 {
+    padding-top: 30px;
+    font-size: 15px;
+    color: white;
+}

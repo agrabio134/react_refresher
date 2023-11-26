@@ -29,10 +29,20 @@ const MainLayout = () => {
         {/* <Router> */}
           <div className="header_fixed">
           <div className="top_header_section">
-            <div className="top_header_content">
-              <div className="email">happypaws@example.com</div>
+              <div className="email_container">
+                <i className="fa-solid fa-envelope"></i>
+                <h6>happypaws@example.com</h6> 
+              </div>
+
+          <div className="auth_content">
+              <div className="icon">
+              <i className="fa-brands fa-square-facebook"></i>
+              <i className="fa-brands fa-x-twitter"></i>
+              <i className="fa-brands fa-instagram"></i>
+           </div>
               <div className="auth_container">
                 {/* Conditionally render Profile or Login/Signup based on authentication status */}
+                
                 {isLogin ? (
                   <Link to="profile" className="auth_item">
                     Profile
@@ -40,16 +50,17 @@ const MainLayout = () => {
                 ) : (
                   <>
                     <Link to="/auth/login" className="auth_item">
-                      Login
+                      Login/
                     </Link>
+                    
                     <Link to="/auth/signup" className="auth_item">
                       Signup
                     </Link>
                   </>
                 )}
               </div>
-            </div>
-          </div>
+          </div>             
+      </div>
           <div className="main_router">
             <div className="header_logo">
               <img src="/src/assets/img/logo.png" alt="" />

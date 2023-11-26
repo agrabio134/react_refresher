@@ -1,0 +1,58 @@
+.emergency{
+	/* margin-top: 50px; */
+	min-height: 100vh;
+	display: flex;
+	align-items: center;
+	background: url(../../../../assets/img/h5.jpg);
+	background-size: cover;
+	background-position: center;
+
+}
+
+.emergency-container{
+    max-width: 500px;
+    background-color: #F50057;
+    padding: 20px;
+    border-radius: 5px;
+	/* border: solid blue; */
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+.emergency-content {
+    display: flex;
+    flex-direction: row;
+    /* border: solid green; */
+}
+
+.headphones .fa-solid{
+    /* border: solid yellow; */
+    color: #fff;
+}
+
+.phone .fa-solid{
+    /* border: solid yellow; */
+    color: #fff;
+}
+
+.emrgency-text {
+    align-self: center;
+    /* border: solid violet; */
+    font-size: 30px;
+}
+
+.emrgency-text h4 {
+    color: #ffffff;
+}
+
+.emergency-container h5{
+    color: #ffffff;
+    padding-bottom: 20px;
+    font-size: 18px;
+}
+ .emergency-container p {
+    /* padding-bottom: 20px; */
+    color: #fff;
+    font-size: 16px;
+ }
+
+
+

@@ -2,8 +2,11 @@ import AboutPage from "./AboutUs";
 import HowItWorksPage from "./HowItWorks";
 import WhyHappyPawsPage from "./WhyHappyPaws";
 import ServicePage from "./Service";
-
+import EmergencyPage from "./Emergency";
+import FooterPage from "./Footer";
 import "./Style/HomePage.css";
+
+
 
 
 const HomePage = () => {
@@ -21,9 +24,10 @@ const HomePage = () => {
       </section>
       <AboutPage />
       <WhyHappyPawsPage />
+      <EmergencyPage />
       <ServicePage />
       <HowItWorksPage />
-    
+      <FooterPage />
       </>
   );
 };
