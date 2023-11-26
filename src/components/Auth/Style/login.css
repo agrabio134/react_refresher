@@ -1,0 +1,22 @@
+.login-main-container {
+	min-height: 100vh;
+    background: url(../../../assets/img/footer.jpg);
+    display: flex;
+    justify-content: center;
+    padding: 50px;
+}
+
+.login-container {
+    margin-top: 125px;
+    background-color: white;
+}
+
+.login-logo-header {
+    display: flex;
+    justify-content: space-between;
+    background-color: #F50057;
+    height: 69.4px;
+    align-items: center;
+    padding-left: 100px;
+    padding-right: 100px;
+}

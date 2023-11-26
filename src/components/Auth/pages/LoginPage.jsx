@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useAuth } from "../AuthContext"; // Import the useAuth hook3.
 import Swal from "sweetalert2";
+import "../Style/login.css";
 
 const LoginPage = () => {
   const { toggleLogin, isLogin } = useAuth(); // Use the hook to access the global state
@@ -95,6 +96,11 @@ const LoginPage = () => {
 
   return (
     <>
+    <section className="login-main-container">
+      <div className="login-container">
+        <div className="login-logo-header">
+        <img src="/src/assets/img/logo.png" alt="" />
+        </div>
       <h1>Login Page</h1>
       <form onSubmit={handleLoginSubmit}>
         <div>
@@ -117,6 +123,8 @@ const LoginPage = () => {
           <input type="submit" value="Login" />
         </div>
       </form>
+      </div>
+      </section>
     </>
   );
 };
