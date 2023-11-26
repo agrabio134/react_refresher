@@ -1,5 +1,5 @@
 .home{
-	margin-top: 50px;
+	/* margin-top: 50px; */
 	min-height: 100vh;
 	display: flex;
 	align-items: center;
@@ -12,7 +12,7 @@
 
 .home .content{
 	max-width: 60rem;
-	border: solid red;
+	/* border: solid red; */
 }
 .home .content h4{
 	font-size: 36px;
