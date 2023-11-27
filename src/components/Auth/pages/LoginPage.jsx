@@ -25,7 +25,7 @@ const LoginPage = () => {
   const handleLoginSubmit = async (event) => {
     event.preventDefault();
     // console.log(formData);
-  
+
     try {
       const response = await fetch("http://localhost/api/login", {
         method: "POST",
@@ -34,21 +34,23 @@ const LoginPage = () => {
         },
         body: JSON.stringify(formData),
       });
-  
+
       if (response.ok) {
         const responseDataText = await response.text();
         console.log("Response Data:", responseDataText);
-  
+
         const trimmedResponseDataText = responseDataText.replace(/null$/, "");
-  
+
         try {
           const response2 = JSON.parse(trimmedResponseDataText);
           console.log("Response:", response2);
-  
-          localStorage.setItem("authToken", response2.payload.token);
-  
+
+          const storage = formData.rememberMe ? localStorage : sessionStorage;
+          storage.setItem("authToken", response2.payload.token);
+          // localStorage.setItem("authToken", response2.payload.token);
+
           toggleLogin();
-  
+
           Swal.fire({
             title: "Login successful",
             icon: "success",
@@ -67,10 +69,13 @@ const LoginPage = () => {
           responseDataText = await response.text();
           console.log("Response Data:", responseDataText);
         } catch (error) {
-          console.error("An error occurred while reading the response text:", error);
+          console.error(
+            "An error occurred while reading the response text:",
+            error
+          );
           return;
         }
-  
+
         if (response.status === 403) {
           Swal.fire({
             title: "Login failed",
@@ -91,39 +96,46 @@ const LoginPage = () => {
       console.error("An error occurred", error);
     }
   };
-  
-  
 
   return (
     <>
-    <section className="login-main-container">
-      <div className="login-container">
-        <div className="login-logo-header">
-        <img src="/src/assets/img/logo.png" alt="" />
+      <section className="login-main-container">
+        <div className="login-container">
+          <div className="login-logo-header">
+            <img src="/src/assets/img/logo.png" alt="" />
+          </div>
+          <h1>Login Page</h1>
+          <form onSubmit={handleLoginSubmit}>
+            <div>
+              <label htmlFor="email">Email</label>
+              <input
+                type="text"
+                name="email"
+                value={formData.email}
+                onChange={handleChange}
+                required
+              />
+              <label htmlFor="password">Password</label>
+              <input
+                type="password"
+                name="password"
+                value={formData.password}
+                onChange={handleChange}
+                required
+              />
+              <label>
+                <input
+                  type="checkbox"
+                  name="rememberMe"
+                  checked={formData.rememberMe}
+                  onChange={handleChange}
+                />
+                Remember Me
+              </label>
+              <input type="submit" value="Login" />
+            </div>
+          </form>
         </div>
-      <h1>Login Page</h1>
-      <form onSubmit={handleLoginSubmit}>
-        <div>
-          <label htmlFor="email">Email</label>
-          <input
-            type="text"
-            name="email"
-            value={formData.email}
-            onChange={handleChange}
-            required
-          />
-          <label htmlFor="password">Password</label>
-          <input
-            type="password"
-            name="password"
-            value={formData.password}
-            onChange={handleChange}
-            required
-          />
-          <input type="submit" value="Login" />
-        </div>
-      </form>
-      </div>
       </section>
     </>
   );

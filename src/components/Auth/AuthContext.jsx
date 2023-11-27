@@ -12,19 +12,34 @@ export const AuthProvider = ({ children }) => {
   };
 
   useEffect(() => {
-    const storedToken = localStorage.getItem("authToken");
-
-    if (storedToken) {
-      const decodedToken = jwt_decode(storedToken);
-
+    // Check if there's a token in sessionStorage
+    const sessionToken = sessionStorage.getItem("authToken");
+  
+    if (sessionToken) {
+      const decodedToken = jwt_decode(sessionToken);
+  
+      if (decodedToken.exp * 1000 < Date.now()) {
+        sessionStorage.removeItem("authToken");
+      } else {
+        toggleLogin(true);
+        return; // If there's a valid token in sessionStorage, no need to check localStorage
+      }
+    }
+  
+    // Check if there's a token in localStorage
+    const localToken = localStorage.getItem("authToken");
+  
+    if (localToken) {
+      const decodedToken = jwt_decode(localToken);
+  
       if (decodedToken.exp * 1000 < Date.now()) {
         localStorage.removeItem("authToken");
-        toggleLogin(false);
       } else {
         toggleLogin(true);
       }
     }
   }, []);
+  
 
   const handleLogin = (token) => {
     localStorage.setItem("authToken", token);

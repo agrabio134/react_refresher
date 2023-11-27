@@ -74,7 +74,11 @@ const AppointmentForm = () => {
   };
 
   const handleAppointmentSubmit = async () => {
-    const authToken = localStorage.getItem("authToken");
+
+    let authToken = sessionStorage.getItem("authToken");
+
+    if (!authToken) {
+      authToken = localStorage.getItem("authToken");
 
     if (!authToken) {
       // Show alert and redirect to login if not logged in
@@ -90,6 +94,7 @@ const AppointmentForm = () => {
       });
       return;
     }
+  }
 
     let userId;
 
@@ -219,7 +224,8 @@ const AppointmentForm = () => {
 
 
   const fetchPets = async () => {
-    const authToken = localStorage.getItem("authToken");
+    let authToken = sessionStorage.getItem("authToken") || localStorage.getItem("authToken");
+    
     const decodedToken = jwt_decode(authToken);
   
     const userId = decodedToken ? decodedToken.user_id : null;
