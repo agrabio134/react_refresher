@@ -12,7 +12,7 @@ import GalleryPage from '../pages/gallery/GalleryPage';
 import AuthRoutes from '../Auth/AuthRoutes';
 
 const AppRoutes = () => {
-  return (
+  return (<div>
     <Routes>
       <Route path="/" element={<HomePage />} />
       <Route path="/appointments" element={<AppointmentForm />} />
@@ -24,6 +24,7 @@ const AppRoutes = () => {
       <Route path="/already-verified" element={<AlreadyVerifiedComponent />} />
       <Route path="/auth/*" element={<AuthRoutes />} />
     </Routes>
+    </div>
   );
 };
 

@@ -119,7 +119,9 @@ html  {
 }
 
 .main_page {
-  height: 100vh;
+  /* height: 100vh; */
+  flex-shrink: 0;
+
 }
 
 
@@ -133,6 +135,14 @@ html  {
   height: 100%;
   border-bottom: 1px solid black;
 }
+
 .footer {
-  border: 1px solid #00c3ff;
+  /* position: fixed; */
+  bottom: 0;
+  left: 0;
+  width: 100%; /* Removed single quotes */
+  background-color: #333; /* Removed single quotes */
+  color: #fff; /* Removed single quotes */
+  padding: 20px; /* Removed single quotes */
+  text-align: center; /* Removed single quotes */
 }

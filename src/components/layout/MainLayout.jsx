@@ -4,6 +4,7 @@ import AppRoutes from "./AppRoutes";
 import { useState, useEffect } from "react";
 import { useAuth } from "../Auth/AuthContext"; // Import the useAuth hook
 import jwt_decode from "jwt-decode";
+import FooterPage from "./footer/Footer";
 
 const MainLayout = () => {
   const { isLogin, toggleLogin } = useAuth(); // Use the hook to access the global state
@@ -87,8 +88,9 @@ const MainLayout = () => {
             </div>
           </div>
         {/* </Router> */}
-        <div className="footer">Footer</div>
       </div>
+      <div className="footer"><FooterPage /></div>
+
     </>
   );
 };
