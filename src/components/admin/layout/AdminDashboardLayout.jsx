@@ -42,16 +42,17 @@ const AdminDashboardLayout = ({ children }) => {
       <Sider width={130} theme="dark">
         <div className="logo">Admin</div>
         <Menu theme="dark" mode="vertical" defaultSelectedKeys={['1']} style={{ marginTop: '16px' }}>
-          <Menu.Item key="1" className="menu-item-text">
-            <Link to="/admin/users" className="menu-item-link">
-              <UserOutlined className="menu-item-icon" />
-              Users
+
+        <Menu.Item key="1" className="menu-item-text">
+            <Link to="/admin/" className="menu-item-link">
+              <BarChartOutlined className="menu-item-icon" />
+              Statistics
             </Link>
           </Menu.Item>
           <Menu.Item key="2" className="menu-item-text">
-            <Link to="/admin/statistics" className="menu-item-link">
-              <BarChartOutlined className="menu-item-icon" />
-              Statistics
+            <Link to="/admin/users" className="menu-item-link">
+              <UserOutlined className="menu-item-icon" />
+              Users
             </Link>
           </Menu.Item>
           <Menu.Item key="3" className="menu-item-text">

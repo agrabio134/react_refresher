@@ -1,0 +1,66 @@
+/* Dashboard.css */
+
+.dashboard {
+  padding: 20px;
+}
+
+.light-bg {
+  background-color: #f4f4f4; /* Light gray background color */
+}
+
+.card-container {
+  display: flex;
+  justify-content: space-between;
+  margin: 20px -10px;
+}
+
+.card {
+  flex: 1;
+  background-color: #fff;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+}
+
+.card h2 {
+  color: #333;
+  margin-bottom: 10px;
+}
+
+.card p {
+  font-size: 24px;
+  font-weight: bold;
+  color: #007bff; /* Change the color to your preference */
+  margin: 0;
+}
+
+h1 {
+  font-size: 28px;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+
+
+.dashboard-header {
+    display: flex;
+    justify-content: space-between;
+    /* align-items: center; */
+    margin-bottom: 20px;
+  }
+  
+  .notification-container {
+    display: flex;
+    align-items: center;
+  }
+  
+  .notification-icon {
+    cursor: pointer;
+    margin-left: 10px; /* Adjust the margin as needed for spacing */
+  }

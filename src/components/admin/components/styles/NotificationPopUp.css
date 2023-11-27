@@ -1,0 +1,56 @@
+/* NotificationPopup.css */
+
+.notification-popup {
+    display: none;
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    width: 300px;
+    background-color: #fff;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+    overflow: hidden;
+    opacity: 0;
+    transform: translateY(-20px);
+    transition: opacity 0.3s, transform 0.3s;
+  }
+  
+  .notification-popup.open {
+    display: block;
+    opacity: 1;
+    transform: translateY(0);
+  }
+  
+  .popup-content {
+    padding: 20px;
+  }
+  
+  .popup-content h2 {
+    margin-bottom: 10px;
+    color: #333;
+  }
+  
+  .popup-content ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .popup-content li {
+    border-bottom: 1px solid #e0e0e0;
+    padding: 10px 0;
+    color: #555;
+  }
+  
+  .popup-content button {
+    margin-top: 10px;
+    padding: 8px 16px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  

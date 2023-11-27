@@ -1,0 +1,25 @@
+.card-container {
+    display: flex;
+    justify-content: space-between;
+    margin: 16px;
+  }
+  
+  .card {
+    flex: 1;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 16px;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .card h2 {
+    color: #333;
+  }
+  
+  .card p {
+    font-size: 24px;
+    font-weight: bold;
+    color: #007bff; /* Change the color to your preference */
+  }
+  

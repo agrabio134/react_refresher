@@ -1,0 +1,10 @@
+/* NotificationIcon.css */
+
+.notification-icon {
+    cursor: pointer;
+  }
+  
+  .notification-icon i {
+    font-size: 24px;
+  }
+  
