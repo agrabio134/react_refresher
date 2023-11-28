@@ -1,17 +1,16 @@
 /* AppointmentForm.css */
 
 .appointment-form-container {
-  max-width: 600px;
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  max-width: 1200px; /* Adjust the maximum width as needed */
   margin: 0 auto;
-}
-
-.form-group {
-  margin-bottom: 20px;
 }
 
 /* Make the calendar larger */
 .react-calendar {
-  width: 300px; /* Adjust the width according to your needs */
+  width: 100%; /* Adjust the width according to your needs */
+  min-height: 300px;
 }
 
 /* Position the calendar on the left side */
@@ -38,6 +37,111 @@ select {
   cursor: pointer;
   border: none;
   border-radius: 5px;
+  transition: background-color 0.3s ease;
+
+  &:hover {
+    background-color: #0056b3;
+  }
+
+  &:disabled {
+    background-color: #d3d3d3;
+    cursor: not-allowed;
+  }
 }
 
-/* Add more styles as needed */
+.form-input-container {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 16px;
+}
+
+.form-group {
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 16px;
+  margin-bottom: 16px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.pet-card-header {
+  background-color: #f5f5f5;
+  padding: 12px;
+}
+
+.pet-card-body img {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  border-radius: 50%;
+  /* margin-right: 16px; */
+}
+
+.pet-card-body .pet-details {
+  flex-grow: 1;
+}
+.pet-card-body p {
+  margin: 8px 0;
+}
+
+.pet-card-body {
+  display: flex;
+  align-items: center;
+  padding: 16px;
+}
+.pet-card-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-gap: 16px;
+}
+.pet-checkbox {
+  padding: 5px 15px;
+  margin-bottom: 16px;
+
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  overflow: hidden;
+  margin-bottom: 16px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: box-shadow 0.3s ease;
+  cursor: pointer;
+}
+
+/* Hide the checkbox visually */
+.pet-checkbox input {
+  display: none;
+}
+
+.pet-checkbox:hover,
+.pet-checkbox.checked {
+  border: 2px solid #6fb1f8; /* Change the border color as needed */
+}
+
+.pet-checkbox.checked {
+  background-color: #4494e9; 
+
+}
+
+.pet-checkbox.checked .pet-name,
+.pet-checkbox.checked .pet-breed,
+.pet-checkbox.checked .pet-age {
+  color: #fff;
+}
+
+.add-pet-card {
+  border: 2px solid #ccc;
+  padding: 10px;
+  margin: 5px;
+  cursor: pointer;
+  transition: border-color 0.3s;
+}
+
+.pet-card-Item:hover,
+.add-pet-card:hover {
+  border-color: #007bff;
+}
+
+@media screen and (max-width: 768px) {
+  .appointment-form-container {
+    grid-template-columns: 1fr; /* Change to a single column layout on smaller screens */
+  }
+}

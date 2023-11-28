@@ -3,16 +3,18 @@ import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
 import Swal from "sweetalert2";
 import jwt_decode from "jwt-decode";
+import "./Styles/AppointmentForm.css";
 
 const AppointmentForm = () => {
   const [selectedDate, setSelectedDate] = useState(new Date());
   const [timeSlots, setTimeSlots] = useState([]);
-  const [selectedTimeSlot, setSelectedTimeSlot] = useState("");
+  const [selectedTimeSlot, setSelectedTimeSlot] = useState("07:00");
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [hasPendingAppointment, setHasPendingAppointment] = useState(false);
   const [bookedTimeSlots, setBookedTimeSlots] = useState([]);
   const [pets, setPets] = useState([]);
-  const [selectedPet, setSelectedPet] = useState("");
+  // const [selectedPet, setSelectedPet] = useState("");
+  const [selectedPets, setSelectedPets] = useState([]);
 
   useEffect(() => {
     fetchTimeSlots(selectedDate);
@@ -73,28 +75,47 @@ const AppointmentForm = () => {
     setSelectedTimeSlot(time);
   };
 
-  const handleAppointmentSubmit = async () => {
+  const handlePetChange = (petId) => {
+    setSelectedPets((prevSelectedPets) =>
+      prevSelectedPets.includes(petId)
+        ? prevSelectedPets.filter((id) => id !== petId)
+        : [...prevSelectedPets, petId]
+    );
+    // Check if the petId is already in the selectedPets array
+    const petIndex = selectedPets.indexOf(petId);
 
+    if (petIndex === -1) {
+      // If not, add it to the array
+      setSelectedPets([...selectedPets, petId]);
+    } else {
+      // If it is, remove it from the array
+      const updatedPets = [...selectedPets];
+      updatedPets.splice(petIndex, 1);
+      setSelectedPets(updatedPets);
+    }
+  };
+
+  const handleAppointmentSubmit = async () => {
     let authToken = sessionStorage.getItem("authToken");
 
     if (!authToken) {
       authToken = localStorage.getItem("authToken");
 
-    if (!authToken) {
-      // Show alert and redirect to login if not logged in
-      Swal.fire({
-        title: "Error",
-        icon: "error",
-        text: "You must be logged in to make an appointment.",
-        confirmButtonText: "Okay",
-      }).then((result) => {
-        if (result.isConfirmed) {
-          window.location.href = "/auth/login";
-        }
-      });
-      return;
+      if (!authToken) {
+        // Show alert and redirect to login if not logged in
+        Swal.fire({
+          title: "Error",
+          icon: "error",
+          text: "You must be logged in to make an appointment.",
+          confirmButtonText: "Okay",
+        }).then((result) => {
+          if (result.isConfirmed) {
+            window.location.href = "/auth/login";
+          }
+        });
+        return;
+      }
     }
-  }
 
     let userId;
 
@@ -172,32 +193,54 @@ const AppointmentForm = () => {
         return;
       }
 
-      await fetch("http://localhost/api/create_appointments", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${authToken}`,
-        },
-        body: JSON.stringify({
-          date: selectedDate.toISOString().split("T")[0],
-          time: selectedTimeSlot,
-          user_Id: userId,
-          pet_Id: selectedPet,
-        }),
-      });
+      if (selectedPets.length === 0) {
+        // Handle the case where no pets are selected
+        Swal.fire({
+          icon: "error",
+          title: "Error",
+          text: "Please select at least one pet.",
+        });
+        return;
+      }
+
+      // Create an array of appointment objects for each selected pet
+      const appointments = selectedPets.map((petId) => ({
+        date: selectedDate.toISOString().split("T")[0],
+        time: selectedTimeSlot,
+        user_Id: userId,
+        pet_Id: petId,
+      }));
+
+      // Make a request for each appointment
+      const appointmentResults = await Promise.all(
+        appointments.map(async (appointment) => {
+          const response = await fetch(
+            "http://localhost/api/create_appointments",
+            {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${authToken}`,
+              },
+              body: JSON.stringify(appointment),
+            }
+          );
+
+          // console.log("Response:", appointment);
+
+          return await response.json();
+        })
+      );
+
+      // Check the results and display appropriate messages
 
       Swal.fire({
         icon: "success",
         title: "Success",
-        text: "Appointment created successfully.",
+        text: "Your appointment has been booked.",
       });
     } catch (error) {
-      console.error("Error creating appointment:", error);
-      Swal.fire({
-        icon: "error",
-        title: "Error",
-        text: "Failed to create appointment. Please try again.",
-      });
+      console.error("Error creating appointments:", error);
     } finally {
       setIsSubmitting(false);
       fetchTimeSlots(selectedDate);
@@ -212,25 +255,21 @@ const AppointmentForm = () => {
     return `${formattedHours}:${minutes} ${period}`;
   };
 
-  // PET
-
   useEffect(() => {
     fetchPets();
   }, []); // Fetch pets when the component mounts
 
-  const handlePetChange = (petId) => {
-    setSelectedPet(petId);
-  };
-
-
   const fetchPets = async () => {
-    let authToken = sessionStorage.getItem("authToken") || localStorage.getItem("authToken");
-    
+    let authToken =
+      sessionStorage.getItem("authToken") || localStorage.getItem("authToken");
+
     const decodedToken = jwt_decode(authToken);
-  
+
     const userId = decodedToken ? decodedToken.user_id : null;
     try {
-      const response = await fetch(`http://localhost/api/get_user_pets/${userId}`);
+      const response = await fetch(
+        `http://localhost/api/get_user_pets/${userId}`
+      );
       const result = await response.text(); // Get the raw response as text
 
       // Split the response into separate JSON objects
@@ -251,7 +290,6 @@ const AppointmentForm = () => {
           parsedJson = JSON.parse(json);
           if (parsedJson.payload && parsedJson.payload.length > 0) {
             setPets(parsedJson.payload);
-            // console.log("Pets successfully fetched:", parsedJson);
           }
         } catch (jsonError) {
           // Handle the case where parsing as JSON failed
@@ -267,62 +305,97 @@ const AppointmentForm = () => {
 
   return (
     <div className="appointment-form-container">
-      <div className="form-group">
-        <label>Select Date:</label>
-        <Calendar
-          onChange={handleDateChange}
-          value={selectedDate}
-          className="static-calendar"
-          minDate={new Date()}
-        />
+      <div className="form-sub-container">
+        <div className="form-group">
+          <label>Select Date:</label>
+          <Calendar
+            onChange={handleDateChange}
+            value={selectedDate}
+            className="static-calendar"
+            minDate={new Date()}
+          />
+
+          <label>Select Time Slot:</label>
+          <select
+            value={selectedTimeSlot}
+            onChange={(e) => handleTimeSlotChange(e.target.value)}
+            disabled={isSubmitting}
+          >
+            {timeSlots.map((time) => (
+              <option
+                key={time}
+                value={time}
+                disabled={bookedTimeSlots.includes(time) || isSubmitting}
+              >
+                {formatTimeSlotLabel(time)}
+              </option>
+            ))}
+          </select>
+        </div>
       </div>
 
-      <div className="form-group">
-        <label>Select Time Slot:</label>
-        <select
-          value={selectedTimeSlot}
-          onChange={(e) => handleTimeSlotChange(e.target.value)}
-          disabled={isSubmitting}
-        >
-          {timeSlots.map((time) => (
-            <option
-              key={time}
-              value={time}
-              disabled={bookedTimeSlots.includes(time) || isSubmitting}
-            >
-              {formatTimeSlotLabel(time)}
-            </option>
-          ))}
-        </select>
+      <div className="form-sub-container">
+        <div className="form-input-container">
+          <div className="pet-card">
+            <div className="pet-card-header">
+              <label>Select Pet:</label>
+            </div>
+            <div className="pet-card-body">
+              <div className="pet-card-container">
+                {pets.map((pet) => (
+                  <div>
+                    <label
+                      key={pet.id}
+                      id="pet-item"
+                      htmlFor={`pet-${pet.id}`}
+                      className={`pet-checkbox ${
+                        selectedPets.includes(pet.id) ? "checked" : ""
+                      }`}
+                    >
+                      <input
+                        type="checkbox"
+                        id={`pet-${pet.id}`}
+                        value={pet.id}
+                        checked={selectedPets.includes(pet.id)}
+                        onChange={() => handlePetChange(pet.id)}
+                        disabled={isSubmitting}
+                      />
+                      <div className="pet-details">
+                        <img src="https://via.placeholder.com/150" alt="pet" />
+                        <p className="pet-name">Pet name: {pet.name}</p>
+                        <p className="pet-breed">Breed: {pet.breed}</p>
+                        <p className="pet-age">Age: {pet.age}</p>
+                      </div>
+                    </label>
+                  </div>
+                ))}
+
+                <div
+                  className="pet-card-Item add-pet-card"
+                  onClick={() => {
+                    window.location.href = "/profile";
+                  }}
+                >
+                  <div className="add-pet-button">
+                    <span>Add Pet</span>
+                    <span>+</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <button
+            className="submit-button"
+            onClick={handleAppointmentSubmit}
+            disabled={isSubmitting}
+          >
+            {isSubmitting ? "Submitting..." : "Submit Appointment"}
+          </button>
+
+          {hasPendingAppointment && <p>You have a pending appointment.</p>}
+        </div>
       </div>
-
-      <div className="form-group">
-        <label>Select Pet:</label>
-        <select
-          value={selectedPet}
-          onChange={(e) => handlePetChange(e.target.value)}
-          disabled={isSubmitting}
-        >
-          <option value="" disabled>
-            Select a pet
-          </option>
-          {pets.map((pet) => (
-            <option key={pet.id} value={pet.id}>
-              {pet.name} - {pet.type}
-            </option>
-          ))}
-        </select>
-      </div>
-
-      <button
-        className="submit-button"
-        onClick={handleAppointmentSubmit}
-        disabled={isSubmitting}
-      >
-        {isSubmitting ? 'Submitting...' : 'Submit Appointment'}
-      </button>
-
-      {hasPendingAppointment && <p>You have a pending appointment.</p>}
     </div>
   );
 };
