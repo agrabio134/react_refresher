@@ -41,7 +41,7 @@ const MainLayout = () => {
               <i className="fa-brands fa-x-twitter"></i>
               <i className="fa-brands fa-instagram"></i>
            </div>
-              <div className="auth_container">
+              <div className="header_auth_container">
                 {/* Conditionally render Profile or Login/Signup based on authentication status */}
                 
                 {isLogin ? (
@@ -89,8 +89,7 @@ const MainLayout = () => {
           </div>
         {/* </Router> */}
       </div>
-      <div className="footer"><FooterPage /></div>
-
+      <FooterPage />
     </>
   );
 };

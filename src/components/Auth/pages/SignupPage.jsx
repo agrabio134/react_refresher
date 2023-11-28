@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useAuth } from "../AuthContext"; // Import the useAuth hook3.
 import Swal from "sweetalert2";
+import "../Style/signup.css";
 
 const SignupPage = () => {
   const { isLogin } = useAuth(); // Use the hook to access the global state
@@ -196,10 +197,18 @@ const SignupPage = () => {
 
   return (
     <>
-    <div className="color">
-      <h1>Signup Page</h1>
+    <section className="signup-main-container">
+    <div className="signup-side">
+      <img src="/src/assets/img/signin.svg" alt="" />
+      </div>
+    <div className="main-user-signup-container">
+        <p className="title">Happy Paws</p>
+            <div className="signup-separator"></div>
+
       <form onSubmit={handleSubmit}>
-        <div>
+        <div className="user-signup-grid-container">
+
+        <div className="user-signup-form-control"> 
           <label htmlFor="fname">First Name</label>
           <input
             type="text"
@@ -207,6 +216,9 @@ const SignupPage = () => {
             value={formData.fname}
             onChange={handleChange}
           />
+          </div>
+
+          <div className="user-signup-form-control"> 
           <label htmlFor="lname">Last Name</label>
           <input
             type="text"
@@ -214,7 +226,9 @@ const SignupPage = () => {
             value={formData.lname}
             onChange={handleChange}
           />
+          </div>
 
+          <div className="user-signup-form-control"> 
           <label htmlFor="contact">Contact Number</label>
           <input
             type="tel"
@@ -222,6 +236,9 @@ const SignupPage = () => {
             value={formData.contact}
             onChange={handleChange}
           />
+          </div>
+
+          <div className="user-signup-form-control"> 
           <label htmlFor="address">Address</label>
           <input
             type="text"
@@ -229,7 +246,9 @@ const SignupPage = () => {
             value={formData.address}
             onChange={handleChange}
           />
+          </div>          </div>
 
+          <div className="user-signup-form-control"> 
           <label htmlFor="email">Email</label>
           <input
             type="email"
@@ -237,6 +256,9 @@ const SignupPage = () => {
             value={formData.email}
             onChange={handleChange}
           />
+          </div>
+          <div className="user-signup-grid-container">
+          <div className="user-signup-form-control"> 
           <label htmlFor="password">Password</label>
           <input
             type="password"
@@ -247,7 +269,9 @@ const SignupPage = () => {
             required
             onChange={handleChange}
           />
+          </div>
 
+          <div className="user-signup-form-control"> 
           <label htmlFor="confirmPass">Confirm Password</label>
           <input
             type="password"
@@ -255,20 +279,44 @@ const SignupPage = () => {
             value={formData.confirmPass}
             onChange={handleChange}
           />
-
+          </div>
+          </div>
+{/* 
+          <div className="user-signup-form-control rm"> 
+-   
+          <label htmlFor="termsAndConditions" className="user-check-box">
           <input
             type="checkbox"
             id="termsAndConditions"
             name="termsAndConditions"
             required
           />
-          <label htmlFor="termsAndConditions">
+          <span className="checkmark"></span>
+
             I accept the terms and conditions
           </label>
+          </div> */}
 
-          <input type="submit" value="Signup" />
-        </div>
-      </form></div>
+          <div className="user-signup-form-control rm">
+              <label className="user-signup-check-box">
+                <input
+                  type="checkbox"
+                  id="termsAndConditions"
+                  name="termsAndConditions"
+                  required
+                />
+                <span className="checkmark"></span>
+              </label>
+   
+              <label htmlFor="termsAndConditions"> I accept the terms and conditions</label>
+
+            </div>  
+
+          <input type="submit" value="Signup" className="btn1"/>
+
+      </form>
+      </div>
+      </section>
     </>
   );
 };

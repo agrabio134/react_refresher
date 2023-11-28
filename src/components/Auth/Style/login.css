@@ -1,22 +1,202 @@
 .login-main-container {
 	min-height: 100vh;
-    background: url(../../../assets/img/footer.jpg);
-    display: flex;
-    justify-content: center;
-    padding: 50px;
+    background: url(../../../assets/img/wave2.png);
+	background-size: cover;
+  background-color: white;
+	background-position: center;
+	background-repeat: no-repeat;
+    width: 100%;
+    display: grid;
+    grid-template-columns: 2fr 1fr;
 }
 
-.login-container {
-    margin-top: 125px;
-    background-color: white;
-}
-
-.login-logo-header {
+.main-user-login-container {
+  margin-top: 50px;
+    max-width: 450px;
+    max-height: 100%;
+    height: 85%;
+    padding: 24px;
     display: flex;
-    justify-content: space-between;
-    background-color: #F50057;
-    height: 69.4px;
+    flex-direction: column;
     align-items: center;
-    padding-left: 100px;
-    padding-right: 100px;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  }
+
+  .title {
+    text-transform: uppercase;
+    font-size: 3em;
+    font-weight: bold;
+    text-align: center;
+    letter-spacing: 1px;
+    color: black;
+    /* border: solid green; */
 }
+
+.separator {
+    width: 150px;
+    height: 4px;
+    background-color: #e12454;
+    margin: 24px;
+}
+
+.welcome-message {
+    text-align: center;
+    font-size: 1.1em;
+    line-height: 28px;
+    margin-bottom: 30px;
+    color: #696969;
+    /* border: solid yellow; */
+}
+
+.user-login-box {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.user-login-form-control {
+  width: 100%;
+  position: relative;
+  margin-bottom: 24px;
+}
+
+input,
+button {
+    border: none;
+    outline: none;
+    border-radius: 30px;
+    font-size: 1.1em;
+}
+
+input {
+    width: 100%;
+    background: #e6e6e6;
+    color: #333;
+    letter-spacing: 0.5px;
+    padding: 14px 64px;
+}
+
+input ~ i {
+    position: absolute;
+    left: 32px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #888;
+    transition: color   0.4s;
+}
+
+input:focus ~ i {
+  color: #e12454;
+}
+
+/* Hide the browser's default checkbox */
+.user-check-box input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+
+/* Create a custom checkbox */
+.checkmark {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 20px;
+  width: 20px;
+  background-color: #eee;
+}
+
+/* On mouse-over, add a grey background color */
+.user-check-box :hover input ~ .checkmark {
+  background-color: #ccc;
+}
+
+/* When the checkbox is checked, add a blue background */
+.user-check-box  input:checked ~ .checkmark {
+  background-color: #e12454;
+}
+
+/* Create the checkmark/indicator (hidden when not checked) */
+.checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+/* Show the checkmark when checked */
+.user-check-box  input:checked ~ .checkmark:after {
+  display: block;
+}
+
+/* Style the checkmark/indicator */
+.user-check-box  .checkmark:after {
+  left: 8px;
+  top: 4px;
+  width: 5px;
+  height: 10px;
+  border: solid white;
+  border-width: 0 3px 3px 0;
+  -webkit-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  transform: rotate(45deg);
+}
+
+
+.user-check-box {
+  padding: 10px;
+}
+
+
+ .rm span {
+  padding-left: 10px;
+  color: black;
+  font-size: 15px;
+}
+  
+
+  .btn1 {
+    color: #fff;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-weight: bold;
+    background-image: linear-gradient(to right, #e12454, #6f0d26);
+    cursor: pointer;
+    transition: opacity 0.4s;
+}
+
+.btn1:hover {
+    opacity: 0.9;
+}
+
+  .dnthave{
+    text-align: center;
+    margin-top: 10px;
+}
+
+a{
+  color: black;
+  text-decoration: none;
+}
+
+a:hover {
+  color: #e12454;
+  text-decoration: underline;
+}
+
+.side {
+  display: flex;
+  margin-left: 120px;
+  margin-bottom: 30px;
+  background-size: 100% 102%;
+}
+
+.side img {
+  width: 75%;
+  max-width: 100%;
+}
+
+

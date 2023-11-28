@@ -52,8 +52,18 @@ const GalleryPage = () => {
   }, []);
 
   return (
+    <section className='main-gallery-container'>
+    <div className='gallery-welcome-container'>
+    <div className="gallery-content">
+          <h1><span className="span">Our</span> Gallery</h1>
+          <ul className='gallery-breadcrumbs'>
+          <a href="">Home </a>
+          <li href="">/</li>
+          <a href="">Gallery</a>
+          </ul>
+        </div>
+    </div>
     <div className="gallery-container">
-      <h1>Gallery Page</h1>
       {loading ? (
         <p>Loading...</p>
       ) : (
@@ -70,7 +80,7 @@ const GalleryPage = () => {
         </ul>
       )}
     </div>
-
+</section>
   );
 };
 

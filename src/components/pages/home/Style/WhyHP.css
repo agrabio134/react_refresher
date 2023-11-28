@@ -58,9 +58,9 @@ p {
 }
 
 
-section{
+/* section{
     padding:2rem 7%;
-}
+} */
 
 
 .main_whyhp_container {
@@ -71,6 +71,7 @@ section{
     border-top-width: 2px;
     border-top-color: #eaeaea;
     border-top-style: solid;
+    padding:2rem 7%;
 }
 
 /* .home1-section-heading1 {

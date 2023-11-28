@@ -46,7 +46,7 @@ html  {
 
 }
 
-.auth_container{
+.header_auth_container{
   padding: 14px;
   text-align: center;
   background-color: orange;
@@ -134,15 +134,4 @@ html  {
 .nav_list:hover {
   height: 100%;
   border-bottom: 1px solid black;
-}
-
-.footer {
-  /* position: fixed; */
-  bottom: 0;
-  left: 0;
-  width: 100%; /* Removed single quotes */
-  background-color: #333; /* Removed single quotes */
-  color: #fff; /* Removed single quotes */
-  padding: 20px; /* Removed single quotes */
-  text-align: center; /* Removed single quotes */
 }

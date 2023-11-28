@@ -1,5 +1,65 @@
 /* BlogPage.css */
 
+.main-blog-container {
+  background-color: #ebf5f5;
+  padding: 0;
+}
+
+.blog-welcome-container {
+  width: 100%;
+	min-height: 70vh;
+  display: flex;
+	background: url(../../../assets/img/b22.jpg);
+	background-size: cover;
+	/* background-position: center; */
+	background-repeat: no-repeat;
+  align-items: center;
+  text-align: center;
+
+
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+  
+.blog-welcome-container .blog-content{
+  display: flex;
+  flex-direction: column;
+  
+
+}
+
+  .blog-welcome-container .blog-content h1{
+    padding-top: 20px;
+      font-size: 54px;
+      font-weight: bold;
+    color: black;
+    width: 45rem;
+  }
+  
+  .blog-welcome-container .blog-content h1 .span{
+    color: #F50057;
+  }
+
+  .blog-breadcrumbs {
+    display: flex;
+    justify-content: space-between;
+    align-self: center;
+    width: 150px;
+  }
+  .blog-breadcrumbs a{
+    color: black;
+    font-size: 20px;
+    font-weight: bold;
+  }
+
+  .blog-breadcrumbs li{
+    color: black;
+    font-size: 20px;
+    font-weight: bold;
+  }
+
+  
+  
+
 .blog-container {
     display: flex;
     max-width: 1200px;
@@ -25,17 +85,19 @@
     list-style: none;
     padding: 0;
     display: flex;
+    justify-content: center;
     flex-wrap: wrap;
   }
   
   .blog-post {
-    background-color: #fff;
     margin: 0 10px 20px 0;
     border-radius: 8px;
     overflow: hidden;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     transition: transform 0.2s ease-in-out;
     width: calc(33.333% - 20px);
+    border-bottom: 10px solid #e12454;
+    background-color: white;
   }
   
   .blog-post:hover {
@@ -49,8 +111,16 @@
   }
   
   .blog-details {
+    border-top: solid black;
     padding: 20px;
   }
+
+  .blog-separator {
+    width: 150px;
+    height: 3px;
+    background-color: #e12454;
+    margin-bottom: 10px;
+}
   
   h2 {
     font-size: 1.8rem;
@@ -71,3 +141,4 @@
   
   /* Add additional styling as needed */
   
+

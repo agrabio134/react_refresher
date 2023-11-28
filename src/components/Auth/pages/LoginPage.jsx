@@ -99,43 +99,59 @@ const LoginPage = () => {
 
   return (
     <>
-      <section className="login-main-container">
-        <div className="login-container">
-          <div className="login-logo-header">
-            <img src="/src/assets/img/logo.png" alt="" />
-          </div>
-          <h1>Login Page</h1>
-          <form onSubmit={handleLoginSubmit}>
-            <div>
-              <label htmlFor="email">Email</label>
+
+      <section className="login-main-container">   
+      <div className="side">
+      <img src="/src/assets/img/wc.svg" alt="" />
+      </div>
+        <div className="main-user-login-container">
+        <p className="title">Happy Paws</p>
+            <div className="separator"></div>
+            <p className="welcome-message">Please, provide login credential to proceed and have access to all our services</p>
+          <form className="user-login-box" onSubmit={handleLoginSubmit}>
+            <div className="user-login-form-control">
+              <label htmlFor="email"></label>
               <input
                 type="text"
                 name="email"
+                placeholder="Email"
                 value={formData.email}
                 onChange={handleChange}
                 required
-              />
-              <label htmlFor="password">Password</label>
+              /> 
+              <i className="fa-solid fa-user"></i>
+              </div>
+              <div className="user-login-form-control">
+              <label htmlFor="password"></label>
               <input
                 type="password"
                 name="password"
+                placeholder="Passsword"
                 value={formData.password}
                 onChange={handleChange}
                 required
-              />
-              <label>
+              /> 
+              <i className="fa-solid fa-lock"></i>
+              </div>
+              <div className="user-login-form-control rm">
+              <label className="user-check-box">
                 <input
                   type="checkbox"
                   name="rememberMe"
                   checked={formData.rememberMe}
                   onChange={handleChange}
                 />
-                Remember Me
+                <span className="checkmark"></span>
               </label>
-              <input type="submit" value="Login" />
-            </div>
+   
+              <span>remember me</span>
+
+            </div>              
+            <input type="submit" value="Login" className="btn1" />
+            <a href="#" className="dnthave">Don’t have an account? Sign up</a>
           </form>
-        </div>
+          </div>
+
       </section>
     </>
   );

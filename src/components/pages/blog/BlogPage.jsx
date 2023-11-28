@@ -49,8 +49,18 @@ const BlogPage = () => {
   }, []);
 
   return (
+    <section className='main-blog-container'>
+    <div className='blog-welcome-container'>
+    <div className="blog-content">
+          <h1><span className="span">Our</span> Blogs</h1>
+          <ul className='blog-breadcrumbs'>
+          <a href="">Home </a>
+          <li href="">/</li>
+          <a href="">Blogs</a>
+          </ul>
+        </div>
+    </div>
     <div className="blog-container">
-      <h1>Blog Page</h1>
       {loading ? (
         <p>Loading...</p>
       ) : (
@@ -60,6 +70,7 @@ const BlogPage = () => {
               <img src={`/blog/${post.thumbnail}`} alt={post.title} />
               <div className="blog-details">
                 <h2>{post.title}</h2>
+                <div className="blog-separator"></div>
                 <p>{post.content}</p>
                 <p>Date Created: {post.date_created}</p>
                 <p>Date Modified: {post.date_modified}</p>
@@ -69,6 +80,7 @@ const BlogPage = () => {
         </ul>
       )}
     </div>
+    </section>
   );
 };
 

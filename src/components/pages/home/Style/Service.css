@@ -58,13 +58,15 @@ p {
 }
 
 
-section{
+/* section{
     padding:2rem 7%;
-}
+} */
 
 
 .main_service_container {
     background-color: #fff;
+    padding:2rem 7%;
+    
 }
 
 /* .home1-section-heading1 {
@@ -132,7 +134,7 @@ section{
     /* border: solid red; */
 }
 
-.fa-solid {
+.service_content .fa-solid {
     font-size: 65px;
     padding: 15px;
     color: #F50057;
