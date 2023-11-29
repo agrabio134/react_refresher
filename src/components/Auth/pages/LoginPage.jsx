@@ -106,7 +106,7 @@ const LoginPage = () => {
       </div>
         <div className="main-user-login-container">
         <p className="title">Happy Paws</p>
-            <div className="separator"></div>
+            <div className="user-separator"></div>
             <p className="welcome-message">Please, provide login credential to proceed and have access to all our services</p>
           <form className="user-login-box" onSubmit={handleLoginSubmit}>
             <div className="user-login-form-control">

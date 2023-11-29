@@ -1,8 +1,15 @@
 /* Styling for the appointment log container */
 .appointment-log-container {
-    max-width: 800px;
+    max-width: 100%;
     margin: 0 auto;
+    background-color: white;
+    margin-top: 10px;
+    text-align: center;
+    padding: 11px;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   }
+  
   
   /* Styling for the title */
   h2 {
@@ -24,15 +31,16 @@
   
   /* Styling for the table header */
   .appointment-log-table th {
-    background-color: #3498db; /* Blue color for header background */
+    background-color: #e12454; /* pinkred color for header background */
     color: #ffffff;
     font-weight: bold;
-    text-align: left;
+    text-align: center;
     padding: 10px;
   }
   
   /* Styling for the table rows */
   .appointment-log-item {
+    text-align: center;
     background-color: #ffffff;
     border: 1px solid #e0e0e0;
     border-radius: 8px;

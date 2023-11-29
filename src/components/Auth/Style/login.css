@@ -34,7 +34,7 @@
     /* border: solid green; */
 }
 
-.separator {
+.user-separator {
     width: 150px;
     height: 4px;
     background-color: #e12454;
@@ -62,15 +62,15 @@
   margin-bottom: 24px;
 }
 
-input,
-button {
+.user-login-box input,
+.user-login-box button {
     border: none;
     outline: none;
     border-radius: 30px;
     font-size: 1.1em;
 }
 
-input {
+.user-login-box input {
     width: 100%;
     background: #e6e6e6;
     color: #333;
@@ -78,7 +78,7 @@ input {
     padding: 14px 64px;
 }
 
-input ~ i {
+.user-login-box input ~ i {
     position: absolute;
     left: 32px;
     top: 50%;
@@ -87,7 +87,7 @@ input ~ i {
     transition: color   0.4s;
 }
 
-input:focus ~ i {
+.user-login-box input:focus ~ i {
   color: #e12454;
 }
 
@@ -158,7 +158,7 @@ input:focus ~ i {
 }
   
 
-  .btn1 {
+ .user-login-box .btn1 {
     color: #fff;
     text-transform: uppercase;
     letter-spacing: 2px;
@@ -168,7 +168,7 @@ input:focus ~ i {
     transition: opacity 0.4s;
 }
 
-.btn1:hover {
+.user-login-box .btn1:hover {
     opacity: 0.9;
 }
 

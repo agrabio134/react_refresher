@@ -143,3 +143,46 @@
     /* -webkit-transform: scaleX(-1);
     transform: scaleX(-1); */
   }
+
+  .user-signup-box .btn1 {
+    color: #fff;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-weight: bold;
+    background-image: linear-gradient(to right, #e12454, #6f0d26);
+    cursor: pointer;
+    transition: opacity 0.4s;
+}
+
+.user-signup-box .btn1:hover {
+    opacity: 0.9;
+}
+
+.user-signup-box input,
+.user-signup-boxbutton {
+    border: none;
+    outline: none;
+    border-radius: 30px;
+    font-size: 1.1em;
+}
+
+.user-signup-box input {
+    width: 100%;
+    background: #e6e6e6;
+    color: #333;
+    letter-spacing: 0.5px;
+    padding: 14px 64px;
+}
+
+.user-signup-box input ~ i {
+    position: absolute;
+    left: 32px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #888;
+    transition: color   0.4s;
+}
+
+.user-signup-box input:focus ~ i {
+  color: #e12454;
+}

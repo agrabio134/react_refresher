@@ -387,8 +387,7 @@ const AppointmentForm = () => {
                   }}
                 >
                   <div className="add-pet-button">
-                    <span>Add Pet</span>
-                    <span>+</span>
+                  <i className="fa-solid fa-plus"></i>
                   </div>
                 </div>
               </div>

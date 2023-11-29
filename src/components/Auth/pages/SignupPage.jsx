@@ -205,7 +205,7 @@ const SignupPage = () => {
         <p className="title">Happy Paws</p>
             <div className="signup-separator"></div>
 
-      <form onSubmit={handleSubmit}>
+      <form className="user-signup-box" onSubmit={handleSubmit}>
         <div className="user-signup-grid-container">
 
         <div className="user-signup-form-control"> 
