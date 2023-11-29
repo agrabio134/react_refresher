@@ -4,6 +4,7 @@ import "react-calendar/dist/Calendar.css";
 import Swal from "sweetalert2";
 import jwt_decode from "jwt-decode";
 import "./Styles/AppointmentForm.css";
+// import AppointmentLog from "./AppointmentLog";
 
 const AppointmentForm = () => {
   const [selectedDate, setSelectedDate] = useState(new Date());
@@ -323,7 +324,7 @@ const AppointmentForm = () => {
           >
             {timeSlots.map((time) => (
               <option
-                key={time}
+                key={time} // Add a unique key here
                 value={time}
                 disabled={bookedTimeSlots.includes(time) || isSubmitting}
               >
@@ -343,7 +344,7 @@ const AppointmentForm = () => {
             <div className="pet-card-body">
               <div className="pet-card-container">
                 {pets.map((pet) => (
-                  <div>
+                  <div key={pet.id}>
                     <label
                       key={pet.id}
                       id="pet-item"
@@ -361,10 +362,19 @@ const AppointmentForm = () => {
                         disabled={isSubmitting}
                       />
                       <div className="pet-details">
-                        <img src="https://via.placeholder.com/150" alt="pet" />
-                        <p className="pet-name">Pet name: {pet.name}</p>
-                        <p className="pet-breed">Breed: {pet.breed}</p>
-                        <p className="pet-age">Age: {pet.age}</p>
+                        <img src={`/pet/${pet.image}`} alt={pet.image} />
+                        <p className="pet-name">
+                          Pet name: <b>{pet.name}</b>
+                        </p>
+                        <p className="pet-breed">
+                          Breed: <b>{pet.breed}</b>
+                        </p>
+                        <p className="pet-age">
+                          Age:{" "}
+                          <b>
+                            {pet.age} {pet.age === 1 ? "Month" : "Months"}
+                          </b>
+                        </p>
                       </div>
                     </label>
                   </div>

@@ -96,6 +96,7 @@ select {
 .pet-checkbox {
   padding: 5px 15px;
   margin-bottom: 16px;
+  height: 100%;
 
   border: 1px solid #ddd;
   border-radius: 8px;

@@ -7,7 +7,7 @@ import VerifyEmail from '../Auth/VerifyEmail';
 import EmailVerifiedComponent from '../Auth/SuccessMsg';
 import AlreadyVerifiedComponent from '../Auth/ErrorVerification';
 import BlogPage from '../pages/blog/BlogPage';
-import AppointmentForm from '../pages/appointment/AppointmentForm';
+import AppointmentPage from '../pages/appointment/AppointmentPage';
 import GalleryPage from '../pages/gallery/GalleryPage';
 import AuthRoutes from '../Auth/AuthRoutes';
 
@@ -15,7 +15,7 @@ const AppRoutes = () => {
   return (<div>
     <Routes>
       <Route path="/" element={<HomePage />} />
-      <Route path="/appointments" element={<AppointmentForm />} />
+      <Route path="/appointments" element={<AppointmentPage />} />
       <Route path="/blogs" element={<BlogPage />} />
       <Route path="/gallery" element={<GalleryPage />} />
       <Route path="/profile" element={<ProfilePage />} />

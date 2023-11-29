@@ -1,0 +1,60 @@
+/* Styling for the appointment log container */
+.appointment-log-container {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+  
+  /* Styling for the title */
+  h2 {
+    color: #333333;
+  }
+  
+  /* Styling for loading and error messages */
+  .loading-message,
+  .error-message {
+    color: #e74c3c; /* Red color for error messages */
+  }
+  
+  /* Styling for the table */
+  .appointment-log-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+  }
+  
+  /* Styling for the table header */
+  .appointment-log-table th {
+    background-color: #3498db; /* Blue color for header background */
+    color: #ffffff;
+    font-weight: bold;
+    text-align: left;
+    padding: 10px;
+  }
+  
+  /* Styling for the table rows */
+  .appointment-log-item {
+    background-color: #ffffff;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin-bottom: 10px;
+    padding: 15px;
+    transition: transform 0.3s ease-in-out;
+  }
+  
+  .appointment-log-item:hover {
+    transform: scale(1.02);
+  }
+  
+  /* Styling for the table data cells */
+  .appointment-log-table td {
+    padding: 15px;
+  }
+  
+  /* Styling for responsive adjustments */
+  @media (max-width: 768px) {
+    .appointment-log-item {
+      padding: 10px;
+    }
+  }
+  
