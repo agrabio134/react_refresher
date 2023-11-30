@@ -1,4 +1,5 @@
 .whole-appointment-container {
+    padding-top: 150px;
     background-color: white;
     display: flex;
     justify-content: center;

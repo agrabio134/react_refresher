@@ -148,7 +148,7 @@ const LoginPage = () => {
 
             </div>              
             <input type="submit" value="Login" className="btn1" />
-            <a href="#" className="dnthave">Don’t have an account? Sign up</a>
+            <a href="http://localhost:5173/auth/signup" className="dnthave">Don’t have an account? Sign up</a>
           </form>
           </div>
 

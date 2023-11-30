@@ -125,11 +125,11 @@ html  {
 }
 
 
-/* .header_fixed {
+.header_fixed {
   position: fixed;
   width: 100%;
-  z-index: 10000;
-} */
+  z-index: 1;
+}
 
 .nav_list:hover {
   height: 100%;

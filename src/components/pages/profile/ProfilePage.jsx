@@ -4,6 +4,7 @@ import jwt_decode from "jwt-decode";
 import Swal from "sweetalert2";
 import AddPetForm from "./AddPetForm";
 import PetTable from "./PetTable";
+import "./Style/ProfilePage.css";
 
 const ProfilePage = () => {
   const [decodedToken, setDecodedToken] = useState(null);
@@ -185,6 +186,7 @@ const ProfilePage = () => {
 
       return (
         <>
+        <section className="main-profile-container">
           <h2>Welcome {userFullName}</h2>
           <button onClick={handleLogout}>Logout</button>
 
@@ -204,6 +206,7 @@ const ProfilePage = () => {
             handleUpdatePet={handleUpdatePet}
             handleDeletePet={handleDeletePet}
           />
+          </section>
         </>
       );
     } else {
@@ -375,7 +378,7 @@ const ProfilePage = () => {
 
   return (
     <>
-      <h1>Profile Page</h1>
+      {/* <h1>Profile Page</h1> */}
       {isLoading ? <div>Loading...</div> : <div>{checkLogin()}</div>}
     </>
   );
