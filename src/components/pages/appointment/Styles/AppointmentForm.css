@@ -100,6 +100,10 @@
   margin-bottom: 20px;
   background-color: white;
 }
+.react-calendar__tile--now{
+  background-color: #ffa500;
+  color: #eaeaea;
+}
 
 select {
   width: 100%;
