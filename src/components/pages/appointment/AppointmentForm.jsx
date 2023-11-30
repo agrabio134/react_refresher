@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
 import Swal from "sweetalert2";
@@ -310,11 +310,21 @@ const AppointmentForm = () => {
         <div className="form-group">
           <label>Select Date:</label>
           <Calendar
-            onChange={handleDateChange}
-            value={selectedDate}
-            className="static-calendar"
-            minDate={new Date()}
-          />
+  onChange={handleDateChange}
+  value={selectedDate}
+  className="static-calendar"
+  minDate={new Date()}
+  onClickDay={(value, event) => {
+    // Check if the click event originated from inside the calendar
+    const isInsideCalendar = event.target.closest(".react-calendar") !== null;
+
+    // Only update the selected date if the click is inside the calendar
+    if (isInsideCalendar) {
+      handleDateChange(value);
+    }
+  }}
+/>
+
 
           <label>Select Time Slot:</label>
           <select
@@ -387,7 +397,7 @@ const AppointmentForm = () => {
                   }}
                 >
                   <div className="add-pet-button">
-                  <i className="fa-solid fa-plus"></i>
+                    <i className="fa-solid fa-plus"></i>
                   </div>
                 </div>
               </div>

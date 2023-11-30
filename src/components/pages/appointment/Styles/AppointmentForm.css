@@ -28,6 +28,7 @@
 .react-calendar__navigation button {
   min-width: 44px;
   background-color: #e12454;
+  color: #eaeaea;
 }
 
 .react-calendar button {
@@ -39,7 +40,19 @@
   
 }
 
-.react-calendar__tile {
+.react-calendar__tile--active:enabled {
+  background-color: #e12454;
+  color: #eaeaea;
+
+}
+
+
+.react-calendar__tile--active:enabled:hover, .react-calendar__tile--active:enabled:focus {
+  background: #e12454;
+  color: #eaeaea;
+}
+
+/* .react-calendar__tile {
   max-width: 100%;
   padding: 10px 6.6667px;
   background: none;
@@ -47,7 +60,7 @@
   line-height: 16px;
   font: inherit;
   font-size: 0.833em;
-}
+} */
 
 .react-calendar__month-view__days {
 
@@ -93,6 +106,7 @@ select {
   padding: 8px;
   margin-bottom: 10px;
   background-color: #e12454;
+  color: #fff;
 }
 
 option {

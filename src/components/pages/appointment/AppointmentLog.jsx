@@ -1,76 +1,87 @@
 import React, { useState, useEffect } from "react";
 import AppointmentLogItem from "./AppointmentLogItem";
 import "./Styles/AppointmentLog.css";
+import Swal from "sweetalert2";
 
 const AppointmentLog = () => {
   const [appointments, setAppointments] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null); // Initialize error state
-
+  const [error, setError] = useState(null);
   let authToken =
     sessionStorage.getItem("authToken") || localStorage.getItem("authToken");
-  let payload = authToken.split(".")[1];
-  payload = window.atob(payload);
-  payload = JSON.parse(payload);
-  let userId = payload.user_id;
 
-  useEffect(() => {
-    const fetchAppointments = async () => {
-      try {
-        const response = await fetch(
-          "http://localhost/api/get_appointments/"+userId
-        );
+  if (authToken === null) {
+    return null;
+  } else {
+    let payload = authToken.split(".")[1];
 
-        if (response.status === 404) {
-          console.log("No Data Found");
-          setAppointments([]); // Set appointments to an empty array
-          setLoading(false);
-          return;
-        }
+    payload = window.atob(payload);
+    payload = JSON.parse(payload);
+    let userId = payload.user_id;
 
-        if (!response.ok) {
-          throw new Error(`Failed to fetch data: ${response.status}`);
-        }
+    useEffect(() => {
+      const fetchAppointments = async () => {
+        try {
+          const response = await fetch(
+            `http://localhost/api/get_appointments/${userId}`
+          );
 
-        const textData = await response.text();
+          if (response.status === 404) {
+            console.log("No Data Found");
+            setAppointments([]); // Set appointments to an empty array
+            setLoading(false);
+            return;
+          }
 
-        const jsonObjects = textData.split("}{").map((json, index, array) => {
-          return index === 0
-            ? json + "}"
-            : index === array.length - 1
-            ? "{" + json
-            : "{" + json + "}";
-        });
+          if (!response.ok) {
+            throw new Error(`Failed to fetch data: ${response.status}`);
+          }
 
-        const appointments = jsonObjects.flatMap((json) => {
-          try {
-            const parsedResult = JSON.parse(json);
+          const textData = await response.text();
 
-            if (
-              parsedResult.status &&
-              parsedResult.status.remarks === "success"
-            ) {
-              return parsedResult.payload;
-            } else {
-              // console.error("Error fetching appointments:", parsedResult.error);
+          const jsonObjects = textData.split("}{").map((json, index, array) => {
+            return index === 0
+              ? json + "}"
+              : index === array.length - 1
+              ? "{" + json
+              : "{" + json + "}";
+          });
+
+          const appointments = jsonObjects.flatMap((json) => {
+            try {
+              const parsedResult = JSON.parse(json);
+
+              if (
+                parsedResult.status &&
+                parsedResult.status.remarks === "success"
+              ) {
+                return parsedResult.payload;
+              } else {
+                // console.error("Error fetching appointments:", parsedResult.error);
+                return [];
+              }
+            } catch (jsonError) {
+              console.error("Error parsing JSON:", jsonError);
               return [];
             }
-          } catch (jsonError) {
-            console.error("Error parsing JSON:", jsonError);
-            return [];
-          }
-        });
+          });
 
-        setAppointments(appointments.filter(Boolean));
-        setLoading(false);
-      } catch (error) {
-        // Suppress any errors
-        setLoading(false);
-      }
-    };
+          // Sort appointments in descending order based on created_at timestamp
+          const sortedAppointments = appointments.sort(
+            (a, b) => new Date(b.created_at) - new Date(a.created_at)
+          );
 
-    fetchAppointments();
-  }, [userId]);
+          setAppointments(sortedAppointments.filter(Boolean));
+          setLoading(false);
+        } catch (error) {
+          // Suppress any errors
+          setLoading(false);
+        }
+      };
+
+      fetchAppointments();
+    }, [userId]);
+  }
 
   return (
     <div className="appointment-log-container">
@@ -99,7 +110,7 @@ const AppointmentLog = () => {
               <AppointmentLogItem
                 key={appointment.id}
                 appointment={appointment}
-                index={index}
+                index={index + 1} // Adjust index to start from 1
               />
             ))}
           </tbody>
