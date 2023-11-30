@@ -110,7 +110,7 @@ const AppointmentLog = () => {
               <AppointmentLogItem
                 key={appointment.id}
                 appointment={appointment}
-                index={index + 1} // Adjust index to start from 1
+                index={index + 0} // Adjust index to start from 1
               />
             ))}
           </tbody>

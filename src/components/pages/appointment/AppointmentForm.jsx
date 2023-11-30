@@ -41,10 +41,26 @@ const AppointmentForm = () => {
       const bookedResponse = await fetch(
         `http://localhost/api/get_booked_time_slots/${formattedDate}`
       );
-      const bookedTimeSlotsData = await bookedResponse.json();
-      const bookedTimeSlotsArray = Array.isArray(bookedTimeSlotsData)
-        ? bookedTimeSlotsData
-        : [];
+      const bookedTimeSlotsData = await bookedResponse.text();
+      const bookedTimeSlotsStartIndex = bookedTimeSlotsData.indexOf("[");
+      const bookedTimeSlotsEndIndex = bookedTimeSlotsData.lastIndexOf("]");
+      const bookedTimeSlotsJSON = bookedTimeSlotsData.substring(
+        bookedTimeSlotsStartIndex, // 1
+        bookedTimeSlotsEndIndex + 1 // 2
+      );
+      const bookedTimeSlotsDataArray = bookedTimeSlotsJSON.split("}{");
+      const bookedTimeSlotsDataArrayWithBrackets = bookedTimeSlotsDataArray.map(
+        (obj, index, array) => {
+          return index < array.length - 1 ? `${obj}}` : obj;
+        }
+      );
+      const bookedTimeSlotsArray = bookedTimeSlotsDataArrayWithBrackets.map(
+        (bookedTimeSlot) => {
+          const parsedBookedTimeSlot = JSON.parse(bookedTimeSlot);
+          console.log("parsedBookedTimeSlot:", parsedBookedTimeSlot);
+          return parsedBookedTimeSlot.time;
+        }
+      );
 
       setTimeSlots(parsedTimeSlots);
       setBookedTimeSlots(bookedTimeSlotsArray);
@@ -52,6 +68,9 @@ const AppointmentForm = () => {
       console.error("Error fetching time slots:", error);
     }
   };
+
+
+  
 
   const checkPendingAppointment = async (date) => {
     try {
@@ -67,9 +86,11 @@ const AppointmentForm = () => {
   };
 
   const handleDateChange = (date) => {
-    setSelectedDate(date);
-    fetchTimeSlots(date);
-    checkPendingAppointment(date);
+    // Adjust the date to your desired timezone
+    const adjustedDate = new Date(date.getTime() - date.getTimezoneOffset() * 60000);
+    setSelectedDate(adjustedDate);
+    fetchTimeSlots(adjustedDate);
+    checkPendingAppointment(adjustedDate);
   };
 
   const handleTimeSlotChange = (time) => {
@@ -173,6 +194,69 @@ const AppointmentForm = () => {
       });
     }
 
+    try {
+      const petId = selectedPets[0];
+      const date = selectedDate.toISOString().split("T")[0];
+
+      // console.log("petId:", petId);
+      const response = await fetch(
+        `http://localhost/api/check_existing_appointment/${petId}/${date}`,
+        {
+          method: "GET",
+        }
+      );
+
+      const responseData = await response.text();
+      const jsonObjects = responseData.split("}{").map((obj, index, array) => {
+        return index < array.length - 1 ? `${obj}}` : obj;
+      });
+
+      for (let i = 0; i < jsonObjects.length; i++) {
+        const jsonObject = jsonObjects[i];
+
+        // console.log("jsonObject:", jsonObject);
+        // if payload is empty, no appointment exists
+
+        try {
+          const data = JSON.parse(jsonObject);
+          // console.log("data:", data);
+
+          const pet = pets.find((pet) => pet.id === petId);
+
+          if (data.payload.length > 0) {
+            Swal.fire({
+              icon: "error",
+              title: "Error",
+              html: `<strong>${pet.name}</strong> already has an appointment. You can only have one appointment per pet at a time.`,
+            });
+            return;
+          } else {
+            return;
+          }
+        } catch (error) {
+          console.error("Error parsing JSON:", error);
+        }
+      }
+
+      if (!userId) {
+        console.error(
+          "Error fetching user ID: No valid user ID found in the response"
+        );
+        Swal.fire({
+          icon: "error",
+          title: "Error",
+          text: "Failed to fetch user ID. No valid user ID found in the response.",
+        });
+      }
+    } catch (error) {
+      console.error("Error fetching user ID:", error);
+      Swal.fire({
+        icon: "error",
+        title: "Error",
+        text: "Failed to fetch user ID. Please try again.",
+      });
+    }
+
     setIsSubmitting(true);
 
     try {
@@ -246,6 +330,8 @@ const AppointmentForm = () => {
       setIsSubmitting(false);
       fetchTimeSlots(selectedDate);
       checkPendingAppointment(selectedDate);
+
+      window.location.reload();
     }
   };
 
@@ -314,16 +400,29 @@ const AppointmentForm = () => {
   value={selectedDate}
   className="static-calendar"
   minDate={new Date()}
+  formatShortWeekday={(locale, date) => {
+    const days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+    const index = date.getDay();
+    return days[index];
+  }}
+  formatDay={(locale, date) => {
+    const options = { day: "numeric" };
+    return new Intl.DateTimeFormat(locale, options).format(date);
+  }}
   onClickDay={(value, event) => {
     // Check if the click event originated from inside the calendar
-    const isInsideCalendar = event.target.closest(".react-calendar") !== null;
+    const isInsideCalendar =
+      event.target.closest(".react-calendar") !== null;
 
     // Only update the selected date if the click is inside the calendar
     if (isInsideCalendar) {
       handleDateChange(value);
     }
   }}
+  calendarType="US" // Set calendarType to "US" for Sunday as the first day of the week
 />
+
+
 
 
           <label>Select Time Slot:</label>
@@ -334,9 +433,16 @@ const AppointmentForm = () => {
           >
             {timeSlots.map((time) => (
               <option
-                key={time} // Add a unique key here
+                key={time}
                 value={time}
                 disabled={bookedTimeSlots.includes(time) || isSubmitting}
+                style={{
+                  color: bookedTimeSlots.includes(time) ? "gray" : "black",
+                  pointerEvents:
+                    bookedTimeSlots.includes(time) || isSubmitting
+                      ? "none !important"
+                      : "auto",
+                }}
               >
                 {formatTimeSlotLabel(time)}
               </option>
@@ -375,6 +481,9 @@ const AppointmentForm = () => {
                         <img src={`/pet/${pet.image}`} alt={pet.image} />
                         <p className="pet-name">
                           Pet name: <b>{pet.name}</b>
+                        </p>
+                        <p className="pet-breed">
+                          TYpe: <b>{pet.type}</b>
                         </p>
                         <p className="pet-breed">
                           Breed: <b>{pet.breed}</b>
