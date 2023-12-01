@@ -1,0 +1,101 @@
+.main-pet-table-container {
+    padding: 20px;
+}
+
+.main-pet-table-container h2{
+    color: black;
+    font-weight: bold;
+    margin-left: 5px;
+}
+
+.pet-table-separator {
+    width: 150px;
+    height: 4px;
+    margin: 10px 0px 20px 5px;
+    background-color: #e12454;
+}
+
+.whole-pet-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+  /* Styling for the table header */
+  .whole-pet-table th {
+    background-color: #e12454; /* pinkred color for header background */
+    color: #ffffff;
+    font-weight: bold;
+    text-align: center;
+    padding: 10px;
+  }
+
+  .pet-item {
+    text-align: center;
+    background-color: #ffffff;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin-bottom: 10px;
+    padding: 15px;
+    transition: transform 0.3s ease-in-out;
+  }
+
+  .pet-item:hover {
+    transform: scale(1.02);
+  }
+
+  .pet-table-item td {
+    padding: 15px;
+  }
+
+  .pet-name-column {
+    font-weight: bold;
+  }
+
+  .pet-type-column {
+    font-weight: bold;
+  }
+
+  .pet-breed-column {
+    font-weight: bold;
+  }
+  .pet-age-column {
+    font-weight: bold;
+  }
+
+  .pet-button-column {
+    display: flex;
+    justify-content: center;
+  }
+
+   /* Style for the action button */
+   .pet-action-edit-button {
+    background-color: orange; /* Red color for the button */
+    color: white;
+    padding: 5px 10px;
+    cursor: pointer;
+    border: none;
+    border-radius: 5px;
+    margin-left: 5px;
+    margin-right: 5px;
+  }
+  
+  .pet-action-edit-button:hover {
+    background-color: rgb(166, 108, 0); /* Darker red color on hover */
+  }
+
+  .pet-action-delete-button {
+    background-color: #e74c3c; /* Red color for the button */
+    color: white;
+    padding: 5px 10px;
+    cursor: pointer;
+    border: none;
+    border-radius: 5px;
+    margin-left: 5px;
+    margin-right: 5px;
+  }
+  
+  .pet-action-delete-button:hover {
+    background-color: #c0392b; /* Darker red color on hover */
+  }
