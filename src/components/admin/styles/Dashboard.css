@@ -14,6 +14,7 @@
   margin: 20px -10px;
 }
 
+
 .card {
   flex: 1;
   background-color: #fff;
@@ -40,27 +41,26 @@
   margin: 0;
 }
 
+
 h1 {
   font-size: 28px;
   margin-bottom: 20px;
   color: #333;
 }
 
-
-
 .dashboard-header {
-    display: flex;
-    justify-content: space-between;
-    /* align-items: center; */
-    margin-bottom: 20px;
-  }
-  
-  .notification-container {
-    display: flex;
-    align-items: center;
-  }
-  
-  .notification-icon {
-    cursor: pointer;
-    margin-left: 10px; /* Adjust the margin as needed for spacing */
-  }
+  display: flex;
+  justify-content: space-between;
+  /* align-items: center; */
+  margin-bottom: 20px;
+}
+
+.notification-container {
+  display: flex;
+  align-items: center;
+}
+
+.notification-icon {
+  cursor: pointer;
+  margin-left: 10px; /* Adjust the margin as needed for spacing */
+}

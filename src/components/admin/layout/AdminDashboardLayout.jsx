@@ -46,7 +46,7 @@ const AdminDashboardLayout = ({ children }) => {
         <Menu.Item key="1" className="menu-item-text">
             <Link to="/admin/" className="menu-item-link">
               <BarChartOutlined className="menu-item-icon" />
-              Statistics
+              Dashboard
             </Link>
           </Menu.Item>
           <Menu.Item key="2" className="menu-item-text">
@@ -62,9 +62,9 @@ const AdminDashboardLayout = ({ children }) => {
             </Link>
           </Menu.Item>
           <Menu.Item key="4" className="menu-item-text">
-            <Link to="/admin/documents" className="menu-item-link">
+            <Link to="/admin/content" className="menu-item-link">
               <FileOutlined className="menu-item-icon" />
-              Documents
+              Content
             </Link>
           </Menu.Item>
           <Menu.Item key="5" className="menu-item-logout">

@@ -1,0 +1,147 @@
+/* AdminDashboardPage.css */
+
+.admin-dashboard-card-container {
+  display: flex;
+  justify-content: space-around;
+}
+
+.admin-dashboard-card {
+  flex: 0 1 calc(33.33% - 16px);
+  text-align: center;
+  padding: 16px;
+  margin: 16px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.admin-dashboard-filter-container {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 16px;
+}
+
+.admin-dashboard-unpublished-blog-posts {
+  flex: 1;
+}
+
+.admin-dashboard-card-container,
+.admin-dashboard-filter-container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.admin-dashboard-card h2 {
+  margin-bottom: 8px;
+}
+
+.admin-dashboard-card p {
+  margin-bottom: 16px;
+}
+
+.admin-dashboard-filter h2 {
+  margin-bottom: 8px;
+}
+
+.admin-dashboard-unpublished-blog-posts h2 {
+  margin-bottom: 16px;
+}
+
+
+.admin-dashboard-card button {
+  background-color: #4caf50;
+  color: white;
+  padding: 8px 16px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-right: 8px;
+}
+
+.admin-dashboard-card button.delete {
+  background-color: #f44336;
+}
+
+/* Additional styles for blog cards */
+
+.admin-dashboard-unpublished-blog-posts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  padding: 16px;
+}
+
+
+
+.admin-dashboard-blog-card {
+  height: 400px;
+  width: 300px;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  transition: transform 0.3s ease-in-out;
+
+
+}
+
+.admin-dashboard-blog-card:hover {
+  transform: scale(1.05);
+}
+
+.admin-dashboard-blog-card-content {
+  padding: 16px;
+}
+
+.blog-post-content-container {
+  height: 80px; /* Set the desired max height */
+  overflow-y: scroll; /* Always show the scrollbar */
+  margin-right: -5px;/* Add this property for scrollable content */
+}
+
+.admin-dashboard-blog-card img {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+  margin-bottom: 8px;
+}
+
+.admin-dashboard-blog-card h3 {
+  margin-bottom: 8px;
+}
+
+.admin-dashboard-blog-card p {
+  margin-bottom: 16px;
+  overflow-wrap: break-word; /* Add this property to handle long words */
+}
+
+.admin-dashboard-blog-card-buttons {
+  display: flex;
+  justify-content: space-between;
+  padding: 0 16px 16px;
+}
+
+.admin-dashboard-blog-card button {
+  background-color: #4caf50;
+  color: white;
+  padding: 8px 16px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  width: 100%;
+}
+
+.admin-dashboard-blog-card button.edit {
+  background-color: #4da1e0;
+}
+.admin-dashboard-blog-card button.unpublish {
+  background-color: #d8a721;
+  text-align: center;
+}
+
+.admin-dashboard-blog-card button.delete {
+  background-color: #f44336;
+}
+
+/* Add any additional styles as needed */
