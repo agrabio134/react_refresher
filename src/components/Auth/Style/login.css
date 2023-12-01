@@ -9,7 +9,7 @@
     display: grid;
     grid-template-columns: 2fr 1fr;
     position: fixed;
-   z-index: 10000;
+   z-index: 1;
 }
 
 .main-user-login-container {

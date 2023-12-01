@@ -58,8 +58,23 @@ html  {
 } 
 
 .auth_item {
+  display: flex;
+  justify-content: space-around;
+  list-style: none;
+  margin: 0 5px ;
+  font-size: 16px;
+  color: white;
   text-decoration: none;
-  color: #ffffff;
+  color: #fff;
+  text-transform: uppercase;
+  font-weight: bold;
+}
+
+.auth_item:hover {
+  color: black;
+  align-items: center;
+  text-decoration: none;
+  height: 100%;
 }
 
 .auth_content {
@@ -98,7 +113,8 @@ html  {
 .main_nav {
   display: flex;
   justify-content: center;
-  /* align-items: center; */
+  align-items: center;
+  height: 100%;
 }
 .nav_list {
   display: flex;
@@ -108,7 +124,11 @@ html  {
   font-size: 16px;
   color: white;
   text-decoration: none;
-  border: 2px solid black;
+
+  color: #fff;
+  text-transform: uppercase;
+  font-weight: bold;
+  
 }
 .nav_list:nth-child(5) {
     margin-left: 30%;
@@ -132,6 +152,9 @@ html  {
 }
 
 .nav_list:hover {
+  color: orange;
+  align-items: center;
+  text-decoration: none;
   height: 100%;
-  border-bottom: 1px solid black;
+  border-bottom: 3px solid orange;
 }

@@ -51,9 +51,9 @@ const MainLayout = () => {
                 ) : (
                   <>
                     <Link to="/auth/login" className="auth_item">
-                      Login/
+                      Login
                     </Link>
-                    
+                    /
                     <Link to="/auth/signup" className="auth_item">
                       Signup
                     </Link>

@@ -49,7 +49,11 @@ const HowItWorksPage = () => {
         <div className='hiw_container'>
         <div className='hiw_content'>
           <h2>How it works?</h2>
+          <div className="hiw-separator"></div>
+          <div className='hiw-text-container'>
           <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ipsum, doloribus magni atque voluptatem architecto odit delectus ad perspiciatis id labore non qui cum natus eos amet, accusamus sed debitis! Iure.</p>
+          <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ipsum, doloribus magni atque voluptatem architecto odit delectus ad perspiciatis id labore non qui cum natus eos amet, accusamus sed debitis! Iure.</p>
+        </div>
         </div>
 
         

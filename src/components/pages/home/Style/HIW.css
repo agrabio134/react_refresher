@@ -3,7 +3,7 @@
     max-width: 1000px;
     position: relative;
     margin: auto;
-    border: solid yellow;
+    /* border: solid yellow; */
   }
   
   /* Next & previous buttons */
@@ -30,8 +30,21 @@
   
   /* On hover, add a black background color with a little bit see-through */
   .prev:hover, .next:hover {
+    color: orange;
     background-color: rgba(0,0,0,0.8);
+    text-decoration: none;
   }
+
+  .hiw-separator {
+    /* width: 150px; */
+    height: 4px;
+    background-color: #e12454;
+    margin: 20px;
+}
+
+.hiw-text-container {
+  padding: 10px;
+}
   
   /* Caption text */
   .text {
@@ -42,7 +55,7 @@
     left: 50%;
     transform: translate(-50%, -50%);
     text-align: center;
-    border: solid red;
+    /* border: solid red; */
   }
 
   .text h2{
@@ -115,7 +128,7 @@
 
   .whole_hiw_container {
     margin: 100px;
-    border: solid red;
+    /* border: solid red; */
   }
 
   .hiw_container {
@@ -123,12 +136,14 @@
     justify-content: center;
     background-color: white;
     padding: 10px;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 
   }
 
 .hiw_content {
   text-align: center;
-  border: solid blue;
+  /* border: solid blue; */
 }
 
 .hiw_content h2 {
