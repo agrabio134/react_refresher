@@ -7,6 +7,7 @@ import { useAdminAuth } from "./auth/AdminAuthContext";
 import "./styles/Dashboard.css";
 import NotificationIcon from "./components/NotificationIcon";
 import NotificationPopup from "./components/NotificationPopup";
+import AdminCalendarPage from "./pages/AdminCalendarPage";
 
 const BackOfficePage = () => {
   const { isAdminLogin } = useAdminAuth();
@@ -86,6 +87,7 @@ const BackOfficePage = () => {
           <Routes>
             <Route path="/admin/users" element={<AdminUsersPage />} />
             <Route path="/admin" element={<AdminStatisticsPage />} />
+            <Route path="/admin/calendar" element={<AdminCalendarPage />} />
             {/* Add more admin-specific routes as needed */}
           </Routes>
         </div>

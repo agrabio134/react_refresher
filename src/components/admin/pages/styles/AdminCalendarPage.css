@@ -1,0 +1,71 @@
+.rbc-button-link {
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  color: #333;
+  cursor: pointer;
+  display: inline-block;
+  font-size: 14px;
+  font-weight: 400;
+  height: 28px;
+  line-height: 26px;
+  margin-bottom: 0;
+  padding: 0 10px;
+  text-align: center;
+  text-decoration: none;
+  touch-action: manipulation;
+  user-select: none;
+  white-space: nowrap;
+  -webkit-user-select: none;
+  -webkit-touch-callout: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+}
+
+.rbc-event {
+  background-color: #ffa500; /* Orange for not yet accepted */
+  border: 1px solid #e0e0e0; /* Border color for events */
+  color: #e9e7e7; /* Text color for events, adjust as needed */
+}
+
+.rbc-event.accepted {
+  background-color: #4285f4; /* Blue for accepted */
+  color: #e9e7e7; /* Text color for events, adjust as needed */
+}
+.rbc-event:active {
+    background-color: #ffa500;
+    border: 1px solid #e0e0e0;
+    color: #e9e7e7;
+  }
+.rbc-event::after {
+  background-color: #ffa500;
+  border: 1px solid #e0e0e0;
+  color: #e9e7e7;
+}
+
+/* Legend styles */
+.legend {
+  display: flex;
+  margin-top: 10px;
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  margin-right: 20px;
+}
+
+.legend-item span {
+  display: inline-block;
+  width: 15px;
+  height: 15px;
+  margin-right: 5px;
+}
+
+.legend-item .not-accepted {
+  background-color: #ffa500;
+}
+
+.legend-item .accepted {
+  background-color: #4285f4;
+}
