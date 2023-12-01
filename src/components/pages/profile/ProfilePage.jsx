@@ -187,8 +187,11 @@ const ProfilePage = () => {
       return (
         <>
         <section className="main-profile-container">
-          <h2>Welcome {userFullName}</h2>
+          <div className="whole-profile-container">
+          <div className="profile-header-container">
+            <div><h2>Welcome {userFullName}</h2></div>
           <button onClick={handleLogout}>Logout</button>
+          </div>
 
           <AddPetForm
             petName={petName}
@@ -206,6 +209,7 @@ const ProfilePage = () => {
             handleUpdatePet={handleUpdatePet}
             handleDeletePet={handleDeletePet}
           />
+          </div>
           </section>
         </>
       );

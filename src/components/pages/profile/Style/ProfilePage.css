@@ -3,3 +3,26 @@
     background-color: white;
     color: black;
 }
+
+.whole-profile-container {
+    background-color: white;
+    margin-top: 10px;
+    width: 90%;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.profile-header-container {
+    width: 100%;
+    padding: 25px;
+    display: flex;
+    background-color: #e12454;
+    justify-content: space-between;
+    align-items: center;
+    align-content: center;
+    align-self: center;
+}
+
+.profile-header-container h2{
+    font-size: 16px;
+}
