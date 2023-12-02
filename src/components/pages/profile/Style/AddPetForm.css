@@ -56,3 +56,80 @@
     padding-left: 5px;
     padding-right: 5px;
 }
+
+@media screen and (max-width: 768px) {
+
+    .main-add-pet-form-container {
+        text-align: center;
+        background-color: #fff;
+        border-radius: 100px 100px 0px 0px;
+        padding: 20px;
+        
+    }
+    
+    .main-add-pet-form-container h2{
+        font-size: 5rem;
+        color: black;
+        font-weight: bold;
+        margin-left: 5px;
+    }
+    
+    .add-pet-separator {
+        align-self: center;
+        width: 100%;
+        height: 4px;
+        margin: 10px 0px 20px 5px;
+        background-color: #e12454;
+    }
+    
+    .add-pet-grid-form {
+        display: grid;
+        grid-template-columns: 1fr
+    }
+    
+    
+    .main-form-body-container input,
+    .main-form-body-container button {
+        border: none;
+        outline: none;
+        border-radius: 30px;
+        font-size: 4rem;
+    }
+    .main-form-body-container button {
+            font-size: 4rem;
+            padding: 11px 41px;
+            margin-left: 5px;
+            color: #fff;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-weight: bold;
+            background-color: orange;
+            cursor: pointer;
+            transition: opacity 0.4s;
+    }
+    
+    .main-form-body-container input {
+        width: 100%;
+        background: #e6e6e6;
+        color: #333;
+        letter-spacing: 0.5px;
+        padding: 14px 64px;
+    }
+    .add-pet-form {
+        color: black;
+        width: 100%;
+        position: relative;
+        margin-bottom: 50px;
+        padding-left: 5px;
+        padding-right: 5px;
+    }
+
+    .add-pet-form h1 {
+        font-size: 3rem;
+        color: black;
+        font-weight: bold;
+        margin-left: 5px;
+    }
+
+}
+

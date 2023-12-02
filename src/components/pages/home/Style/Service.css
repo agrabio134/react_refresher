@@ -155,4 +155,100 @@ p {
     color: white;
 }
 
+@media screen and (max-width: 768px) {
+
+    .main_service_container {
+        background-color: #fff;
+    }
+    
+    /* .home1-section-heading1 {
+        color: #e12454;
+        text-align: center;
+        padding-bottom: 12px;
+        border: solid red;
+    } */
+    
+    .home1-section-heading2 {
+        color: black;
+        font-size: 7rem;
+        text-align: center;
+        font-weight: 600;
+        /* border: solid blue; */
+    }
+    
+    .home1-section-heading2 span {
+        color: #F50057;
+    }
+    
+    .main_service_container .service_content_container p {
+        text-align: center;
+        margin-top: 10px;
+        font-size: 2rem;
+        /* margin: 20px 50px 50px 0px; */
+        width: 100%;
+        /* border: solid green; */
+    }
+    
+    .service-section {
+        /* border: solid yellow; */
+        /* margin: 50px; */
+        
+    
+    }
+    
+    .service_item_container {
+        display: flex;
+        justify-content: space-around;
+        flex-wrap: wrap;
+        /* border: solid violet; */
+    }
+    
+    
+    .service_content {
+        border-width: 2px;
+        border-color: #eaeaea;
+        border-style: solid;
+        margin-top: 10px;
+        text-align: center;
+        width: 50%;
+        height: auto;
+        padding: 25px;
+        background-color: #fff;
+        box-sizing: border-box;
+        /* border-radius: 5px; */
+        /* box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19); */
+        /* border: solid orange; */
+    }
+    
+    .service_content h5 {
+        /* margin-top: 50px; */
+        color: black;
+        /* font-weight: 600; */
+        font-size: 3rem;
+        /* border: solid red; */
+    }
+    
+    .service_content .fa-solid {
+        font-size: 5rem;
+        padding: 15px;
+        color: #F50057;
+    }
+    
+    .service_content:hover {
+        background-color: #F50057;
+    }
+    
+    .service_content:hover .fa-solid{
+        color: white;
+    }
+    
+    .service_content:hover h5{
+        color: white;
+    }
+    .service_content:hover p{
+        color: white;
+    }
+
+}
+
 

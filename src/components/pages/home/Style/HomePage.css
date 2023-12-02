@@ -8,6 +8,7 @@
 	/* background-position: center; */
 	background-repeat: no-repeat;
 	background-attachment: fixed;
+	padding:2rem 7%;
 }
 
 .home .content{
@@ -40,21 +41,59 @@
     padding-top: 20px;
 }
 
-.btn {
-	background-color: #F50057;
-	font-size: 16px;
-	padding: 10px 22px 10px 22px;
-	margin-top: 1.5rem!important;
-	border-radius: 30px;
-	text-transform: uppercase;
-    display: inline-block;
-    background-color: #e12454;
-    color: #fff;
-    text-transform: capitalize;
-    position: relative;
-    z-index: 99;
-    overflow: hidden;
-    border: none;
+@media screen and (max-width: 768px) {
+	
+	.home{
+		margin-top: 50px;
+		min-height: 200vh;
+		display: flex;
+		align-items: center;
+		background: url(../../../../assets/img/h1.jpg);
+		background-size: cover;
+		background-position: center;
+		background-repeat: no-repeat;
+		background-attachment: fixed;
+	}
+	
+	.home .content{
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+		width: 100%;
+		height: 50rem;
+		/* border: solid red; */
+		text-align: center;
+
+	}
+	.home .content h4{
+		font-size: 120px;
+		width: 100%;
+		font-weight: bold;
+		text-transform: uppercase;
+		color: white;
+	}
+	
+	.home .content h2{
+		padding-top: 20px;
+		font-size:155px;
+		color: black;
+		width: 100%;
+	}
+	
+	.home .content h2 .span{
+		color: #F50057;
+		font-weight: bold;
+	}
+	
+	.home .content p{
+		width: 100%;
+		font-size: 30px;
+		color: white;
+		font-weight: 500;
+		padding-top: 20px;
+	}
+	
 }
 
 

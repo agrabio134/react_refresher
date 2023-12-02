@@ -3,7 +3,7 @@ import "./Style/Emergency.css";
 const EmergencyPage = () => {
   return (
     <>
-      <section className="emergency" id="emergency">
+      <section className="emergency mobile-emergency">
         <div className="emergency-container">
             <div className="emergency-content">
               <div className="headphones">

@@ -124,8 +124,6 @@ html  {
   font-size: 16px;
   color: white;
   text-decoration: none;
-
-  color: #fff;
   text-transform: uppercase;
   font-weight: bold;
   
@@ -158,3 +156,228 @@ html  {
   height: 100%;
   border-bottom: 3px solid orange;
 }
+
+
+.sidenav {
+  height: 0;
+  width: 100%;
+  position: fixed;
+  z-index: 20;
+  top: 0;
+  left: 0;
+  background-color: #e12454;
+  overflow-x: hidden;
+}
+
+.sidenav a {
+  display: block;
+}
+
+.sidenav a:hover {
+  color: #f1f1f1;
+}
+
+.sidenav .closebtn {
+  display: none;
+}
+
+.sidebar-button {
+  font-size: 30px;
+  cursor: pointer;
+  display: none;
+}
+
+@media screen and (max-height: 1080px) {
+  
+  .sidenav a {font-size: 18px;}
+
+
+}
+
+@media screen and (max-width: 768px) { 
+
+
+  .top_header_section {
+    display: none;
+    justify-content: space-between;
+    background-color: #ebf5f5;
+    height: 51px;
+    align-items: center;
+    padding-left: 100px;
+    padding-right: 100px;
+  }
+
+  .main_router {
+    display: flex;
+    justify-content: space-between;
+    background-color: #F50057;
+    height: 200px;
+    align-items: center;
+    padding-left: 100px;
+    padding-right: 100px;
+  
+  }
+  
+  .header_logo img {
+    height: auto;
+    width: 200px;
+  }
+
+  .header_fixed .fa-solid {
+    font-size: 50px;
+  }
+  
+  .main_nav {
+    display: none;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+  }
+
+
+  .main-side-nav-header {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    background-color: #F50057;
+    align-items: center;
+    padding-left: 100px;
+    padding-right: 100px;
+
+    border-bottom-width: 2px;
+    border-bottom-color: #eaeaea;
+    border-bottom-style: solid;
+}
+
+  .side-nav-header_logo img{
+    height: auto;
+    width: 200px;
+  }
+
+  .side-nab-email h4{
+    color: white;
+    font-weight: bold;
+    font-size: 40px;
+  }
+
+  .sidenav {
+    height: 0;
+    width: 100%;
+    position: fixed;
+    z-index: 20;
+    top: 0;
+    left: 0;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    
+  }
+  
+  .side-header_auth_container {
+    padding: 14px;
+  }
+
+  .sidenav a {
+    list-style: none;
+    margin: 0 5px ;
+    font-size: 40px;
+    padding: 20px;
+    color: black;
+    text-decoration: none;
+    text-transform: uppercase;
+    font-weight: bold;
+    transition: 0.3s;
+  }
+  
+  .sidenav a:hover {
+    color: orange;
+    align-items: center;
+    text-decoration: none;
+    height: 100%;
+    border-bottom: 3px solid orange;
+  }
+  
+  .sidenav .closebtn {
+ 
+    padding: 14px;
+    text-align: center;
+    background-color: orange;
+    cursor: pointer;
+    display: block;
+
+  }
+
+  .sidebar-button {
+    padding: 14px;
+    text-align: center;
+    background-color: orange;
+    cursor: pointer;
+    display: block;
+  }
+
+  .side-main_nav {
+    margin-top: 20px;
+    padding-left: 100px;
+    padding-right: 100px;
+  }
+
+  .side-nav-content {
+    margin-top: 20px;
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    border-bottom-width: 2px;
+    border-bottom-color: #eaeaea;
+    border-bottom-style: solid;
+}
+
+.side-nav-content .fa-solid {
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  color: black;
+  font-size: 50px;
+padding: 20px;
+}
+
+.side-nav-content .fa-user{
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  color: black;
+  font-size: 50px;
+  padding: 20px 26px 20px 26px;
+}
+
+.side-nav-content .fa-calendar-check {
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  color: black;
+  font-size: 50px;
+  padding: 20px 26px 20px 26px;
+}
+
+.side-nav-content .fa-image{
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  color: black;
+  font-size: 50px;
+  padding: 20px 23px 20px 23px;
+}
+
+.side-nav-content .fa-blog {
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  color: black;
+  font-size: 50px;
+  padding: 20px 23px 20px 23px;
+}
+
+
+}
+
+

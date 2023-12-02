@@ -7,7 +7,8 @@ const PetTable = ({ petList, handleUpdatePet, handleDeletePet }) => {
     <div className="main-pet-table-container">
       <h2>Your Pets</h2>
       <div className="pet-table-separator"></div>
-      <table className="whole-pet-table">
+      <div className="mobile-table">
+      <table className="whole-pet-table" >
         <thead>
           <tr>
             <th>Name</th>
@@ -17,7 +18,7 @@ const PetTable = ({ petList, handleUpdatePet, handleDeletePet }) => {
             <th>Actions</th>
           </tr>
         </thead>
-        <tbody className="pet-table-item">
+        <tbody className="pet-table-item" >
           {petList && petList.length > 0 ? (
             petList.map((pet) => (
               <tr className="pet-item" key={pet.id}>
@@ -40,6 +41,7 @@ const PetTable = ({ petList, handleUpdatePet, handleDeletePet }) => {
           )}
         </tbody>
       </table>
+      </div>
       </div>
     </>
   );

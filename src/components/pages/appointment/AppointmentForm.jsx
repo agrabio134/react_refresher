@@ -432,12 +432,12 @@ const AppointmentForm = () => {
             disabled={isSubmitting}
           >
             {timeSlots.map((time) => (
-              <option
+              <option className="value-container"
                 key={time}
                 value={time}
                 disabled={bookedTimeSlots.includes(time) || isSubmitting}
                 style={{
-                  color: bookedTimeSlots.includes(time) ? "gray" : "black",
+                  color: bookedTimeSlots.includes(time) ? "gray" : "white",
                   pointerEvents:
                     bookedTimeSlots.includes(time) || isSubmitting
                       ? "none !important"

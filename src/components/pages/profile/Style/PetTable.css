@@ -99,3 +99,127 @@
   .pet-action-delete-button:hover {
     background-color: #c0392b; /* Darker red color on hover */
   }
+
+  @media screen and (max-width: 768px) {
+
+    .main-pet-table-container {
+      padding-top: 50px;
+      background-color: #ffffff;
+      padding: 20px;
+      text-align: center;
+  }
+  
+  .main-pet-table-container h2{
+    font-size: 5rem;
+    color: black;
+    font-weight: bold;
+    margin-left: 5px;
+  }
+  
+  .pet-table-separator {
+    align-self: center;
+    width: 100%;
+    height: 4px;
+    margin: 10px 0px 20px 5px;
+    background-color: #e12454;
+  }
+  
+  .whole-pet-table {
+      width: 160%;
+      border-collapse: collapse;
+      margin-top: 20px;
+
+  }
+  
+    /* Styling for the table header */
+    .whole-pet-table th {
+      font-size: 4rem;
+      background-color: #e12454; /* pinkred color for header background */
+      color: #ffffff;
+      font-weight: bold;
+      text-align: center;
+      padding: 10px;
+    }
+  
+    .pet-item {
+      text-align: center;
+      font-size: 3rem;
+      background-color: #ffffff;
+      border: 1px solid #e0e0e0;
+      border-radius: 8px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      margin-bottom: 10px;
+      padding: 15px;
+      transition: transform 0.3s ease-in-out;
+    }
+  
+    .pet-item:hover {
+      transform: scale(1.02);
+    }
+  
+    .pet-table-item td {
+      padding: 15px;
+    }
+  
+    .pet-name-column {
+      font-weight: bold;
+    }
+  
+    .pet-type-column {
+      font-weight: bold;
+    }
+  
+    .pet-breed-column {
+      font-weight: bold;
+    }
+    .pet-age-column {
+      font-weight: bold;
+    }
+  
+    .pet-button-column {
+      display: flex;
+      padding: 20px;
+      margin: 20px;
+      justify-content: space-around;
+      flex-direction: column;
+    }
+  
+     /* Style for the action button */
+     .pet-action-edit-button {
+      background-color: orange; /* Red color for the button */
+      font-size: 4rem;
+      color: white;
+      padding: 5px 10px;
+      cursor: pointer;
+      border: none;
+      border-radius: 5px;
+      margin: 20px;
+    }
+    
+    .pet-action-edit-button:hover {
+      background-color: rgb(166, 108, 0); /* Darker red color on hover */
+    }
+  
+    .pet-action-delete-button {
+      background-color: #e74c3c; /* Red color for the button */
+      font-size: 4rem;
+      color: white;
+      padding: 5px 10px;
+      cursor: pointer;
+      border: none;
+      border-radius: 5px;
+      margin: 20px;
+    }
+    
+    .pet-action-delete-button:hover {
+      background-color: #c0392b; /* Darker red color on hover */
+    }
+
+    .mobile-table {
+      width: 100%; /* Set the width of the container */
+      overflow-x: auto; /* Enable horizontal scrolling */
+      white-space: nowrap; /* Prevent content from wrapping */
+    }
+
+
+  }

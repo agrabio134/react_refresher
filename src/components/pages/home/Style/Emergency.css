@@ -1,16 +1,18 @@
 .emergency{
 	/* margin-top: 50px; */
-	min-height: 100vh;
+	height: 100vh;
+    width: 100%;
 	display: flex;
 	align-items: center;
 	background: url(../../../../assets/img/h5.jpg);
 	background-size: cover;
 	background-position: center;
+    padding:2rem 7%;
 
 }
 
 .emergency-container{
-    max-width: 500px;
+    width: 500px;
     background-color: #F50057;
     padding: 20px;
     border-radius: 5px;
@@ -21,6 +23,11 @@
     display: flex;
     flex-direction: row;
     /* border: solid green; */
+}
+
+.emergency-content .fa-solid {
+    font-size: 65px;
+    padding: 15px;
 }
 
 .headphones .fa-solid{
@@ -54,5 +61,76 @@
     font-size: 16px;
  }
 
+ @media screen and (max-width: 768px) {
+
+    .emergency{
+        display: block;
+    }
+
+    .mobile-emergency {
+        /* margin-top: 50px; */
+        width: 100%;
+        height: 150vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background: url(../../../../assets/img/h5.jpg);
+        background-size: cover;
+        background-position: center; 
+    }
+    
+    .emergency-container{
+        width: 100%;
+        height: 90%;
+        background-color: #F50057;
+        border-radius: 5px;
+        /* border: solid blue; */
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    }
+    .emergency-content {
+        display: flex;
+        flex-direction: row;
+        /* border: solid green; */
+    }
+    
+    .emergency-content .fa-solid {
+        font-size: 10rem;
+    }
+    
+    .headphones .fa-solid{
+        /* border: solid yellow; */
+        color: #fff;
+    }
+    
+    .phone .fa-solid{
+        /* border: solid yellow; */
+        color: #fff;
+    }
+    
+    .emrgency-text {
+        align-self: center;
+        /* border: solid violet; */
+        font-size: 5rem;
+    }
+    
+    .emrgency-text h4 {
+        color: #ffffff;
+    }
+    
+    .emergency-container h5{
+        padding-top: 20px;
+        color: #ffffff;
+        text-align: justify;
+        padding-bottom: 20px;
+        font-size: 50px;
+    }
+     .emergency-container p {
+        /* padding-bottom: 20px; */
+        color: #fff;
+        text-align: justify;
+        font-size:  40px;
+     }
+
+ }
 
 

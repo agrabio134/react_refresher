@@ -21,7 +21,7 @@ const AddPetForm = ({
         <div className="add-pet-grid-form">
           <div className="add-pet-form">
             <label>
-              Name:
+              <h1>Name:</h1>
               <input
                 type="text"
                 value={petName}
@@ -32,7 +32,7 @@ const AddPetForm = ({
             </div>
             <div className="add-pet-form">
             <label>
-              Type:
+            <h1>Type:</h1>
               <input
                 type="text"
                 value={petType}
@@ -43,7 +43,7 @@ const AddPetForm = ({
             </div>
             <div className="add-pet-form">
             <label>
-              Breed:
+            <h1>Breed:</h1>
               <input
                 type="text"
                 value={petBreed}
@@ -54,7 +54,7 @@ const AddPetForm = ({
             </div>
             <div className="add-pet-form">
             <label>
-              Age:
+            <h1>Age:</h1>
               <input
                 type="number"
                 value={petAge}

@@ -1,11 +1,12 @@
 
-section{
+/* section{
     padding:2rem 7%;
-}
+} */
 
 
 .main_footer_container {
 	background: url(../../../assets/img/footer.jpg);
+    padding:2rem 7%;
 }
 
 .footer-content-container{
@@ -100,4 +101,124 @@ section{
     padding-top: 30px;
     font-size: 15px;
     color: white;
+}
+
+@media screen and (max-width: 768px) {
+    .main_footer_container {
+        width: 70rem;
+        height: 170vh;
+        background: url(../../../assets/img/footer.jpg);
+        background-size: cover;
+        /* background-position: center; */
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        /* padding:2rem 7%; */
+    }
+    
+    .footer-content-container{
+        /* border: solid blue; */
+        height: 100%;
+        width: 100%;
+    }
+    
+    .footer-content {
+        display: flex;
+        text-align: center;
+        flex-direction: column;
+        /* border: solid red; */
+        height: 90%;
+    }
+    
+    .footer-content h1 {
+        font-size: 4rem;
+        padding-bottom: 25px;
+        color: #fff;
+    }
+
+    .footer-content p {
+        font-size: 2.5rem;
+        padding-bottom: 25px;
+    }
+    
+    
+    .happy-paws-content {
+        /* border: solid green; */
+    }
+    
+    .quick-links-content {
+        display: flex;
+        flex-direction: column;
+        color: #fff;
+    }
+    
+    .quick-links-content a {
+        display: flex;
+        font-size: 2.5rem;
+        padding-top: 5px;
+        text-decoration: none;
+        flex-direction: column;
+        color: #fff;
+    }
+    
+    .contactus-content {
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        /* border: solid violet; */
+    }
+    
+    .contacus-details h6 {
+        display: flex;
+        color: white;
+        align-self: center;
+        font-size: 2.5rem;
+        padding: 10px;
+    }
+    
+    .contacus-details .fa-solid{
+        padding: 0;
+        display: flex;
+        color: white;
+        align-self: center;
+        font-size: 3.5rem;
+    }
+    
+    
+    .contacus-details {
+        display: flex;
+        color: white;
+    }
+    
+    
+    .followus-content {
+        /* border: solid brown; */
+    }
+    
+    .followus-icon {
+        padding-top: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+    
+    }
+    
+    .followus-icon .fa-brands {
+        color: white;
+        font-size: 4rem;
+        padding: 0;
+    }
+    
+    .copyrigt-content {
+        margin-top: 50px;
+        display: flex;
+        justify-content: center;
+        border-top: 2px solid #516c75;
+    }
+    
+    .copyrigt-content h6 {
+        padding-top: 30px;
+        font-size: 2.3rem;
+        color: white;
+    }
+
 }
