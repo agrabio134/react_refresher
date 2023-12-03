@@ -61,7 +61,7 @@ const AppointmentLogItem = ({ appointment, index }) => {
       <td className="action-column">
         {/* Add your action button or link here */}
         <button className="action-button" onClick={handleAction}>
-          Cancel Appointment
+        <i className="fa-solid fa-xmark"></i>
         </button>
       </td>
     </tr>

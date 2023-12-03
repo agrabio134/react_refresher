@@ -147,7 +147,7 @@ select {
   margin-bottom: 10px;
 }
 
-.submit-button {
+.apoint-submit-button {
   margin-left: 20px;
   background-color: orange;
   color: #fff;
@@ -546,7 +546,7 @@ select {
   border-color: orange;;
 }
 
-.submit-button {
+.apoint-submit-button {
   font-size: 4rem;
   margin-left: 0;
   background-color: orange;

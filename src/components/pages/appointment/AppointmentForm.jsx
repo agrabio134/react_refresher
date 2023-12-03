@@ -514,7 +514,7 @@ const AppointmentForm = () => {
           </div>
 
           <button
-            className="submit-button"
+            className="apoint-submit-button"
             onClick={handleAppointmentSubmit}
             disabled={isSubmitting}
           >

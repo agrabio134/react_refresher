@@ -67,4 +67,72 @@
       padding: 10px;
     }
   }
+
+  @media screen and (max-width: 768px) {
+    .appointment-log-item {
+      width: 100%;
+      padding: 30px;
+      font-size: 3rem;
+      background-color: #f5f5f5;
+      border: 1px solid #ddd;
+      color: black;
+    }
+    
+    .id-column {
+      font-weight: bold;
+    }
+    
+    .date-column {
+      font-style: italic;
+    }
+    
+    .time-column {
+      font-weight: bold;
+    }
+    
+    .status-column {
+      text-transform: uppercase;
+      color: #27ae60; /* Default color for status */
+    }
+    
+    .status-column.pending {
+      color: #f39c12; /* Orange color for pending status */
+    }
+    
+    .status-column.accepted {
+      color: #2ecc71; /* Green color for accepted status */
+    }
+    
+    .status-column.denied {
+      color: #e74c3c; /* Red color for denied status */
+    }
+    
+    .name-column {
+      font-weight: bold;
+    }
+    
+    .pet-image {
+      width: 200px;
+      height: 200px;
+      border-radius: 50%;
+    }
+    
+    
+  .action-column {
+      text-align: center;
+    }
+    
+    /* Style for the action button */
+    .action-button {
+      font-size: 3rem;
+      padding: 30px;
+      width: 50%;
+      background-color: #e74c3c; /* Red color for the button */
+      color: white;
+      cursor: pointer;
+      border: none;
+      border-radius: 5px;
+    }
+
+  }
   

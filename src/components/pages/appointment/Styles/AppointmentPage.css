@@ -5,24 +5,35 @@
     justify-content: center;
 }
 
-/* .main-appointment-container {
-    background-color: white;
+.main-appointment-container {
+    /* background-color: white; */
     margin-top: 10px;
     text-align: center;
-    width: 90%;
     padding: 25px;
     border-radius: 5px;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-} */
+    /* box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19); */
+}
 
 @media screen and (max-width: 768px) {
     .whole-appointment-container {
+        margin-top: 200px;
         height: auto;
         width: 70rem;
         padding-top: 230px;
         background-color: white;
         display: flex;
         justify-content: center;
+        padding:2rem 7%;
+    }
+
+    .main-appointment-container {
+        max-width: 70rem;
+        /* background-color: white; */
+        margin-top: 10px;
+        text-align: center;
+        padding: 25px;
+        border-radius: 5px;
+        /* box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19); */
     }
 
 }

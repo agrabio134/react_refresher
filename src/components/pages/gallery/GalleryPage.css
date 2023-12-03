@@ -107,3 +107,116 @@
     transform: translateY(0);
   }
   
+  @media screen and (max-width: 768px) {
+
+    /* GalleryPage.css */
+
+.main-gallery-container {
+  background-color: #ebf5f5;
+  padding: 0;
+}
+
+.gallery-welcome-container {
+  width: 100%;
+	min-height: 70vh;
+  display: flex;
+	background: url(../../../assets/img/b22.jpg);
+	background-size: cover;
+	/* background-position: center; */
+	background-repeat: no-repeat;
+  align-items: center;
+  text-align: center;
+
+
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+  
+.gallery-welcome-container .gallery-content{
+  display: flex;
+  flex-direction: column;
+  
+
+}
+
+  .gallery-welcome-container .gallery-content h1{
+    padding-top: 20px;
+      font-size: 54px;
+      font-weight: bold;
+    color: black;
+    width: 45rem;
+  }
+  
+  .gallery-welcome-container .gallery-content h1 .span{
+    color: #F50057;
+  }
+
+  .gallery-breadcrumbs {
+    display: flex;
+    justify-content: space-between;
+    align-self: center;
+    width: 150px;
+  }
+  .gallery-breadcrumbs a{
+    color: black;
+    font-size: 20px;
+    font-weight: bold;
+  }
+
+  .gallery-breadcrumbs li{
+    color: black;
+    font-size: 20px;
+    font-weight: bold;
+  }
+
+
+
+.gallery-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+  
+  .image-list {
+    list-style: none;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 20px;
+  }
+  
+  .image-item {
+    position: relative;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+ .image-item img {
+    width: 100%;
+    height: auto;
+    border-radius: 8px 8px 0 0;
+    transition: transform 0.3s ease;
+  }
+  
+  .image-item:hover img {
+    transform: scale(1.1);
+  }
+  
+  .image-details {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    padding: 15px;
+    background-color: rgba(255, 255, 255, 0.9);
+    border-radius: 0 0 8px 8px;
+    transform: translateY(100%);
+    transition: transform 0.3s ease;
+  }
+  
+  .image-item:hover .image-details {
+    transform: translateY(0);
+  }
+
+  }
+  

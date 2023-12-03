@@ -86,6 +86,8 @@ const AppointmentLog = () => {
   return (
     <div className="appointment-log-container">
       <h2>Appointment Log</h2>
+      <div className="mobile-res-table">
+        <div className="mobile-table-container">
       {loading ? (
         <p>Loading...</p>
       ) : error ? (
@@ -116,6 +118,8 @@ const AppointmentLog = () => {
           </tbody>
         </table>
       )}
+      </div>
+      </div>
     </div>
   );
 };
