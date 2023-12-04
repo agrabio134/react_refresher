@@ -112,18 +112,20 @@
     /* GalleryPage.css */
 
 .main-gallery-container {
+  width: 70rem;
   background-color: #ebf5f5;
   padding: 0;
 }
 
 .gallery-welcome-container {
   width: 100%;
-	min-height: 70vh;
+  margin-top: 160px;
+  min-height: 70vh;
   display: flex;
-	background: url(../../../assets/img/b22.jpg);
-	background-size: cover;
-	/* background-position: center; */
-	background-repeat: no-repeat;
+  background: url(../../../assets/img/b22.jpg);
+  background-size: cover;
+  /* background-position: center; */
+  background-repeat: no-repeat;
   align-items: center;
   text-align: center;
 
@@ -140,10 +142,10 @@
 
   .gallery-welcome-container .gallery-content h1{
     padding-top: 20px;
-      font-size: 54px;
-      font-weight: bold;
-    color: black;
-    width: 45rem;
+    font-size: 7rem;
+    font-weight: bold;
+  color: black;
+  width: 45rem;
   }
   
   .gallery-welcome-container .gallery-content h1 .span{
@@ -153,19 +155,20 @@
   .gallery-breadcrumbs {
     display: flex;
     justify-content: space-between;
-    align-self: center;
+    align-self: normal;
+    padding-left: 18vh;
     width: 150px;
   }
   .gallery-breadcrumbs a{
     color: black;
-    font-size: 20px;
+    font-size: 4rem;
     font-weight: bold;
   }
 
   .gallery-breadcrumbs li{
-    color: black;
-    font-size: 20px;
-    font-weight: bold;
+        color: black;
+        font-size: 4rem;
+        font-weight: bold;
   }
 
 

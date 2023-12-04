@@ -36,6 +36,22 @@ const AppointmentLogItem = ({ appointment, index }) => {
     );
 
     if (isConfirmed) {
+
+      const handleSubmitConfirmed =  async (appointment) =>{
+        try {
+          const response = await fetch (`http://localhost/api/cancel_appointment/${appointment.id}`);
+          if (response.status === 404){
+            console.log("No Data Found");
+            return;
+
+          }
+       
+      handleSubmitConfirmed();
+          
+        } catch (error) {
+          
+        }
+      }
       // Perform the cancellation action here
       alert(`Appointment with ID ${appointment.id} has been canceled.`);
     }

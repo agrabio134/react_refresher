@@ -26,6 +26,7 @@ html  {
   align-items: center;
   padding-left: 100px;
   padding-right: 100px;
+  display:none;
 }
 .email_container {
   display: flex;
@@ -49,7 +50,7 @@ html  {
 .header_auth_container{
   padding: 14px;
   text-align: center;
-  background-color: orange;
+  background-color: #FF5C17;
   color: #ffffff;
   display: flex;
   align-self: center;
@@ -97,7 +98,7 @@ html  {
 .main_router {
   display: flex;
   justify-content: space-between;
-  background-color: #F50057;
+  background-color: #082342;
   height: 69.4px;
   align-items: center;
   padding-left: 100px;
@@ -150,11 +151,11 @@ html  {
 }
 
 .nav_list:hover {
-  color: orange;
+  color: #FF5C17;
   align-items: center;
   text-decoration: none;
   height: 100%;
-  border-bottom: 3px solid orange;
+  border-bottom: 3px solid #FF5C17;
 }
 
 

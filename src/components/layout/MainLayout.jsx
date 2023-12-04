@@ -77,7 +77,7 @@ const MainLayout = () => {
       </div>
           <div className="main_router">
             <div className="header_logo">
-              <img src="/src/assets/img/logo.png" alt="" />
+              <img src="/src/assets/img/logoHD.png" alt="" />
             </div>
             <div className="main_nav">
               <Link to="/" className="nav_list">
@@ -93,6 +93,26 @@ const MainLayout = () => {
                 Gallery
               </Link>
             </div>
+
+            <div className="header_auth_container">
+                {/* Conditionally render Profile or Login/Signup based on authentication status */}
+                
+                {isLogin ? (
+                  <Link to="profile" className="auth_item">
+                    Profile
+                  </Link>
+                ) : (
+                  <>
+                    <Link to="/auth/login" className="auth_item">
+                      Login
+                    </Link>
+                    /
+                    <Link to="/auth/signup" className="auth_item">
+                      Signup
+                    </Link>
+                  </>
+                )}
+              </div>
 
 
       <div id="mySidenav" style={{ height: sideNavHeight}}  className="sidenav">

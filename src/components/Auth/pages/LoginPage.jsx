@@ -100,12 +100,12 @@ const LoginPage = () => {
   return (
     <>
 
-      <section className="login-main-container">   
+      <section className="login-main-container mobile-login-main-container">   
       <div className="side">
       <img src="/src/assets/img/wc.svg" alt="" />
       </div>
         <div className="main-user-login-container">
-        <p className="title">Happy Paws</p>
+        <p className="login-title mobile-title">Happy Paws</p>
             <div className="user-separator"></div>
             <p className="welcome-message">Please, provide login credential to proceed and have access to all our services</p>
           <form className="user-login-box" onSubmit={handleLoginSubmit}>
@@ -144,7 +144,7 @@ const LoginPage = () => {
                 <span className="checkmark"></span>
               </label>
    
-              <span>remember me</span>
+              <span>Remember Me</span>
 
             </div>              
             <input type="submit" value="Login" className="btn1" />
