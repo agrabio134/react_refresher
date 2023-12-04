@@ -1,0 +1,15 @@
+.blinking-dot {
+    width: 10px;
+    height: 10px;
+    background-color: red;
+    border-radius: 50%;
+  }
+  
+  .visible {
+    display: block;
+  }
+  
+  .hidden {
+    display: none;
+  }
+  

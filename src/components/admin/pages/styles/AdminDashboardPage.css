@@ -131,6 +131,13 @@
   cursor: pointer;
   width: 100%;
 }
+.live-dot {
+  display: flex ;
+  width: 40px;
+}
+.liveBtnItem {
+  margin-right: 5px;
+}
 
 .admin-dashboard-blog-card button.edit {
   background-color: #4da1e0;

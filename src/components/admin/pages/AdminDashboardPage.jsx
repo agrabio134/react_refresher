@@ -10,8 +10,10 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import "./styles/AdminDashboardPage.css";
 import Swal from "sweetalert2";
+import BlinkingDot from "../components/BlinkingDot";
 
 const AdminDashboardPage = () => {
+  const [activeTab, setActiveTab] = useState("preview");
   const [userCount, setUserCount] = useState(0);
   const [galleryCount, setGalleryCount] = useState(0);
   const [blogCount, setBlogCount] = useState(0);
@@ -180,9 +182,55 @@ const AdminDashboardPage = () => {
   };
 
   const handleDelete = (blogPost) => {
-    // Add logic for deleting a blog post
-  };
+    Swal.fire({
+      title: "Are you sure you want to delete this blog post?",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonText: "Delete",
+      cancelButtonText: "Cancel",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        confirmDelete(blogPost);
+        Swal.fire({
+          title: "Deleted",
+          icon: "success",
+          confirmButtonText: "Okay",
+        }).then((result) => {
+          if (result.isConfirmed) {
+            window.location.reload();
+          }
+        });
+      } else if (result.dismiss === Swal.DismissReason.cancel) {
+        Swal.fire({
+          title: "Cancelled",
+          icon: "error",
+          confirmButtonText: "Okay",
+        });
+      }
+    });
 
+    const confirmDelete = async (blogPost) => {
+      let blogPostId = blogPost.id;
+      try {
+        const response = await fetch(
+          `http://localhost/api/delete_blog_post/${blogPostId}`,
+          {
+            method: "DELETE",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(blogPostId),
+          }
+        );
+
+        if (!response.ok) {
+          throw new Error(`Failed to delete blog post: ${response.status}`);
+        }
+      } catch (error) {
+        console.error(`Error deleting blog post: ${error.message}`);
+      }
+    };
+  };
 
   const handleUnpublish = (blogPost) => {
     Swal.fire({
@@ -272,62 +320,90 @@ const AdminDashboardPage = () => {
         </div>
       </div>
 
-      <h2>Unpublished Blog Posts</h2>
-
-      <div className="admin-dashboard-unpublished-blog-posts">
-        {unpublishedBlogPosts.map((blogPost) => (
-          <div key={blogPost.id} className="admin-dashboard-blog-card">
-            <div className="admin-dashboard-blog-card-content">
-              <img src={`${blogPost.thumbnail}`} alt="" />
-              <h3>{blogPost.title}</h3>
-              <div className="blog-post-content-container">
-                <p className="blog-post-content">{blogPost.content}</p>
-              </div>
-            </div>
-            <div className="admin-dashboard-blog-card-buttons">
-              <button onClick={() => handlePublish(blogPost)}>Publish</button>
-              <button className="edit" onClick={() => handleEdit(blogPost)}>
-                Edit
-              </button>
-
-              <button className="delete" onClick={() => handleDelete(blogPost)}>
-                Delete
-              </button>
+      <div className="tab-buttons">
+        <button
+          className={activeTab === "preview" ? "active-tab" : ""}
+          onClick={() => setActiveTab("preview")}
+        >
+          Preview
+        </button>
+        <button
+          className={activeTab === "live" ? "active-tab" : ""}
+          onClick={() => setActiveTab("live")}
+        >
+          <div className="live-dot">
+            <div className="liveBtnItem">Live</div>
+            <div className="liveBtnItem">
+              <BlinkingDot />
             </div>
           </div>
-        ))}
+        </button>
       </div>
 
-      <h2>Published Blog Posts</h2>
+      {activeTab === "preview" && (
+        <>
+          <h2>Preview</h2>
 
-      <div className="admin-dashboard-unpublished-blog-posts">
-        {publishedBlogPosts.map((blogPost) => (
-          <div key={blogPost.id} className="admin-dashboard-blog-card">
-            <div className="admin-dashboard-blog-card-content">
-              <img src={`${blogPost.thumbnail}`} alt="" />
-              <h3>{blogPost.title}</h3>
-              <div className="blog-post-content-container">
-                <p className="blog-post-content">{blogPost.content}</p>
+          <div className="admin-dashboard-unpublished-blog-posts">
+            {unpublishedBlogPosts.map((blogPost) => (
+              <div key={blogPost.id} className="admin-dashboard-blog-card">
+                <div className="admin-dashboard-blog-card-content">
+                  <img src={`${blogPost.thumbnail}`} alt="" />
+                  <h3>{blogPost.title}</h3>
+                  <div className="blog-post-content-container">
+                    <p className="blog-post-content">{blogPost.content}</p>
+                  </div>
+                </div>
+                <div className="admin-dashboard-blog-card-buttons">
+                  <button onClick={() => handlePublish(blogPost)}>
+                    Publish
+                  </button>
+                  <button className="edit" onClick={() => handleEdit(blogPost)}>
+                    Edit
+                  </button>
+
+                  <button
+                    className="delete"
+                    onClick={() => handleDelete(blogPost)}
+                  >
+                    Delete
+                  </button>
+                </div>
               </div>
-            </div>
-            <div className="admin-dashboard-blog-card-buttons">
-            <button
-                className="unpublish"
-                onClick={() => handleUnpublish(blogPost)}
-              >
-                Unpublished
-              </button>
-              <button className="edit" onClick={() => handleEdit(blogPost)}>
-                Edit
-              </button>
-
-              <button className="delete" onClick={() => handleDelete(blogPost)}>
-                Delete
-              </button>
-            </div>
+            ))}
           </div>
-        ))}
-      </div>
+        </>
+      )}
+      {activeTab === "live" && (
+        <>
+          <h2>Live</h2>
+
+          <div className="admin-dashboard-unpublished-blog-posts">
+            {publishedBlogPosts.map((blogPost) => (
+              <div key={blogPost.id} className="admin-dashboard-blog-card">
+                <div className="admin-dashboard-blog-card-content">
+                  <img src={`${blogPost.thumbnail}`} alt="" />
+                  <h3>{blogPost.title}</h3>
+                  <div className="blog-post-content-container">
+                    <p className="blog-post-content">{blogPost.content}</p>
+                  </div>
+                </div>
+                <div className="admin-dashboard-blog-card-buttons">
+                  <button
+                    className="unpublish"
+                    onClick={() => handleUnpublish(blogPost)}
+                  >
+                    Unpublished
+                  </button>
+                  <button className="edit" onClick={() => handleEdit(blogPost)}>
+                    Edit
+                  </button>
+                </div>
+              </div>
+            ))}
+          </div>
+        </>
+      )}
     </div>
   );
 };
