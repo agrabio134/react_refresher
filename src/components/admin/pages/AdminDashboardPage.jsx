@@ -111,7 +111,7 @@ const AdminDashboardPage = () => {
       }
     });
 
-    console.log(blogPosts);
+    // console.log(blogPosts);
     setBlogPosts(blogPosts);
   };
 
@@ -304,7 +304,7 @@ const AdminDashboardPage = () => {
         {publishedBlogPosts.map((blogPost) => (
           <div key={blogPost.id} className="admin-dashboard-blog-card">
             <div className="admin-dashboard-blog-card-content">
-              <img src={`/blog/${blogPost.thumbnail}`} alt="" />
+              <img src={`${blogPost.thumbnail}`} alt="" />
               <h3>{blogPost.title}</h3>
               <div className="blog-post-content-container">
                 <p className="blog-post-content">{blogPost.content}</p>

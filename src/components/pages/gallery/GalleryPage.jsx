@@ -70,7 +70,7 @@ const GalleryPage = () => {
         <ul className="image-list">
           {galleryData.map((item) => (
             <li key={item.id} className="image-item">
-              <img src={`/gallery/${item.image}`} alt={item.image} />
+              <img src={`${item.image}`} alt={item.image} />
               <div className="image-details">
                 <p>{item.description}</p>
                 <p>Upload Date: {item.upload_date}</p>
