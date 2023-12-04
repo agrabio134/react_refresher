@@ -67,7 +67,7 @@ const BlogPage = () => {
         <ul className="blog-list">
           {blogData.map((post) => (
             <li key={post.id} className="blog-post">
-              <img src={`/blog/${post.thumbnail}`} alt={post.title} />
+              <img src={`${post.thumbnail}`} alt={post.title} />
               <div className="blog-details">
                 <h2>{post.title}</h2>
                 <div className="blog-separator"></div>
