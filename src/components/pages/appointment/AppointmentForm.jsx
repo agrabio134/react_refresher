@@ -16,11 +16,25 @@ const AppointmentForm = () => {
   const [pets, setPets] = useState([]);
   // const [selectedPet, setSelectedPet] = useState("");
   const [selectedPets, setSelectedPets] = useState([]);
+  const [selectedType, setSelectedType] = useState("Grooming");
+  const [selectedReason, setSelectedReason] = useState("");
 
   useEffect(() => {
     fetchTimeSlots(selectedDate);
     checkPendingAppointment(selectedDate);
   }, [selectedDate]);
+
+  const handleTypeChange = (value) => {
+    setSelectedType(value);
+
+    if (value !== "Others") {
+      setSelectedReason("");
+    }
+  };
+
+  const handleReasonChange = (value) => {
+    setSelectedReason(value);
+  };
 
   const fetchTimeSlots = async (date) => {
     try {
@@ -69,9 +83,6 @@ const AppointmentForm = () => {
     }
   };
 
-
-  
-
   const checkPendingAppointment = async (date) => {
     try {
       const formattedDate = date.toISOString().split("T")[0];
@@ -87,7 +98,9 @@ const AppointmentForm = () => {
 
   const handleDateChange = (date) => {
     // Adjust the date to your desired timezone
-    const adjustedDate = new Date(date.getTime() - date.getTimezoneOffset() * 60000);
+    const adjustedDate = new Date(
+      date.getTime() - date.getTimezoneOffset() * 60000
+    );
     setSelectedDate(adjustedDate);
     fetchTimeSlots(adjustedDate);
     checkPendingAppointment(adjustedDate);
@@ -294,6 +307,7 @@ const AppointmentForm = () => {
         time: selectedTimeSlot,
         user_Id: userId,
         pet_Id: petId,
+        reason: selectedType === "Others" ? selectedReason : selectedType,
       }));
 
       // Make a request for each appointment
@@ -396,34 +410,31 @@ const AppointmentForm = () => {
         <div className="form-group">
           <label>Select Date:</label>
           <Calendar
-  onChange={handleDateChange}
-  value={selectedDate}
-  className="static-calendar"
-  minDate={new Date()}
-  formatShortWeekday={(locale, date) => {
-    const days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
-    const index = date.getDay();
-    return days[index];
-  }}
-  formatDay={(locale, date) => {
-    const options = { day: "numeric" };
-    return new Intl.DateTimeFormat(locale, options).format(date);
-  }}
-  onClickDay={(value, event) => {
-    // Check if the click event originated from inside the calendar
-    const isInsideCalendar =
-      event.target.closest(".react-calendar") !== null;
+            onChange={handleDateChange}
+            value={selectedDate}
+            className="static-calendar"
+            minDate={new Date()}
+            formatShortWeekday={(locale, date) => {
+              const days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+              const index = date.getDay();
+              return days[index];
+            }}
+            formatDay={(locale, date) => {
+              const options = { day: "numeric" };
+              return new Intl.DateTimeFormat(locale, options).format(date);
+            }}
+            onClickDay={(value, event) => {
+              // Check if the click event originated from inside the calendar
+              const isInsideCalendar =
+                event.target.closest(".react-calendar") !== null;
 
-    // Only update the selected date if the click is inside the calendar
-    if (isInsideCalendar) {
-      handleDateChange(value);
-    }
-  }}
-  calendarType="US" // Set calendarType to "US" for Sunday as the first day of the week
-/>
-
-
-
+              // Only update the selected date if the click is inside the calendar
+              if (isInsideCalendar) {
+                handleDateChange(value);
+              }
+            }}
+            calendarType="US" // Set calendarType to "US" for Sunday as the first day of the week
+          />
 
           <label>Select Time Slot:</label>
           <select
@@ -432,7 +443,8 @@ const AppointmentForm = () => {
             disabled={isSubmitting}
           >
             {timeSlots.map((time) => (
-              <option className="value-container"
+              <option
+                className="value-container"
                 key={time}
                 value={time}
                 disabled={bookedTimeSlots.includes(time) || isSubmitting}
@@ -448,6 +460,36 @@ const AppointmentForm = () => {
               </option>
             ))}
           </select>
+
+          <label>Reason of Appointment:</label>
+
+          <select
+            value={selectedType}
+            onChange={(e) => handleTypeChange(e.target.value)}
+            disabled={isSubmitting}
+          >
+            <option value="Grooming">Grooming</option>
+            <option value="Vaccination">Vaccination</option>
+            <option value="Checkup">Checkup</option>
+            <option value="Others">Others</option>
+          </select>
+
+          {selectedType === "Others" && (
+            <div className="others-container">
+              <label>Others:</label>
+              <input
+                type="text"
+                placeholder="Enter Reason"
+                value={selectedReason}
+                onChange={(e) => handleReasonChange(e.target.value)}
+                disabled={isSubmitting}
+                className="others-input"
+                maxLength={15}
+              />
+                  <p>Max Character: {selectedReason.length}/15</p>
+
+            </div>
+          )}
         </div>
       </div>
 

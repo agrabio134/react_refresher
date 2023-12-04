@@ -33,9 +33,14 @@
   color: #e9e7e7; /* Text color for events, adjust as needed */
 }
 .rbc-event:active {
-    background-color: #ffa500;
     border: 1px solid #e0e0e0;
     color: #e9e7e7;
+    /* transform */
+    -webkit-transform: scale(0.98);
+    -moz-transform: scale(0.98);
+    -ms-transform: scale(0.98);
+    -o-transform: scale(0.98);
+    transform: scale(0.95);
   } 
 .rbc-event::after {
   background-color: #ffa500;
@@ -68,4 +73,38 @@
 
 .legend-item .accepted {
   background-color: #4285f4;
+}
+
+.legend-item .denied {
+  background-color: #f75959;
+}
+
+.rbc-event.denied {
+  background-color: #f75959; /* Lighter red for denied */
+  color: #e9e7e7; /* Text color for events, adjust as needed */
+}
+
+
+
+/* Add this to your AdminCalendarPage.css */
+.zoom-enter {
+  opacity: 0;
+  transform: scale(0.8);
+  transition: opacity 300ms ease-in, transform 300ms ease-in;
+}
+
+.zoom-enter-active {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.zoom-exit {
+  opacity: 1;
+  transform: scale(1);
+  transition: opacity 300ms ease-in, transform 300ms ease-in;
+}
+
+.zoom-exit-active {
+  opacity: 0;
+  transform: scale(0.8);
 }

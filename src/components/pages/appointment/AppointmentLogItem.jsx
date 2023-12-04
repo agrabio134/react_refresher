@@ -73,6 +73,7 @@ const AppointmentLogItem = ({ appointment, index }) => {
           className="pet-image"
         />
       </td>
+      <td className="service-column">{appointment.reason}</td>
       <td className={`status-column ${statusClass}`}>{appointment.status}</td>
       <td className="action-column">
         {/* Add your action button or link here */}

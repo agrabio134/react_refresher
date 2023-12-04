@@ -1,13 +1,22 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { Calendar, momentLocalizer } from "react-big-calendar";
 import "react-big-calendar/lib/css/react-big-calendar.css";
 import moment from "moment";
+import { Modal, Button, Descriptions, Image } from "antd";
+
 import "./styles/AdminCalendarPage.css";
+import Swal from "sweetalert2";
+
+// Modal.setAppElement("#root"); // Assuming "#root" is the ID of your root element
 
 const localizer = momentLocalizer(moment);
 
 const AdminCalendarPage = () => {
   const [appointments, setAppointments] = useState([]);
+  const [selectedEvent, setSelectedEvent] = useState(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isModalTransitioning, setIsModalTransitioning] = useState(false);
+  const [modalScale, setModalScale] = useState(0);
 
   useEffect(() => {
     fetchData(); // Fetch initial data
@@ -29,12 +38,9 @@ const AdminCalendarPage = () => {
       }
 
       const textData = await response.text();
-      // console.log(textData);
 
       // Surround the parsing logic in a try-catch block
       try {
-        // Split the string by "}{", append "{" to the beginning of each segment,
-        // and append "}" to the end of each segment, then parse each segment
         const jsonObjects = textData
           .split("}{")
           .map((json, index, array) =>
@@ -66,34 +72,148 @@ const AdminCalendarPage = () => {
 
   const handleDateClick = (date) => {
     // Handle date click as needed
-    setShowAppointmentForm(true);
+    // setShowAppointmentForm(true);
   };
 
-// Map your data to include start and end fields
-const mappedAppointments = appointments.map((appointment) => {
-  const status = appointment.status.toLowerCase(); // Ensure it's lowercase for case-insensitive comparison
+  // Map your data to include start and end fields
+  const mappedAppointments = appointments.map((appointment) => {
+    const status = appointment.status.toLowerCase(); // Ensure it's lowercase for case-insensitive comparison
+    const startDateTime = new Date(`${appointment.date} ${appointment.time}`);
+    const endDateTime = new Date(startDateTime.getTime() + 60 * 60 * 1000);
 
-  return {
-    ...appointment,
-    title: `${appointment.fname}'s appointment for ${appointment.name}`, // Display user and pet names in the title
-    start: new Date(`${appointment.date} ${appointment.time}`),
-    end: new Date(`${appointment.date} ${appointment.time}`),
+    return {
+      ...appointment,
+      title: `${appointment.fname}'s appointment for ${appointment.name}`, // Display user and pet names in the title
+      start: startDateTime,
+      end: endDateTime,
+    };
+  });
+
+  const eventStyleGetter = (event) => {
+    const status = event.status.toLowerCase(); // Ensure it's lowercase for case-insensitive comparison
+    let className = '';
+  
+    if (status === 'accepted') {
+      className = 'accepted';
+    } else if (status === 'denied') {
+      className = 'denied';
+    } else {
+      className = 'not-accepted';
+    }
+  
+    return {
+      className,
+    };
   };
-});
+  
 
-const eventStyleGetter = (event, start, end, isSelected) => {
-  const status = event.status.toLowerCase(); // Ensure it's lowercase for case-insensitive comparison
-  const className = status === "accepted" ? "accepted" : "not-accepted";
-
-  return {
-    className,
+  const handleEventClick = (event) => {
+    setSelectedEvent(event);
+    setIsModalOpen(true);
   };
-};
 
-const handleEventClick = (event) => {
-  // Handle event click as needed
-  alert(`Clicked event: ${event.title}`);
-};
+  const closeModal = () => {
+    setIsModalTransitioning(true);
+    setModalScale(0.5); // Adjust the scaling factor for the zoom-out effect
+    setTimeout(() => {
+      setSelectedEvent(null);
+      setIsModalOpen(false);
+      setIsModalTransitioning(false);
+      setModalScale(1); // Reset the scale after the modal is closed
+    }, 300); // Adjust the timeout based on your transition duration
+  };
+
+  const handleAccept = async (e) => {
+    e.preventDefault();
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: false,
+      confirmButtonColor: "#3085d6",
+      confirmButtonText: "Yes, accept it!",
+      showDenyButton: true,
+      denyButtonColor: "#d33",
+      denyButtonText: "No, cancel!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        Swal.fire("Accepted!", "Your file has been accepted.", "success");
+        handleConfirmAccept(e);
+        window.location.reload();
+      }
+    });
+  };
+
+  const handleConfirmAccept = async (e) => {
+    e.preventDefault();
+
+    const id = selectedEvent.t1_id;
+    try {
+      const response = await fetch(
+        `http://localhost/api/accept_appointment_admin/${id}`,
+        {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ id }),
+        }
+      );
+
+      if (!response.ok) {
+        throw new Error(`Failed to fetch data: ${response.status}`);
+      } else {
+        console.log("Success", response);
+      }
+    } catch (error) {
+      console.error("Error fetching data:", error.message);
+    }
+  };
+
+  const handleDecline = () => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: false,
+      confirmButtonColor: "#3085d6",
+      confirmButtonText: "Yes, decline it!",
+      showDenyButton: true,
+      denyButtonColor: "#d33",
+      denyButtonText: "No, cancel!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        Swal.fire("Declined!", "Your file has been declined.", "success");
+        handleConfirmDecline();
+        window.location.reload();
+      }
+    });
+  };
+
+  const handleConfirmDecline = async () => {
+
+    const id = selectedEvent.t1_id;
+    try {
+      const response = await fetch(
+        `http://localhost/api/decline_appointment_admin/${id}`,
+        {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ id }),
+        }
+      );
+
+      if (!response.ok) {
+        throw new Error(`Failed to fetch data: ${response.status}`);
+      } else {
+        console.log("Success", response);
+      }
+    } catch (error) {
+      console.error("Error fetching data:", error.message);
+    }
+  };
 
   return (
     <div className="admin-calendar-page">
@@ -105,6 +225,9 @@ const handleEventClick = (event) => {
         <div className="legend-item">
           <span className="accepted" /> Accepted
         </div>
+        <div className="legend-item">
+          <span className="denied" /> Denied
+        </div>
       </div>
       <Calendar
         key={JSON.stringify(appointments)} // Add key prop based on appointments
@@ -114,7 +237,6 @@ const handleEventClick = (event) => {
         endAccessor="end"
         onSelectSlot={(slotInfo) => handleDateClick(slotInfo.start)}
         onSelectEvent={handleEventClick} // Handle event click
-
         selectable
         popup
         views={["month", "week", "day"]}
@@ -122,6 +244,66 @@ const handleEventClick = (event) => {
         eventPropGetter={eventStyleGetter} // Use this to apply dynamic class names
       />
 
+      <Modal
+        visible={isModalOpen}
+        onCancel={closeModal}
+        title="Event Details"
+        footer={null}
+        destroyOnClose
+      >
+        {selectedEvent && (
+          <div>
+            <h2>{selectedEvent.title}</h2>
+            <p>{selectedEvent.start.toLocaleString()}</p>
+            <Image
+              src={`/pet/${selectedEvent.image}`}
+              alt="pet"
+              width={100}
+              height={100}
+              style={{ marginBottom: 10 }}
+            />
+            <Descriptions column={1}>
+              <Descriptions.Item label="Full Name">
+                {selectedEvent.fname} {selectedEvent.lname}
+              </Descriptions.Item>
+              <Descriptions.Item label="Pet Name">
+                {selectedEvent.name}
+              </Descriptions.Item>
+              <Descriptions.Item label="Date">
+                {selectedEvent.date}
+              </Descriptions.Item>
+              <Descriptions.Item label="Time">
+                {selectedEvent.time}
+              </Descriptions.Item>
+              <Descriptions.Item label="Reason for Appointment">
+                {selectedEvent.reason}
+              </Descriptions.Item>
+            </Descriptions>
+            <div style={{ marginTop: 10 }}>
+              <Button
+                type="primary"
+                size="small"
+                onClick={(e) => handleAccept(e)}
+              >
+                Accept
+              </Button>
+
+              <Button
+                type="danger"
+                size="small"
+                onClick={(e) => handleDecline(e)}
+                style={{ marginLeft: 10 }}
+
+              >
+                Decline
+              </Button>
+            </div>
+            <Button onClick={closeModal} style={{ marginTop: 10 }}>
+              Close
+            </Button>
+          </div>
+        )}
+      </Modal>
     </div>
   );
 };

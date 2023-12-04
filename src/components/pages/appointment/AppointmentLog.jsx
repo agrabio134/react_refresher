@@ -103,6 +103,7 @@ const AppointmentLog = () => {
               <th>Time</th>
               <th>Pet Name</th>
               <th>Pet Image</th>
+              <th>Reason for Appointment</th>
               <th>Status</th>
               <th>Action</th>
             </tr>

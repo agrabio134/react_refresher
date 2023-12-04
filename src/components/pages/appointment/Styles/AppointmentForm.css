@@ -288,6 +288,36 @@ select {
   border-color: orange;;
 }
 
+/* styles.css */
+
+/* Container for the "Others" input section */
+.others-container {
+  margin-top: 10px;
+}
+
+/* Label styling */
+.others-container label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+/* Input field styling */
+.others-container input {
+  width: 100%;
+  padding: 8px;
+  box-sizing: border-box;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 14px;
+}
+
+/* Optional: Add some styling when the input is disabled */
+.others-container input:disabled {
+  background-color: #f4f4f4;
+  color: #777;
+}
+
 
 @media screen and (max-width: 768px) {
   .appointment-form-container {
