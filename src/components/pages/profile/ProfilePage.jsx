@@ -16,6 +16,7 @@ const ProfilePage = () => {
   const [petType, setPetType] = useState("");
   const [petBreed, setPetBreed] = useState("");
   const [petAge, setPetAge] = useState("");
+  const [petSex, setPetSex] = useState("");
   const [petList, setPetList] = useState([]);
 
   const user_id = decodedToken ? decodedToken.user_id : null;
@@ -201,8 +202,11 @@ const ProfilePage = () => {
             petBreed={petBreed}
             setPetBreed={setPetBreed}
             petAge={petAge}
+            petSex={petSex}
+            setPetSex={setPetSex}
             setPetAge={setPetAge}
             handleAddPet={handleAddPet}
+           
           />
           <PetTable
             petList={petList}
@@ -223,6 +227,8 @@ const ProfilePage = () => {
     }
   };
 
+  
+
   const handleAddPet = async () => {
     if (petName === "" || petType === "" || petBreed === "" || petAge === "") {
       Swal.fire({
@@ -236,7 +242,8 @@ const ProfilePage = () => {
       name: petName,
       type: petType,
       breed: petBreed,
-      age: petAge,
+      birthdate: petAge,
+      sex: petSex,
       user_id: decodedToken, // Assuming decodedToken contains user information
     };
 
@@ -345,6 +352,7 @@ const ProfilePage = () => {
   };
   
 
+  
   const checkPetAppointment = async (petId) => {
     try {
       const response = await fetch(`http://localhost/api/check_pet_appointment/${petId}`);
@@ -378,6 +386,7 @@ const ProfilePage = () => {
       return false; // Assume there is no appointment in case of an error
     }
   };
+  
   
 
   return (

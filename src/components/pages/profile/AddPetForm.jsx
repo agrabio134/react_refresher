@@ -11,13 +11,17 @@ const AddPetForm = ({
   petAge,
   setPetAge,
   handleAddPet,
+  petSex,
+  setPetSex,
 }) => {
   return (
-    <>
     <div className="main-add-pet-form-container">
       <h2>Add Pet</h2>
       <div className="add-pet-separator"></div>
-      <form className="main-form-body-container" onSubmit={(e) => e.preventDefault()}>
+      <form
+        className="main-form-body-container"
+        onSubmit={(e) => e.preventDefault()}
+      >
         <div className="add-pet-grid-form">
           <div className="add-pet-form">
             <label>
@@ -29,10 +33,10 @@ const AddPetForm = ({
                 required
               />
             </label>
-            </div>
-            <div className="add-pet-form">
+          </div>
+          <div className="add-pet-form">
             <label>
-            <h1>Type:</h1>
+              <h1>Type:</h1>
               <input
                 type="text"
                 value={petType}
@@ -40,10 +44,10 @@ const AddPetForm = ({
                 required
               />
             </label>
-            </div>
-            <div className="add-pet-form">
+          </div>
+          <div className="add-pet-form">
             <label>
-            <h1>Breed:</h1>
+              <h1>Breed:</h1>
               <input
                 type="text"
                 value={petBreed}
@@ -51,23 +55,38 @@ const AddPetForm = ({
                 required
               />
             </label>
-            </div>
-            <div className="add-pet-form">
+          </div>
+          <div className="add-pet-form">
             <label>
-            <h1>Age:</h1>
+              <h1>Birthdate:</h1>
               <input
-                type="number"
+                type="date"
                 value={petAge}
                 onChange={(e) => setPetAge(e.target.value)}
                 required
               />
             </label>
-            </div>
-            </div>
-            <button onClick={handleAddPet}>Add Pet</button>
-          </form> 
-        </div>      
-    </>
+          </div>
+          <div className="add-pet-form">
+            <label>
+              <h1>Sex:</h1>
+              <select
+                value={petSex}
+                onChange={(e) => setPetSex(e.target.value)}
+                required
+              >
+                <option value="" disabled>
+                  Select Sex
+                </option>
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+              </select>
+            </label>
+          </div>
+        </div>
+        <button onClick={handleAddPet}>Add Pet</button>
+      </form>
+    </div>
   );
 };
 

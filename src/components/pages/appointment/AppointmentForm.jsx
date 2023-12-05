@@ -4,6 +4,11 @@ import "react-calendar/dist/Calendar.css";
 import Swal from "sweetalert2";
 import jwt_decode from "jwt-decode";
 import "./Styles/AppointmentForm.css";
+import {
+  calculateAgeInMonths,
+  calculateAgeInDays,
+} from "../utils/petAgeCalculation";
+
 // import AppointmentLog from "./AppointmentLog";
 
 const AppointmentForm = () => {
@@ -71,7 +76,7 @@ const AppointmentForm = () => {
       const bookedTimeSlotsArray = bookedTimeSlotsDataArrayWithBrackets.map(
         (bookedTimeSlot) => {
           const parsedBookedTimeSlot = JSON.parse(bookedTimeSlot);
-          console.log("parsedBookedTimeSlot:", parsedBookedTimeSlot);
+          // console.log("parsedBookedTimeSlot:", parsedBookedTimeSlot);
           return parsedBookedTimeSlot.time;
         }
       );
@@ -486,8 +491,7 @@ const AppointmentForm = () => {
                 className="others-input"
                 maxLength={15}
               />
-                  <p>Max Character: {selectedReason.length}/15</p>
-
+              <p>Max Character: {selectedReason.length}/15</p>
             </div>
           )}
         </div>
@@ -533,8 +537,53 @@ const AppointmentForm = () => {
                         <p className="pet-age">
                           Age:{" "}
                           <b>
-                            {pet.age} {pet.age === 1 ? "Month" : "Months"}
+                            {calculateAgeInMonths(pet.birthdate) >= 12 ? (
+                              <>
+                                {Math.floor(
+                                  calculateAgeInMonths(pet.birthdate) / 12
+                                )}{" "}
+                                {Math.floor(
+                                  calculateAgeInMonths(pet.birthdate) / 12
+                                ) === 1
+                                  ? "year"
+                                  : "years"}
+                                {calculateAgeInMonths(pet.birthdate) % 12 >
+                                  0 && (
+                                  <>
+                                    {" and "}
+                                    {calculateAgeInMonths(pet.birthdate) %
+                                      12}{" "}
+                                    {calculateAgeInMonths(pet.birthdate) %
+                                      12 ===
+                                    1
+                                      ? "month"
+                                      : "months"}
+                                  </>
+                                )}
+                              </>
+                            ) : (
+                              <>
+                                {calculateAgeInMonths(pet.birthdate) < 1 ? (
+                                  <>
+                                    {calculateAgeInDays(pet.birthdate)}{" "}
+                                    {calculateAgeInDays(pet.birthdate) === 1
+                                      ? "day"
+                                      : "days"}
+                                  </>
+                                ) : (
+                                  <>
+                                    {calculateAgeInMonths(pet.birthdate)}{" "}
+                                    {calculateAgeInMonths(pet.birthdate) < 2
+                                      ? "month"
+                                      : "months"}
+                                  </>
+                                )}
+                              </>
+                            )}
                           </b>
+                        </p>
+                        <p className="pet-sex">
+                          Sex: <b>{pet.sex}</b>
                         </p>
                       </div>
                     </label>
