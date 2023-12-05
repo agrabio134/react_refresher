@@ -18,6 +18,9 @@ const ProfilePage = () => {
   const [petAge, setPetAge] = useState("");
   const [petSex, setPetSex] = useState("");
   const [petList, setPetList] = useState([]);
+  const [petImageUrl, setDownloadURL] = useState("");
+
+  // console.log("petImageUrl", petImageUrl);
 
   const user_id = decodedToken ? decodedToken.user_id : null;
 
@@ -187,33 +190,34 @@ const ProfilePage = () => {
 
       return (
         <>
-        <section className="main-profile-container">
-          <div className="whole-profile-container">
-          <div className="profile-header-container">
-          <h2>Welcome {userFullName}</h2>
-          <button onClick={handleLogout}>Logout</button>
-          </div>
+          <section className="main-profile-container">
+            <div className="whole-profile-container">
+              <div className="profile-header-container">
+                <h2>Welcome {userFullName}</h2>
+                <button onClick={handleLogout}>Logout</button>
+              </div>
 
-          <AddPetForm
-            petName={petName}
-            setPetName={setPetName}
-            petType={petType}
-            setPetType={setPetType}
-            petBreed={petBreed}
-            setPetBreed={setPetBreed}
-            petAge={petAge}
-            petSex={petSex}
-            setPetSex={setPetSex}
-            setPetAge={setPetAge}
-            handleAddPet={handleAddPet}
-           
-          />
-          <PetTable
-            petList={petList}
-            handleUpdatePet={handleUpdatePet}
-            handleDeletePet={handleDeletePet}
-          />
-          </div>
+              <AddPetForm
+                petName={petName}
+                setPetName={setPetName}
+                petType={petType}
+                setPetType={setPetType}
+                petBreed={petBreed}
+                setPetBreed={setPetBreed}
+                petAge={petAge}
+                setPetAge={setPetAge}
+                petSex={petSex}
+                setPetSex={setPetSex}
+                petImageUrl={petImageUrl}
+                setDownloadURL={setDownloadURL}
+                handleAddPet={handleAddPet}
+              />
+              <PetTable
+                petList={petList}
+                handleUpdatePet={handleUpdatePet}
+                handleDeletePet={handleDeletePet}
+              />
+            </div>
           </section>
         </>
       );
@@ -227,10 +231,8 @@ const ProfilePage = () => {
     }
   };
 
-  
-
   const handleAddPet = async () => {
-    if (petName === "" || petType === "" || petBreed === "" || petAge === "") {
+    if (petName === "" || petType === "" || petBreed === "" || petAge === "" || petSex === "" || petImageUrl === "") {
       Swal.fire({
         title: "Error",
         text: "Please fill in all fields.",
@@ -244,6 +246,7 @@ const ProfilePage = () => {
       breed: petBreed,
       birthdate: petAge,
       sex: petSex,
+      image: petImageUrl,
       user_id: decodedToken, // Assuming decodedToken contains user information
     };
 
@@ -274,6 +277,8 @@ const ProfilePage = () => {
       setPetType("");
       setPetBreed("");
       setPetAge("");
+      setPetSex("");
+      setDownloadURL("");
     } catch (error) {
       console.error("Error adding pet:", error);
       Swal.fire({
@@ -291,7 +296,7 @@ const ProfilePage = () => {
   const handleDeletePet = async (petId) => {
     // Check if the pet has an appointment
     const hasAppointment = await checkPetAppointment(petId);
-  
+
     if (hasAppointment === true) {
       Swal.fire({
         title: "Error",
@@ -300,7 +305,7 @@ const ProfilePage = () => {
       });
       return;
     }
-  
+
     // If no appointment, proceed with the delete action
     Swal.fire({
       title: "Are you sure?",
@@ -312,21 +317,24 @@ const ProfilePage = () => {
     }).then(async (result) => {
       if (result.isConfirmed) {
         try {
-          const response = await fetch(`http://localhost/api/delete_pet/${petId}`, {
-            method: "DELETE",
-            headers: {
-              "Content-Type": "application/json",
-            },
-          });
-  
+          const response = await fetch(
+            `http://localhost/api/delete_pet/${petId}`,
+            {
+              method: "DELETE",
+              headers: {
+                "Content-Type": "application/json",
+              },
+            }
+          );
+
           if (!response.ok) {
             throw new Error("Failed to delete pet");
           }
-  
+
           setPetList((prevPetList) =>
             prevPetList.filter((pet) => pet.id !== petId)
           );
-  
+
           Swal.fire({
             title: "Deleted!",
             text: "Your pet has been deleted.",
@@ -350,23 +358,23 @@ const ProfilePage = () => {
       }
     });
   };
-  
 
-  
   const checkPetAppointment = async (petId) => {
     try {
-      const response = await fetch(`http://localhost/api/check_pet_appointment/${petId}`);
-      
+      const response = await fetch(
+        `http://localhost/api/check_pet_appointment/${petId}`
+      );
+
       // Handle 404 status code
       if (response.status === 404) {
         console.log("Pet appointment not found");
         return false; // Treat as if there is no appointment
       }
-  
+
       const data = await response.text();
-  
+
       // console.log("Response data:", data);
-  
+
       // Split the response into separate JSON objects
       const jsonObjects = data.split("}{").map((json, index, array) => {
         return index === 0
@@ -376,18 +384,13 @@ const ProfilePage = () => {
           : "{" + json + "}";
       });
       // console.log("JSON objects:", jsonObjects);
-  
-      
-            return true;
- 
-  
+
+      return true;
     } catch (error) {
       console.error("Error checking pet appointment:", error);
       return false; // Assume there is no appointment in case of an error
     }
   };
-  
-  
 
   return (
     <>
