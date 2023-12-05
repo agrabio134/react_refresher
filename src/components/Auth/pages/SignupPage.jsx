@@ -199,7 +199,7 @@ const SignupPage = () => {
     <>
     <section className="signup-main-container">
     <div className="signup-side">
-      <img src="/src/assets/img/signin.svg" alt="" />
+      <img src="/src/assets/img/LGHD.png" alt="" />
       </div>
     <div className="main-user-signup-container">
         <p className="title">Happy Paws</p>

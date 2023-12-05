@@ -16,26 +16,30 @@
 	/* border: solid red; */
 }
 .home .content h4{
+	font-family: 'montserrat';
+	font-weight: 700;
 	font-size: 36px;
 	line-height: 35px;
 	text-transform: uppercase;
-	color: black;
+	color: #082342;
 }
 
 .home .content h2{
+	font-family: 'montserrat';
+	font-weight: bold;
 	padding-top: 20px;
     font-size: 54px;
-	color: black;
 	width: 45rem;
 }
 
 .home .content h2 .span{
-	color: #F50057;
+	color: #FF5C17;
 }
 
 .home .content p{
+	font-family: 'Franklin Gothic Light';
 	font-size: 16px;
-	color: black;
+	color: #082342;
 	line-height: 1.8;
 	width: 500px;
     padding-top: 20px;

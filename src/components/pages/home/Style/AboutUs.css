@@ -18,13 +18,24 @@ html{
 
 }
 .about-img .row .content h6{
+  font-family: 'montserrat';
+  font-weight: bold;
 	font-size: 28px;
-	color: #F50057;
+	color: #FAD400;
+  padding-bottom: 12px;
+}
+
+
+.about-img .row .content h4{
+  font-family: 'montserrat';
+  font-weight: bold;
+	color: #082342;
   padding-bottom: 12px;
 }
 .about-img .row .content p{
+	font-family: 'Franklin Gothic Light';
 	font-size: 16px;
-	color: black;
+	color: #082342;
 	padding: 1rem 0;
 	line-height: 1.8;
 }
@@ -67,7 +78,8 @@ html{
  }
 
 .about-img .image-section .image-content {
-  background-color: #e12454;
+  background-color: #FF5C17;
+  font-family: 'Franklin Gothic Light';
   color: #ffffff;
   width: 280px;
   position: relative;

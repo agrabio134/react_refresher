@@ -21,6 +21,65 @@ body {
 }
 
 
+h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
+  font-family: "Roboto", sans-serif;
+  line-height: 1.1;
+  font-weight: 500;
+  color: #222222;
+  margin: 0;
+  padding: 0;
+}
+
+h6, .h6 {
+  font-size: 28px;
+}
+
+h5, .h5 {
+  font-size: 30px;
+}
+
+.h6 {
+  display: block;
+  font-size: 0.67em;
+  margin-block-start: 2.33em;
+  margin-block-end: 2.33em;
+  margin-inline-start: 0px;
+  margin-inline-end: 0px;
+  font-weight: bold;
+}
+
+.h5 {
+  display: block;
+  font-size: 0.83em;
+  margin-block-start: 1.67em;
+  margin-block-end: 1.67em;
+  margin-inline-start: 0px;
+  margin-inline-end: 0px;
+  font-weight: bold;
+}
+
+p {
+  display: block;
+  margin-block-start: 1em;
+  margin-block-end: 1em;
+  margin-inline-start: 0px;
+  margin-inline-end: 0px;
+}
+
+p {
+  margin-top: 0;
+  margin-bottom: 1rem;
+}
+
+p {
+  margin: 0;
+}
+
+p {
+  color: #808080;
+}
+
+
 @media (prefers-color-scheme: light) {
   :root {
     color: #213547;

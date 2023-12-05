@@ -102,10 +102,10 @@ const LoginPage = () => {
 
       <section className="login-main-container mobile-login-main-container">   
       <div className="side">
-      <img src="/src/assets/img/wc.svg" alt="" />
+      <img src="/src/assets/img/LGHD.png" alt="" />
       </div>
         <div className="main-user-login-container">
-        <p className="login-title mobile-title">Happy Paws</p>
+        <p className="login-title mobile-title">Welcome!</p>
             <div className="user-separator"></div>
             <p className="welcome-message">Please, provide login credential to proceed and have access to all our services</p>
           <form className="user-login-box" onSubmit={handleLoginSubmit}>

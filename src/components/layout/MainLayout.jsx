@@ -77,7 +77,7 @@ const MainLayout = () => {
       </div>
           <div className="main_router">
             <div className="header_logo">
-              <img src="/src/assets/img/logoHD.png" alt="" />
+              <img src="/src/assets/img/LGHD.png" alt="" />
             </div>
             <div className="main_nav">
               <Link to="/" className="nav_list">
@@ -126,7 +126,7 @@ const MainLayout = () => {
             </div>
 
 <div className="top-nav-close-btn">
-<button href="javascript:void(0)" className="closebtn" onClick={closeNav}><i className="fa-solid fa-xmark"></i></button>
+<button href="" className="closebtn" onClick={closeNav}><i className="fa-solid fa-xmark"></i></button>
 </div>
             
             </div>
@@ -137,7 +137,7 @@ const MainLayout = () => {
               <div className="side-nav-content">
                 {/* Conditionally render Profile or Login/Signup based on authentication status */}
                 <div className="side-nav-home">
-                <i class="fa-solid fa-user"></i>
+                <i className="fa-solid fa-user"></i>
                   </div>
                 {isLogin ? (
                   

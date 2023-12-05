@@ -112,6 +112,7 @@ html  {
 }
 
 .main_nav {
+  margin-left: 60vh;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -119,11 +120,14 @@ html  {
 }
 .nav_list {
   display: flex;
+  padding: 20px;
+  letter-spacing: 3px;
   justify-content: space-around;
   list-style: none;
   margin: 0 5px ;
   font-size: 16px;
   color: white;
+  font-family: 'montserrat';
   text-decoration: none;
   text-transform: uppercase;
   font-weight: bold;

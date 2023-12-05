@@ -30,7 +30,7 @@
   
   /* On hover, add a black background color with a little bit see-through */
   .prev:hover, .next:hover {
-    color: orange;
+    color: #FF5C17;
     background-color: rgba(0,0,0,0.8);
     text-decoration: none;
   }
@@ -38,7 +38,7 @@
   .hiw-separator {
     /* width: 150px; */
     height: 4px;
-    background-color: #e12454;
+    background-color: #FAD400;
     margin: 20px;
 }
 
@@ -148,10 +148,18 @@
 }
 
 .hiw_content h2 {
-  color: black;
+  font-family: 'montserrat';
+  color: #082342;
   text-transform: uppercase;
   font-weight: bolder;
   font-size: 48px;
+}
+
+.hiw_content p {
+  font-family: 'Franklin Gothic Light';
+  color: #082342;
+  font-weight: 300;
+  font-size: 16px;
 }
 
 @media screen and (max-width: 768px) {

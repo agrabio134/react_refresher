@@ -13,7 +13,7 @@
 
 .emergency-container{
     width: 500px;
-    background-color: #F50057;
+    background-color: #082342;
     padding: 20px;
     border-radius: 5px;
 	/* border: solid blue; */
@@ -32,12 +32,12 @@
 
 .headphones .fa-solid{
     /* border: solid yellow; */
-    color: #fff;
+    color: #FF5C17;
 }
 
 .phone .fa-solid{
     /* border: solid yellow; */
-    color: #fff;
+    color: #FF5C17;
 }
 
 .emrgency-text {
@@ -47,16 +47,22 @@
 }
 
 .emrgency-text h4 {
-    color: #ffffff;
+    font-family: 'montserrat';
+    color: white;
+    font-weight: bold;
 }
 
 .emergency-container h5{
-    color: #ffffff;
+    font-family: 'montserrat';
+    text-align: center;
+    color: #FAD400;
     padding-bottom: 20px;
+    font-weight: bold;
     font-size: 18px;
 }
  .emergency-container p {
     /* padding-bottom: 20px; */
+    font-family: 'Franklin Gothic Light';
     color: #fff;
     font-size: 16px;
  }

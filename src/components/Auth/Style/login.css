@@ -1,6 +1,6 @@
 .login-main-container {
 	min-height: 100vh;
-    background: url(../../../assets/img/wave2.png);
+    background: url(../../../assets/img/wave5.png);
 	background-size: cover;
   background-color: white;
 	background-position: center;
@@ -27,28 +27,31 @@
   }
 
   .login-title {
+    font-family: 'montserrat';
     text-transform: uppercase;
     font-size: 3rem;
     font-weight: bold;
     text-align: center;
     letter-spacing: 1px;
-    color: black;
+    color: #082342;
     /* border: solid green; */
 }
 
 .user-separator {
     width: 150px;
     height: 4px;
-    background-color: #e12454;
+    background-color: #FAD400;
     margin: 24px;
 }
 
 .welcome-message {
+  font-family: 'Franklin Gothic light';
+  /* font-weight: 100; */
     text-align: center;
     font-size: 1.1em;
     line-height: 28px;
     margin-bottom: 30px;
-    color: #696969;
+    color: #082342;
     /* border: solid yellow; */
 }
 
@@ -66,6 +69,8 @@
 
 .user-login-box input,
 .user-login-box button {
+    font-family: 'Franklin Gothic light';
+    color: #082342;
     border: none;
     outline: none;
     border-radius: 30px;
@@ -90,7 +95,7 @@
 }
 
 .user-login-box input:focus ~ i {
-  color: #e12454;
+  color: #FF5C17;
 }
 
 /* Hide the browser's default checkbox */
@@ -119,7 +124,7 @@
 
 /* When the checkbox is checked, add a blue background */
 .user-check-box  input:checked ~ .checkmark {
-  background-color: #e12454;
+  background-color: #082342;
 }
 
 /* Create the checkmark/indicator (hidden when not checked) */
@@ -161,11 +166,12 @@
   
 
  .user-login-box .btn1 {
+  font-family: 'montserrat';
     color: #fff;
     text-transform: uppercase;
     letter-spacing: 2px;
     font-weight: bold;
-    background-image: linear-gradient(to right, #e12454, #6f0d26);
+    background-image: linear-gradient(to right, #024ca1, #082342);
     cursor: pointer;
     transition: opacity 0.4s;
 }
@@ -174,7 +180,13 @@
     opacity: 0.9;
 }
 
+.user-login-box span {
+  font-family: 'Franklin Gothic light';
+  color: #082342;
+}
+
   .dnthave{
+    font-family: 'Franklin Gothic light';
     text-align: center;
     margin-top: 10px;
 }
@@ -185,20 +197,19 @@ a{
 }
 
 a:hover {
-  color: #e12454;
+  color: #FAD400;
   text-decoration: underline;
 }
 
 .side {
   display: flex;
-  margin-left: 120px;
-  margin-bottom: 30px;
-  background-size: 100% 102%;
+  margin-left: 26.8vh;
+  /* background-size: 100% 102%; */
 }
 
 .side img {
-  width: 75%;
-  max-width: 100%;
+  width: 75vh;
+  height: 75vh;
 }
 
 @media screen and (max-width: 768px) {

@@ -1,6 +1,6 @@
  .signup-main-container {
     	min-height: 100vh;
-    background: url(../../../assets/img/wave2.png);
+    background: url(../../../assets/img/wave5.png);
 	background-size: cover;
     background-color: white;
 	background-position: center;
@@ -15,19 +15,20 @@
 
 
 .title {
-    text-transform: uppercase;
-    font-size: 3em;
-    font-weight: bold;
-    text-align: center;
-    letter-spacing: 1px;
-    color: black;
-    /* border: solid green; */
+  font-family: 'montserrat';
+  text-transform: uppercase;
+  font-size: 3rem;
+  font-weight: bold;
+  text-align: center;
+  letter-spacing: 1px;
+  color: #082342;
+  /* border: solid green; */
 }
 
 .signup-separator {
     width: 150px;
     height: 4px;
-    background-color: #e12454;
+    background-color: #FAD400;
     margin-bottom: 24px;
 }
 
@@ -47,7 +48,8 @@
  } 
 
  .user-signup-form-control {
-    color: black;
+  font-family: 'Franklin Gothic light';
+  color: #082342;
     width: 100%;
     position: relative;
     margin-bottom: 20px;
@@ -86,7 +88,7 @@
   
   /* When the checkbox is checked, add a blue background */
   .user-signup-check-box  input:checked ~ .checkmark {
-    background-color: #e12454;
+    background-color: #082342;
   }
   
   /* Create the checkmark/indicator (hidden when not checked) */
@@ -134,17 +136,14 @@
 
   .signup-side {
     display: flex;
-    margin-left: 120px;
-    margin-bottom: 30px;
+    margin-left: 13vh;
     background-size: 100% 102%;
     
   }
   
   .signup-side img {
-    width: 80%;
-    max-width: 100%;
-    /* -webkit-transform: scaleX(-1);
-    transform: scaleX(-1); */
+    width: 70vh;
+    height: 70vh;
   }
 
   .user-signup-box .btn1 {
@@ -152,7 +151,7 @@
     text-transform: uppercase;
     letter-spacing: 2px;
     font-weight: bold;
-    background-image: linear-gradient(to right, #e12454, #6f0d26);
+    background-image: linear-gradient(to right, #024ca1, #082342);
     cursor: pointer;
     transition: opacity 0.4s;
 }
@@ -163,6 +162,8 @@
 
 .user-signup-box input,
 .user-signup-boxbutton {
+  font-family: 'Franklin Gothic light';
+  color: #082342;
     border: none;
     outline: none;
     border-radius: 30px;
@@ -172,7 +173,6 @@
 .user-signup-box input {
     width: 100%;
     background: #e6e6e6;
-    color: #333;
     letter-spacing: 0.5px;
     padding: 14px 64px;
 }
@@ -182,7 +182,7 @@
     left: 32px;
     top: 50%;
     transform: translateY(-50%);
-    color: #888;
+    color: white;
     transition: color   0.4s;
 }
 

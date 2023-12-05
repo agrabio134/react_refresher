@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "./GalleryPage.css"; // Import your CSS file
-import { Modal, Button, Descriptions, Image, Breadcrumb, Spin } from "antd";
+import { Modal, Button, Descriptions, Image,  Spin } from "antd";
 
 const GalleryPage = () => {
   const [galleryData, setGalleryData] = useState([]);

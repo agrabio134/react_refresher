@@ -1,4 +1,4 @@
-
+/* 
 h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
     font-family: "Roboto", sans-serif;
     line-height: 1.1;
@@ -55,7 +55,7 @@ p {
 
 p {
     color: #808080;
-}
+} */
 
 
 /* section{
@@ -82,14 +82,15 @@ p {
 } */
 
 .whyhp-home-section-heading2 {
-    color: black;
+    color: #082342;
+    font-family: 'montserrat';
     text-align: center;
-    font-weight: 600;
+    font-weight: bold;
     /* border: solid blue; */
 }
 
 .whyhp-home-section-heading2 span {
-    color: #F50057;
+    color: #FAD400;
 }
 
 .main_whyhp_container .whyhp_content_container p {
@@ -130,11 +131,21 @@ p {
 
 .whyhp_content h5 {
     /* margin-top: 50px; */
-    color: black;
-    font-weight: 600;
+    font-family: 'montserrat';
+    color: #082342;
+    font-weight: bold;
     font-size: 24px;
     /* border: solid red; */
 }
+
+.whyhp_content p {
+    /* margin-top: 50px; */
+    font-family: 'Franklin Gothic light';
+    color: #082342;
+    font-size: 16px;
+    /* border: solid red; */
+}
+
 
 
 @media screen and (max-width: 768px) {
