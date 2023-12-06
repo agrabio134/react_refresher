@@ -68,7 +68,7 @@ const AppointmentLogItem = ({ appointment, index }) => {
       <td className="name-column">{appointment.name}</td>
       <td className="image-column">
         <img
-          src={`pet/${appointment.image}`}
+          src={`${appointment.image}`}
           alt={appointment.name}
           className="pet-image"
         />

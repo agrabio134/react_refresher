@@ -524,7 +524,7 @@ const AppointmentForm = () => {
                         disabled={isSubmitting}
                       />
                       <div className="pet-details">
-                        <img src={`/pet/${pet.image}`} alt={pet.image} />
+                        <img src={`${pet.image}`} alt={pet.image} />
                         <p className="pet-name">
                           Pet name: <b>{pet.name}</b>
                         </p>
