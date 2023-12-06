@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { Calendar, momentLocalizer } from "react-big-calendar";
 import "react-big-calendar/lib/css/react-big-calendar.css";
 import moment from "moment";
-import { Modal, Button, Descriptions, Image } from "antd";
+import { Modal, Button, Descriptions, Image, Table } from "antd";
 
 import "./styles/AdminCalendarPage.css";
 import Swal from "sweetalert2";
@@ -89,23 +89,23 @@ const AdminCalendarPage = () => {
     };
   });
 
+
   const eventStyleGetter = (event) => {
     const status = event.status.toLowerCase(); // Ensure it's lowercase for case-insensitive comparison
-    let className = '';
-  
-    if (status === 'accepted') {
-      className = 'accepted';
-    } else if (status === 'denied') {
-      className = 'denied';
+    let className = "";
+
+    if (status === "accepted") {
+      className = "accepted";
+    } else if (status === "denied") {
+      className = "denied";
     } else {
-      className = 'not-accepted';
+      className = "not-accepted";
     }
-  
+
     return {
       className,
     };
   };
-  
 
   const handleEventClick = (event) => {
     setSelectedEvent(event);
@@ -191,7 +191,6 @@ const AdminCalendarPage = () => {
   };
 
   const handleConfirmDecline = async () => {
-
     const id = selectedEvent.t1_id;
     try {
       const response = await fetch(
@@ -244,10 +243,11 @@ const AdminCalendarPage = () => {
         eventPropGetter={eventStyleGetter} // Use this to apply dynamic class names
       />
 
+
       <Modal
         visible={isModalOpen}
         onCancel={closeModal}
-        title="Event Details"
+        title="Appointment Details"
         footer={null}
         destroyOnClose
       >
@@ -256,7 +256,7 @@ const AdminCalendarPage = () => {
             <h2>{selectedEvent.title}</h2>
             <p>{selectedEvent.start.toLocaleString()}</p>
             <Image
-              src={`/pet/${selectedEvent.image}`}
+              src={`${selectedEvent.image}`}
               alt="pet"
               width={100}
               height={100}
@@ -273,7 +273,7 @@ const AdminCalendarPage = () => {
                 {selectedEvent.date}
               </Descriptions.Item>
               <Descriptions.Item label="Time">
-                {selectedEvent.time}
+                {selectedEvent.time}               
               </Descriptions.Item>
               <Descriptions.Item label="Reason for Appointment">
                 {selectedEvent.reason}
@@ -293,7 +293,6 @@ const AdminCalendarPage = () => {
                 size="small"
                 onClick={(e) => handleDecline(e)}
                 style={{ marginLeft: 10 }}
-
               >
                 Decline
               </Button>
@@ -303,6 +302,8 @@ const AdminCalendarPage = () => {
             </Button>
           </div>
         )}
+
+     
       </Modal>
     </div>
   );
