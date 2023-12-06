@@ -6,7 +6,8 @@ import {
   BarChartOutlined,
   CalendarOutlined,
   FileOutlined,
-  LogoutOutlined 
+  LogoutOutlined,
+  HistoryOutlined   
 } from '@ant-design/icons';
 import Swal from 'sweetalert2';
 import { Link } from 'react-router-dom';
@@ -62,12 +63,19 @@ const AdminDashboardLayout = ({ children }) => {
             </Link>
           </Menu.Item>
           <Menu.Item key="4" className="menu-item-text">
+            <Link to="/admin/records" className="menu-item-link">
+              <HistoryOutlined   className="menu-item-icon" />
+              Records
+            </Link>
+          </Menu.Item>
+
+          <Menu.Item key="5" className="menu-item-text">
             <Link to="/admin/content" className="menu-item-link">
               <FileOutlined className="menu-item-icon" />
               Content
             </Link>
           </Menu.Item>
-          <Menu.Item key="5" className="menu-item-logout">
+          <Menu.Item key="6" className="menu-item-logout">
             <Button
               type="text"
               icon={<LogoutOutlined />}

@@ -11,6 +11,7 @@ import AdminCalendarPage from "./pages/AdminCalendarPage";
 
 import AdminDashboardPage from "./pages/AdminDashboardPage";
 import AdminContentPage from "./pages/AdminContentPage";
+import VeterinaryRecord from "./pages/AdminVetRecordsPage";
 
 const BackOfficePage = () => {
   const { isAdminLogin } = useAdminAuth();
@@ -63,6 +64,7 @@ const BackOfficePage = () => {
             <Route path="/admin/" element={<AdminDashboardPage />} />
             <Route path="/admin/calendar" element={<AdminCalendarPage />} />
             <Route path="/admin/content" element={<AdminContentPage />} />
+            <Route path="/admin/records" element={<VeterinaryRecord />} />
             {/* Add more admin-specific routes as needed */}
           </Routes>
         </div>
