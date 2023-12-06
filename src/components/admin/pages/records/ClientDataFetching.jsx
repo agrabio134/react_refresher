@@ -4,20 +4,41 @@ import { useEffect } from "react";
 const API_BASE_URL = "http://localhost/api"; // Replace with your API base URL
 
 export const fetchClients = async () => {
+  const response = await fetch(`${API_BASE_URL}/get_clients`);
+  if (!response.ok) {
+    throw new Error(`Failed to fetch clients: ${response.status}`);
+  }
+
+  const jsonData = await response.text();
+
   try {
-    const response = await fetch(`${API_BASE_URL}/get_clients`);
-    if (!response.ok) {
-      throw new Error(`Failed to fetch clients: ${response.status}`);
-    }
-    return response;
-  } catch (error) {
-    console.error("Error fetching clients:", error.message);
-    throw error;
+    const jsonObjects = jsonData
+      .split("}{")
+      .map((json, index, array) =>
+        index === 0
+          ? json + "}"
+          : index === array.length - 1
+          ? "{" + json
+          : "{" + json + "}"
+      );
+
+    const clients = jsonObjects.flatMap((json, index) => {
+      try {
+        const parsedResult = JSON.parse(json);
+        return parsedResult.payload || { key: index }; // Add a unique key property
+      } catch (jsonError) {
+        console.error("Error parsing JSON:", jsonError);
+        return null;
+      }
+    });
+
+    return clients.filter(Boolean); // Filter out null values
+  } catch (splitError) {
+    console.error("Error splitting JSON:", splitError);
   }
 };
 
-
-const ClientDataFetching = ({ setClients }) => {
+export const ClientDataFetching = ({ setClients }) => {
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -76,5 +97,3 @@ const ClientDataFetching = ({ setClients }) => {
 
   return null;
 };
-
-export default ClientDataFetching;

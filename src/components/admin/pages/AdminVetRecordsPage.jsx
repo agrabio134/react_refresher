@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import DataFetching from "./records/DataFetching";
 // import AppointmentTable from "./records/AppointmentTable";
 import AppointmentDetailsModal from "./records/AppointmentDetailsModal";
-import { fetchClients } from "./records/ClientDataFetching";
+import { ClientDataFetching } from "./records/ClientDataFetching";
 
 import { Form, Button, Tabs, Option, Table } from "./records/Imports";
 import moment from "moment";
@@ -17,16 +17,42 @@ const VeterinaryRecord = () => {
   const [modalVisible, setModalVisible] = useState(false);
   const [selectedAppointment, setSelectedAppointment] = useState(null);
   const [clients, setClients] = useState([]);
-  
+
   const fetchClientData = async () => {
     try {
-      const clients = await fetchClients();
-      setClients(clients);
+      const clients = await fetch("http://localhost/api/get_clients");
+
+      const jsonData = await clients.text();
+
+      try {
+        const jsonObjects = jsonData
+          .split("}{")
+          .map((json, index, array) =>
+            index === 0
+              ? json + "}"
+              : index === array.length - 1
+              ? "{" + json
+              : "{" + json + "}"
+          );
+
+        const clients = jsonObjects.flatMap((json, index) => {
+          try {
+            const parsedResult = JSON.parse(json);
+            return parsedResult.payload || { key: index }; // Add a unique key property
+          } catch (jsonError) {
+            console.error("Error parsing JSON:", jsonError);
+            return null;
+          }
+        });
+        console.log(clients);
+        setClients(clients);
+      } catch (splitError) {
+        console.error("Error splitting JSON:", splitError);
+      }
     } catch (error) {
       console.error("Error fetching client data:", error.message);
     }
   };
-  
 
   useEffect(() => {
     // Fetch appointment data when the component mounts
@@ -94,8 +120,17 @@ const VeterinaryRecord = () => {
   };
 
   const ClientsColumns = [
-    { title: "Client ID", dataIndex: "clientId", key: "clientId" },
-    // Add more columns based on your client data structure
+    { title: "First Name", dataIndex: "fname", key: "fname" },
+    { title: "Last Name", dataIndex: "lname", key: "lname" },
+    { title: "Contact Number", dataIndex: "contact_no", key: "contact_no" },
+    { title: "Address", dataIndex: "address", key: "address" },
+    { title: "Email", dataIndex: "email", key: "email" },
+    // add button
+    {
+      title: "Action",
+      dataIndex: "action",
+      key: "action",
+    },
   ];
 
   const mappedAppointments = appointments.map(mapAppointmentData);
@@ -272,18 +307,19 @@ const VeterinaryRecord = () => {
           columns={columns}
           pagination={false}
           style={{ marginTop: 20 }}
+          rowKey={(record) => record.key}
         />
       </TabPane>
       <TabPane tab="Client Records" key="2">
-      <h1>Client Records</h1>
-      <Table
-        dataSource={clients}
-        columns={ClientsColumns}
-        pagination={false}
-        style={{ marginTop: 20 }}
-        rowKey={(record) => record.key}
-      />
-    </TabPane>
+        <h1>Client Records</h1>
+        <Table
+          dataSource={clients}
+          columns={ClientsColumns}
+          pagination={false}
+          style={{ marginTop: 20 }}
+          rowKey={(record) => record.key} // Ensure each row has a unique key
+        />
+      </TabPane>
     </Tabs>
   );
 
