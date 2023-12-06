@@ -145,7 +145,7 @@ const AddPetForm = ({
               </select>
             </label>
           </div>
-        </div>
+
         <div className="add-pet-form">
           <label>
             <h1>Profile Image:</h1>
@@ -159,7 +159,7 @@ const AddPetForm = ({
             />
           )}
         </div>
-
+        </div>
         <button onClick={() => setUploading(true)} disabled={uploading}>
           {uploading ? "Uploading..." : "Add Pet"}
         </button>

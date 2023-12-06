@@ -105,7 +105,7 @@
   color: white;
 }
 
-select {
+.form-group select {
   font-size: 1rem;
   text-align: center;
   width: 50%;
@@ -141,7 +141,7 @@ select {
   margin-bottom: 10px;
 }
 
-select {
+.form-group select {
   width: 100%;
   padding: 8px;
   margin-bottom: 10px;
@@ -461,7 +461,7 @@ select {
   color: #eaeaea;
 }
 
-select {
+.form-group select {
   font-size: 40px;
   text-align: center;
   width: 50%;
