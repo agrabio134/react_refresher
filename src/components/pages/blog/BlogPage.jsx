@@ -52,11 +52,11 @@ const BlogPage = () => {
     <section className='main-blog-container'>
     <div className='blog-welcome-container'>
     <div className="blog-content">
-          <h1><span className="span">Our</span> Blogs</h1>
+          <h1><span className="span">News</span> & Announcements</h1>
           <ul className='blog-breadcrumbs'>
           <a href="">Home </a>
           <li href="">/</li>
-          <a href="">Blogs</a>
+          <a href="">News</a>
           </ul>
         </div>
     </div>

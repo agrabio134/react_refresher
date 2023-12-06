@@ -47,15 +47,9 @@ const AboutPage = () => {
                      Care in Full Measure
                   </h4>
                   <p className="py-3">
-                     It is a long established fact that a reader will be distracted by the readable content of a
-                     page when looking at its layout. The point of using Lorem Ipsum is that it has a
-                     more-or-less normal distribution of letters, as opposed to using 'Content here, content
-                     here', making it look like readable English.
+                  Happy Paws is a special place that focuses on taking great care of your pets. We're not just about regular vet services; we go the extra mile to make sure your furry friends are happy and healthy. In addition to basic vet care, we offer grooming, handpicked pet products, and other services designed to meet the specific needs of your pets. We're all about making sure your beloved animals are well taken care of in every way possible.
                   </p>
-                  <p>
-                     It is a long established fact that a reader will be distracted by the readable
-                     content of a page when looking at its layout.
-                  </p>
+
           </div>
         </div>
       </section>

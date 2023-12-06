@@ -9,9 +9,7 @@ const FooterPage = () => {
 
                     <div className="happy-paws-content">
                         <h1>Happy Paws</h1>
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
+                        <p>Veterinary Services & Pet Grooming</p>
                     </div>
 
                     <div className="quick-links-content">

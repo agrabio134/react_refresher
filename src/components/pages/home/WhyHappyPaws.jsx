@@ -16,8 +16,7 @@ const WhyHappyPawsPage = () => {
                   </div>
                   <div className="whyhp_content">
                       <h5>Personalized Profiles</h5>
-                      <p>Say goodbye to long phone calls and waiting on hold. 
-                        With just a few clicks, schedule appointments that suit your schedule.</p>
+                      <p>Creating personalized profiles for pets at a Happy Paws lets our staff know about each pet's health history, preferences, and specific needs. </p>
                   </div>
                   <div className="whyhp_content">
                       <h5>Access Anytime, Anywhere</h5>

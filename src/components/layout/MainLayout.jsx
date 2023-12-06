@@ -86,11 +86,11 @@ const MainLayout = () => {
               <Link to="/appointments" className="nav_list">
                 Appointment
               </Link>
-              <Link to="blogs" className="nav_list">
-                Blog
-              </Link>
               <Link to="gallery" className="nav_list">
                 Gallery
+              </Link>
+              <Link to="blogs" className="nav_list">
+                News & Announcements
               </Link>
             </div>
 
