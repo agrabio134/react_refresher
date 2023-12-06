@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { Calendar, momentLocalizer } from "react-big-calendar";
 import "react-big-calendar/lib/css/react-big-calendar.css";
 import moment from "moment";
-import { Modal, Button, Descriptions, Image, Table } from "antd";
+import { Modal, Button, Descriptions, Image } from "antd";
 
 import "./styles/AdminCalendarPage.css";
 import Swal from "sweetalert2";
@@ -89,7 +89,6 @@ const AdminCalendarPage = () => {
     };
   });
 
-
   const eventStyleGetter = (event) => {
     const status = event.status.toLowerCase(); // Ensure it's lowercase for case-insensitive comparison
     let className = "";
@@ -98,6 +97,8 @@ const AdminCalendarPage = () => {
       className = "accepted";
     } else if (status === "denied") {
       className = "denied";
+    } else if (status === "done") {
+      className = "done";
     } else {
       className = "not-accepted";
     }
@@ -225,6 +226,9 @@ const AdminCalendarPage = () => {
           <span className="accepted" /> Accepted
         </div>
         <div className="legend-item">
+          <span className="done" /> Done
+        </div>
+        <div className="legend-item">
           <span className="denied" /> Denied
         </div>
       </div>
@@ -242,7 +246,6 @@ const AdminCalendarPage = () => {
         style={{ height: 500 }}
         eventPropGetter={eventStyleGetter} // Use this to apply dynamic class names
       />
-
 
       <Modal
         visible={isModalOpen}
@@ -273,37 +276,30 @@ const AdminCalendarPage = () => {
                 {selectedEvent.date}
               </Descriptions.Item>
               <Descriptions.Item label="Time">
-                {selectedEvent.time}               
+                {selectedEvent.time}
               </Descriptions.Item>
               <Descriptions.Item label="Reason for Appointment">
                 {selectedEvent.reason}
               </Descriptions.Item>
             </Descriptions>
-            <div style={{ marginTop: 10 }}>
-              <Button
-                type="primary"
-                size="small"
-                onClick={(e) => handleAccept(e)}
-              >
-                Accept
-              </Button>
-
-              <Button
-                type="danger"
-                size="small"
-                onClick={(e) => handleDecline(e)}
-                style={{ marginLeft: 10 }}
-              >
-                Decline
-              </Button>
-            </div>
-            <Button onClick={closeModal} style={{ marginTop: 10 }}>
-              Close
-            </Button>
+            {/* add if else */}
+            {selectedEvent.status === "pending" && (
+              <div>
+                <Button
+                  onClick={handleAccept}
+                  style={{ marginTop: 10, marginRight: 10 }}
+                >
+                  Accept
+                </Button>
+                <Button onClick={handleDecline} style={{ marginTop: 10 }}>
+                  Decline
+                </Button>
+              </div>
+            )}
+            
+          
           </div>
         )}
-
-     
       </Modal>
     </div>
   );
