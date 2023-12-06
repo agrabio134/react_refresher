@@ -18,16 +18,16 @@
 } */
 
 .react-calendar__navigation button:enabled:hover, .react-calendar__navigation button:enabled:focus {
-  background-color: orange;
+  background-color: #FAD400;
 }
 
 .react-calendar__navigation button:disabled {
-  background-color: orange;
+  background-color: #FAD400;
 }
 
 .react-calendar__navigation button {
   min-width: 44px;
-  background-color: #e12454;
+  background-color: #082342;
   color: #eaeaea;
 }
 
@@ -41,14 +41,14 @@
 }
 
 .react-calendar__tile--active:enabled {
-  background-color: #e12454;
+  background-color: #082342;
   color: #eaeaea;
 
 }
 
 
 .react-calendar__tile--active:enabled:hover, .react-calendar__tile--active:enabled:focus {
-  background: #e12454;
+  background: #082342;
   color: #eaeaea;
 }
 
@@ -101,8 +101,8 @@
   background-color: white;
 }
 .react-calendar__tile--now{
-  background-color: #ffa500;
-  color: #eaeaea;
+  background-color: #FF5C17;
+  color: white;
 }
 
 select {
@@ -112,13 +112,13 @@ select {
   height: 100%;
   padding: 20px;
   margin-bottom: 10px;
-  background-color: #e12454;
+  background-color: #082342;
   color: #fff;
 }
 
 .value-container {
   font-size: 1rem;
-  background-color: #ffa500;
+  background-color: #082342;
 }
 
 
@@ -149,7 +149,7 @@ select {
 
 .apoint-submit-button {
   margin-left: 20px;
-  background-color: orange;
+  background-color: #FF5C17;
   color: #fff;
   padding: 10px;
   cursor: pointer;
@@ -159,7 +159,7 @@ select {
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 
   &:hover {
-    background-color: #e12454;
+    background-color: #082342;
   }
 
   &:disabled {
@@ -191,8 +191,10 @@ select {
 }
 
 .pet-card-header {
+  font-family: 'montserrat';
+  font-weight: bold;
   border-radius: 5px 5px 0px 0px;
-  background-color: #e12454;;
+  background-color: #082342;;
   padding: 12px;
   color: white;
 }
@@ -214,8 +216,17 @@ select {
   flex-grow: 1;
 }
 .pet-card-body p {
+  font-family: 'Franklin Gothic Light';
+  font-weight: lighter;
+  color: #FF5C17;
   margin: 8px 0;
 }
+
+.pet-card-body p b {
+  font-family: 'Franklin Gothic Medium';
+  color: #082342;
+}
+
 
 .pet-card-body {
   display: flex;
@@ -247,18 +258,26 @@ select {
 
 .pet-checkbox:hover,
 .pet-checkbox.checked {
-  border: 2px solid #e12454; /* Change the border color as needed */
+  border: 2px solid #FAD400; /* Change the border color as needed */
 }
 
 .pet-checkbox.checked {
-  background-color: #e12454;; 
+  background-color: #082342;
 
 }
 
 .pet-checkbox.checked .pet-name,
 .pet-checkbox.checked .pet-breed,
-.pet-checkbox.checked .pet-age {
-  color: #fff;
+.pet-checkbox.checked .pet-age,
+.pet-checkbox.checked .pet-sex {
+  color: #FAD400;
+}
+
+.pet-checkbox.checked .pet-name b,
+.pet-checkbox.checked .pet-breed b,
+.pet-checkbox.checked .pet-age b,
+.pet-checkbox.checked .pet-sex b {
+  color: white;
 }
 
 .add-pet-card {
@@ -274,7 +293,7 @@ select {
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   transition: box-shadow 0.3s ease;
   cursor: pointer;
-  background-color: #e12454;
+  background-color: #FAD400;
 }
 
 .add-pet-card .fa-solid {
@@ -285,7 +304,7 @@ select {
 
 .pet-card-Item:hover,
 .add-pet-card:hover {
-  border-color: orange;;
+  border-color: #FAD400;
 }
 
 /* styles.css */

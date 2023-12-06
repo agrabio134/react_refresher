@@ -119,10 +119,7 @@ const MainLayout = () => {
         
       <div className="main-side-nav-header">
       <div className="side-nav-header_logo">
-              <img src="/src/assets/img/logo.png" alt="" />
-            </div>
-            <div className="side-nab-email">
-            <h4>happypaws@example.com</h4>    
+              <img src="/src/assets/img/LGHD.png" alt="" />
             </div>
 
 <div className="top-nav-close-btn">

@@ -30,13 +30,14 @@
   .gallery-welcome-container .gallery-content h1{
     padding-top: 20px;
       font-size: 54px;
+      font-family: 'montserrat';
       font-weight: bold;
-    color: black;
+    color: #082342;
     width: 45rem;
   }
   
   .gallery-welcome-container .gallery-content h1 .span{
-    color: #F50057;
+    color: #FF5C17;
   }
 
   .gallery-breadcrumbs {
@@ -46,14 +47,16 @@
     width: 150px;
   }
   .gallery-breadcrumbs a{
-    color: black;
+    color: #082342;
     font-size: 20px;
+    font-family: 'montserrat';
     font-weight: bold;
   }
 
   .gallery-breadcrumbs li{
-    color: black;
+    color: #082342;
     font-size: 20px;
+    font-family: 'montserrat';
     font-weight: bold;
   }
 

@@ -529,7 +529,7 @@ const AppointmentForm = () => {
                           Pet name: <b>{pet.name}</b>
                         </p>
                         <p className="pet-breed">
-                          TYpe: <b>{pet.type}</b>
+                          Type: <b>{pet.type}</b>
                         </p>
                         <p className="pet-breed">
                           Breed: <b>{pet.breed}</b>

@@ -201,21 +201,10 @@ html  {
 
 @media screen and (max-width: 768px) { 
 
-
-  .top_header_section {
-    display: none;
-    justify-content: space-between;
-    background-color: #ebf5f5;
-    height: 51px;
-    align-items: center;
-    padding-left: 100px;
-    padding-right: 100px;
-  }
-
   .main_router {
     display: flex;
     justify-content: space-between;
-    background-color: #F50057;
+    background-color: #082342;
     height: 200px;
     align-items: center;
     padding-left: 100px;
@@ -239,12 +228,15 @@ html  {
     height: 100%;
   }
 
+  .header_auth_container {
+display: none;
+  }
 
   .main-side-nav-header {
     display: flex;
     width: 100%;
     justify-content: space-between;
-    background-color: #F50057;
+    background-color: #082342;
     align-items: center;
     padding-left: 100px;
     padding-right: 100px;
@@ -288,7 +280,9 @@ html  {
     margin: 0 5px ;
     font-size: 40px;
     padding: 20px;
-    color: black;
+    font-family: 'montserrat';  
+font-weight: bold;
+    color: #082342;
     text-decoration: none;
     text-transform: uppercase;
     font-weight: bold;
@@ -296,18 +290,20 @@ html  {
   }
   
   .sidenav a:hover {
-    color: orange;
+    font-family: 'montserrat';  
+font-weight: bold;
+    color: #FAD400;
     align-items: center;
     text-decoration: none;
     height: 100%;
-    border-bottom: 3px solid orange;
+    border-bottom: 3px solid #FAD400;
   }
   
   .sidenav .closebtn {
  
     padding: 14px;
     text-align: center;
-    background-color: orange;
+    background-color: #FF5C17;
     cursor: pointer;
     display: block;
 
@@ -316,7 +312,7 @@ html  {
   .sidebar-button {
     padding: 14px;
     text-align: center;
-    background-color: orange;
+    background-color: #FF5C17;
     cursor: pointer;
     display: block;
   }
@@ -341,7 +337,7 @@ html  {
   display: flex;
   align-items: center;
   flex-direction: row;
-  color: black;
+  color: #082342;
   font-size: 50px;
 padding: 20px;
 }
@@ -350,7 +346,7 @@ padding: 20px;
   display: flex;
   align-items: center;
   flex-direction: row;
-  color: black;
+  color: #082342;
   font-size: 50px;
   padding: 20px 26px 20px 26px;
 }
@@ -359,7 +355,7 @@ padding: 20px;
   display: flex;
   align-items: center;
   flex-direction: row;
-  color: black;
+  color: #082342;
   font-size: 50px;
   padding: 20px 26px 20px 26px;
 }
@@ -368,7 +364,7 @@ padding: 20px;
   display: flex;
   align-items: center;
   flex-direction: row;
-  color: black;
+  color: #082342;
   font-size: 50px;
   padding: 20px 23px 20px 23px;
 }
@@ -377,7 +373,7 @@ padding: 20px;
   display: flex;
   align-items: center;
   flex-direction: row;
-  color: black;
+  color: #082342;
   font-size: 50px;
   padding: 20px 23px 20px 23px;
 }

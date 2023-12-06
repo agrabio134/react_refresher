@@ -12,8 +12,11 @@
   
   
   /* Styling for the title */
-  h2 {
-    color: #333333;
+  .appointment-log-container h2 {
+    margin-top: 15px;
+    font-family: 'montserrat';
+    font-weight: bolder;
+    color: #082342;
   }
   
   /* Styling for loading and error messages */
@@ -31,9 +34,10 @@
   
   /* Styling for the table header */
   .appointment-log-table th {
-    background-color: #e12454; /* pinkred color for header background */
+    background-color: #082342; /* pinkred color for header background */
     color: #ffffff;
-    font-weight: bold;
+    font-family: 'montserrat';
+    font-weight: bolder;
     text-align: center;
     padding: 10px;
   }

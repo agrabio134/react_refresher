@@ -30,13 +30,14 @@
   .blog-welcome-container .blog-content h1{
     padding-top: 20px;
       font-size: 54px;
+      font-family: 'montserrat';
       font-weight: bold;
-    color: black;
+    color: #082342;
     width: 45rem;
   }
   
   .blog-welcome-container .blog-content h1 .span{
-    color: #F50057;
+    color: #FF5C17;
   }
 
   .blog-breadcrumbs {
@@ -46,14 +47,16 @@
     width: 150px;
   }
   .blog-breadcrumbs a{
-    color: black;
+    color: #082342;
     font-size: 20px;
+    font-family: 'montserrat';
     font-weight: bold;
   }
 
   .blog-breadcrumbs li{
-    color: black;
+    color: #082342;
     font-size: 20px;
+    font-family: 'montserrat';
     font-weight: bold;
   }
 
@@ -96,7 +99,7 @@
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     transition: transform 0.2s ease-in-out;
     width: calc(33.333% - 20px);
-    border-bottom: 10px solid #e12454;
+    border-bottom: 10px solid #FF5C17;
     background-color: white;
   }
   
@@ -111,32 +114,35 @@
   }
   
   .blog-details {
-    border-top: solid black;
+    border-top: solid #FF5C17;
     padding: 20px;
   }
 
   .blog-separator {
     width: 150px;
     height: 3px;
-    background-color: #e12454;
+    background-color: #FAD400;
     margin-bottom: 10px;
 }
   
  .blog-details h2 {
+  font-family: 'montserrat';
+  font-weight: bold;
     font-size: 1.8rem;
     margin-bottom: 10px;
-    color: #333;
+    color: #082342;
   }
   
-  p {
-    line-height: 1.6;
-    margin-bottom: 15px;
-    color: #555;
+  .blog-details p {
+    font-family: 'Franklin Gothic Light';
+    font-style: italic;
+    color: #082342;
   }
   
   p.date {
+    font-family: 'Franklin Gothic Light';
     font-style: italic;
-    color: #777;
+    color: #082342;
   }
   
   /* Add additional styling as needed */
