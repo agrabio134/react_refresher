@@ -17,7 +17,7 @@ const AppointmentDetailsModal = ({
     visible={modalVisible}
     onCancel={handleModalCancel}
     footer={null}
-    width={800}
+    width={1000}
   >
     {selectedAppointment && (
       <Form form={form} onFinish={handleSubmit} layout="vertical">

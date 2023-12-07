@@ -1,28 +1,31 @@
 import React, { useState, useEffect } from "react";
 import DataFetching from "./records/DataFetching";
-// import AppointmentTable from "./records/AppointmentTable";
 import AppointmentDetailsModal from "./records/AppointmentDetailsModal";
-import { ClientDataFetching } from "./records/ClientDataFetching";
-
-import { Form, Button, Tabs, Option, Table } from "./records/Imports";
+import { Form, Button, Tabs, Table, Modal, Select } from "antd";
 import moment from "moment";
 import Swal from "sweetalert2";
 import jwt_decode from "jwt-decode";
 
 const { TabPane } = Tabs;
+const { Option } = Select;
 
 const VeterinaryRecord = () => {
+  const [printableRecords, setPrintableRecords] = useState([]);
+  const [selectedRecords, setSelectedRecords] = useState([]);
+
   const [form] = Form.useForm();
   const [appointments, setAppointments] = useState([]);
   const [modalVisible, setModalVisible] = useState(false);
+  const [recordModalVisible, setRecordModalVisible] = useState(false);
   const [selectedAppointment, setSelectedAppointment] = useState(null);
+  const [selectedClient, setSelectedClient] = useState(null); // [1]
   const [clients, setClients] = useState([]);
-
+  const [vetRecord, setVetRecord] = useState([]);
+  const [vetRecordError, setVetRecordError] = useState(null); // New state to store vet record fetching errors
   const fetchClientData = async () => {
     try {
-      const clients = await fetch("http://localhost/api/get_clients");
-
-      const jsonData = await clients.text();
+      const clientsResponse = await fetch("http://localhost/api/get_clients");
+      const jsonData = await clientsResponse.text();
 
       try {
         const jsonObjects = jsonData
@@ -35,17 +38,18 @@ const VeterinaryRecord = () => {
               : "{" + json + "}"
           );
 
-        const clients = jsonObjects.flatMap((json, index) => {
+        const clientsData = jsonObjects.flatMap((json, index) => {
           try {
             const parsedResult = JSON.parse(json);
-            return parsedResult.payload || { key: index }; // Add a unique key property
+            return parsedResult.payload || [];
           } catch (jsonError) {
             console.error("Error parsing JSON:", jsonError);
             return null;
           }
         });
-        console.log(clients);
-        setClients(clients);
+
+        // console.log(clientsData);
+        setClients(clientsData);
       } catch (splitError) {
         console.error("Error splitting JSON:", splitError);
       }
@@ -85,7 +89,7 @@ const VeterinaryRecord = () => {
               : "{" + json + "}"
           );
 
-        const appointments = jsonObjects.flatMap((json) => {
+        const appointmentsData = jsonObjects.flatMap((json) => {
           try {
             const parsedResult = JSON.parse(json);
             return parsedResult.payload || [];
@@ -95,7 +99,7 @@ const VeterinaryRecord = () => {
           }
         });
 
-        setAppointments(appointments);
+        setAppointments(appointmentsData);
       } catch (splitError) {
         console.error("Error splitting JSON:", splitError);
       }
@@ -125,21 +129,223 @@ const VeterinaryRecord = () => {
     { title: "Contact Number", dataIndex: "contact_no", key: "contact_no" },
     { title: "Address", dataIndex: "address", key: "address" },
     { title: "Email", dataIndex: "email", key: "email" },
-    // add button
+    {
+      title: "Account Status",
+      dataIndex: "is_verified",
+      key: "is_verified",
+      render: (text, record) => <p>{text ? "Verified" : "Not Verified"}</p>,
+    },
     {
       title: "Action",
       dataIndex: "action",
-      key: "action",
+      render: (text, record, index) => (
+        <Button
+          type="primary"
+          key={index}
+          onClick={() => {
+            handleViewClientsDataClick(record);
+          }}
+        >
+          View
+        </Button>
+      ),
     },
   ];
+  const VetRecordColumns = [
+    { title: "Date", dataIndex: "date", key: "date" },
+    { title: "Vet on Duty", dataIndex: "vet_on_duty", key: "vet_on_duty" },
+    { title: "Body Weight", dataIndex: "body_wt", key: "body_wt" },
+    { title: "Temperature", dataIndex: "temp", key: "temp" },
+
+    {
+      title: "Complaint History",
+      dataIndex: "complaint_history",
+      key: "complaint_history",
+    },
+    {
+      title: "Diagnostic Tool",
+      dataIndex: "diagnostic_tool",
+      key: "diagnostic_tool",
+    },
+    {
+      title: "Laboratory Findings",
+      dataIndex: "laboratory_findings",
+      key: "laboratory_findings",
+    },
+    {
+      title: "General Assessment",
+      dataIndex: "general_assessment",
+      key: "general_assessment",
+    },
+    {
+      title: "Medication Treatment",
+      dataIndex: "medication_treatment",
+      key: "medication_treatment",
+    },
+    { title: "Remarks", dataIndex: "remarks", key: "remarks" },
+    {
+      title: "Next Follow-up Checkup",
+      dataIndex: "next_followup_checkup",
+      key: "next_followup_checkup",
+    },
+    {
+      title: "Action",
+      dataIndex: "print",
+      key: "print",
+      render: (text, record) => (
+        <Button type="primary" onClick={() => handlePrint(record)}>
+          Print
+        </Button>
+      ),
+    },
+  ];
+  useEffect(() => {
+    if (selectedClient) {
+      getVeterinaryRecord(selectedClient.id);
+    }
+  }, [selectedClient /* other dependencies */]);
+
+  const handlePrint = () => {
+    // Use vetRecord directly instead of mapping it to printableData
+    const printableData = vetRecord;
+
+    console.log(printableData);
+
+    // Open a new window for printing
+    const printWindow = window.open("", "_blank");
+
+    // Construct the HTML content for printing
+    const printContent = `
+      <html>
+        <head>
+          <title>Veterinary Records</title>
+          <!-- Add any additional styles if needed -->
+          <style>
+            body { font-family: Arial, sans-serif; }
+            table { border-collapse: collapse; width: 100%; }
+            th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
+            th { background-color: #f2f2f2; }
+          </style>
+        </head>
+        <body>
+          <h1>Selected Veterinary Records</h1>
+          <table>
+            <thead>
+              <tr>
+                <th>Date</th>
+                <th>Vet on Duty</th>
+                <!-- Add other table headers as needed -->
+              </tr>
+            </thead>
+            <tbody>
+              ${printableData
+                .map(
+                  (record) => `
+                  <tr>
+                    <td>${record.date}</td>
+                    <td>${record.vet_on_duty}</td>
+                    <!-- Add other table data as needed -->
+                  </tr>
+                `
+                )
+                .join("")}
+            </tbody>
+          </table>
+        </body>
+      </html>
+    `;
+
+    // Set the HTML content to the new window
+    printWindow.document.open();
+    printWindow.document.write(printContent);
+    printWindow.document.close();
+
+    // Trigger the print dialog
+    printWindow.print();
+  };
+
+  // Update printableRecords whenever vetRecord is updated
+  useEffect(() => {
+    setPrintableRecords(vetRecord);
+  }, [vetRecord]);
+
+  const handleViewClientsDataClick = async (client) => {
+    try {
+      setSelectedClient(client);
+      await getVeterinaryRecord(client.id);
+      setRecordModalVisible(true);
+      setVetRecord((prevVetRecord) => [...prevVetRecord]);
+    } catch (error) {
+      console.error("Error fetching veterinary record:", error);
+      setVetRecord([]);
+      setVetRecordError(error);
+    }
+  };
+
+  const handleRecordModalCancel = () => {
+    setRecordModalVisible(false);
+    setSelectedAppointment(null);
+  };
+
+  const getVeterinaryRecord = async (user_id) => {
+    try {
+      const response = await fetch(
+        `http://localhost/api/get_vet_record_admin/${user_id}`
+      );
+
+      if (!response.ok) {
+        // Check specifically for 404 status and handle it as a non-error
+        if (response.status === 404) {
+          // console.log(`No data found for user with ID ${user_id}`);
+          setVetRecord([]); // Set the state to an empty array
+          return; // Return early without throwing an error
+        } else {
+          throw new Error(`Failed to fetch data: ${response.status}`);
+        }
+      } else {
+        const textData = await response.text();
+
+        try {
+          const jsonObjects = textData
+            .split("}{")
+            .map((json, index, array) =>
+              index === 0
+                ? json + "}"
+                : index === array.length - 1
+                ? "{" + json
+                : "{" + json + "}"
+            );
+
+          const vetRecordData = jsonObjects.flatMap((json) => {
+            try {
+              const parsedResult = JSON.parse(json);
+              return parsedResult.payload || [];
+            } catch (jsonError) {
+              console.error("Error parsing JSON:", jsonError);
+              return [];
+            }
+          });
+
+          console.log(vetRecordData);
+          setVetRecord(vetRecordData);
+        } catch (jsonError) {
+          console.error("Error parsing JSON:", jsonError);
+          setVetRecord([]); // Clear the state in case of an error
+        }
+      }
+    } catch (error) {
+      console.error("Error fetching data:", error.message);
+      setVetRecord([]); // Clear the state in case of an error
+    }
+  };
 
   const mappedAppointments = appointments.map(mapAppointmentData);
 
-  const mapDataSource = (appointment) => {
+  const mapDataSource = (appointment, index) => {
     const isAM = moment(appointment.start).format("A") === "AM";
 
     return {
-      key: appointment.t1_id,
+      key: index,
       fullName: `${appointment.fname} ${appointment.lname}`,
       contactNumber: appointment.contact_no,
       address: appointment.address,
@@ -312,26 +518,51 @@ const VeterinaryRecord = () => {
       </TabPane>
       <TabPane tab="Client Records" key="2">
         <h1>Client Records</h1>
-        <Table
-          dataSource={clients}
-          columns={ClientsColumns}
-          pagination={false}
-          style={{ marginTop: 20 }}
-          rowKey={(record) => record.key} // Ensure each row has a unique key
-        />
+        {clients.length > 0 && (
+          <Table
+            dataSource={clients}
+            columns={ClientsColumns}
+            style={{ marginTop: 20 }}
+            rowKey={(record) => record.id}
+          />
+        )}
       </TabPane>
     </Tabs>
   );
 
   const renderModal = () => (
-    <AppointmentDetailsModal
-      modalVisible={modalVisible}
-      handleModalCancel={handleModalCancel}
-      form={form}
-      handleSubmit={handleSubmit}
-      selectedAppointment={selectedAppointment}
-      Option={Option}
-    />
+    <>
+      <AppointmentDetailsModal
+        modalVisible={modalVisible}
+        handleModalCancel={handleModalCancel}
+        form={form}
+        handleSubmit={handleSubmit}
+        selectedAppointment={selectedAppointment}
+        Option={Option}
+      />
+
+      <Modal
+        // other properties
+        visible={recordModalVisible}
+        onCancel={handleRecordModalCancel}
+        onOk={() => setRecordModalVisible(false)}
+        width={1600}
+      >
+        <h1>Veterinary Record</h1>
+        {vetRecord.length > 0 ? (
+          <Table
+            dataSource={vetRecord}
+            columns={VetRecordColumns}
+            style={{ marginTop: 20 }}
+            rowKey={(record, index) => `${record.t3_id}_${index}`}
+          />
+        ) : vetRecordError ? (
+          <p>Error fetching veterinary record: {vetRecordError.message}</p>
+        ) : (
+          <p>No veterinary record found.</p>
+        )}
+      </Modal>
+    </>
   );
 
   return (

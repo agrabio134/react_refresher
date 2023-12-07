@@ -50,10 +50,10 @@ const AdminDashboardLayout = ({ children }) => {
               Dashboard
             </Link>
           </Menu.Item>
-          <Menu.Item key="2" className="menu-item-text">
-            <Link to="/admin/users" className="menu-item-link">
-              <UserOutlined className="menu-item-icon" />
-              Users
+          <Menu.Item key="4" className="menu-item-text">
+            <Link to="/admin/records" className="menu-item-link">
+              <HistoryOutlined   className="menu-item-icon" />
+              Records
             </Link>
           </Menu.Item>
           <Menu.Item key="3" className="menu-item-text">
@@ -62,12 +62,7 @@ const AdminDashboardLayout = ({ children }) => {
               Calendar
             </Link>
           </Menu.Item>
-          <Menu.Item key="4" className="menu-item-text">
-            <Link to="/admin/records" className="menu-item-link">
-              <HistoryOutlined   className="menu-item-icon" />
-              Records
-            </Link>
-          </Menu.Item>
+        
 
           <Menu.Item key="5" className="menu-item-text">
             <Link to="/admin/content" className="menu-item-link">
