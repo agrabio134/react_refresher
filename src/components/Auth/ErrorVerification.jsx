@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react';
 
+import "./Style/errorverification.css";
+
 const AlreadyVerifiedComponent = () => {
     const [seconds, setSeconds] = useState(5);
 
@@ -19,8 +21,12 @@ const AlreadyVerifiedComponent = () => {
     }, [seconds]);
 
     return (
+        <section className='main-error-verification-container'>
         <div style={{
+            position:'fixed',
+            zIndex: '3',
             fontFamily: 'Arial, sans-serif',
+            backgroundColor : 'red',
             display: 'flex',
             flexDirection: 'column',
             alignItems: 'center',
@@ -35,6 +41,7 @@ const AlreadyVerifiedComponent = () => {
             <p>You are already verified. Redirecting to your profile page...</p>
             <div className="countdown" id="countdown"></div>
         </div>
+        </section>
     );
 };
 

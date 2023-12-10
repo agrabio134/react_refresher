@@ -27,8 +27,8 @@ const ServicePage = () => {
 
                   <div className="service_content">
                   <i className="fa-solid fa-house-chimney-medical"></i>
-                      <h5>Boarding/Daycare</h5>
-                      <p>Safe and comfortable facilities for pets when you're away, providing proper care, feeding, and playtime.</p>
+                      <h5>Deworming</h5>
+                      <p>Say goodbye to unwanted guests with our expert deworming treatments.</p>
                   </div>
                   {/* <div className="service_content">
                   <i className="fa-solid fa-paw"></i>

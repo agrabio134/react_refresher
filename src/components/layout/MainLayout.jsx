@@ -91,7 +91,7 @@ const MainLayout = () => {
               </Link>
               <Link to="blogs" className="nav_list">
                 News & Announcements
-              </Link>
+              </Link> 
             </div>
 
             <div className="header_auth_container">

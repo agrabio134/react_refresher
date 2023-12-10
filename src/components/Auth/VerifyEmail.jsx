@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
+import "./Style/verifyemail.css";
 
 const VerifyEmail = () => {
   const [emailAddress, setEmailAddress] = useState("");
@@ -45,7 +46,11 @@ const VerifyEmail = () => {
 
 
   return (
-    <div>
+    <section className="main-verify-email-container">
+
+      <div className="whole-verify-email-container">
+      <img src="/src/assets/img/LGHD.png" alt="" />
+    <div className="verify-email-container">
       <h1>Please Verify your email address</h1>
       <p>
         {" "}
@@ -65,6 +70,8 @@ const VerifyEmail = () => {
       <p>Still can't find it? Click the button below to resend the email.</p>
       <button>Resend Email</button>
     </div>
+    </div>
+    </section>
   );
 };
 

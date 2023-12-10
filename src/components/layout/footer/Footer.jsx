@@ -24,18 +24,18 @@ const FooterPage = () => {
                     <h1>Contact Us</h1>
                     <div className="contacus-details">
                     <i className="fa-solid fa-envelope"></i>
-                    <h6>happypaws@example.com</h6>
+                    <h6>happypawsolongapo@gmail.com</h6>
                     </div>
                     <div className="contacus-details">
                     <i className="fa-solid fa-phone-volume"></i>
-                    <h6>094-2666-666</h6>
+                    <h6>+63 923-960-1739</h6>
                     </div>
                     </div>
 
                     <div className="followus-content">
                     <h1>Follow Us</h1>
                     <div className="followus-icon">
-                        <i className="fa-brands fa-square-facebook"></i>
+                        <a href="https://web.facebook.com/olongapocentral" className="fa-brands fa-square-facebook"></a>
                         <i className="fa-brands fa-x-twitter"></i>
                         <i className="fa-brands fa-instagram"></i>
                     </div>
@@ -43,7 +43,7 @@ const FooterPage = () => {
 
                 </div>
                 <div className="copyrigt-content">
-                    <h6>Copyright © [Year] Happy Paws. All Rights Reserved.</h6>
+                    <h6>Copyright © 2023 Happy Paws. All Rights Reserved. Power</h6>
                 </div>
             </div>
       </section>

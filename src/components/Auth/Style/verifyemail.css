@@ -1,0 +1,66 @@
+.main-verify-email-container {
+    position: fixed;
+    z-index: 3;
+    background: url(../../../assets/img/wave5.png);
+	background-size: cover;
+  background-color: white;
+	background-position: center;
+	background-repeat: no-repeat;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.whole-verify-email-container {
+    margin-top: 25px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+}
+
+.whole-verify-email-container img {
+    width: 30vh;
+    height: auto;
+}
+
+
+.verify-email-container {
+    text-align: center;
+    width: 50%;
+    height: 30%;
+}
+
+.verify-email-container h1 {
+    font-size: 40px;
+    font-family: 'montserrat';
+    font-weight: bold;
+}
+
+.verify-email-container h3 {
+    font-size: 24px;
+    font-family: 'montserrat';
+    font-weight: 500;
+}
+
+.verify-email-container p {
+    color: black;
+    font-size: 16px;
+    font-family: 'Franklin Gothic Light';
+}
+
+.verify-email-container button {
+    margin-top: 5px;
+font-family: 'montserrat';  
+font-weight: bold;
+padding: 13px 20px;
+color: #fff;
+text-transform: uppercase;
+letter-spacing: 2px;
+font-weight: bold;
+background-color: #FF5C17;
+cursor: pointer;
+transition: opacity 0.4s;
+}

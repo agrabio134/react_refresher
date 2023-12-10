@@ -47,8 +47,8 @@ const AdminCalendarPage = () => {
             index === 0
               ? json + "}"
               : index === array.length - 1
-              ? "{" + json
-              : "{" + json + "}"
+                ? "{" + json
+                : "{" + json + "}"
           );
 
         const appointments = jsonObjects.flatMap((json) => {
@@ -74,6 +74,7 @@ const AdminCalendarPage = () => {
     // Handle date click as needed
     // setShowAppointmentForm(true);
   };
+  
 
   // Map your data to include start and end fields
   const mappedAppointments = appointments.map((appointment) => {
@@ -215,6 +216,59 @@ const AdminCalendarPage = () => {
     }
   };
 
+  const handleDone = () => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: false,
+      confirmButtonColor: "#3085d6",
+      confirmButtonText: "Yes, done it!",
+      showDenyButton: true,
+      denyButtonColor: "#d33",
+      denyButtonText: "No, cancel!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        Swal.fire("Done!", "Your file has been done.", "success");
+        handleConfirmDone();
+        window.location.reload();
+      }
+    });
+  };
+
+
+  const handleConfirmDone = async () => {
+    const id = selectedEvent.t1_id;
+    try {
+      const response = await fetch(
+        `http://localhost/api/done_appointment_admin/${id}`,
+        {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ id }),
+        }
+      );
+      if (!response.ok) {
+        throw new Error(`Failed to fetch data: ${response.status}`);
+      } else {
+        console.log("Success", response);
+      }
+      window.location.reload();
+      Swal.fire("Done!", "Your file has been done.", "success");
+      handleConfirmDone();
+
+
+    } catch (error) {
+      console.error("Error fetching data:", error.message);
+
+    }
+  };
+
+
+    
+    
   return (
     <div className="admin-calendar-page">
       <h1>Admin Calendar Page</h1>
@@ -296,8 +350,25 @@ const AdminCalendarPage = () => {
                 </Button>
               </div>
             )}
+
             
-          
+            {selectedEvent.status === "accepted" && (
+              <div>
+                <Button
+                  onClick={handleDone}
+                  style={{ marginTop: 10, marginRight: 10 }}
+                >
+                  Done
+                </Button>
+              </div>
+            )}
+             
+
+            
+
+
+
+
           </div>
         )}
       </Modal>

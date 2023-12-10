@@ -56,7 +56,7 @@ const BlogPage = () => {
           <ul className='blog-breadcrumbs'>
           <a href="">Home </a>
           <li href="">/</li>
-          <a href="">News</a>
+          <a href="">News </a>
           </ul>
         </div>
     </div>

@@ -78,6 +78,18 @@
     color: #fff;;
 }
 
+.profile-img {
+    margin: 30px;
+    display: flex;
+    justify-content: center;
+}
+
+.profile-img img {
+    width: 50vh;
+    height: auto;
+    border-radius: 100%;
+}
+
 @media screen and (max-width: 768px) {
 
     .main-add-pet-form-container {

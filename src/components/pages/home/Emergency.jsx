@@ -14,7 +14,7 @@ const EmergencyPage = () => {
             </div>
             <h5>With access to 24 hour emergency assistance.
                   </h5>
-          <p>Happy Paws helps our customers by providing complete access 24/7. This continual availability proves to be a helpful tool for pet owners who may require emergency services or supplies for their cherished animals beyond typical operating hours. Our website's easy-to-use interface empowers customers to navigate effortlessly, ensuring convenience in addressing any immediate needs for their pets.
+          <p>Happy Paws helps our customers by providing complete access 24/7, emergency hours start from 6:01 PM to 7:59 AM. This continual availability proves to be a helpful tool for pet owners who may require emergency services or supplies for their cherished animals beyond typical operating hours. We ensure convenience in addressing any immediate needs for their pets.
                   </p>
             
 

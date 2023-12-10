@@ -19,17 +19,19 @@ const AboutPage = () => {
                               <li>Thursday :</li>
                               <li>Friday :</li>
                               <li>Saturday :</li>
+                              <li>Sunday :</li>
                            </ul>
                         </li>
                         <li>
                            <ul>
-                              <li>08.00 - 10.00</li>
-                              <li>08.00 - 10.00</li>
-                              <li>08.00 - 10.00</li>
-                              <li>08.00 - 10.00</li>
-                              <li>08.00 - 10.00</li>
-                              <li>08.00 - 10.00</li>
-                              <li>08.00 - 10.00</li>
+                              <li>8:00 AM - 6:00 PM</li>
+                              <li>8:00 AM - 6:00 PM</li>
+                              <li>8:00 AM - 6:00 PM</li>
+                              <li>8:00 AM - 6:00 PM</li>
+                              <li>8:00 AM - 6:00 PM</li>
+                              <li>8:00 AM - 6:00 PM</li>
+                              <li>8:00 AM - 6:00 PM</li>
+                              <li>8:00 AM - 6:00 PM</li>
                            </ul>
                         </li>
                      </ul>

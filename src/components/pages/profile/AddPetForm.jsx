@@ -75,8 +75,21 @@ const AddPetForm = ({
 
   return (
     <div className="main-add-pet-form-container">
+      
       <h2>Add Pet</h2>
+      
       <div className="add-pet-separator"></div>
+      <div className="profile-img">
+      {thumbnailPreview && (
+            <img
+              src={thumbnailPreview}
+              alt="Thumbnail Preview"
+              style={{ maxWidth: "100px", maxHeight: "100px" }}
+            />
+          )}
+      </div>
+
+      
       <form
         className="main-form-body-container"
         onSubmit={(e) => {
@@ -85,6 +98,13 @@ const AddPetForm = ({
         }}
       >
         <div className="add-pet-grid-form">
+          
+                  <div className="add-pet-form">
+          <label>
+            <h1>Profile Image:</h1>
+            <input type="file" accept="image/*" onChange={handleFileInput} />
+          </label>
+        </div>
           <div className="add-pet-form">
             <label>
               <h1>Name:</h1>
@@ -146,19 +166,7 @@ const AddPetForm = ({
             </label>
           </div>
 
-        <div className="add-pet-form">
-          <label>
-            <h1>Profile Image:</h1>
-            <input type="file" accept="image/*" onChange={handleFileInput} />
-          </label>
-          {thumbnailPreview && (
-            <img
-              src={thumbnailPreview}
-              alt="Thumbnail Preview"
-              style={{ maxWidth: "100px", maxHeight: "100px" }}
-            />
-          )}
-        </div>
+
         </div>
         <button onClick={() => setUploading(true)} disabled={uploading}>
           {uploading ? "Uploading..." : "Add Pet"}
