@@ -22,8 +22,8 @@ function App() {
           <Router>
             <Routes>
               <Route path="/*" element={<BackOfficePage />} />
-              <Route path="/login/*" element={<LoginPage />} />
-              <Route path="/signup/*" element={<SignupPage />} />
+              <Route path="/admin/login/*" element={<LoginPage />} />
+              <Route path="/admin/signup/*" element={<SignupPage />} />
             </Routes>
           </Router>
         </AdminAuthProvider>
