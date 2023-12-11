@@ -102,7 +102,7 @@ const LoginPage = () => {
 
       <section className="login-main-container mobile-login-main-container">   
       <div className="side">
-      <img src="/src/assets/img/LGHD.png" alt="" />
+      <img src="/page/LGHD.png" alt="" />
       </div>
         <div className="main-user-login-container">
         <p className="login-title mobile-title">Welcome!</p>
@@ -148,7 +148,7 @@ const LoginPage = () => {
 
             </div>              
             <input type="submit" value="Login" className="btn1" />
-            <a href="http://localhost:5173/auth/signup" className="dnthave">Don’t have an account? Sign up</a>
+            <a href="/auth/signup" className="dnthave">Don’t have an account? Sign up</a>
           </form>
           </div>
 
