@@ -33,6 +33,14 @@ const PetTable = ({ petList, handleUpdatePet, handleDeletePet }) => {
       setFile(info.file.originFileObj);
       setFilename(info.file.name);
       setThumbnailPreview(info.file.thumbUrl);
+
+      if (info.file.originFileObj) {
+        const reader = new FileReader();
+        reader.onloadend = () => {
+          setThumbnailPreview(reader.result);
+        };
+        reader.readAsDataURL(info.file.originFileObj);
+      }
     }
     // Handle other file status if needed
   };
@@ -57,7 +65,9 @@ const PetTable = ({ petList, handleUpdatePet, handleDeletePet }) => {
         imageUrl = await getDownloadURL(storageRef);
       }
 
-      const birthdate = new Date(selectedPet.birthdate).toISOString().split('T')[0];
+      const birthdate = new Date(selectedPet.birthdate)
+        .toISOString()
+        .split("T")[0];
 
       const updateData = {
         name: selectedPet.name,
@@ -92,7 +102,6 @@ const PetTable = ({ petList, handleUpdatePet, handleDeletePet }) => {
       console.error("Error updating pet:", error);
     }
   };
-
 
   return (
     <>
@@ -212,34 +221,92 @@ const PetTable = ({ petList, handleUpdatePet, handleDeletePet }) => {
         {selectedPet && (
           <Form layout="vertical">
             <Item label="Image">
-              <Image
-                width={200}
-                src={selectedPet.image}
-                alt={selectedPet.name}
-              />
+              {thumbnailPreview ? (
+                <Image
+                  width={200}
+                  src={thumbnailPreview}
+                  alt={selectedPet.name}
+                />
+              ) : (
+                <Image
+                  width={200}
+                  src={selectedPet.image}
+                  alt={selectedPet.name}
+                />
+              )}
             </Item>
             <Item label="Image File">
-              <Upload
-                customRequest={({ file, onSuccess, onError }) => {
-                  const storageRef = ref(storage, `petImages/${file.name}`);
-                  const uploadTask = uploadBytesResumable(storageRef, file);
+            <Upload
+      customRequest={async ({ file, onSuccess, onError }) => {
+        try {
+          const storageRef = ref(storage, `petImages/${file.name}`);
+          const uploadTask = uploadBytesResumable(storageRef, file);
 
-                  uploadTask
-                    .then(() => getDownloadURL(storageRef))
-                    .then((url) => {
-                      onSuccess();
-                      setDownloadURL(url);
-                    })
-                    .catch((error) => {
-                      onError(error);
-                      console.error("File upload failed:", error);
-                    });
-                }}
-                onChange={handleFileInputChange}
-                showUploadList={false}
-              >
-                <Button icon={<UploadOutlined />}>Upload File</Button>
-              </Upload>
+          await uploadTask;
+
+          const url = await getDownloadURL(storageRef);
+          setDownloadURL(url);
+
+          onSuccess();
+
+          // Display success message using SweetAlert
+          Swal.fire({
+            title: "Success!",
+            text: "File uploaded successfully.",
+            icon: "success",
+            confirmButtonText: "OK",
+          });
+        } catch (error) {
+          onError(error);
+          console.error("File upload failed:", error);
+
+          // Display error message using SweetAlert
+          Swal.fire({
+            title: "Error!",
+            text: "File upload failed. Please try again.",
+            icon: "error",
+            confirmButtonText: "OK",
+          });
+        }
+      }}
+      beforeUpload={(file) => {
+        const maxSize = 5 * 1024 * 1024; // 5 MB
+        const allowedFormats = ["image/jpeg", "image/png", "image/gif"];
+
+        if (file.size > maxSize) {
+          const errorMessage = `File size must be smaller than ${
+            maxSize / 1024 / 1024
+          } MB!`;
+          // Display error message using SweetAlert
+          Swal.fire({
+            title: "Error!",
+            text: errorMessage,
+            icon: "error",
+            confirmButtonText: "OK",
+          });
+
+          return false;
+        }
+
+        if (!allowedFormats.includes(file.type.toLowerCase())) {
+          const errorMessage = "Only JPEG, PNG, and GIF formats are allowed!";
+          // Display error message using SweetAlert
+          Swal.fire({
+            title: "Error!",
+            text: errorMessage,
+            icon: "error",
+            confirmButtonText: "OK",
+          });
+          return false;
+        }
+
+        return true;
+      }}
+      onChange={handleFileInputChange}
+      showUploadList={false}
+    >
+      <Button icon={<UploadOutlined />}>Upload File</Button>
+    </Upload>
             </Item>
             <Item label="Name">
               <Input
