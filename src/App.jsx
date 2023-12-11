@@ -1,3 +1,4 @@
+// App.js
 import React from "react";
 import { AuthProvider } from "./components/Auth/AuthContext";
 import MainLayout from "./components/layout/MainLayout";
@@ -12,14 +13,13 @@ import SignupPage from "./components/admin/auth/SignupPage";
 import { AdminAuthProvider } from "./components/admin/auth/AdminAuthContext";
 
 function App() {
-  // Manually specify the base URL
   const isBackOffice = window.location.pathname.startsWith("/admin");
 
   return (
     <AuthProvider>
       {isBackOffice ? (
         <AdminAuthProvider>
-          <Router basename="/admin">
+          <Router>
             <Routes>
               <Route path="/*" element={<BackOfficePage />} />
               <Route path="/login/*" element={<LoginPage />} />
