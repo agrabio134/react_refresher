@@ -152,6 +152,7 @@ const VeterinaryRecord = () => {
     },
   ];
   const VetRecordColumns = [
+    { title: "id", dataIndex: "t1_id", key: "t1_id" },
     { title: "Date", dataIndex: "date", key: "date" },
     { title: "Vet on Duty", dataIndex: "vet_on_duty", key: "vet_on_duty" },
     { title: "Body Weight", dataIndex: "body_wt", key: "body_wt" },
@@ -193,7 +194,7 @@ const VeterinaryRecord = () => {
       dataIndex: "print",
       key: "print",
       render: (text, record) => (
-        <Button type="primary" onClick={() => handlePrint(record)}>
+        <Button type="primary" onClick={() => handlePrint(record.t1_id)}>
           Print
         </Button>
       ),
@@ -205,9 +206,10 @@ const VeterinaryRecord = () => {
     }
   }, [selectedClient /* other dependencies */]);
 
-  const handlePrint = () => {
-    // Use vetRecord directly instead of mapping it to printableData
-    const printableData = vetRecord;
+  const handlePrint = (targetId) => {
+    const printableData = vetRecord.filter(
+      (record) => record.t1_id === targetId
+    );
 
     console.log(printableData);
 
@@ -216,43 +218,202 @@ const VeterinaryRecord = () => {
 
     // Construct the HTML content for printing
     const printContent = `
-      <html>
-        <head>
-          <title>Veterinary Records</title>
-          <!-- Add any additional styles if needed -->
-          <style>
-            body { font-family: Arial, sans-serif; }
-            table { border-collapse: collapse; width: 100%; }
-            th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
-            th { background-color: #f2f2f2; }
-          </style>
-        </head>
-        <body>
-          <h1>Selected Veterinary Records</h1>
-          <table>
-            <thead>
-              <tr>
-                <th>Date</th>
-                <th>Vet on Duty</th>
-                <!-- Add other table headers as needed -->
-              </tr>
-            </thead>
-            <tbody>
-              ${printableData
-                .map(
-                  (record) => `
-                  <tr>
-                    <td>${record.date}</td>
-                    <td>${record.vet_on_duty}</td>
-                    <!-- Add other table data as needed -->
-                  </tr>
-                `
-                )
-                .join("")}
-            </tbody>
-          </table>
-        </body>
-      </html>
+    <html>
+    <head>
+      <title>Veterinary Records</title>
+      <!-- Add any additional styles if needed -->
+      <style>
+        body {
+          font-family: Arial, sans-serif;
+          line-height: 1.6;
+        }
+  
+        .record-container {
+          margin-bottom: 20px;
+          border: 1px solid #ddd;
+          padding: 15px;
+        }
+  
+        h1 {
+          text-align: center;
+        }
+  
+        .info-box {
+          font-size: 18px;
+          font-weight: bold;
+          margin-bottom: 10px;
+        }
+  
+        .record-label {
+          font-weight: bold;
+          margin-bottom: 5px;
+        }
+  
+        .record-value {
+          margin-bottom: 15px;
+          margin-left: 20px;
+
+        }
+  
+        .date-picker {
+          width: 100%;
+          margin-bottom: 15px;
+        }
+  
+        .text-area {
+          width: 100%;
+          height: 100px;
+          margin-bottom: 15px;
+        }
+  
+        .hidden-input {
+          display: none;
+        }
+  
+        .submit-button {
+          margin-top: 15px;
+        }
+
+        .first_row {
+          display: flex;
+          flex-direction: row;
+          
+        }
+        .record_item {
+          display: flex;
+        }
+        .record_item_lab {
+          
+        }
+        .second_row {
+          margin-top: 20px;
+          margin-bottom: 30px;
+         
+        }
+        .third_row {
+          display: flex;
+          flex-direction: row;
+          margin-bottom: 30px;
+        }
+        .fourth_row {
+          margin-bottom: 30px;
+        }
+        .fifth_row {
+          display: flex;
+          flex-direction: row;
+          margin-bottom: 30px;
+        }
+        .sixth_row {
+          margin-bottom: 30px;
+        }
+        .client-info{
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+        }
+
+    
+      </style>
+    </head>
+    <body>
+      <h1>Veterinary Records</h1>
+      ${printableData
+        .map(
+          (record) => `
+          <div class="record-container">
+
+          <div class="client-info">
+            <div class="info-box">CLIENT NAME: ${record.fname} ${record.lname}</div>
+            <div class="info-box">CONTACT NO: ${record.contact_no}</div>
+
+            <div class="info-box">ADDRESS: ${record.address}</div>
+            <div class="info-box">BREED: ${record.breed}</div>
+
+            <div class="info-box">PETNAME: ${record.name}</div>
+            <div class="info-box">SEX: ${record.sex}</div>
+
+            <div class="info-box">DATE OF BIRTH: ${record.birthdate}</div>
+  
+          </div>
+  
+            <div class="first_row">
+            <div style="flex-grow: 2" class="record_item">
+            <div class="record-label">Date:</div>
+            <div class="record-value">${record.date}</div>
+            </div>
+            <div style="flex-grow: 2" class="record_item">
+            <div class="record-label">Vet on Duty:</div>
+            <div class="record-value">${record.vet_on_duty}</div>
+            </div>
+            <div style="flex-grow: 1" class="record_item">
+
+            <div class="record-label">Body Weight:</div>
+            <div class="record-value">${record.body_wt}</div>
+            </div>
+            <div style="flex-grow: 1" class="record_item">
+            <div class="record-label">Temperature:</div>
+            <div class="record-value">${record.temp}</div>
+            </div>
+
+            </div>
+
+            <div class="second_row">
+
+  
+            <div class="record-label">Complaint History:</div>
+            <div class="record-value">${record.complaint_history}</div>
+            </div>
+
+            <div class="third_row">
+
+            <div style="flex-grow: 2" class="record_item_lab">
+
+            <div class="record-label">Diagnostic Tool:</div>
+            <div class="record-value" >${record.diagnostic_tool}</div>
+            </div>
+            <div style="flex-grow: 2" class="record_item_lab">
+
+  
+            <div class="record-label">Laboratory Findings:</div>
+            <div class="record-value">${record.laboratory_findings}</div>
+            </div>
+            </div>
+
+            <div class="fourth_row">
+
+  
+            <div class="record-label">General Assessment:</div>
+            <div class="record-value">${record.general_assessment}</div>
+
+            </div>
+
+            <div class="fifth_row">
+
+            <div style="flex-grow: 2" class="record_item_lab">
+
+            <div class="record-label">Medication Treatment:</div>
+            <div class="record-value">${record.medication_treatment}</div>
+            </div>
+            <div style="flex-grow: 2" class="record_item_lab">
+  
+            <div class="record-label">Remarks:</div>
+            <div class="record-value">${record.remarks}</div>
+            </div>
+
+            </div>
+            <div class="sixth_row">
+  
+            <div class="record-label">Next Follow-up Checkup:</div>
+            <div class="record-value">${record.next_followup_checkup}</div>
+            </div>
+
+          </div>
+        `
+        )
+        .join("")}
+    </body>
+  </html>
+  
+  
     `;
 
     // Set the HTML content to the new window
