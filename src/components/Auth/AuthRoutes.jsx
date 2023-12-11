@@ -4,7 +4,7 @@ import { Routes, Route, Navigate } from "react-router-dom";
 
 import AuthLayout from "../../components/layout/AuthLayout";
 import LoginPage from "./pages/LoginPage";
-import SignupPage from "./pages/SignUpPage";
+import SignupPage from "./pages/SignupPage";
 
 const AuthRoutes = () => {
   return (
