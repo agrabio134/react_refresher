@@ -11,7 +11,7 @@ import {
 } from '@ant-design/icons';
 import Swal from 'sweetalert2';
 import { Link } from 'react-router-dom';
-import '../Styles/AdminLayout.css'; // Import the CSS file
+import '../styles/AdminLayout.css'; // Import the CSS file
 
 const { Sider, Content } = Layout;
 
