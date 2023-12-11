@@ -59,20 +59,20 @@ const AdminDashboardPage = () => {
   useEffect(() => {
     const fetchDataAndUpdateState = async () => {
       setUserCount(
-        (await fetchData("http://localhost/api/get_total_users")).length
+        (await fetchData("https://happypawsolongapo.com/api/get_total_users")).length
       );
       setGalleryCount(
-        (await fetchData("http://localhost/api/get_total_gallery")).length
+        (await fetchData("https://happypawsolongapo.com/api/get_total_gallery")).length
       );
       setBlogCount(
-        (await fetchData("http://localhost/api/get_total_blog_posts")).length
+        (await fetchData("https://happypawsolongapo.com/api/get_total_blog_posts")).length
       );
 
       const pendingAppointments = await fetchData(
-        "http://localhost/api/get_total_pending_appointments"
+        "https://happypawsolongapo.com/api/get_total_pending_appointments"
       );
       const scheduledAppointments = await fetchData(
-        "http://localhost/api/get_total_accepted_appointments"
+        "https://happypawsolongapo.com/api/get_total_accepted_appointments"
       );
 
       setPendingAppointmentCount(pendingAppointments.length);
@@ -81,11 +81,11 @@ const AdminDashboardPage = () => {
 
     fetchDataAndUpdateState();
     fetchBlogData(
-      "http://localhost/api/get_unpublished_blog_posts",
+      "https://happypawsolongapo.com/api/get_unpublished_blog_posts",
       setUnpublishedBlogPosts
     );
     fetchBlogData(
-      "http://localhost/api/get_published_blog_posts",
+      "https://happypawsolongapo.com/api/get_published_blog_posts",
       setPublishedBlogPosts
     );
   }, []); // Fix: Added dependency array
@@ -152,7 +152,7 @@ const AdminDashboardPage = () => {
 
     try {
       const response = await fetch(
-        `http://localhost/api/publish_blog_post/${blogPostId}`,
+        `https://happypawsolongapo.com/api/publish_blog_post/${blogPostId}`,
         {
           method: "PUT",
           headers: {
@@ -213,7 +213,7 @@ const AdminDashboardPage = () => {
       let blogPostId = blogPost.id;
       try {
         const response = await fetch(
-          `http://localhost/api/delete_blog_post/${blogPostId}`,
+          `https://happypawsolongapo.com/api/delete_blog_post/${blogPostId}`,
           {
             method: "DELETE",
             headers: {
@@ -266,7 +266,7 @@ const AdminDashboardPage = () => {
 
     try {
       const response = await fetch(
-        `http://localhost/api/unpublish_blog_post/${blogPostId}`,
+        `https://happypawsolongapo.com/api/unpublish_blog_post/${blogPostId}`,
         {
           method: "PUT",
           headers: {
@@ -358,9 +358,9 @@ const AdminDashboardPage = () => {
                   <button onClick={() => handlePublish(blogPost)}>
                     Publish
                   </button>
-                  <button className="edit" onClick={() => handleEdit(blogPost)}>
+                  {/* <button className="edit" onClick={() => handleEdit(blogPost)}>
                     Edit
-                  </button>
+                  </button> */}
 
                   <button
                     className="delete"
@@ -395,9 +395,9 @@ const AdminDashboardPage = () => {
                   >
                     Unpublished
                   </button>
-                  <button className="edit" onClick={() => handleEdit(blogPost)}>
+                  {/* <button className="edit" onClick={() => handleEdit(blogPost)}>
                     Edit
-                  </button>
+                  </button> */}
                 </div>
               </div>
             ))}

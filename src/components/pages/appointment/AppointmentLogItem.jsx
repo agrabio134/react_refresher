@@ -39,7 +39,7 @@ const AppointmentLogItem = ({ appointment, index }) => {
 
       const handleSubmitConfirmed =  async (appointment) =>{
         try {
-          const response = await fetch (`http://localhost/api/cancel_appointment/${appointment.id}`);
+          const response = await fetch (`https://happypawsolongapo.com/api/cancel_appointment/${appointment.id}`);
           if (response.status === 404){
             console.log("No Data Found");
             return;

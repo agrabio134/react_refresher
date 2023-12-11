@@ -30,7 +30,7 @@ const SignupPage = () => {
 
   const sendVerificationEmail = async () => {
     const response = await fetch(
-      "http://localhost/api/sent_verification_email/" + formData.email,
+      "https://happypawsolongapo.com/api/sent_verification_email/" + formData.email,
       {
         method: "POST",
         headers: {
@@ -46,7 +46,7 @@ const SignupPage = () => {
 
   const validatedSignup = async () => {
     try {
-      const response = await fetch("http://localhost/api/register", {
+      const response = await fetch("https://happypawsolongapo.com/api/register", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -89,7 +89,7 @@ const SignupPage = () => {
     // add useEffect to check if email already exists
 
     try {
-      const response = await fetch("http://localhost/api/users", {
+      const response = await fetch("https://happypawsolongapo.com/api/users", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

@@ -24,7 +24,7 @@ const VeterinaryRecord = () => {
   const [vetRecordError, setVetRecordError] = useState(null); // New state to store vet record fetching errors
   const fetchClientData = async () => {
     try {
-      const clientsResponse = await fetch("http://localhost/api/get_clients");
+      const clientsResponse = await fetch("https://happypawsolongapo.com/api/get_clients");
       const jsonData = await clientsResponse.text();
 
       try {
@@ -69,7 +69,7 @@ const VeterinaryRecord = () => {
   const fetchData = async () => {
     try {
       const response = await fetch(
-        "http://localhost/api/get_done_appointments_admin"
+        "https://happypawsolongapo.com/api/get_done_appointments_admin"
       );
 
       if (!response.ok) {
@@ -451,7 +451,7 @@ const VeterinaryRecord = () => {
   const getVeterinaryRecord = async (user_id) => {
     try {
       const response = await fetch(
-        `http://localhost/api/get_vet_record_admin/${user_id}`
+        `https://happypawsolongapo.com/api/get_vet_record_admin/${user_id}`
       );
 
       if (!response.ok) {
@@ -632,7 +632,7 @@ const VeterinaryRecord = () => {
       if (result.isConfirmed) {
         try {
           const response = await fetch(
-            "http://localhost/api/submit_vet_record_admin",
+            "https://happypawsolongapo.com/api/submit_vet_record_admin",
             {
               method: "POST",
               body: formData,

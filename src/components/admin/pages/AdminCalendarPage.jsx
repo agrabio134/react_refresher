@@ -30,7 +30,7 @@ const AdminCalendarPage = () => {
   const fetchData = async () => {
     try {
       const response = await fetch(
-        "http://localhost/api/get_appointments_admin"
+        "https://happypawsolongapo.com/api/get_appointments_admin"
       );
 
       if (!response.ok) {
@@ -152,7 +152,7 @@ const AdminCalendarPage = () => {
     const id = selectedEvent.t1_id;
     try {
       const response = await fetch(
-        `http://localhost/api/accept_appointment_admin/${id}`,
+        `https://happypawsolongapo.com/api/accept_appointment_admin/${id}`,
         {
           method: "PUT",
           headers: {
@@ -196,7 +196,7 @@ const AdminCalendarPage = () => {
     const id = selectedEvent.t1_id;
     try {
       const response = await fetch(
-        `http://localhost/api/decline_appointment_admin/${id}`,
+        `https://happypawsolongapo.com/api/decline_appointment_admin/${id}`,
         {
           method: "PUT",
           headers: {
@@ -241,7 +241,7 @@ const AdminCalendarPage = () => {
     const id = selectedEvent.t1_id;
     try {
       const response = await fetch(
-        `http://localhost/api/done_appointment_admin/${id}`,
+        `https://happypawsolongapo.com/api/done_appointment_admin/${id}`,
         {
           method: "PUT",
           headers: {

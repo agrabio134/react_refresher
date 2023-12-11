@@ -98,7 +98,7 @@ const AdminBlogSection = () => {
 
 
   useEffect(() => {
-    const apiUrl = "http://localhost/api/get_all_blog_posts";
+    const apiUrl = "https://happypawsolongapo.com/api/get_all_blog_posts";
     fetchBlogData(apiUrl, setBlogData);
 
     console.log(blogData);
@@ -168,7 +168,7 @@ const AdminBlogSection = () => {
         admin_id: admin_id,
       };
 
-      const UPLOAD_URL = "http://localhost/api/";
+      const UPLOAD_URL = "https://happypawsolongapo.com/api/";
 
       const blogPostResponse = await axios.post(
         `${UPLOAD_URL}/post_blog`,

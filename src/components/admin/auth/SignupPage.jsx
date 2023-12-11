@@ -26,7 +26,7 @@ const SignupPage = () => {
 
   const validatedSignup = async () => {
     try {
-      const response = await fetch("http://localhost/api/admin_register", {
+      const response = await fetch("https://happypawsolongapo.com/api/admin_register", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

@@ -23,7 +23,7 @@ const AppointmentLog = () => {
       const fetchAppointments = async () => {
         try {
           const response = await fetch(
-            `http://localhost/api/get_appointments/${userId}`
+            `https://happypawsolongapo.com/api/get_appointments/${userId}`
           );
 
           if (response.status === 404) {

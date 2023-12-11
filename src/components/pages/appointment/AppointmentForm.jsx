@@ -46,7 +46,7 @@ const AppointmentForm = () => {
       const formattedDate = date.toISOString().split("T")[0];
 
       const response = await fetch(
-        `http://localhost/api/get_available_time_slots/${formattedDate}`
+        `https://happypawsolongapo.com/api/get_available_time_slots/${formattedDate}`
       );
       const rawResponse = await response.text();
       const timeSlotsStartIndex = rawResponse.indexOf("[");
@@ -58,7 +58,7 @@ const AppointmentForm = () => {
       const parsedTimeSlots = JSON.parse(timeSlotsJSON);
 
       const bookedResponse = await fetch(
-        `http://localhost/api/get_booked_time_slots/${formattedDate}`
+        `https://happypawsolongapo.com/api/get_booked_time_slots/${formattedDate}`
       );
       const bookedTimeSlotsData = await bookedResponse.text();
       const bookedTimeSlotsStartIndex = bookedTimeSlotsData.indexOf("[");
@@ -92,7 +92,7 @@ const AppointmentForm = () => {
     try {
       const formattedDate = date.toISOString().split("T")[0];
       const response = await fetch(
-        `http://localhost/api/check_pending_appointment/${formattedDate}`
+        `https://happypawsolongapo.com/api/check_pending_appointment/${formattedDate}`
       );
       const data = await response.json();
       setHasPendingAppointment(data.hasPendingAppointment);
@@ -161,7 +161,7 @@ const AppointmentForm = () => {
 
     try {
       const response = await fetch(
-        `http://localhost/api/get_user_id/${authToken}`,
+        `https://happypawsolongapo.com/api/get_user_id/${authToken}`,
         {
           method: "GET",
         }
@@ -218,7 +218,7 @@ const AppointmentForm = () => {
 
       // console.log("petId:", petId);
       const response = await fetch(
-        `http://localhost/api/check_existing_appointment/${petId}/${date}`,
+        `https://happypawsolongapo.com/api/check_existing_appointment/${petId}/${date}`,
         {
           method: "GET",
         }
@@ -319,7 +319,7 @@ const AppointmentForm = () => {
       const appointmentResults = await Promise.all(
         appointments.map(async (appointment) => {
           const response = await fetch(
-            "http://localhost/api/create_appointments",
+            "https://happypawsolongapo.com/api/create_appointments",
             {
               method: "POST",
               headers: {
@@ -374,7 +374,7 @@ const AppointmentForm = () => {
     const userId = decodedToken ? decodedToken.user_id : null;
     try {
       const response = await fetch(
-        `http://localhost/api/get_user_pets/${userId}`
+        `https://happypawsolongapo.com/api/get_user_pets/${userId}`
       );
       const result = await response.text(); // Get the raw response as text
 

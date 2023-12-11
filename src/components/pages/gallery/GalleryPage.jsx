@@ -11,7 +11,7 @@ const GalleryPage = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch("http://localhost/api/get_gallery");
+        const response = await fetch("https://happypawsolongapo.com/api/get_gallery");
         const textData = await response.text();
 
         const jsonObjects = textData.split("}{").map((json, index, array) => {

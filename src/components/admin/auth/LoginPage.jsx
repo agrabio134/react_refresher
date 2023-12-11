@@ -26,7 +26,7 @@ const LoginPage = () => {
     console.log(values);
 
     try {
-      const response = await fetch("http://localhost/api/admin_login", {
+      const response = await fetch("https://happypawsolongapo.com/api/admin_login", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

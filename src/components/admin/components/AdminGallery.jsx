@@ -84,7 +84,7 @@ const AdminGallerySection = () => {
         image: downloadURL,
       };
 
-      const UPLOAD_URL = "http://localhost/api/";
+      const UPLOAD_URL = "https://happypawsolongapo.com/api/";
 
       const imagePostResponse = await axios.post(
         `${UPLOAD_URL}/post_image`,

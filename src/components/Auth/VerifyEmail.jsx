@@ -9,7 +9,7 @@ const VerifyEmail = () => {
   const userEmail = new URLSearchParams(location.search).get("email");
 
   useEffect(() => {
-    fetch("http://localhost/api/getEmail/" + userEmail)
+    fetch("https://happypawsolongapo.com/api/getEmail/" + userEmail)
       .then((response) => {
         if (!response.ok) {
           throw new Error("Network response was not ok");

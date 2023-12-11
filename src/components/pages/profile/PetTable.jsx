@@ -82,7 +82,7 @@ const PetTable = ({ petList, handleUpdatePet, handleDeletePet }) => {
       console.log("Update Request Data:", updateData);
 
       const response = await axios.put(
-        `http://localhost/api/update_pet/${selectedPet.id}`,
+        `https://happypawsolongapo.com/api/update_pet/${selectedPet.id}`,
         updateData
       );
 
