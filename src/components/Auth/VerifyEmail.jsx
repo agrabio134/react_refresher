@@ -68,7 +68,9 @@ const VerifyEmail = () => {
         such as your Spam folder.
       </p>
       <p>Still can't find it? Click the button below to resend the email.</p>
-      <button>Resend Email</button>
+      <button onClick={()=>{
+        window.location.reload();
+      }}>Resend Email</button>
     </div>
     </div>
     </section>

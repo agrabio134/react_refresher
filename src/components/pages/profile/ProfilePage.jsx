@@ -233,11 +233,11 @@ const ProfilePage = () => {
 
   const handleAddPet = async () => {
     if (petName === "" || petType === "" || petBreed === "" || petAge === "" || petSex === "" || petImageUrl === "") {
-      Swal.fire({
-        title: "Error",
-        text: "Please fill in all fields.",
-        icon: "error",
-      });
+      // Swal.fire({
+      //   title: "Error",
+      //   text: "Please fill in all fields.",
+      //   icon: "error",
+      // });
       return;
     }
     const petData = {

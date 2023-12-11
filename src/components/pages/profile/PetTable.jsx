@@ -1,34 +1,41 @@
-import React, { useState } from "react";
-import { Image, Button, Modal, Form, Input, Select } from "antd";
-import "./Style/PetTable.css";
+import { useState, useEffect } from "react";
+import { Image, Button, Modal, Form, Input, Upload } from "antd";
+import { UploadOutlined } from "@ant-design/icons";
+import { initializeApp } from "firebase/app";
+import {
+  getStorage,
+  ref,
+  uploadBytesResumable,
+  getDownloadURL,
+} from "firebase/storage";
+import axios from "axios";
+import firebaseConfig from "../../admin/config/FirebaseConfig";
 import {
   calculateAgeInMonths,
   calculateAgeInDays,
 } from "../utils/petAgeCalculation";
+import "./Style/PetTable.css";
+import Swal from "sweetalert2";
 
-const { Option } = Select;
+const { Item } = Form;
+const storage = getStorage(initializeApp(firebaseConfig));
 
 const PetTable = ({ petList, handleUpdatePet, handleDeletePet }) => {
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [selectedPet, setSelectedPet] = useState(null);
+  const [file, setFile] = useState(null);
+  const [thumbnailPreview, setThumbnailPreview] = useState(null);
+  const [filename, setFilename] = useState("");
+  const [downloadURL, setDownloadURL] = useState(null);
 
-  const columns = [
-    // ... other columns
-    {
-      title: "Actions",
-      key: "actions",
-      render: (_, record) => (
-        <span>
-          <Button type="link" onClick={() => handleEditPet(record)}>
-            Edit
-          </Button>
-          <Button type="link" onClick={() => handleDeletePet(record.id)}>
-            Delete
-          </Button>
-        </span>
-      ),
-    },
-  ];
+  const handleFileInputChange = (info) => {
+    if (info.file.status === "done" || info.file.status === "error") {
+      setFile(info.file.originFileObj);
+      setFilename(info.file.name);
+      setThumbnailPreview(info.file.thumbUrl);
+    }
+    // Handle other file status if needed
+  };
 
   const handleEditPet = (pet) => {
     setSelectedPet(pet);
@@ -39,11 +46,54 @@ const PetTable = ({ petList, handleUpdatePet, handleDeletePet }) => {
     setIsModalVisible(false);
   };
 
-  const handleUpdate = () => {
-    // Handle update logic here
-    setIsModalVisible(false);
-    handleUpdatePet(selectedPet.id);
+  const handleUpdate = async () => {
+    try {
+      let imageUrl = selectedPet.image;
+
+      if (file) {
+        const storageRef = ref(storage, `petImages/${file.name}`);
+        const uploadTask = uploadBytesResumable(storageRef, file);
+        await uploadTask;
+        imageUrl = await getDownloadURL(storageRef);
+      }
+
+      const birthdate = new Date(selectedPet.birthdate).toISOString().split('T')[0];
+
+      const updateData = {
+        name: selectedPet.name,
+        type: selectedPet.type,
+        breed: selectedPet.breed,
+        birthdate: birthdate, // Modify this accordingly
+        sex: selectedPet.sex, // Add this line
+        image: imageUrl,
+        // Add other fields as needed
+      };
+
+      console.log("Update Request Data:", updateData);
+
+      const response = await axios.put(
+        `http://localhost/api/update_pet/${selectedPet.id}`,
+        updateData
+      );
+
+      console.log("Update Response Data:", response.data);
+
+      setIsModalVisible(false);
+
+      Swal.fire({
+        title: "Success!",
+        text: "Pet updated successfully!",
+        icon: "success",
+        confirmButtonText: "OK",
+      }).then(() => {
+        window.location.reload();
+      });
+    } catch (error) {
+      console.error("Error updating pet:", error);
+    }
   };
+
+
   return (
     <>
       <div className="main-pet-table-container">
@@ -53,6 +103,8 @@ const PetTable = ({ petList, handleUpdatePet, handleDeletePet }) => {
           <table className="whole-pet-table">
             <thead>
               <tr>
+                <th>#</th>
+                <th>Image</th>
                 <th>Name</th>
                 <th>Type</th>
                 <th>Breed</th>
@@ -64,6 +116,18 @@ const PetTable = ({ petList, handleUpdatePet, handleDeletePet }) => {
               {petList && petList.length > 0 ? (
                 petList.map((pet) => (
                   <tr className="pet-item" key={pet.id}>
+                    <td className="pet-number-column">
+                      {petList.indexOf(pet) + 1}
+                    </td>
+                    <td className="pet-image-column">
+                      {" "}
+                      <Image
+                        src={`${pet.image}`}
+                        alt={pet.image}
+                        width={100}
+                        height={100}
+                      />
+                    </td>
                     <td className="pet-name-column">{pet.name}</td>
                     <td className="pet-type-column">{pet.type}</td>
                     <td className="pet-breed-column">{pet.breed}</td>
@@ -109,7 +173,7 @@ const PetTable = ({ petList, handleUpdatePet, handleDeletePet }) => {
                     <td className="pet-button-column">
                       <button
                         className="pet-action-edit-button"
-                        onClick={() => handleEditPet(pet)} // Fix this line
+                        onClick={() => handleEditPet(pet)}
                       >
                         Edit
                       </button>
@@ -143,58 +207,76 @@ const PetTable = ({ petList, handleUpdatePet, handleDeletePet }) => {
             Update
           </Button>,
         ]}
+        destroyOnClose={true}
       >
         {selectedPet && (
           <Form layout="vertical">
-            <Form.Item label="Image">
+            <Item label="Image">
               <Image
                 width={200}
                 src={selectedPet.image}
                 alt={selectedPet.name}
               />
-            </Form.Item>
-            <Form.Item label="Image URL">
-              <Input
-                value={selectedPet.image}
-                onChange={(e) =>
-                  setSelectedPet({ ...selectedPet, image: e.target.value })
-                }
-              />
-            </Form.Item>
-            
-                
-            <Form.Item label="Name">
+            </Item>
+            <Item label="Image File">
+              <Upload
+                customRequest={({ file, onSuccess, onError }) => {
+                  const storageRef = ref(storage, `petImages/${file.name}`);
+                  const uploadTask = uploadBytesResumable(storageRef, file);
+
+                  uploadTask
+                    .then(() => getDownloadURL(storageRef))
+                    .then((url) => {
+                      onSuccess();
+                      setDownloadURL(url);
+                    })
+                    .catch((error) => {
+                      onError(error);
+                      console.error("File upload failed:", error);
+                    });
+                }}
+                onChange={handleFileInputChange}
+                showUploadList={false}
+              >
+                <Button icon={<UploadOutlined />}>Upload File</Button>
+              </Upload>
+            </Item>
+            <Item label="Name">
               <Input
                 value={selectedPet.name}
                 onChange={(e) =>
                   setSelectedPet({ ...selectedPet, name: e.target.value })
                 }
               />
-            </Form.Item>
-            <Form.Item label="Type">
+            </Item>
+            <Item label="Type">
               <Input
                 value={selectedPet.type}
                 onChange={(e) =>
                   setSelectedPet({ ...selectedPet, type: e.target.value })
                 }
               />
-            </Form.Item>
-            <Form.Item label="Breed">
+            </Item>
+            <Item label="Breed">
               <Input
                 value={selectedPet.breed}
                 onChange={(e) =>
                   setSelectedPet({ ...selectedPet, breed: e.target.value })
                 }
               />
-            </Form.Item>
-            <Form.Item label="Birthdate">
+            </Item>
+            <Item label="Birthdate">
               <Input
+                type="date"
                 value={selectedPet.birthdate}
                 onChange={(e) =>
-                  setSelectedPet({ ...selectedPet, birthdate: e.target.value })
+                  setSelectedPet({
+                    ...selectedPet,
+                    birthdate: e.target.value,
+                  })
                 }
               />
-            </Form.Item>
+            </Item>
           </Form>
         )}
       </Modal>
