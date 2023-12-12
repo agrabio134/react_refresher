@@ -14,7 +14,7 @@ const AlreadyVerifiedComponent = () => {
                     setSeconds(seconds - 1);
                 }, 1000); // This represents 1 second
             } else {
-                window.location.href = "http://localhost:5173/profile";
+                window.location.href = "http://happypawsolongapo.online/profile";
             }
         };
         updateCountdown();

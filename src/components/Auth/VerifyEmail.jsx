@@ -49,7 +49,7 @@ const VerifyEmail = () => {
     <section className="main-verify-email-container">
 
       <div className="whole-verify-email-container">
-      <img src="/src/assets/img/LGHD.png" alt="" />
+      <img src="/page/LGHD.png" alt="" />
     <div className="verify-email-container">
       <h1>Please Verify your email address</h1>
       <p>
