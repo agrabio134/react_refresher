@@ -1,3 +1,5 @@
-/some-path       https://example.com       301
+/*    /index.html   301
+
+/*       https://happypawsolongapo.netlify.app       200
 /admin/*         https://happypawsolongapo.netlify.app/:splat       200
-/*               https://happypawsolongapo.netlify.app       200
+
