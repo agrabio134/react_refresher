@@ -251,7 +251,9 @@ const VeterinaryRecord = () => {
   
         .record-value {
           margin-bottom: 15px;
-          margin-left: 20px;
+        
+          border: 1px solid #ddd;
+          padding: 5px 20px;
 
         }
   
