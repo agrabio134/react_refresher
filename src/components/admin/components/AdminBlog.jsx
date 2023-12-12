@@ -218,7 +218,7 @@ const AdminBlogSection = () => {
   return (
     <>
       <div className="form-container">
-        <h1>Blog Post Form</h1>
+        <h1>News and Announcements Post</h1>
         <form onSubmit={handleBlogFormSubmit} encType="multipart/form-data">
           <FileUploader onFileSelectSuccess={handleFileInput} />
           {thumbnailPreview && (
