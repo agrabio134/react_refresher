@@ -12,7 +12,7 @@ import LoginPage from "./components/admin/auth/LoginPage";
 import SignupPage from "./components/admin/auth/SignupPage";
 import { AdminAuthProvider } from "./components/admin/auth/AdminAuthContext";
 
-function App() {
+const App = () => {
   const isBackOffice = window.location.pathname.startsWith("/admin");
 
   return (

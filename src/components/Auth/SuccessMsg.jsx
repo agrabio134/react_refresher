@@ -16,7 +16,7 @@ const EmailVerifiedComponent = () => {
             } else {
                 setIsLoading(true);
                 setTimeout(() => {
-                    window.location.href = "http://localhost:5173/profile";
+                    window.location.href = "http://happypawsolongapo.online/profile";
                 }, 1000); // This represents 1 second
             }
         };
