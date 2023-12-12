@@ -32,7 +32,7 @@ const ProfilePage = () => {
       const fetchUserPets = async () => {
         try {
           const response = await fetch(
-            `https://happypawsolongapo.com/api//get_user_pets/${user_id}`,
+            `https://happypawsolongapo.com/api/get_user_pets/${user_id}`,
             {
               method: "GET",
               headers: {
@@ -148,7 +148,7 @@ const ProfilePage = () => {
           queryIdToken = value;
         });
 
-        const url = "https://happypawsolongapo.com/api//getuser/" + queryIdToken;
+        const url = "https://happypawsolongapo.com/api/getuser/" + queryIdToken;
 
         try {
           const response = await fetch(url, {
@@ -251,7 +251,7 @@ const ProfilePage = () => {
     };
 
     try {
-      const response = await fetch("https://happypawsolongapo.com/api//addpet", {
+      const response = await fetch("https://happypawsolongapo.com/api/addpet", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -318,7 +318,7 @@ const ProfilePage = () => {
       if (result.isConfirmed) {
         try {
           const response = await fetch(
-            `https://happypawsolongapo.com/api//delete_pet/${petId}`,
+            `https://happypawsolongapo.com/api/delete_pet/${petId}`,
             {
               method: "DELETE",
               headers: {
@@ -362,7 +362,7 @@ const ProfilePage = () => {
   const checkPetAppointment = async (petId) => {
     try {
       const response = await fetch(
-        `https://happypawsolongapo.com/api//check_pet_appointment/${petId}`
+        `https://happypawsolongapo.com/api/check_pet_appointment/${petId}`
       );
 
       // Handle 404 status code
