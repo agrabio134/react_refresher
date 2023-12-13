@@ -76,11 +76,11 @@ const columns = [
     title: "Action",
     dataIndex: "action",
     key: "action",
-    render: (text, record) => (
-      <Button type="primary" onClick={() => handleEditClick(record)}>
-        Edit
-      </Button>
-    ),
+    // render: (text, record) => (
+    //   <Button type="primary" onClick={() => handleEditClick(record)}>
+    //     Edit
+    //   </Button>
+    // ),
   },
 ]
 
