@@ -72,16 +72,16 @@ const columns = [
       return <span style={{ color }}>{statusText}</span>;
     },
   },
-  {
-    title: "Action",
-    dataIndex: "action",
-    key: "action",
-    // render: (text, record) => (
-    //   <Button type="primary" onClick={() => handleEditClick(record)}>
-    //     Edit
-    //   </Button>
-    // ),
-  },
+  // {
+  //   title: "Action",
+  //   dataIndex: "action",
+  //   key: "action",
+  //   // render: (text, record) => (
+  //   //   <Button type="primary" onClick={() => handleEditClick(record)}>
+  //   //     Edit
+  //   //   </Button>
+  //   // ),
+  // },
 ]
 
 
