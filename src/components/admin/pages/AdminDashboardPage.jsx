@@ -8,6 +8,7 @@ import {
   faClock,
   faCalendarAlt,
 } from "@fortawesome/free-solid-svg-icons";
+import { Image } from "antd";
 import "./styles/AdminDashboardPage.css";
 import Swal from "sweetalert2";
 import BlinkingDot from "../components/BlinkingDot";
@@ -348,7 +349,7 @@ const AdminDashboardPage = () => {
             {unpublishedBlogPosts.map((blogPost) => (
               <div key={blogPost.id} className="admin-dashboard-blog-card">
                 <div className="admin-dashboard-blog-card-content">
-                  <img src={`${blogPost.thumbnail}`} alt="" />
+                  <Image src={`${blogPost.thumbnail}`} alt="" height="200px" width="100%"/>
                   <h3>{blogPost.title}</h3>
                   <div className="blog-post-content-container">
                     <p className="blog-post-content">{blogPost.content}</p>
