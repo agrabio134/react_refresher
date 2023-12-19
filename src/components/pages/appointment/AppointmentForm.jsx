@@ -218,7 +218,7 @@ const AppointmentForm = () => {
 
       // console.log("petId:", petId);
       const response = await fetch(
-        `https://happypawsolongapo.com/api/check_existing_appointment/${petId}/${date}`,
+        `https://happypawsolongapo.com/api/check_existing_appointment/${petId}`,
         {
           method: "GET",
         }
