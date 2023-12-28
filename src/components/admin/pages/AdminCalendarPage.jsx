@@ -100,6 +100,8 @@ const AdminCalendarPage = () => {
       className = "denied";
     } else if (status === "done") {
       className = "done";
+    } else if (status === "canceled") {
+      className = "canceled";
     } else {
       className = "not-accepted";
     }
@@ -285,6 +287,9 @@ const AdminCalendarPage = () => {
         <div className="legend-item">
           <span className="denied" /> Denied
         </div>
+        <div className="legend-item">
+          <span className="canceled" /> Canceled
+        </div>
       </div>
       <Calendar
         key={JSON.stringify(appointments)} // Add key prop based on appointments
@@ -362,11 +367,7 @@ const AdminCalendarPage = () => {
                 </Button>
               </div>
             )}
-             
-
             
-
-
 
 
           </div>

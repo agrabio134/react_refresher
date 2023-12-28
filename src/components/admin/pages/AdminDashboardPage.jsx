@@ -383,7 +383,7 @@ const AdminDashboardPage = () => {
             {publishedBlogPosts.map((blogPost) => (
               <div key={blogPost.id} className="admin-dashboard-blog-card">
                 <div className="admin-dashboard-blog-card-content">
-                  <img src={`${blogPost.thumbnail}`} alt="" />
+                  <Image src={`${blogPost.thumbnail}`} alt="" height="200px" width="100%" />
                   <h3>{blogPost.title}</h3>
                   <div className="blog-post-content-container">
                     <p className="blog-post-content">{blogPost.content}</p>

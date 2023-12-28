@@ -19,8 +19,12 @@
   .status-column {
     text-transform: uppercase;
     color: #27ae60; /* Default color for status */
+    /* text bold */
   }
   
+  .status-column.canceled {
+    color: #615b5b; /* Light muted orange for canceled status */
+  }
   .status-column.pending {
     color: #f39c12; /* Orange color for pending status */
   }

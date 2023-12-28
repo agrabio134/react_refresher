@@ -306,8 +306,11 @@
 .add-pet-card:hover {
   border-color: #FAD400;
 }
+.today {
+  color: white;
+  pointer-events: none;
+}
 
-/* styles.css */
 
 /* Container for the "Others" input section */
 .others-container {

@@ -1,5 +1,5 @@
 import "./Styles/AppointmentLogItems.css"; // Import your CSS file for styling
-
+import Swal from "sweetalert2";
 const formatTime = (time) => {
   const [hour, minute] = time.split(":").map(Number);
 
@@ -29,33 +29,52 @@ const getDayOfWeek = (date) => {
 const AppointmentLogItem = ({ appointment, index }) => {
   const statusClass = appointment.status.toLowerCase();
 
-  const handleAction = () => {
+
+  // console.log(appointment.tb1_id);
+  const handleAction = async () => {
     // Display a confirmation alert
-    const isConfirmed = window.confirm(
-      `Are you sure you want to cancel the appointment with ID ${appointment.id}?`
-    );
+    const result = await Swal.fire({
+      title: "Are you sure?",
+      text: "This action cannot be undone.",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonText: "Yes, cancel it!",
+      cancelButtonText: "No, keep it",
+    });
 
-    if (isConfirmed) {
+    if (result.isConfirmed) {
+      const id =  appointment.tb1_id;
 
-      const handleSubmitConfirmed =  async (appointment) =>{
-        try {
-          const response = await fetch (`https://happypawsolongapo.com/api/cancel_appointment/${appointment.id}`);
-          if (response.status === 404){
-            console.log("No Data Found");
-            return;
+  
 
+      try {
+        const response = await fetch(
+          `https://happypawsolongapo.com/api/cancel_appointment/${id}`,
+          {
+            method: "PUT",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            // No need to include the body for a cancellation if your backend doesn't expect it
           }
-       
-      handleSubmitConfirmed();
-          
-        } catch (error) {
-          
+        );
+
+        if (!response.ok) {
+          throw new Error(`Failed to fetch data: ${response.status}`);
         }
+
+        console.log("Success", response);
+        Swal.fire("Cancelled!", "Your appointment has been cancelled.", "success");
+        window.location.reload();
+
+      } catch (error) {
+        console.error("Error fetching data:", error.message);
       }
-      // Perform the cancellation action here
-      alert(`Appointment with ID ${appointment.id} has been canceled.`);
+    } else if (result.dismiss === Swal.DismissReason.cancel) {
+      Swal.fire("Cancelled", "Your appointment is safe :)", "error");
     }
   };
+
 
   return (
     <tr className={`appointment-log-item ${statusClass}`}>

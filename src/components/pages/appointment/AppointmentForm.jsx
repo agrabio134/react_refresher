@@ -9,10 +9,11 @@ import {
   calculateAgeInDays,
 } from "../utils/petAgeCalculation";
 
+
 // import AppointmentLog from "./AppointmentLog";
 
 const AppointmentForm = () => {
-  const [selectedDate, setSelectedDate] = useState(new Date());
+  const [selectedDate, setSelectedDate] = useState(null);
   const [timeSlots, setTimeSlots] = useState([]);
   const [selectedTimeSlot, setSelectedTimeSlot] = useState("07:00");
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -84,7 +85,7 @@ const AppointmentForm = () => {
       setTimeSlots(parsedTimeSlots);
       setBookedTimeSlots(bookedTimeSlotsArray);
     } catch (error) {
-      console.error("Error fetching time slots:", error);
+      // console.error("Error fetching time slots:", error);
     }
   };
 
@@ -97,7 +98,7 @@ const AppointmentForm = () => {
       const data = await response.json();
       setHasPendingAppointment(data.hasPendingAppointment);
     } catch (error) {
-      console.error("Error checking pending appointment:", error);
+      // console.error("Error checking pending appointment:", error);
     }
   };
 
@@ -409,11 +410,21 @@ const AppointmentForm = () => {
     }
   };
 
+  const isToday = (date) => {
+    const today = new Date();
+    return (
+      date.getDate() === today.getDate() &&
+      date.getMonth() === today.getMonth() &&
+      date.getFullYear() === today.getFullYear()
+    );
+  };
+
   return (
     <div className="appointment-form-container">
       <div className="form-sub-container">
         <div className="form-group">
           <label>Select Date:</label>
+
           <Calendar
             onChange={handleDateChange}
             value={selectedDate}
@@ -429,16 +440,14 @@ const AppointmentForm = () => {
               return new Intl.DateTimeFormat(locale, options).format(date);
             }}
             onClickDay={(value, event) => {
-              // Check if the click event originated from inside the calendar
               const isInsideCalendar =
                 event.target.closest(".react-calendar") !== null;
-
-              // Only update the selected date if the click is inside the calendar
               if (isInsideCalendar) {
                 handleDateChange(value);
               }
             }}
-            calendarType="US" // Set calendarType to "US" for Sunday as the first day of the week
+            calendarType="US"
+            tileClassName={({ date }) => (isToday(date) ? "today" : "")}
           />
 
           <label>Select Time Slot:</label>
@@ -447,6 +456,16 @@ const AppointmentForm = () => {
             onChange={(e) => handleTimeSlotChange(e.target.value)}
             disabled={isSubmitting}
           >
+            {/* option default disable */}
+            <option
+              className="value-container"
+              disabled
+              style={{ color: "white" }}
+            >
+              {timeSlots.length === 0
+                ? "No available time slots"
+                : "Select Time Slot"}
+            </option>
             {timeSlots.map((time) => (
               <option
                 className="value-container"

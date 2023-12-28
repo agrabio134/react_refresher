@@ -28,10 +28,7 @@
   color: #e9e7e7; /* Text color for events, adjust as needed */
 }
 
-.rbc-event.accepted {
-  background-color: #4285f4; /* Blue for accepted */
-  color: #e9e7e7; /* Text color for events, adjust as needed */
-}
+
 .rbc-event:active {
     border: 1px solid #e0e0e0;
     color: #e9e7e7;
@@ -43,7 +40,7 @@
     transform: scale(0.95);
   } 
 .rbc-event::after {
-  background-color: #ffa500;
+  /* background-color: #ffa500; */
   border: 1px solid #e0e0e0;
   color: #e9e7e7;
 }
@@ -82,6 +79,21 @@
 .legend-item .done {
   background-color: #4caf50;
 }
+
+.legend-item .canceled {
+  background-color: #6e6e6e; /* Light muted orange for canceled status */
+}
+
+
+.rbc-event.accepted {
+  background-color: #4285f4; /* Blue for accepted */
+  color: #e9e7e7; /* Text color for events, adjust as needed */
+}
+.rbc-event.canceled {
+  background-color: #6e6e6e; /* Light muted orange for canceled status */
+  color: #e9e7e7; /* Text color for events, adjust as needed */
+}
+
 
 .rbc-event.done {
   background-color: #4caf50; /* Green for done */

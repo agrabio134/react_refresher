@@ -5,12 +5,80 @@ import { useState, useEffect } from "react";
 import { useAuth } from "../Auth/AuthContext"; // Import the useAuth hook
 import jwt_decode from "jwt-decode";
 import FooterPage from "./footer/Footer";
+import axios from "axios";
 
 const MainLayout = () => {
   const { isLogin, toggleLogin } = useAuth(); // Use the hook to access the global state
 
   const [sideNavHeight, setSideNavHeight] = useState('0%');
   const [marginTop, setMarginTop] = useState('0%');
+  const [user, setUser] = useState({}); // Initialize the user state with an empty object
+  const [storedToken, setStoredToken] = useState(localStorage.getItem("authToken"));
+  const [userFName, setUserFName] = useState("");
+  // get user 
+  useEffect(() => {
+    const storedToken = localStorage.getItem("authToken");
+  
+    if (storedToken) {
+      const decodedToken = jwt_decode(storedToken);
+  
+      if (decodedToken.exp * 1000 < Date.now()) {
+        localStorage.removeItem("authToken");
+        toggleLogin(false); // Update the global state to indicate logout
+      } else {
+        toggleLogin(true); // Update the global state
+        setUser(decodedToken);
+      }
+    }
+  }, [storedToken]);
+
+  // console.log(user.user_id);
+
+
+
+  useEffect(() => {
+    const storedToken = localStorage.getItem("authToken");
+  
+    if (storedToken) {
+      const decodedToken = jwt_decode(storedToken);
+  
+      if (decodedToken.exp * 1000 < Date.now()) {
+        localStorage.removeItem("authToken");
+        toggleLogin(false);
+      } else {
+        toggleLogin(true);
+  
+        axios
+          .get(`https://happypawsolongapo.com/api/getuser/${decodedToken.user_id}`)
+          .then((res) => {
+            const result = res.data;
+            // console.log(result);
+
+            const jsonObjects = result.split("}{");
+            jsonObjects[0] = jsonObjects[0] + "}";
+            jsonObjects[1] = "{" + jsonObjects[1];
+            const jsonObject1 = JSON.parse(jsonObjects[0]);
+            // console.log(jsonObject1);
+
+            // get full name
+            const fName = jsonObject1.payload[0].fname;
+
+           setUserFName(fName);
+            
+            
+          
+          })
+          .catch((err) => {
+            // console.log(err);
+          });
+      }
+    }
+  }, [storedToken]);
+
+
+  
+
+  
 
   const openNav = () => {
     setSideNavHeight('36%');
@@ -99,7 +167,7 @@ const MainLayout = () => {
                 
                 {isLogin ? (
                   <Link to="profile" className="auth_item">
-                    Profile
+                    Welcome, {userFName}
                   </Link>
                 ) : (
                   <>
