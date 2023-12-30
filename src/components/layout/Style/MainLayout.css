@@ -191,7 +191,7 @@ html  {
   cursor: pointer;
   display: none;
 }
-
+.sidenav{display: none;}
 @media screen and (max-height: 1080px) {
   
   .sidenav a {font-size: 18px;}
@@ -200,6 +200,7 @@ html  {
 }
 
 @media screen and (max-width: 768px) { 
+
 
   .main_router {
     display: flex;
