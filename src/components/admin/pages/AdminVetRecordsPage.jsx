@@ -162,27 +162,53 @@ const VeterinaryRecord = () => {
       title: "Complaint History",
       dataIndex: "complaint_history",
       key: "complaint_history",
+      render: (text) => (
+        <div style={{ maxWidth: "200px", maxHeight: "100px", overflow: "auto" }}>
+          {text}
+        </div>
+      ),
     },
     {
       title: "Diagnostic Tool",
       dataIndex: "diagnostic_tool",
       key: "diagnostic_tool",
+      render: (text) => (
+        <div style={{ maxWidth: "200px", maxHeight: "100px", overflow: "auto" }}>
+          {text}
+        </div>
+      ),
     },
     {
       title: "Laboratory Findings",
       dataIndex: "laboratory_findings",
       key: "laboratory_findings",
+      render: (text) => (
+        <div style={{ maxWidth: "200px", maxHeight: "100px", overflow: "auto" }}>
+          {text}
+        </div>
+      ),
     },
     {
       title: "General Assessment",
       dataIndex: "general_assessment",
       key: "general_assessment",
+      render: (text) => (
+        <div style={{ maxWidth: "200px", maxHeight: "100px", overflow: "auto" }}>
+          {text}
+        </div>
+      ),
     },
     {
       title: "Medication Treatment",
       dataIndex: "medication_treatment",
       key: "medication_treatment",
+      render: (text) => (
+        <div style={{ maxWidth: "200px", maxHeight: "100px", overflow: "auto" }}>
+          {text}
+        </div>
+      ),
     },
+  
     { title: "Remarks", dataIndex: "remarks", key: "remarks" },
     {
       title: "Next Follow-up Checkup",
