@@ -170,7 +170,7 @@ html  {
   z-index: 20;
   top: 0;
   left: 0;
-  background-color: #e12454;
+  /* background-color: #e12454; */
   overflow-x: hidden;
 }
 
@@ -205,16 +205,16 @@ html  {
     display: flex;
     justify-content: space-between;
     background-color: #082342;
-    height: 200px;
+    height: 180px;
     align-items: center;
-    padding-left: 100px;
-    padding-right: 100px;
+    padding-left: 70px;
+    padding-right: 70px;
   
   }
   
   .header_logo img {
     height: auto;
-    width: 200px;
+    width: 150px;
   }
 
   .header_fixed .fa-solid {
@@ -238,8 +238,9 @@ display: none;
     justify-content: space-between;
     background-color: #082342;
     align-items: center;
-    padding-left: 100px;
-    padding-right: 100px;
+    padding-left: 70px;
+    padding-right: 70px;
+    height: 180px;
 
     border-bottom-width: 2px;
     border-bottom-color: #eaeaea;
@@ -248,7 +249,7 @@ display: none;
 
   .side-nav-header_logo img{
     height: auto;
-    width: 200px;
+    width: 150px;
   }
 
   .side-nab-email h4{
@@ -300,7 +301,6 @@ font-weight: bold;
   }
   
   .sidenav .closebtn {
- 
     padding: 14px;
     text-align: center;
     background-color: #FF5C17;
@@ -309,7 +309,7 @@ font-weight: bold;
 
   }
 
-  .sidebar-button {
+  .sidebar-button, .closebtn {
     padding: 14px;
     text-align: center;
     background-color: #FF5C17;
@@ -339,7 +339,7 @@ font-weight: bold;
   flex-direction: row;
   color: #082342;
   font-size: 50px;
-padding: 20px;
+  padding: 20px;
 }
 
 .side-nav-content .fa-user{

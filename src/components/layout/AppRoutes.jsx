@@ -10,9 +10,10 @@ import BlogPage from '../pages/blog/BlogPage';
 import AppointmentPage from '../pages/appointment/AppointmentPage';
 import GalleryPage from '../pages/gallery/GalleryPage';
 import AuthRoutes from '../Auth/AuthRoutes';
+import './Style/MainLayout.css';
 
 const AppRoutes = () => {
-  return (<div>
+  return (<div className='MainContent'>
     <Routes>
       <Route path="/" element={<HomePage />} />
       <Route path="/appointments" element={<AppointmentPage />} />

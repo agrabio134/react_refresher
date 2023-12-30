@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import './BlogPage.css'; // Import your CSS file
+import { Image } from 'antd';
 
 const BlogPage = () => {
   const [blogData, setBlogData] = useState([]);
@@ -67,13 +68,13 @@ const BlogPage = () => {
         <ul className="blog-list">
           {blogData.map((post) => (
             <li key={post.id} className="blog-post">
-              <img src={`${post.thumbnail}`} alt={post.title} />
+              <Image src={`${post.thumbnail}`} alt={post.title} />
               <div className="blog-details">
                 <h2>{post.title}</h2>
                 <div className="blog-separator"></div>
                 <p>{post.content}</p>
-                <p>Date Created: {post.date_created}</p>
-                <p>Date Modified: {post.date_modified}</p>
+                {/* <p>Date Created: {post.date_created}</p>
+                <p>Date Modified: {post.date_modified}</p> */}
               </div>
             </li>
           ))}
