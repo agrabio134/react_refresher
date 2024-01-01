@@ -105,8 +105,8 @@
 
 @media screen and (max-width: 768px) {
     .main_footer_container {
-        width: 70rem;
-        height: 170vh;
+        width: 100%;
+        height: auto;
         background: url(../../../assets/img/footer.jpg);
         background-size: cover;
         /* background-position: center; */
@@ -130,13 +130,13 @@
     }
     
     .footer-content h1 {
-        font-size: 4rem;
+        font-size: 24px;
         padding-bottom: 25px;
         color: #fff;
     }
 
     .footer-content p {
-        font-size: 2.5rem;
+        font-size: 18px;
         padding-bottom: 25px;
     }
     
@@ -149,11 +149,12 @@
         display: flex;
         flex-direction: column;
         color: #fff;
+        padding-bottom: 25px;
     }
     
     .quick-links-content a {
         display: flex;
-        font-size: 2.5rem;
+        font-size: 18px;
         padding-top: 5px;
         text-decoration: none;
         flex-direction: column;
@@ -165,13 +166,14 @@
         align-items: center;
         flex-direction: column;
         /* border: solid violet; */
+        padding-bottom: 25px;
     }
     
     .contacus-details h6 {
         display: flex;
         color: white;
         align-self: center;
-        font-size: 2.5rem;
+        font-size: 18px;
         padding: 10px;
     }
     
@@ -180,7 +182,7 @@
         display: flex;
         color: white;
         align-self: center;
-        font-size: 3.5rem;
+        font-size: 20px;
     }
     
     
@@ -204,7 +206,7 @@
     
     .followus-icon .fa-brands {
         color: white;
-        font-size: 4rem;
+        font-size: 30px;
         padding: 0;
     }
     
@@ -216,8 +218,9 @@
     }
     
     .copyrigt-content h6 {
+        text-align: center;
         padding-top: 30px;
-        font-size: 2.3rem;
+        font-size: 20px;
         color: white;
     }
 

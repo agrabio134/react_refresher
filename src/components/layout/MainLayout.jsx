@@ -82,7 +82,7 @@ const MainLayout = () => {
 
   const openNav = () => {
     setSideNavHeight('auto');
-    setMarginTop('20%');
+    setMarginTop('13%');
   };
 
   const closeNav = () => {

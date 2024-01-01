@@ -159,7 +159,8 @@ p {
         border-top-color: #eaeaea;
         border-top-style: solid;
         padding: 2rem;
-        width: 37%;
+        /* width: 37%; */
+        width: 90%;
         height: auto;
     }
     

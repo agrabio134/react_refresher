@@ -347,7 +347,7 @@
   }
 
   .form-group {
-    width: 100%;
+    width: 44%;
     background-color: white;
     text-align: center;
     padding: 25px;
@@ -356,7 +356,7 @@
   }
 
   .form-group label {
-    font-size: 4rem;
+    font-size: 18px;
     color: black;
     font-weight: bold;
   }
@@ -383,16 +383,16 @@
 }
 
 .react-calendar__navigation button {
-  font-size: 3rem;
+  font-size: 18px;
   background-color: #e12454;
   color: #eaeaea;
-    padding: 20px;
+    padding: 16px;
 }
 
 .react-calendar__navigation {
 
-  min-width: 100px;
-  height: 150px;
+  width: 100%;
+  height: 50%;
   /* padding: 30px; */
 }
 
@@ -456,7 +456,7 @@
 /* Position the calendar on the left side */
 .static-calendar {
   margin-bottom: 20px;
-  font-size: 4rem;
+  font-size: 20px;
   background-color: white;
 }
 .react-calendar__tile--now{
@@ -465,11 +465,11 @@
 }
 
 .form-group select {
-  font-size: 40px;
+  font-size: 18px;
   text-align: center;
   width: 50%;
   height: 100%;
-  padding: 20px;
+  padding: 15px;
   margin-bottom: 10px;
   background-color: #e12454;
   color: #fff;
@@ -478,7 +478,7 @@
 }
 
 .value-container {
-  font-size: 1rem;
+  font-size: 12px;
   width: 10%;
   background-color: #ffa500;
 }
@@ -502,8 +502,8 @@
 
 .pet-card-header {
   border-radius: 5px 5px 0px 0px;
-  background-color: #e12454;;
-  font-size: 4rem;
+  background-color: #082342;
+  font-size: 12px;
   padding: 12px;
   color: white;
 }
@@ -520,7 +520,7 @@
   flex-grow: 1;
 }
 .pet-card-body p {
-  font-size: 3rem;
+  font-size: 12px;
   margin: 8px 0;
 }
 
@@ -588,7 +588,7 @@
 }
 
 .add-pet-card .fa-solid {
-  font-size: 50px;
+  font-size: 12px;
   font-weight: bold;
   color: white;
 }
@@ -599,7 +599,7 @@
 }
 
 .apoint-submit-button {
-  font-size: 4rem;
+  font-size: 12px;
   margin-left: 0;
   background-color: orange;
   color: #fff;

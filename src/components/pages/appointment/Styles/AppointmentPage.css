@@ -16,22 +16,22 @@
 
 @media screen and (max-width: 768px) {
     .whole-appointment-container {
-        margin-top: 200px;
+        margin-top: 75px;
         height: auto;
-        width: 70rem;
+        width: 37%;
         padding-top: 230px;
         background-color: white;
         display: flex;
         justify-content: center;
-        padding:2rem 7%;
+        padding: 0px;
     }
 
     .main-appointment-container {
-        max-width: 70rem;
+        width: 100%;
         /* background-color: white; */
         margin-top: 10px;
         text-align: center;
-        padding: 25px;
+        padding: 10px;
         border-radius: 5px;
         /* box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19); */
     }

@@ -113,7 +113,8 @@
     .main_service_container {
         background-color: #fff;
         padding: 6px;
-        width: 37%;
+        /* width: 37%; */
+        width: 90%;
     }
     
     /* .home1-section-heading1 {

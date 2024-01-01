@@ -218,7 +218,8 @@ margin: 0;
 }
 
 .about-img {
-  width: 37%;
+    /* width: 37%; */
+    width: 90%;
     height: auto;
     display: flex;
     justify-content: center;

@@ -75,7 +75,8 @@
 
     .mobile-emergency {
         /* margin-top: 50px; */
-        width: 37%;
+        /* width: 37%; */
+        width: 90%;
         height: auto;
         display: flex;
         justify-content: center;
