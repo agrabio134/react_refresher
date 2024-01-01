@@ -3,7 +3,7 @@
 	min-height: 100vh;
 	display: flex;
 	align-items: center;
-	background: url(../../../../assets/img/h1.jpg);
+	background: url(../../../../assets/img/h11.png);
 	background-size: cover;
 	/* background-position: center; */
 	background-repeat: no-repeat;
@@ -46,54 +46,67 @@
 }
 
 @media screen and (max-width: 768px) {
-	
-	.home{
-		margin-top: 50px;
-		min-height: 200vh;
-		display: flex;
-		align-items: center;
-		background: url(../../../../assets/img/h1.jpg);
-		background-size: cover;
-		background-position: center;
-		background-repeat: no-repeat;
-		background-attachment: fixed;
+
+	.home {
+		display: none;
 	}
 	
+	.phone-home{
+		/* margin-top: 50px; */
+		min-height: 80vh;
+		width: 37%;
+		padding: 0%;
+		display: flex;
+		align-items: center;
+		background: url(../../../../assets/img/phonebg2.jpg);
+		background-size: cover;
+		background-position: center;
+		/* background-repeat: no-repeat; */
+		/* background-attachment: fixed; */
+		justify-content: center;
+	}
+
 	.home .content{
+		display: none;
+
+	}
+	
+	.phone-home .phone-content{
 		display: flex;
 		flex-direction: column;
 		justify-content: center;
 		align-items: center;
 		width: 100%;
-		height: 50rem;
 		/* border: solid red; */
 		text-align: center;
 
 	}
-	.home .content h4{
-		font-size: 120px;
+	.phone-home .phone-content h4{
+		font-size: 45px;
 		width: 100%;
 		font-weight: bold;
 		text-transform: uppercase;
-		color: white;
+		color: black;
 	}
 	
-	.home .content h2{
+	.phone-home .phone-content h2{
 		padding-top: 20px;
-		font-size:155px;
+		font-size:  42px;
 		color: black;
 		width: 100%;
 	}
 	
-	.home .content h2 .span{
-		color: #F50057;
+	.phone-home .phone-content h2 .span{
+		color: #FF5C17;
 		font-weight: bold;
 	}
 	
-	.home .content p{
+	.phone-home .phone-content p{
 		width: 100%;
-		font-size: 30px;
-		color: white;
+		font-size: 16px;
+		color: black;
+		text-align: justify;
+		padding: 25px;
 		font-weight: 500;
 		padding-top: 20px;
 	}

@@ -11,8 +11,8 @@ import "./Style/HomePage.css";
 const HomePage = () => {
   return (
     <>
-      <section className="home" id="home">
-        <div className="content">
+      <section className="home phone-home" id="home">
+        <div className="content phone-content"> 
           <h4>Welcome to </h4>
           <h2><span className="span">Happy Paws</span></h2>
           <p>At Happy Paws, we understand that your furry friends are family. 

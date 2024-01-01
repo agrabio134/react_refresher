@@ -187,39 +187,38 @@ html  {
 }
 
 .sidebar-button {
-  font-size: 30px;
+  /* font-size: 30px; */
   cursor: pointer;
   display: none;
 }
-.sidenav{display: none;}
+
 @media screen and (max-height: 1080px) {
   
-  .sidenav a {font-size: 18px;}
+  .sidenav a {font-size: 2px;}
 
 
 }
 
 @media screen and (max-width: 768px) { 
 
-
   .main_router {
     display: flex;
     justify-content: space-between;
     background-color: #082342;
-    height: 180px;
+    height: 75px;
     align-items: center;
-    padding-left: 70px;
-    padding-right: 70px;
+      padding-left: 20px;
+      padding-right: 20px;
   
   }
   
   .header_logo img {
     height: auto;
-    width: 150px;
+    width: 5rem;
   }
 
   .header_fixed .fa-solid {
-    font-size: 50px;
+    font-size: 1.30rem;
   }
   
   .main_nav {
@@ -230,7 +229,7 @@ html  {
   }
 
   .header_auth_container {
-display: none;
+    display: none;
   }
 
   .main-side-nav-header {
@@ -239,9 +238,10 @@ display: none;
     justify-content: space-between;
     background-color: #082342;
     align-items: center;
-    padding-left: 70px;
-    padding-right: 70px;
-    height: 180px;
+    height: 75px;
+    align-items: center;
+      padding-left: 20px;
+      padding-right: 20px;
 
     border-bottom-width: 2px;
     border-bottom-color: #eaeaea;
@@ -250,14 +250,14 @@ display: none;
 
   .side-nav-header_logo img{
     height: auto;
-    width: 150px;
+    width: 5rem;
   }
 
-  .side-nab-email h4{
+  /* .side-nab-email h4{
     color: white;
     font-weight: bold;
     font-size: 40px;
-  }
+  } */
 
   .sidenav {
     height: 0;
@@ -280,10 +280,10 @@ display: none;
   .sidenav a {
     list-style: none;
     margin: 0 5px ;
-    font-size: 40px;
-    padding: 20px;
+    font-size: 15px;
+    /* padding: 20px; */
     font-family: 'montserrat';  
-font-weight: bold;
+    font-weight: bold;
     color: #082342;
     text-decoration: none;
     text-transform: uppercase;
@@ -293,7 +293,7 @@ font-weight: bold;
   
   .sidenav a:hover {
     font-family: 'montserrat';  
-font-weight: bold;
+    font-weight: bold;
     color: #FAD400;
     align-items: center;
     text-decoration: none;
@@ -302,7 +302,7 @@ font-weight: bold;
   }
   
   .sidenav .closebtn {
-    padding: 14px;
+    padding: 11px;
     text-align: center;
     background-color: #FF5C17;
     cursor: pointer;
@@ -311,7 +311,7 @@ font-weight: bold;
   }
 
   .sidebar-button, .closebtn {
-    padding: 14px;
+    padding: 10px;
     text-align: center;
     background-color: #FF5C17;
     cursor: pointer;
@@ -319,13 +319,13 @@ font-weight: bold;
   }
 
   .side-main_nav {
-    margin-top: 20px;
-    padding-left: 100px;
-    padding-right: 100px;
+    margin-top: 9px;
+    padding-left: 10px;
+    padding-right: 10px;
   }
 
   .side-nav-content {
-    margin-top: 15px;
+    /* margin-top: 15px; */
     display: flex;
     align-items: center;
     flex-direction: row;
@@ -339,7 +339,7 @@ font-weight: bold;
   align-items: center;
   flex-direction: row;
   color: #082342;
-  font-size: 50px;
+  font-size: 20px;
   padding: 20px;
 }
 
@@ -348,8 +348,8 @@ font-weight: bold;
   align-items: center;
   flex-direction: row;
   color: #082342;
-  font-size: 50px;
-  padding: 20px 26px 20px 26px;
+  font-size: 20px;
+  padding: 20px 24px 20px 24px;
 }
 
 .side-nav-content .fa-calendar-check {
@@ -357,8 +357,8 @@ font-weight: bold;
   align-items: center;
   flex-direction: row;
   color: #082342;
-  font-size: 50px;
-  padding: 20px 26px 20px 26px;
+  font-size: 20px;
+  padding: 20px 24px 20px 24px;
 }
 
 .side-nav-content .fa-image{
@@ -366,7 +366,7 @@ font-weight: bold;
   align-items: center;
   flex-direction: row;
   color: #082342;
-  font-size: 50px;
+  font-size: 20px;
   padding: 20px 23px 20px 23px;
 }
 
@@ -375,7 +375,7 @@ font-weight: bold;
   align-items: center;
   flex-direction: row;
   color: #082342;
-  font-size: 50px;
+  font-size: 20px;
   padding: 20px 23px 20px 23px;
 }
 

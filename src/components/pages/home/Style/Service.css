@@ -112,6 +112,8 @@
 
     .main_service_container {
         background-color: #fff;
+        padding: 6px;
+        width: 37%;
     }
     
     /* .home1-section-heading1 {
@@ -122,21 +124,21 @@
     } */
     
     .home1-section-heading2 {
-        color: black;
-        font-size: 7rem;
+        color: #082342;
+        font-size: 25px;
         text-align: center;
-        font-weight: 600;
+        font-weight: bold;
         /* border: solid blue; */
     }
     
     .home1-section-heading2 span {
-        color: #F50057;
+        color: #FAD400;
     }
     
     .main_service_container .service_content_container p {
         text-align: center;
         margin-top: 10px;
-        font-size: 2rem;
+        font-size: 14px;
         /* margin: 20px 50px 50px 0px; */
         width: 100%;
         /* border: solid green; */
@@ -163,7 +165,7 @@
         border-style: solid;
         margin-top: 10px;
         text-align: center;
-        width: 50%;
+        width: 48%;
         height: auto;
         padding: 25px;
         background-color: #fff;
@@ -175,20 +177,20 @@
     
     .service_content h5 {
         /* margin-top: 50px; */
-        color: black;
+        color: #082342;
         /* font-weight: 600; */
-        font-size: 3rem;
+        font-size: 18px;
         /* border: solid red; */
     }
     
     .service_content .fa-solid {
-        font-size: 5rem;
+        font-size: 30px;
         padding: 15px;
-        color: #F50057;
+        color: #FF5C17;
     }
     
     .service_content:hover {
-        background-color: #F50057;
+        background-color: #082342;;
     }
     
     .service_content:hover .fa-solid{
@@ -196,7 +198,7 @@
     }
     
     .service_content:hover h5{
-        color: white;
+        color: #FAD400;
     }
     .service_content:hover p{
         color: white;

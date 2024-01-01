@@ -75,20 +75,21 @@
 
     .mobile-emergency {
         /* margin-top: 50px; */
-        width: 100%;
-        height: 150vh;
+        width: 37%;
+        height: auto;
         display: flex;
         justify-content: center;
         align-items: center;
         background: url(../../../../assets/img/h5.jpg);
         background-size: cover;
         background-position: center; 
+        padding: 2rem;
     }
     
     .emergency-container{
         width: 100%;
         height: 90%;
-        background-color: #F50057;
+        background-color: #082342;
         border-radius: 5px;
         /* border: solid blue; */
         box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
@@ -100,23 +101,23 @@
     }
     
     .emergency-content .fa-solid {
-        font-size: 10rem;
+        font-size: 45px;
     }
     
     .headphones .fa-solid{
         /* border: solid yellow; */
-        color: #fff;
+        color: #FF5C17;
     }
     
     .phone .fa-solid{
         /* border: solid yellow; */
-        color: #fff;
+        color: #FF5C17;
     }
     
     .emrgency-text {
         align-self: center;
         /* border: solid violet; */
-        font-size: 5rem;
+        font-size: 20px;
     }
     
     .emrgency-text h4 {
@@ -124,17 +125,17 @@
     }
     
     .emergency-container h5{
-        padding-top: 20px;
-        color: #ffffff;
+        padding-top: 18px;
+        color: #FAD400;
         text-align: justify;
         padding-bottom: 20px;
-        font-size: 50px;
+        font-size: 18px;
     }
      .emergency-container p {
         /* padding-bottom: 20px; */
         color: #fff;
         text-align: justify;
-        font-size:  40px;
+        font-size:  14px;
      }
 
  }
