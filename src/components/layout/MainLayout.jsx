@@ -187,7 +187,7 @@ const MainLayout = () => {
         
       <div className="main-side-nav-header">
       <div className="side-nav-header_logo">
-              <img src="/src/assets/img/LGHD.png" alt="" />
+              <img src="/page/LGHD.png" alt="" />
             </div>
 
 <div className="top-nav-close-btn">
