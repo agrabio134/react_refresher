@@ -219,7 +219,7 @@ margin: 0;
 
 .about-img {
     /* width: 37%; */
-    width: 90%;
+		width: 100dvw;
     height: auto;
     display: flex;
     justify-content: center;

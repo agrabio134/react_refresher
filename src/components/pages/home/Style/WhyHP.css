@@ -160,7 +160,7 @@ p {
         border-top-style: solid;
         padding: 2rem;
         /* width: 37%; */
-        width: 90%;
+		width: 100dvw;
         height: auto;
     }
     

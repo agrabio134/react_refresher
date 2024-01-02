@@ -18,7 +18,7 @@
     .whole-appointment-container {
         margin-top: 75px;
         height: auto;
-        width: 37%;
+        width: 100dvw;
         padding-top: 230px;
         background-color: white;
         display: flex;

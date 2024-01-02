@@ -172,7 +172,7 @@
     justify-content: center;
     display: flex;
     height: auto;
-    width: 90%;
+		width: 100dvw;
     padding: 20px;
   }
 

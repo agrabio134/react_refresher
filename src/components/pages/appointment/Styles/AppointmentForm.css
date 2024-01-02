@@ -136,6 +136,7 @@
   font-weight: bold;
 }
 
+
 .form-sub-container label {
   display: block;
   margin-bottom: 10px;
@@ -175,11 +176,13 @@
 }
 
 .form-group {
-  background-color: white;
+  background-color: red;
   text-align: center;
   padding: 25px;
   border-radius: 5px;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+
+  grid-area: form-group;
 }
 
 .pet-card {
@@ -188,6 +191,8 @@
   border-radius: 5px 5px 0px 0px;
   background-color: white;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+
+  grid-area: pet-card;
 }
 
 .pet-card-header {
@@ -344,10 +349,15 @@
 @media screen and (max-width: 768px) {
   .appointment-form-container {
     grid-template-columns: 1fr; /* Change to a single column layout on smaller screens */
+    grid-template-rows: 0.4fr 0.4fr;
+
+    grid-template-areas:
+    "form-group"
+    "pet-card";
   }
 
   .form-group {
-    width: 44%;
+    width: 95dvw;
     background-color: white;
     text-align: center;
     padding: 25px;
@@ -471,7 +481,7 @@
   height: 100%;
   padding: 15px;
   margin-bottom: 10px;
-  background-color: #e12454;
+  background-color: #082342;
   color: #fff;
   z-index: 2;
   overflow-y: auto;
@@ -483,6 +493,11 @@
   background-color: #ffa500;
 }
 
+.form-sub-container {
+  margin-top: 20px;
+  width: 100%;
+}
+
 .form-input-container {
   padding: 0;
   display: flex;
@@ -492,7 +507,7 @@
 
 
 .pet-card {
-  max-width: 100%;
+  width: auto;
   text-align: center;
   margin: 0;
   border-radius: 5px 5px 0px 0px;
@@ -509,7 +524,7 @@
 }
 
 .pet-card-body img {
-  width: 50%;
+  width: 30%;
   height: auto;
   object-fit: cover;
   border-radius: 50%;
@@ -525,7 +540,7 @@
 }
 
 .pet-card-body {
-  width: 100%;
+  width: auto;
   display: flex;
   justify-content: center;
   align-items: center;
