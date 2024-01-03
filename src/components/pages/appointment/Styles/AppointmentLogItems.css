@@ -74,7 +74,7 @@
 
   @media screen and (max-width: 768px) {
     .appointment-log-item {
-      width: 100%;
+      width: 100dvw;
       padding: 30px;
       font-size: 12px;
       background-color: #f5f5f5;
@@ -116,8 +116,8 @@
     }
     
     .pet-image {
-      width: 200px;
-      height: 200px;
+      width: 10dvw;
+      height: auto;
       border-radius: 50%;
     }
     
@@ -128,9 +128,9 @@
     
     /* Style for the action button */
     .action-button {
-      font-size: 12px;
-      padding: 30px;
-      width: 50%;
+      font-size: 20px;
+      width: 40px;
+      height: 40px;
       background-color: #e74c3c; /* Red color for the button */
       color: white;
       cursor: pointer;

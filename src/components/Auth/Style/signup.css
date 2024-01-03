@@ -195,7 +195,7 @@
     height: 160rem;
     background-color: #082342;
     background-size: cover;
-      width: 70rem;
+      width: 100dvw;
       display: flex;
       flex-direction: column;
       position: fixed;
@@ -225,7 +225,7 @@
 .main-user-signup-container {
   margin: 0;
   padding: 0;
-  width: 36.6%;
+  width: 100dvw;
   height: 100%;
   padding: 24px;
   display: flex;
@@ -326,7 +326,7 @@ color: #082342;
 }
 
 .signup-side {
-  width: 37%;
+  width: 100dvw;
   display: flex;
   justify-content: center;
   margin: 30px 0px 30px 0px;
@@ -336,7 +336,7 @@ color: #082342;
 }
 
 .signup-side img {
-  width: 250px;
+  width: 60dvw;
   height: auto;
   /* display: none; */
 }

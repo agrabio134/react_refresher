@@ -231,10 +231,10 @@ a:hover {
 
 
   .mobile-login-main-container {
-    height: 160rem;
+    width: 100dvw;
+    height: 160dvh;
     background-color: #082342;
     background-size: cover;
-      width: 70rem;
       display: flex;
       flex-direction: column;
       position: fixed;
@@ -244,8 +244,8 @@ a:hover {
   .main-user-login-container {
       margin: 0;
       padding: 0;
-      width: 36.6%;
-      height: 100%;
+      width: 100dvw;
+      height: 100dvh;
       padding: 24px;
       display: flex;
       flex-direction: column;
@@ -267,7 +267,7 @@ a:hover {
   }
   
   .user-separator {
-      width: 150px;
+      width: 50dvw;
       height: 4px;
       background-color: #FAD400;
       margin: 20px;
@@ -422,16 +422,15 @@ a:hover {
   }
   
   .side {
-    width: 37%;
+    width: 100dvw;
     display: flex;
     justify-content: center;
-    margin: 30px 0px 30px 0px;
-    background-size: 100%;
+    margin: 5dvh 0dvw 5dvh 0dvw;
     /* display: none; */
   }
   
   .side img {
-    width: 300px;
+    width: 70dvw;
     height: auto;
     /* display: none; */
   }
