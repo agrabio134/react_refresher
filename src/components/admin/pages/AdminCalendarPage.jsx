@@ -141,7 +141,7 @@ const AdminCalendarPage = () => {
       denyButtonText: "No, cancel!",
     }).then((result) => {
       if (result.isConfirmed) {
-        Swal.fire("Accepted!", "Your file has been accepted.", "success");
+        Swal.fire("Accepted!", "Appointment has been accepted.", "success");
         handleConfirmAccept(e);
         window.location.reload();
       }
@@ -187,7 +187,7 @@ const AdminCalendarPage = () => {
       denyButtonText: "No, cancel!",
     }).then((result) => {
       if (result.isConfirmed) {
-        Swal.fire("Declined!", "Your file has been declined.", "success");
+        Swal.fire("Declined!", "Appointment has been set declined.", "success");
         handleConfirmDecline();
         window.location.reload();
       }
@@ -231,7 +231,7 @@ const AdminCalendarPage = () => {
       denyButtonText: "No, cancel!",
     }).then((result) => {
       if (result.isConfirmed) {
-        Swal.fire("Done!", "Your file has been done.", "success");
+        Swal.fire("Done!", "Appointment has been set done.", "success");
         handleConfirmDone();
         window.location.reload();
       }
@@ -258,7 +258,7 @@ const AdminCalendarPage = () => {
         console.log("Success", response);
       }
       window.location.reload();
-      Swal.fire("Done!", "Your file has been done.", "success");
+      Swal.fire("Done!", "Appointment has been set done.", "success");
       handleConfirmDone();
 
 
