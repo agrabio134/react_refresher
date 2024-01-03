@@ -176,7 +176,7 @@
 }
 
 .form-group {
-  background-color: red;
+  background-color: white;
   text-align: center;
   padding: 25px;
   border-radius: 5px;
@@ -385,16 +385,16 @@
 }
 
 .react-calendar__navigation button:enabled:hover, .react-calendar__navigation button:enabled:focus {
-  background-color: orange;
+  background-color: #FAD400;
 }
 
 .react-calendar__navigation button:disabled {
-  background-color: orange;
+  background-color: #FAD400;
 }
 
 .react-calendar__navigation button {
   font-size: 18px;
-  background-color: #e12454;
+  background-color: #082342;
   color: #eaeaea;
     padding: 16px;
 }
@@ -419,14 +419,14 @@
 }
 
 .react-calendar__tile--active:enabled {
-  background-color: #e12454;
+  background-color: #082342;
   color: #eaeaea;
 
 }
 
 
 .react-calendar__tile--active:enabled:hover, .react-calendar__tile--active:enabled:focus {
-  background: #e12454;
+  background: #082342;
   color: #eaeaea;
 }
 
@@ -470,7 +470,7 @@
   background-color: white;
 }
 .react-calendar__tile--now{
-  background-color: #ffa500;
+  background-color: #FF5C17;
   color: #eaeaea;
 }
 
@@ -572,11 +572,11 @@
 
 .pet-checkbox:hover,
 .pet-checkbox.checked {
-  border: 2px solid #e12454; /* Change the border color as needed */
+  border: 2px solid #FAD400; /* Change the border color as needed */
 }
 
 .pet-checkbox.checked {
-  background-color: #e12454;; 
+  background-color: #082342;
 
 }
 
@@ -599,7 +599,7 @@
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   transition: box-shadow 0.3s ease;
   cursor: pointer;
-  background-color: #e12454;
+  background-color: #FAD400;
 }
 
 .add-pet-card .fa-solid {
@@ -610,13 +610,13 @@
 
 .pet-card-Item:hover,
 .add-pet-card:hover {
-  border-color: orange;;
+  border-color: #FF5C17;
 }
 
 .apoint-submit-button {
   font-size: 12px;
   margin-left: 0;
-  background-color: orange;
+  background-color: #FF5C17;
   color: #fff;
   padding: 10px;
   cursor: pointer;
@@ -626,7 +626,7 @@
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 
   &:hover {
-    background-color: #e12454;
+    background-color: #082342;
   }
 
   &:disabled {
