@@ -37,10 +37,12 @@ const MainLayout = () => {
 
 
   useEffect(() => {
-    const storedToken = localStorage.getItem("authToken");
+    const storedToken = localStorage.getItem("authToken") || sessionStorage.getItem("authToken");
+    // console.log(storedToken);
   
     if (storedToken) {
       const decodedToken = jwt_decode(storedToken);
+
   
       if (decodedToken.exp * 1000 < Date.now()) {
         localStorage.removeItem("authToken");
@@ -66,14 +68,18 @@ const MainLayout = () => {
            setUserFName(fName);
             
             
-          
+  
           })
           .catch((err) => {
             // console.log(err);
           });
       }
     }
+    
   }, [storedToken]);
+
+  // console.log(" user id " + user.user_id);
+
 
 
   
