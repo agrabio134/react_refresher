@@ -73,6 +73,14 @@
     .appointment-log-item {
       padding: 10px;
     }
+    .appointment-log-table {
+      font-size: 14px; /* Adjust font size for smaller screens */
+    }
+  
+    .appointment-log-table th,
+    .appointment-log-table td {
+      padding: 6px;
+    }
   }
 
   @media screen and (max-width: 768px) {
