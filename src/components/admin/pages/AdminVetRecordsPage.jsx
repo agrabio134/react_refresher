@@ -685,7 +685,7 @@ const VeterinaryRecord = () => {
           const data = await response.json();
           console.log(data);
 
-          Swal.fire("Submitted!", "Your file has been submitted.", "success");
+          Swal.fire("Submitted!", "Record has been submitted.", "success");
           setModalVisible(false);
         } catch (error) {
           console.error("Error submitting vet record:", error);
