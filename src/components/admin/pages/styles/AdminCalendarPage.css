@@ -83,6 +83,9 @@
 .legend-item .canceled {
   background-color: #6e6e6e; /* Light muted orange for canceled status */
 }
+.legend-item .pending-cancellation {
+  background-color: #ecff5c; /* Light muted orange for canceled status */
+}
 
 
 .rbc-event.accepted {
@@ -92,6 +95,10 @@
 .rbc-event.canceled {
   background-color: #6e6e6e; /* Light muted orange for canceled status */
   color: #e9e7e7; /* Text color for events, adjust as needed */
+}
+.rbc-event.pending-cancellation {
+  background-color: #ecff5c; /* Light muted orange for canceled status */
+  color: #000000; /* Text color for events, adjust as needed */
 }
 
 

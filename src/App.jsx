@@ -14,6 +14,7 @@ import { AdminAuthProvider } from "./components/admin/auth/AdminAuthContext";
 
 const App = () => {
   const isBackOffice = window.location.pathname.startsWith("/admin");
+  
 
   return (
     <AuthProvider>

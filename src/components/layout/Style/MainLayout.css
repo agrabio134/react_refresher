@@ -125,12 +125,12 @@ html  {
   justify-content: space-around;
   list-style: none;
   /* margin: 0 5px ; */
-  font-size: 16px;
+  font-size: 14px;
   color: white;
   font-family: 'montserrat';
   text-decoration: none;
   text-transform: uppercase;
-  font-weight: bold;
+  /* font-weight: bold; */
   
 }
 .nav_list:nth-child(5) {

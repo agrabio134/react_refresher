@@ -74,7 +74,7 @@ const AdminCalendarPage = () => {
     // Handle date click as needed
     // setShowAppointmentForm(true);
   };
-  
+
 
   // Map your data to include start and end fields
   const mappedAppointments = appointments.map((appointment) => {
@@ -102,6 +102,9 @@ const AdminCalendarPage = () => {
       className = "done";
     } else if (status === "canceled") {
       className = "canceled";
+    } else if (status === "pending cancellation") {
+      className = "pending-cancellation";
+     
     } else {
       className = "not-accepted";
     }
@@ -268,9 +271,61 @@ const AdminCalendarPage = () => {
     }
   };
 
+  const handleCancel = () => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: false,
+      confirmButtonColor: "#3085d6",
+      confirmButtonText: "Yes, done it!",
+      showDenyButton: true,
+      denyButtonColor: "#d33",
+      denyButtonText: "No, cancel!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        Swal.fire("Done!", "Appointment has been set done.", "success");
+        handleConfirmCancel();
+        window.location.reload();
+      }
+    });
+  };  
 
-    
-    
+  const handleConfirmCancel = async () => {
+    const id = selectedEvent.t1_id;
+    try {
+      const response = await fetch(
+        `https://happypawsolongapo.com/api/cancel_appointment_force/${id}`,
+        {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ id }),
+        }
+      );
+      if (!response.ok) {
+        throw new Error(`Failed to fetch data: ${response.status}`);
+      } else {
+        console.log("Success", response);
+      }
+      window.location.reload();
+      Swal.fire("Done!", "Appointment has been set done.", "success");
+      handleConfirmDone();
+    } catch (error) {
+      console.error("Error fetching data:", error.message);
+    }
+  };
+
+  const formatTimeWithOneHourIncrement = (time) => {
+    const currentTime = new Date(`2000-01-01 ${time}`);
+    currentTime.setHours(currentTime.getHours() + 1); // Adding 1 hour
+    return currentTime.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+  };
+
+  
+
+
   return (
     <div className="admin-calendar-page">
       <h1>Admin Calendar Page</h1>
@@ -288,7 +343,10 @@ const AdminCalendarPage = () => {
           <span className="denied" /> Denied
         </div>
         <div className="legend-item">
-          <span className="canceled" /> Canceled
+          <span className="canceled" /> Cancelled
+        </div>
+        <div className="legend-item">
+          <span className="pending-cancellation" />Pending cancellation
         </div>
       </div>
       <Calendar
@@ -325,23 +383,45 @@ const AdminCalendarPage = () => {
               style={{ marginBottom: 10 }}
             />
             <Descriptions column={1}>
-              <Descriptions.Item label="Full Name">
+              <Descriptions.Item label="Full Name: ">
                 {selectedEvent.fname} {selectedEvent.lname}
               </Descriptions.Item>
-              <Descriptions.Item label="Pet Name">
+              <Descriptions.Item label="Email: ">
+                {selectedEvent.email}
+              </Descriptions.Item>
+              <Descriptions.Item label="Contact Number: ">
+                {selectedEvent.contact_no}
+              </Descriptions.Item>
+
+              <Descriptions.Item label="Pet Name: ">
                 {selectedEvent.name}
               </Descriptions.Item>
-              <Descriptions.Item label="Date">
+
+              <Descriptions.Item label="Date: ">
                 {selectedEvent.date}
               </Descriptions.Item>
-              <Descriptions.Item label="Time">
-                {selectedEvent.time}
+              <Descriptions.Item label="Time: ">
+               {selectedEvent.time && (
+                <div>
+                 {selectedEvent.time} - {formatTimeWithOneHourIncrement(selectedEvent.time)}
+                </div>
+                  )}
               </Descriptions.Item>
-              <Descriptions.Item label="Reason for Appointment">
+
+              <Descriptions.Item label="Reason for Appointment: s">
                 {selectedEvent.reason}
               </Descriptions.Item>
+              {/* add if else */}
+
+              {/* if reason for cancellation is NOT NULL, show this */}
+
+              {selectedEvent.cancellation_reason && (
+                <Descriptions.Item label="Reason for Cancellation: ">
+                  {selectedEvent.cancellation_reason}
+                </Descriptions.Item>
+              )}
             </Descriptions>
-            {/* add if else */}
+
             {selectedEvent.status === "pending" && (
               <div>
                 <Button
@@ -356,7 +436,7 @@ const AdminCalendarPage = () => {
               </div>
             )}
 
-            
+
             {selectedEvent.status === "accepted" && (
               <div>
                 <Button
@@ -367,7 +447,18 @@ const AdminCalendarPage = () => {
                 </Button>
               </div>
             )}
-            
+
+            {selectedEvent.status === "pending cancellation" && (
+              <div>
+                <Button
+                  onClick={handleCancel}
+                  style={{ marginTop: 10, marginRight: 10 }}
+                >
+                  Confirm Cancellation
+                </Button>
+              </div>
+            )}
+
 
 
           </div>
