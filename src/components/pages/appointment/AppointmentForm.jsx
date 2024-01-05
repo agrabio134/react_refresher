@@ -42,52 +42,68 @@ const AppointmentForm = () => {
     setSelectedReason(value);
   };
 
-  const fetchTimeSlots = async (date) => {
-    try {
-      const formattedDate = date.toISOString().split("T")[0];
+const fetchTimeSlots = async (date) => {
+  try {
+    const formattedDate = date.toISOString().split("T")[0];
 
-      const response = await fetch(
-        `https://happypawsolongapo.com/api/get_available_time_slots/${formattedDate}`
-      );
-      const rawResponse = await response.text();
-      const timeSlotsStartIndex = rawResponse.indexOf("[");
-      const timeSlotsEndIndex = rawResponse.lastIndexOf("]");
-      const timeSlotsJSON = rawResponse.substring(
-        timeSlotsStartIndex,
-        timeSlotsEndIndex + 1
-      );
-      const parsedTimeSlots = JSON.parse(timeSlotsJSON);
+    const response = await fetch(
+      `https://happypawsolongapo.com/api/get_available_time_slots/${formattedDate}`
+    );
 
-      const bookedResponse = await fetch(
-        `https://happypawsolongapo.com/api/get_booked_time_slots/${formattedDate}`
-      );
-      const bookedTimeSlotsData = await bookedResponse.text();
-      const bookedTimeSlotsStartIndex = bookedTimeSlotsData.indexOf("[");
-      const bookedTimeSlotsEndIndex = bookedTimeSlotsData.lastIndexOf("]");
-      const bookedTimeSlotsJSON = bookedTimeSlotsData.substring(
-        bookedTimeSlotsStartIndex, // 1
-        bookedTimeSlotsEndIndex + 1 // 2
-      );
-      const bookedTimeSlotsDataArray = bookedTimeSlotsJSON.split("}{");
-      const bookedTimeSlotsDataArrayWithBrackets = bookedTimeSlotsDataArray.map(
-        (obj, index, array) => {
-          return index < array.length - 1 ? `${obj}}` : obj;
-        }
-      );
-      const bookedTimeSlotsArray = bookedTimeSlotsDataArrayWithBrackets.map(
-        (bookedTimeSlot) => {
+    const rawResponse = await response.text();
+    const timeSlotsStartIndex = rawResponse.indexOf("[");
+    const timeSlotsEndIndex = rawResponse.lastIndexOf("]");
+    const timeSlotsJSON = rawResponse.substring(
+      timeSlotsStartIndex,
+      timeSlotsEndIndex + 1
+    );
+    const parsedTimeSlots = JSON.parse(timeSlotsJSON);
+
+    const bookedResponse = await fetch(
+      `https://happypawsolongapo.com/api/get_all_appointment_date_time`
+    );
+
+    const bookedTimeSlotsData = await bookedResponse.text();
+    const bookedTimeSlotsStartIndex = bookedTimeSlotsData.indexOf("[");
+    const bookedTimeSlotsEndIndex = bookedTimeSlotsData.lastIndexOf("]");
+    const bookedTimeSlotsJSON = bookedTimeSlotsData.substring(
+      bookedTimeSlotsStartIndex,
+      bookedTimeSlotsEndIndex + 1
+    );
+    
+   
+
+    const bookedTimeSlotsDataArray = bookedTimeSlotsJSON.split("}{");
+    const bookedTimeSlotsDataArrayWithBrackets = bookedTimeSlotsDataArray.map(
+      (obj, index, array) => {
+        return index < array.length - 1 ? `${obj}}` : obj;
+      }
+    );
+
+    // Process the bookedTimeSlotsData
+    const bookedTimeSlotsArray = bookedTimeSlotsDataArrayWithBrackets.map(
+      (bookedTimeSlot) => {
+        try {
           const parsedBookedTimeSlot = JSON.parse(bookedTimeSlot);
-          // console.log("parsedBookedTimeSlot:", parsedBookedTimeSlot);
           return parsedBookedTimeSlot.time;
+        } catch (error) {
+          console.error("Error parsing bookedTimeSlot JSON:", error);
+          return null; // Handle parsing errors
         }
-      );
+      }
+    );
 
-      setTimeSlots(parsedTimeSlots);
-      setBookedTimeSlots(bookedTimeSlotsArray);
-    } catch (error) {
-      // console.error("Error fetching time slots:", error);
-    }
-  };
+    // Remove undefined entries from bookedTimeSlotsArray
+    const filteredBookedTimeSlots = bookedTimeSlotsArray.filter(Boolean);
+
+    setTimeSlots(parsedTimeSlots);
+    setBookedTimeSlots(filteredBookedTimeSlots); // Update to use the filtered array
+  } catch (error) {
+    console.error("Error fetching time slots:", error);
+    // Handle errors
+  }
+};
+
 
   const checkPendingAppointment = async (date) => {
     try {
@@ -419,6 +435,28 @@ const AppointmentForm = () => {
     );
   };
 
+  const apiDateTime = new Date("2024-01-13T18:00:00+08:00");
+console.log("API DateTime in local time:", apiDateTime);
+
+const isTimeSlotBooked = (time) => {
+  const apiDateTime = new Date("2024-01-13T" + time + "+08:00");
+  return bookedTimeSlots.some((booking) => {
+    const bookingDateTime = new Date(booking.date + "T" + booking.time + "+00:00");
+    return (
+      apiDateTime.getUTCFullYear() === bookingDateTime.getUTCFullYear() &&
+      apiDateTime.getUTCMonth() === bookingDateTime.getUTCMonth() &&
+      apiDateTime.getUTCDate() === bookingDateTime.getUTCDate() &&
+      apiDateTime.getUTCHours() === bookingDateTime.getUTCHours() &&
+      apiDateTime.getUTCMinutes() === bookingDateTime.getUTCMinutes()
+    );
+  });
+};
+
+  
+console.log("timeSlots:", timeSlots);
+console.log("bookedTimeSlots:", bookedTimeSlots); 
+
+
   return (
     <div className="appointment-form-container">
       <div className="form-sub-container">
@@ -452,38 +490,37 @@ const AppointmentForm = () => {
 
           <label>Select Time Slot:</label>
           <select
-            value={selectedTimeSlot}
-            onChange={(e) => handleTimeSlotChange(e.target.value)}
-            disabled={isSubmitting}
-          >
-            {/* option default disable */}
-            <option
-              className="value-container"
-              disabled
-              style={{ color: "white" }}
-            >
-              {timeSlots.length === 0
-                ? "No available time slots"
-                : "Select Time Slot"}
-            </option>
-            {timeSlots.map((time) => (
-              <option
-                className="value-container"
-                key={time}
-                value={time}
-                disabled={bookedTimeSlots.includes(time) || isSubmitting}
-                style={{
-                  color: bookedTimeSlots.includes(time) ? "gray" : "white",
-                  pointerEvents:
-                    bookedTimeSlots.includes(time) || isSubmitting
-                      ? "none !important"
-                      : "auto",
-                }}
-              >
-                {formatTimeSlotLabel(time)}
-              </option>
-            ))}
-          </select>
+  value={selectedTimeSlot}
+  onChange={(e) => handleTimeSlotChange(e.target.value)}
+  disabled={isSubmitting}
+>
+  <option
+    className="value-container"
+    disabled
+    style={{ color: "white" }}
+  >
+    {timeSlots.length === 0
+      ? "No available time slots"
+      : "Select Time Slot"}
+  </option>
+  {timeSlots.map((time) => (
+    <option
+      className="value-container"
+      key={time}
+      value={time}
+      disabled={isTimeSlotBooked(time) || isSubmitting}
+      style={{
+        color: isTimeSlotBooked(time) ? "gray" : "white",
+        pointerEvents: isTimeSlotBooked(time) || isSubmitting
+          ? "none"
+          : "auto",
+      }}
+    >
+      {formatTimeSlotLabel(time)}
+    </option>
+  ))}
+</select>
+
 
           <label>Reason of Appointment:</label>
 
