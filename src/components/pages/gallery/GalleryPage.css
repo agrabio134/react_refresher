@@ -115,15 +115,15 @@
     /* GalleryPage.css */
 
 .main-gallery-container {
-  width: 70rem;
+  width: 100dvw;
   background-color: #ebf5f5;
   padding: 0;
 }
 
 .gallery-welcome-container {
-  width: 100%;
-  margin-top: 160px;
-  min-height: 70vh;
+  width: 100dvw;
+  margin-top: 50px;
+  min-height: 30vh;
   display: flex;
   background: url(../../../assets/img/b22.jpg);
   background-size: cover;
@@ -145,49 +145,50 @@
 
   .gallery-welcome-container .gallery-content h1{
     padding-top: 20px;
-    font-size: 7rem;
+    font-size: 24px;
     font-weight: bold;
-  color: black;
-  width: 45rem;
+  color: #082342;
+  width: 100dvw;
   }
   
   .gallery-welcome-container .gallery-content h1 .span{
-    color: #F50057;
+    color: #FF5C17;
   }
 
   .gallery-breadcrumbs {
     display: flex;
     justify-content: space-between;
     align-self: normal;
-    padding-left: 18vh;
+    padding-left: 29dvw;
     width: 150px;
   }
   .gallery-breadcrumbs a{
-    color: black;
-    font-size: 4rem;
+    color: #082342;
+    font-size: 24px;
     font-weight: bold;
   }
 
   .gallery-breadcrumbs li{
-        color: black;
-        font-size: 4rem;
-        font-weight: bold;
+    color: #082342;
+    font-size: 24px;
+    font-weight: bold;;
   }
 
 
 
 .gallery-container {
-    max-width: 1200px;
-    margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  width: 100dvw !important;
+    margin: 0;
     padding: 20px;
   }
   
   .image-list {
     list-style: none;
     padding: 0;
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-    gap: 20px;
+    display: flex;
+    flex-direction: column;
   }
   
   .image-item {
@@ -198,7 +199,7 @@
   }
   
  .image-item img {
-    width: 100%;
+    width: 90dvw;
     height: auto;
     border-radius: 8px 8px 0 0;
     transition: transform 0.3s ease;
@@ -212,7 +213,7 @@
     position: absolute;
     bottom: 0;
     left: 0;
-    width: 100%;
+    width: 90dvw;
     padding: 15px;
     background-color: rgba(255, 255, 255, 0.9);
     border-radius: 0 0 8px 8px;

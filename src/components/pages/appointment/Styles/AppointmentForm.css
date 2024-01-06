@@ -372,6 +372,7 @@
   }
 
   .form-sub-container label {
+    font-size: 14px;
     display: block;
     margin-bottom: 10px;
   }
@@ -524,7 +525,7 @@
 }
 
 .pet-card-body img {
-  width: 30%;
+  width: 40%;
   height: auto;
   object-fit: cover;
   border-radius: 50%;
@@ -534,8 +535,13 @@
 .pet-card-body .pet-details {
   flex-grow: 1;
 }
+
+.pet-details{
+  padding-top: 10px;
+}
+
 .pet-card-body p {
-  font-size: 12px;
+  font-size: 13px;
   margin: 8px 0;
 }
 

@@ -177,7 +177,7 @@ const MainLayout = () => {
                   </Link>
                 ) : (
                   <>
-                    <Link to="/auth/login" className="auth_item">
+                    <Link to="/auth/login" className="auth_item" >
                       Login
                     </Link>
                     /
@@ -212,16 +212,16 @@ const MainLayout = () => {
                   </div>
                 {isLogin ? (
                   
-                  <Link to="profile" className="side-auth_item">
+                  <Link to="profile" className="side-auth_item" onClick={closeNav}>
                     Profile
                   </Link>
                 ) : (
                   <>
-                    <Link to="/auth/login" className="side-auth_item">
+                    <Link to="/auth/login" className="side-auth_item" onClick={closeNav}>
                       Login
                     </Link>
                     /
-                    <Link to="/auth/signup" className="side-auth_item">
+                    <Link to="/auth/signup" className="side-auth_item"  onClick={closeNav}>
                       Signup
                     </Link>
                   </>
@@ -232,7 +232,7 @@ const MainLayout = () => {
                   <div className="side-nav-home">
                     <i className="fa-solid fa-house"></i>
                   </div>
-                  <Link to="/" className="side-nav_list">
+                  <Link to="/" className="side-nav_list" onClick={closeNav}>
                     Home
                   </Link>
                 </div>
@@ -241,7 +241,7 @@ const MainLayout = () => {
                   <div className="side-nav-home">
                     <i className="fa-solid fa-calendar-check"></i>
                   </div>
-                  <Link to="/appointments" className="side-nav_list">
+                  <Link to="/appointments" className="side-nav_list" onClick={closeNav}>
                     Appointment
                   </Link>
                 </div>
@@ -250,7 +250,7 @@ const MainLayout = () => {
                   <div className="side-nav-home">
                     <i className="fa-solid fa-blog"></i>
                   </div>
-                  <Link to="blogs" className="sdie-nav_list">
+                  <Link to="blogs" className="sdie-nav_list" onClick={closeNav}>
                     Blog
                   </Link>
                 </div>
@@ -259,7 +259,7 @@ const MainLayout = () => {
                   <div className="side-nav-home">
                     <i className="fa-solid fa-image"></i>
                   </div>
-                  <Link to="gallery" className="sdie-nav_list">
+                  <Link to="gallery" className="sdie-nav_list" onClick={closeNav}>
                     Gallery
                   </Link>
                 </div>

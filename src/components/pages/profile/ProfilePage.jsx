@@ -193,7 +193,7 @@ const ProfilePage = () => {
           <section className="main-profile-container">
             <div className="whole-profile-container">
               <div className="profile-header-container">
-                <h2>Welcome {userFullName}</h2>
+                <h2>{userFullName}</h2>
                 <button onClick={handleLogout}>Logout</button>
               </div>
 

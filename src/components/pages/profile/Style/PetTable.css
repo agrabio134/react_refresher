@@ -67,10 +67,10 @@
     font-weight: bold;
   }
 
-  .pet-button-column {
+  /* .pet-button-column {
     display: flex;
     justify-content: center;
-  }
+  } */
 
    /* Style for the action button */
    .pet-action-edit-button {
@@ -106,6 +106,8 @@
   @media screen and (max-width: 768px) {
 
     .main-pet-table-container {
+      display: flex;
+      flex-direction: column;
       padding-top: 50px;
       background-color: #ffffff;
       padding: 20px;
@@ -113,18 +115,18 @@
   }
   
   .main-pet-table-container h2{
-    font-size: 5rem;
-    color: black;
+    font-size: 24px;
+    color: #082342;
     font-weight: bold;
     margin-left: 5px;
   }
   
   .pet-table-separator {
     align-self: center;
-    width: 100%;
+    width: 40%;
     height: 4px;
     margin: 10px 0px 20px 5px;
-    background-color: #e12454;
+    background-color: #FAD400;
   }
   
   .whole-pet-table {
@@ -136,8 +138,8 @@
   
     /* Styling for the table header */
     .whole-pet-table th {
-      font-size: 4rem;
-      background-color: #e12454; /* pinkred color for header background */
+      font-size: 14px;
+      background-color:#082342; /* pinkred color for header background */
       color: #ffffff;
       font-weight: bold;
       text-align: center;
@@ -146,7 +148,7 @@
   
     .pet-item {
       text-align: center;
-      font-size: 3rem;
+      font-size: 12px;
       background-color: #ffffff;
       border: 1px solid #e0e0e0;
       border-radius: 8px;
@@ -161,7 +163,7 @@
     }
   
     .pet-table-item td {
-      padding: 15px;
+      padding: 0;
     }
   
     .pet-name-column {
@@ -179,18 +181,18 @@
       font-weight: bold;
     }
   
-    .pet-button-column {
+    /* .pet-button-column {
       display: flex;
-      padding: 20px;
-      margin: 20px;
+      padding: 0px;
+      margin: 0px;
       justify-content: space-around;
       flex-direction: column;
-    }
+    } */
   
      /* Style for the action button */
      .pet-action-edit-button {
       background-color: orange; /* Red color for the button */
-      font-size: 4rem;
+      font-size: 12px;
       color: white;
       padding: 5px 10px;
       cursor: pointer;
@@ -205,7 +207,7 @@
   
     .pet-action-delete-button {
       background-color: #e74c3c; /* Red color for the button */
-      font-size: 4rem;
+      font-size: 12px;
       color: white;
       padding: 5px 10px;
       cursor: pointer;
@@ -222,6 +224,21 @@
       width: 100%; /* Set the width of the container */
       overflow-x: auto; /* Enable horizontal scrolling */
       white-space: nowrap; /* Prevent content from wrapping */
+    }
+
+    :where(.css-dev-only-do-not-override-1g853jt)[class^="ant-image"], :where(.css-dev-only-do-not-override-1g853jt)[class*=" ant-image"] {
+      font-family: -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica Neue',Arial,'Noto Sans',sans-serif,'Apple Color Emoji','Segoe UI Emoji','Segoe UI Symbol','Noto Color Emoji';
+      font-size: 14px;
+      box-sizing: border-box; 
+      display: flex !important;
+      justify-content: center !important;
+      align-content: center !important;
+      align-items: center !important;
+    }
+
+    .pet-image-column img{
+      width: 50px !important;
+      height: auto !important;
     }
 
 

@@ -126,6 +126,9 @@
 @media screen and (max-width: 768px) {
 
     .main-add-pet-form-container {
+        display: flex;
+        align-items: center;
+        flex-direction: column;
         text-align: center;
         background-color: #fff;
         border-radius: 100px 100px 0px 0px;
@@ -134,18 +137,18 @@
     }
     
     .main-add-pet-form-container h2{
-        font-size: 5rem;
-        color: black;
+        font-size: 24px;
+        color: #082342;
         font-weight: bold;
-        margin-left: 5px;
+        margin: 0;
     }
     
     .add-pet-separator {
         align-self: center;
-        width: 100%;
+        width: 40%;
         height: 4px;
-        margin: 10px 0px 20px 5px;
-        background-color: #e12454;
+        margin: 10px 0px 20px 0px;
+        background-color: #FAD400;
     }
     
     .add-pet-grid-form {
@@ -159,10 +162,10 @@
         border: none;
         outline: none;
         border-radius: 30px;
-        font-size: 4rem;
+        font-size: 12px;
     }
     .main-form-body-container button {
-            font-size: 4rem;
+            font-size: 12px;
             padding: 11px 41px;
             margin-left: 5px;
             color: #fff;
@@ -180,22 +183,77 @@
         color: #333;
         letter-spacing: 0.5px;
         padding: 14px 64px;
+        font-size: 14px;
     }
     .add-pet-form {
         color: black;
         width: 100%;
         position: relative;
-        margin-bottom: 50px;
         padding-left: 5px;
         padding-right: 5px;
     }
 
     .add-pet-form h1 {
-        font-size: 3rem;
+        display: flex;
+        font-size: 14px;
         color: black;
         font-weight: bold;
         margin-left: 5px;
+        margin-bottom: 5px;
     }
+
+    .add-pet-form select{
+        border-radius: 100px;
+        width: 100%;
+        margin-bottom: 10px;
+        font-size: 1rem;
+        text-align: center;
+        padding: 17px 64px;
+        margin-bottom: 10px;
+        background-color: #082342;
+        color: #fff;;
+    }
+    
+    .profile-img {
+        display: flex;
+        justify-content: center;
+    }
+    
+    .profile-img img {
+        width: 25dvw;
+        height: 25dvw;
+        border-radius: 100%;
+    }
+    
+    
+    /* AddPetForm.css */
+    
+    /* Unique class for the autocomplete */
+    .autocomplete-container {
+        position: relative;
+      }
+      
+      .autocomplete-results {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        position: absolute;
+        z-index: 1;
+        width: 100%;
+        max-height: 150px;
+        overflow-y: auto;
+        border: 1px solid #ccc;
+        background-color: #fff;
+      }
+      
+      .autocomplete-results li {
+        padding: 8px;
+        cursor: pointer;
+      }
+      
+      .autocomplete-results li:hover {
+        background-color: #f0f0f0;
+      }
 
 }
 

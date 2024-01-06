@@ -173,7 +173,7 @@ const AppointmentLog = () => {
         visible={isModalVisible}
         onCancel={handleCancel}
         footer={null}
-        width={"60%"}
+        width={null}
       >
         {loading ? (
           <p>Loading...</p>

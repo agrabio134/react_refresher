@@ -244,7 +244,7 @@ a:hover {
   .main-user-login-container {
       margin: 0;
       padding: 0;
-      width: 100dvw;
+      width: 99.8dvw;
       height: 100dvh;
       padding: 24px;
       display: flex;

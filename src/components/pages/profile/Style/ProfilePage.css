@@ -32,7 +32,7 @@
 
 .profile-header-container button{
     font-family: 'montserrat';  
-        font-weight: bold;
+    font-weight: bold;
     padding: 13px 50px;
     margin-left: 5px;
     color: #fff;
@@ -48,30 +48,29 @@
 
     .main-profile-container {
         height: auto;
-        width: 70rem;
-        padding-top: 230px;
+        width: 100dvw;
+        padding-top: 10dvh;
         background-color: white;
         color: black;
         display: flex;
         justify-content: center;
+        padding-bottom: 2dvh;
     }
     
     .whole-profile-container {
-        background-color: #e12454;
+        background-color: #082342;
         margin-top: 10px;
-        width: 90%;
+        width: 90dvw;
         border-radius: 20px;
         box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     }
     
     .profile-header-container {
         display: flex;
-        flex-direction: column;
         width: 100%;
         border-radius: 5px 5px 0px 0px;
-        background-color: #e12454;
+        background-color: #082342;
         border-radius: 20px;
-        display: flex;
         justify-content: space-between;
         padding: 20px;
         align-items: center;
@@ -79,20 +78,21 @@
     }
     
     .profile-header-container h2{
-        font-size: 4.5rem;
+        font-size: 20px;
         color: white;
         font-weight: bold;
+        border-bottom: solid #FAD400;
     }
     
     .profile-header-container button{
-        padding: 13px 50px;
-        font-size: 3rem;
+        padding: 10px 10px;
+        font-size: 12px;
         margin-left: 5px;
         color: #fff;
         text-transform: uppercase;
-        letter-spacing: 2px;
+        letter-spacing: 1px;
         font-weight: bold;
-        background-color: orange;
+        background-color: #FF5C17;
         cursor: pointer;
         transition: opacity 0.4s;
     }

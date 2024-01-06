@@ -225,7 +225,7 @@
 .main-user-signup-container {
   margin: 0;
   padding: 0;
-  width: 100dvw;
+  width: 99.8dvw;
   height: 100%;
   padding: 24px;
   display: flex;
@@ -336,7 +336,7 @@ color: #082342;
 }
 
 .signup-side img {
-  width: 60dvw;
+  width: 40dvw;
   height: auto;
   /* display: none; */
 }
@@ -362,14 +362,14 @@ color: #082342;
   border: none;
   outline: none;
   border-radius: 30px;
-  font-size: 1.1em;
+  font-size: 14px;
 }
 
 .user-signup-box input {
   width: 100%;
   background: #e6e6e6;
   letter-spacing: 0.5px;
-  padding: 14px 64px;
+  padding: 14px 12px;
 }
 
 .user-signup-box input ~ i {

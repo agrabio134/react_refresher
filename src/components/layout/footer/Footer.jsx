@@ -6,9 +6,10 @@ const FooterPage = () => {
       <section className="main_footer_container">
             <div className="footer-content-container">
                 <div className="footer-content">
-
+   
                     <div className="happy-paws-content">
-                        <h1>Happy Paws</h1>
+                        <img src="/page/LGHD.png" alt="" />
+                        {/* <h1>Happy Paws</h1> */}
                         <p>Veterinary Services & Pet Grooming</p>
                     </div>
 

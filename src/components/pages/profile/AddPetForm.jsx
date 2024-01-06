@@ -121,7 +121,7 @@ const AddPetForm = ({
           <img
             src={thumbnailPreview}
             alt="Thumbnail Preview"
-            style={{ maxWidth: "100px", maxHeight: "100px" }}
+            // style={{ maxWidth: "100px", maxHeight: "100px" }}
           />
         )}
       </div>
