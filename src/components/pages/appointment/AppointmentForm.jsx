@@ -8,6 +8,7 @@ import {
   calculateAgeInMonths,
   calculateAgeInDays,
 } from "../utils/petAgeCalculation";
+import axios from "axios";
 
 
 // import AppointmentLog from "./AppointmentLog";
@@ -28,6 +29,7 @@ const AppointmentForm = () => {
   useEffect(() => {
     fetchTimeSlots(selectedDate);
     checkPendingAppointment(selectedDate);
+    fetchBookedTimeSlots();
   }, [selectedDate]);
 
   const handleTypeChange = (value) => {
@@ -41,68 +43,61 @@ const AppointmentForm = () => {
   const handleReasonChange = (value) => {
     setSelectedReason(value);
   };
+  const fetchBookedTimeSlots = async () => {
+    try {
+      const response = await fetch("https://happypawsolongapo.com/api/get_all_appointment_date_time");
+      const rawData = await response.text();
 
-const fetchTimeSlots = async (date) => {
-  try {
-    const formattedDate = date.toISOString().split("T")[0];
+      const startIndex = rawData.indexOf("[");
+      const endIndex = rawData.lastIndexOf("]");
+      const json = rawData.substring(startIndex, endIndex + 1);
+      const parsedJson = JSON.parse(json);
+      setBookedTimeSlots(parsedJson);
 
-    const response = await fetch(
-      `https://happypawsolongapo.com/api/get_available_time_slots/${formattedDate}`
-    );
+      console.log("Booked time slots:", parsedJson);
+  
+      
+  
+        
+    } catch (error) {
+      console.error("Error fetching booked time slots:", error);
+      // Handle errors related to fetching the API data
+    }
+  };
+  
+  
+  
+  
+  
+  
+  
 
-    const rawResponse = await response.text();
-    const timeSlotsStartIndex = rawResponse.indexOf("[");
-    const timeSlotsEndIndex = rawResponse.lastIndexOf("]");
-    const timeSlotsJSON = rawResponse.substring(
-      timeSlotsStartIndex,
-      timeSlotsEndIndex + 1
-    );
-    const parsedTimeSlots = JSON.parse(timeSlotsJSON);
 
-    const bookedResponse = await fetch(
-      `https://happypawsolongapo.com/api/get_all_appointment_date_time`
-    );
-
-    const bookedTimeSlotsData = await bookedResponse.text();
-    const bookedTimeSlotsStartIndex = bookedTimeSlotsData.indexOf("[");
-    const bookedTimeSlotsEndIndex = bookedTimeSlotsData.lastIndexOf("]");
-    const bookedTimeSlotsJSON = bookedTimeSlotsData.substring(
-      bookedTimeSlotsStartIndex,
-      bookedTimeSlotsEndIndex + 1
-    );
-    
-   
-
-    const bookedTimeSlotsDataArray = bookedTimeSlotsJSON.split("}{");
-    const bookedTimeSlotsDataArrayWithBrackets = bookedTimeSlotsDataArray.map(
-      (obj, index, array) => {
-        return index < array.length - 1 ? `${obj}}` : obj;
-      }
-    );
-
-    // Process the bookedTimeSlotsData
-    const bookedTimeSlotsArray = bookedTimeSlotsDataArrayWithBrackets.map(
-      (bookedTimeSlot) => {
-        try {
-          const parsedBookedTimeSlot = JSON.parse(bookedTimeSlot);
-          return parsedBookedTimeSlot.time;
-        } catch (error) {
-          console.error("Error parsing bookedTimeSlot JSON:", error);
-          return null; // Handle parsing errors
-        }
-      }
-    );
-
-    // Remove undefined entries from bookedTimeSlotsArray
-    const filteredBookedTimeSlots = bookedTimeSlotsArray.filter(Boolean);
-
-    setTimeSlots(parsedTimeSlots);
-    setBookedTimeSlots(filteredBookedTimeSlots); // Update to use the filtered array
-  } catch (error) {
-    console.error("Error fetching time slots:", error);
-    // Handle errors
-  }
-};
+  const fetchTimeSlots = async (date) => {
+    try {
+      const formattedDate = date.toISOString().split("T")[0];
+  
+      const response = await fetch(
+        `https://happypawsolongapo.com/api/get_available_time_slots/${formattedDate}`
+      );
+  
+      const rawResponse = await response.text();
+      const timeSlotsStartIndex = rawResponse.indexOf("[");
+      const timeSlotsEndIndex = rawResponse.lastIndexOf("]");
+      const timeSlotsJSON = rawResponse.substring(
+        timeSlotsStartIndex,
+        timeSlotsEndIndex + 1
+      );
+      const parsedTimeSlots = JSON.parse(timeSlotsJSON);
+  
+      // Update only the available time slots, not booked time slots
+      setTimeSlots(parsedTimeSlots);
+    } catch (error) {
+      console.error("Error fetching time slots:", error);
+      // Handle errors
+    }
+  };
+  
 
 
   const checkPendingAppointment = async (date) => {
@@ -438,19 +433,16 @@ const fetchTimeSlots = async (date) => {
   const apiDateTime = new Date("2024-01-13T18:00:00+08:00");
 console.log("API DateTime in local time:", apiDateTime);
 
-const isTimeSlotBooked = (time) => {
-  const apiDateTime = new Date("2024-01-13T" + time + "+08:00");
+const isTimeSlotBooked = (time, date) => {
   return bookedTimeSlots.some((booking) => {
-    const bookingDateTime = new Date(booking.date + "T" + booking.time + "+00:00");
-    return (
-      apiDateTime.getUTCFullYear() === bookingDateTime.getUTCFullYear() &&
-      apiDateTime.getUTCMonth() === bookingDateTime.getUTCMonth() &&
-      apiDateTime.getUTCDate() === bookingDateTime.getUTCDate() &&
-      apiDateTime.getUTCHours() === bookingDateTime.getUTCHours() &&
-      apiDateTime.getUTCMinutes() === bookingDateTime.getUTCMinutes()
-    );
+    return booking.date === date && booking.time === time;
   });
 };
+
+
+
+
+
 
   
 console.log("timeSlots:", timeSlots);
@@ -508,10 +500,10 @@ console.log("bookedTimeSlots:", bookedTimeSlots);
       className="value-container"
       key={time}
       value={time}
-      disabled={isTimeSlotBooked(time) || isSubmitting}
+      disabled={isTimeSlotBooked(time, selectedDate.toISOString().split("T")[0]) || isSubmitting}
       style={{
-        color: isTimeSlotBooked(time) ? "gray" : "white",
-        pointerEvents: isTimeSlotBooked(time) || isSubmitting
+        color: isTimeSlotBooked(time, selectedDate.toISOString().split("T")[0]) ? "gray" : "white",
+        pointerEvents: isTimeSlotBooked(time, selectedDate.toISOString().split("T")[0]) || isSubmitting
           ? "none"
           : "auto",
       }}
@@ -520,6 +512,9 @@ console.log("bookedTimeSlots:", bookedTimeSlots);
     </option>
   ))}
 </select>
+
+
+
 
 
           <label>Reason of Appointment:</label>
