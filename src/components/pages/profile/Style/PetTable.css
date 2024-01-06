@@ -226,7 +226,7 @@
       white-space: nowrap; /* Prevent content from wrapping */
     }
 
-    :where(.css-dev-only-do-not-override-1g853jt)[class^="ant-image"], :where(.css-dev-only-do-not-override-1g853jt)[class*=" ant-image"] {
+    /* :where(.css-dev-only-do-not-override-1g853jt)[class^="ant-image"], :where(.css-dev-only-do-not-override-1g853jt)[class*=" ant-image"] {
       font-family: -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica Neue',Arial,'Noto Sans',sans-serif,'Apple Color Emoji','Segoe UI Emoji','Segoe UI Symbol','Noto Color Emoji';
       font-size: 14px;
       box-sizing: border-box; 
@@ -234,12 +234,12 @@
       justify-content: center !important;
       align-content: center !important;
       align-items: center !important;
-    }
+    } */
 
-    .pet-image-column img{
+    /* .pet-image-column img{
       width: 50px !important;
       height: auto !important;
-    }
+    } */
 
 
   }
