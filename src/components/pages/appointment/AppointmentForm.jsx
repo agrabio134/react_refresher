@@ -10,7 +10,6 @@ import {
 } from "../utils/petAgeCalculation";
 import axios from "axios";
 
-
 // import AppointmentLog from "./AppointmentLog";
 
 const AppointmentForm = () => {
@@ -45,7 +44,9 @@ const AppointmentForm = () => {
   };
   const fetchBookedTimeSlots = async () => {
     try {
-      const response = await fetch("https://happypawsolongapo.com/api/get_all_appointment_date_time");
+      const response = await fetch(
+        "https://happypawsolongapo.com/api/get_all_appointment_date_time"
+      );
       const rawData = await response.text();
 
       const startIndex = rawData.indexOf("[");
@@ -55,32 +56,20 @@ const AppointmentForm = () => {
       setBookedTimeSlots(parsedJson);
 
       console.log("Booked time slots:", parsedJson);
-  
-      
-  
-        
     } catch (error) {
       console.error("Error fetching booked time slots:", error);
       // Handle errors related to fetching the API data
     }
   };
-  
-  
-  
-  
-  
-  
-  
-
 
   const fetchTimeSlots = async (date) => {
     try {
       const formattedDate = date.toISOString().split("T")[0];
-  
+
       const response = await fetch(
         `https://happypawsolongapo.com/api/get_available_time_slots/${formattedDate}`
       );
-  
+
       const rawResponse = await response.text();
       const timeSlotsStartIndex = rawResponse.indexOf("[");
       const timeSlotsEndIndex = rawResponse.lastIndexOf("]");
@@ -89,7 +78,7 @@ const AppointmentForm = () => {
         timeSlotsEndIndex + 1
       );
       const parsedTimeSlots = JSON.parse(timeSlotsJSON);
-  
+
       // Update only the available time slots, not booked time slots
       setTimeSlots(parsedTimeSlots);
     } catch (error) {
@@ -97,8 +86,6 @@ const AppointmentForm = () => {
       // Handle errors
     }
   };
-  
-
 
   const checkPendingAppointment = async (date) => {
     try {
@@ -431,23 +418,16 @@ const AppointmentForm = () => {
   };
 
   const apiDateTime = new Date("2024-01-13T18:00:00+08:00");
-console.log("API DateTime in local time:", apiDateTime);
+  console.log("API DateTime in local time:", apiDateTime);
 
-const isTimeSlotBooked = (time, date) => {
-  return bookedTimeSlots.some((booking) => {
-    return booking.date === date && booking.time === time;
-  });
-};
+  const isTimeSlotBooked = (time, date) => {
+    return bookedTimeSlots.some((booking) => {
+      return booking.date === date && booking.time === time;
+    });
+  };
 
-
-
-
-
-
-  
-console.log("timeSlots:", timeSlots);
-console.log("bookedTimeSlots:", bookedTimeSlots); 
-
+  console.log("timeSlots:", timeSlots);
+  console.log("bookedTimeSlots:", bookedTimeSlots);
 
   return (
     <div className="appointment-form-container">
@@ -482,40 +462,50 @@ console.log("bookedTimeSlots:", bookedTimeSlots);
 
           <label>Select Time Slot:</label>
           <select
-  value={selectedTimeSlot}
-  onChange={(e) => handleTimeSlotChange(e.target.value)}
-  disabled={isSubmitting}
->
-  <option
-    className="value-container"
-    disabled
-    style={{ color: "white" }}
-  >
-    {timeSlots.length === 0
-      ? "No available time slots"
-      : "Select Time Slot"}
-  </option>
-  {timeSlots.map((time) => (
-    <option
-      className="value-container"
-      key={time}
-      value={time}
-      disabled={isTimeSlotBooked(time, selectedDate.toISOString().split("T")[0]) || isSubmitting}
-      style={{
-        color: isTimeSlotBooked(time, selectedDate.toISOString().split("T")[0]) ? "gray" : "white",
-        pointerEvents: isTimeSlotBooked(time, selectedDate.toISOString().split("T")[0]) || isSubmitting
-          ? "none"
-          : "auto",
-      }}
-    >
-      {formatTimeSlotLabel(time)}
-    </option>
-  ))}
-</select>
-
-
-
-
+            value={selectedTimeSlot}
+            onChange={(e) => handleTimeSlotChange(e.target.value)}
+            disabled={isSubmitting}
+          >
+            <option
+              className="value-container"
+              disabled
+              style={{ color: "white" }}
+            >
+              {timeSlots.length === 0
+                ? "No available time slots"
+                : "Select Time Slot"}
+            </option>
+            {timeSlots.map((time) => (
+              <option
+                className="value-container"
+                key={time}
+                value={time}
+                disabled={
+                  isTimeSlotBooked(
+                    time,
+                    selectedDate.toISOString().split("T")[0]
+                  ) || isSubmitting
+                }
+                style={{
+                  color: isTimeSlotBooked(
+                    time,
+                    selectedDate.toISOString().split("T")[0]
+                  )
+                    ? "gray"
+                    : "white",
+                  pointerEvents:
+                    isTimeSlotBooked(
+                      time,
+                      selectedDate.toISOString().split("T")[0]
+                    ) || isSubmitting
+                      ? "none"
+                      : "auto",
+                }}
+              >
+                {formatTimeSlotLabel(time)}
+              </option>
+            ))}
+          </select>
 
           <label>Reason of Appointment:</label>
 

@@ -152,7 +152,7 @@ const VeterinaryRecord = () => {
     },
   ];
   const VetRecordColumns = [
-    { title: "id", dataIndex: "t1_id", key: "t1_id" },
+    // { title: "id", dataIndex: "t1_id", key: "t1_id" },
     { title: "Date", dataIndex: "date", key: "date" },
     { title: "Vet on Duty", dataIndex: "vet_on_duty", key: "vet_on_duty" },
     { title: "Body Weight", dataIndex: "body_wt", key: "body_wt" },
@@ -515,7 +515,7 @@ const VeterinaryRecord = () => {
             }
           });
 
-          console.log(vetRecordData);
+          // console.log(vetRecordData);
           setVetRecord(vetRecordData);
         } catch (jsonError) {
           console.error("Error parsing JSON:", jsonError);

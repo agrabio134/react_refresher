@@ -5,13 +5,15 @@ import Swal from "sweetalert2";
 import AddPetForm from "./AddPetForm";
 import PetTable from "./PetTable";
 import "./Style/ProfilePage.css";
+import UserRecords from "./UserRecords";
+import { Modal, Button } from "antd";
 
 const ProfilePage = () => {
   const [decodedToken, setDecodedToken] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const [userFullName, setUserFullName] = useState("");
   const { isLogin, toggleLogin } = useAuth();
-
+  const [isModalVisible, setIsModalVisible] = useState(false);
   const [petName, setPetName] = useState("");
   const [petType, setPetType] = useState("");
   const [petBreed, setPetBreed] = useState("");
@@ -188,6 +190,15 @@ const ProfilePage = () => {
 
       getUser();
 
+      // Function to open the modal
+      const showModal = () => {
+        setIsModalVisible(true);
+      };
+
+      // Function to close the modal
+      const handleCancel = () => {
+        setIsModalVisible(false);
+      };
       return (
         <>
           <section className="main-profile-container">
@@ -197,6 +208,19 @@ const ProfilePage = () => {
                 <button onClick={handleLogout}>Logout</button>
               </div>
 
+              <button onClick={showModal}>My Records</button>
+
+              <Modal
+                title="User Records"
+                visible={isModalVisible}
+                onCancel={handleCancel}
+                width={'500vh'}
+                footer={null}
+              >
+                <UserRecords id={decodedToken.user_id} />
+
+                <Button onClick={handleCancel}>Close</Button>
+              </Modal>
               <AddPetForm
                 petName={petName}
                 setPetName={setPetName}
@@ -232,7 +256,14 @@ const ProfilePage = () => {
   };
 
   const handleAddPet = async () => {
-    if (petName === "" || petType === "" || petBreed === "" || petAge === "" || petSex === "" || petImageUrl === "") {
+    if (
+      petName === "" ||
+      petType === "" ||
+      petBreed === "" ||
+      petAge === "" ||
+      petSex === "" ||
+      petImageUrl === ""
+    ) {
       // Swal.fire({
       //   title: "Error",
       //   text: "Please fill in all fields.",
