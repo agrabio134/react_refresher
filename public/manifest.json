@@ -1,6 +1,6 @@
 {
     "name": "PawsPro",
-    "short_name": "App",
+    "short_name": "PawsPro",
     "start_url": ".",
     "display": "standalone",
     "theme_color": "#ffffff",
