@@ -205,10 +205,10 @@ const ProfilePage = () => {
             <div className="whole-profile-container">
               <div className="profile-header-container">
                 <h2>{userFullName}</h2>
-                <button onClick={handleLogout}>Logout</button>
+                <button className="recordsBtn" onClick={showModal}>My Records</button>
+                <button className="logoutBtn" onClick={handleLogout}><i class="fa-solid fa-right-from-bracket  fa-lg "></i></button>
               </div>
 
-              <button onClick={showModal}>My Records</button>
 
               <Modal
                 title="User Records"

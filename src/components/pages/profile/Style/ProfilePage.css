@@ -15,23 +15,43 @@
 }
 
 .profile-header-container {
+    display: grid;
+    grid-template-columns: 1fr auto auto;
     width: 100%;
     border-radius: 5px 5px 0px 0px;
     background-color: #082342;
-    display: flex;
-    justify-content: space-between;
+    /* display: flex; */
+    /* justify-content: space-between; */
     padding: 20px;
     align-items: center;
 }
 
-.profile-header-container h2{
-    font-family: 'montserrat';      
+.recordsBtn {
+    background-color: #FAD400;
+    color: #082342 !important;
+}
+
+.recordsBtn:hover { 
+    background-color: #868686;
+    color: #fff !important;
+}
+
+.logoutBtn {
+    border: solid 2px rgb(188, 188, 188);
+    background-color: transparent;
+    padding: 13px !important;
+
+
+}
+
+.profile-header-container h2 {
+    font-family: 'montserrat';
     color: white;
     font-weight: bold;
 }
 
-.profile-header-container button{
-    font-family: 'montserrat';  
+.profile-header-container button {
+    font-family: 'montserrat';
     font-weight: bold;
     padding: 13px 50px;
     margin-left: 5px;
@@ -39,12 +59,25 @@
     text-transform: uppercase;
     letter-spacing: 2px;
     font-weight: bold;
-    background-color: #FF5C17;
+    /* background-color: #FF5C17; */
     cursor: pointer;
     transition: opacity 0.4s;
 }
 
 @media screen and (max-width: 768px) {
+
+    .recordsBtn {
+        background-color: #FAD400 !important;
+        color: #082342 !important;
+    }
+
+    .logoutBtn {
+        border: solid 2px rgb(188, 188, 188) !important;
+        background-color: transparent !important;
+        padding: 13px !important;
+
+
+    }
 
     .main-profile-container {
         height: auto;
@@ -56,7 +89,7 @@
         justify-content: center;
         padding-bottom: 2dvh;
     }
-    
+
     .whole-profile-container {
         background-color: #082342;
         margin-top: 10px;
@@ -64,7 +97,7 @@
         border-radius: 20px;
         box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     }
-    
+
     .profile-header-container {
         display: flex;
         width: 100%;
@@ -76,15 +109,15 @@
         align-items: center;
         padding-top: 30px;
     }
-    
-    .profile-header-container h2{
+
+    .profile-header-container h2 {
         font-size: 20px;
         color: white;
         font-weight: bold;
         border-bottom: solid #FAD400;
     }
-    
-    .profile-header-container button{
+
+    .profile-header-container button {
         padding: 10px 10px;
         font-size: 12px;
         margin-left: 5px;

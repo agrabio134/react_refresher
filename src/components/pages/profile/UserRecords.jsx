@@ -108,7 +108,7 @@ const UserRecords = ({ id }) => {
 
   return (
     <div className="user-records-container">
-      <h2>User Records</h2>
+      {/* <h2>User Records</h2> */}
       {records.length > 0 ? (
         <Table
           dataSource={records}
