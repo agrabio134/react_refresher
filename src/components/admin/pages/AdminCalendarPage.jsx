@@ -323,6 +323,10 @@ const AdminCalendarPage = () => {
     return currentTime.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
   };
 
+  const formatTime = (time) => {
+    return new Date(`2000-01-01 ${time}`).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+  };
+
   
 
 
@@ -403,7 +407,7 @@ const AdminCalendarPage = () => {
               <Descriptions.Item label="Time: ">
                {selectedEvent.time && (
                 <div>
-                 {selectedEvent.time} - {formatTimeWithOneHourIncrement(selectedEvent.time)}
+                 {formatTime(selectedEvent.time)} - {formatTimeWithOneHourIncrement(selectedEvent.time)}
                 </div>
                   )}
               </Descriptions.Item>

@@ -7,15 +7,23 @@ import firebaseConfig from "../config/FirebaseConfig";
 import { initializeApp } from "firebase/app";
 import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import Swal from "sweetalert2";
+import { Table, Button, Image, Modal, Form, Input, Card } from "antd";
+
+const API_URL = "https://happypawsolongapo.com/api/";
 
 const AdminGallerySection = () => {
   const [selectedFile, setSelectedFile] = useState(null);
   const [thumbnailPreview, setThumbnailPreview] = useState(null);
   const [filename, setFilename] = useState("");
   const [decodedToken, setDecodedToken] = useState(null);
+  const [imageData, setImageData] = useState([]);
+  const [blogData, setBlogData] = useState([]);
   const [imageFormData, setImageFormData] = useState({
     description: "",
   });
+  const [isModalVisible, setIsModalVisible] = useState(false);
+  const [currentImage, setCurrentImage] = useState("");
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     const decodeAuthToken = () => {
@@ -23,18 +31,18 @@ const AdminGallerySection = () => {
       if (token) {
         const decoded = jwt_decode(token);
         setDecodedToken(decoded);
-        console.log(decoded);
       }
     };
-    decodeAuthToken();
 
-    // Initialize Firebase once when the component mounts
-    const app = initializeApp(firebaseConfig);
-    return () => {
-      // Optionally, you can clean up the Firebase app when the component unmounts
-      // e.g., app.delete();
+    const fetchData = async () => {
+      setIsLoading(true);
+      decodeAuthToken();
+      await fetchImageData(`${API_URL}get_all_images`, setBlogData);
+      setIsLoading(false);
     };
-  }, []); // Empty dependency array ensures that this effect runs only once
+
+    fetchData();
+  }, []);
 
   const handleFileInput = (file) => {
     const filename = file.name;
@@ -46,6 +54,165 @@ const AdminGallerySection = () => {
     };
     reader.readAsDataURL(file);
     setSelectedFile(file);
+  };
+
+  const fetchImageData = async (url, setBlogPosts) => {
+    try {
+      const response = await fetch(url);
+  
+      if (!response.ok) {
+        throw new Error(`Failed to fetch data: ${response.status}`);
+      }
+  
+      const textData = await response.text();
+      const jsonObjects = textData.split("}{").map((json, index, array) =>
+        index === 0
+          ? json + "}"
+          : index === array.length - 1
+          ? "{" + json
+          : "{" + json + "}"
+      );
+  
+      const blogPosts = jsonObjects.flatMap((json) => {
+        try {
+          const parsedResult = JSON.parse(json);
+          return parsedResult.payload || [];
+        } catch (jsonError) {
+          console.error("Error parsing JSON:", jsonError);
+          return [];
+        }
+      });
+  
+      setBlogPosts(blogPosts);
+    } catch (error) {
+      console.error(`Error fetching data from ${url}:`, error.message);
+      setBlogPosts([]);
+    }
+  };
+  
+
+  const handleEditClick = (record) => {
+    showModal();
+    setCurrentImage(record.image);
+    setImageFormData({
+      id: record.id,
+      description: record.description,
+    });
+  };
+
+  const showModal = () => {
+    setIsModalVisible(true);
+  };
+
+  const handleCancel = () => {
+    setIsModalVisible(false);
+  };
+
+  const handleModalEdit = async () => {
+    try {
+      const admin_id = decodedToken ? decodedToken.user_id : null;
+
+      const imagePostData = {
+        id: imageFormData.id,
+        description: imageFormData.description,
+        image: currentImage || null,
+        admin_id: admin_id,
+      };
+
+      const imagePostResponse = await axios.put(
+        `${API_URL}update_image/${imageFormData.id}`,
+        imagePostData,
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+
+      if (!imagePostResponse.data || imagePostResponse.data.error) {
+        console.error(imagePostResponse.data.error);
+        Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: "Image update failed",
+        });
+        return;
+      }
+
+      Swal.fire({
+        icon: "success",
+        title: "Success!",
+        text: "Image update successful",
+      }).then(() => {
+        fetchData();
+        setIsModalVisible(false);
+      });
+    } catch (err) {
+      console.error(err);
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "Image update failed",
+      });
+    }
+  };
+
+  const handleDeleteClick = (record) => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#d33",
+      cancelButtonColor: "#3085d6",
+      confirmButtonText: "Yes, delete it!",
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        try {
+          const imagePostResponse = await axios.delete(
+            `${API_URL}delete_image/${record.id}`,
+            {
+              headers: {
+                "Content-Type": "application/json",
+              },
+            }
+          );
+
+          if (!imagePostResponse.data || imagePostResponse.data.error) {
+            console.error(imagePostResponse.data.error);
+            Swal.fire({
+              icon: "error",
+              title: "Oops...",
+              text: "Image delete failed",
+            });
+            return;
+          }
+
+          Swal.fire({
+            icon: "success",
+            title: "Success!",
+            text: "Image deleted",
+          }).then(() => {
+            window.location.reload();
+
+            fetchData();
+          });
+        } catch (err) {
+          console.error(err);
+          Swal.fire({
+            icon: "error",
+            title: "Oops...",
+            text: "Image delete failed",
+          }
+            .then(() => {
+              window.location.reload();
+
+            })
+          );
+      
+        }
+      }
+    });
   };
 
   const handleImageFormChange = (e) => {
@@ -66,7 +233,11 @@ const AdminGallerySection = () => {
           icon: "error",
           title: "Oops...",
           text: "No file selected",
-        });
+        } .then(() => {
+          window.location.reload();
+        })
+
+          );
         return;
       }
 
@@ -84,10 +255,8 @@ const AdminGallerySection = () => {
         image: downloadURL,
       };
 
-      const UPLOAD_URL = "https://happypawsolongapo.com/api/";
-
       const imagePostResponse = await axios.post(
-        `${UPLOAD_URL}/post_image`,
+        `${API_URL}post_image`,
         imagePostData,
         {
           headers: {
@@ -102,12 +271,12 @@ const AdminGallerySection = () => {
           icon: "error",
           title: "Oops...",
           text: "Image upload failed",
-        });
+        }.then(() => {
+          window.location.reload();
+        }));
 
         return;
       }
-
-      // console.log(imagePostResponse.data);
 
       Swal.fire({
         title: "Success!",
@@ -116,27 +285,59 @@ const AdminGallerySection = () => {
         confirmButtonText: "Ok",
       }).then(() => {
         window.location.reload();
+        fetchData();
       });
     } catch (err) {
       console.error(err);
-      Swal.fire(
-        {
-          title: "Error!",
-          text: "Image upload failed",
-          icon: "error",
-          confirmButtonText: "Ok",
-        }.then(() => {
-          window.location.reload();
-        })
-      );
+      Swal.fire({
+        title: "Error!",
+        text: "Image upload failed",
+        icon: "error",
+        confirmButtonText: "Ok",
+      }).then(() => {
+        window.location.reload();
+        fetchData();
+      });
     }
   };
+
+  const columns = [
+    {
+      title: "Image",
+      dataIndex: "image",
+      key: "image",
+      render: (image) => <Image src={image} width={150} />,
+    },
+    {
+      title: "Description",
+      dataIndex: "description",
+      key: "description",
+    },
+    {
+      title: "Action",
+      dataIndex: "action",
+      key: "action",
+      render: (id, record) => (
+        <div className="ActionBtn">
+          <Button type="primary" onClick={() => handleEditClick(record)}>
+            Edit
+          </Button>
+          <Button type="primary" onClick={() => handleDeleteClick(record)} danger>
+            Delete
+          </Button>
+        </div>
+      ),
+    },
+  ];
 
   return (
     <div className="form-container">
       <h1>Image Upload Form</h1>
       <form onSubmit={handleImageFormSubmit} encType="multipart/form-data">
+      <div className="file-container">
+
         <FileUploader onFileSelectSuccess={handleFileInput} />
+
         {thumbnailPreview && (
           <img
             src={thumbnailPreview}
@@ -148,6 +349,7 @@ const AdminGallerySection = () => {
             }}
           />
         )}
+        </div>
         <label>
           Description:
           <input
@@ -162,6 +364,49 @@ const AdminGallerySection = () => {
           Submit Image
         </button>
       </form>
+
+      {isLoading ? (
+        <p>Loading...</p>
+      ) : (
+        <Table columns={columns} dataSource={blogData} />
+      )}
+
+      <Modal
+        title="Edit Image"
+        visible={isModalVisible}
+        onCancel={handleCancel}
+        footer={[
+          <Button key="back" onClick={handleCancel}>
+            Cancel
+          </Button>,
+          <Button key="submit" type="primary" onClick={handleModalEdit}>
+            Save
+          </Button>,
+        ]}
+      >
+        <Card className="custom-card">
+          <Form
+            initialValues={{
+              description: imageFormData.description,
+            }}
+          >
+            <Form.Item name="id" hidden={true}>
+              <Input value={imageFormData.id} />
+            </Form.Item>
+            <Form.Item label="Description" name="description">
+              <Input
+                value={imageFormData.description}
+                onChange={(e) =>
+                  setImageFormData({
+                    ...imageFormData,
+                    description: e.target.value,
+                  })
+                }
+              />
+            </Form.Item>
+          </Form>
+        </Card>
+      </Modal>
     </div>
   );
 };
