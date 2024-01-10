@@ -55,9 +55,9 @@ const BlogPage = () => {
     <div className="blog-content">
           <h1><span className="span">News</span> & Announcements</h1>
           <ul className='blog-breadcrumbs'>
-          <a href="">Home </a>
+          <a href="/">Home </a>
           <li href="">/</li>
-          <a href="">News </a>
+          <a href="/blogs">News </a>
           </ul>
         </div>
     </div>

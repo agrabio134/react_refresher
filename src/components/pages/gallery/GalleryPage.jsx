@@ -97,9 +97,9 @@ const GalleryPage = () => {
             <span className="span">Our</span> Gallery
           </h1>
           <ul className="gallery-breadcrumbs">
-            <a href="">Home </a>
+            <a href="/">Home </a>
             <li href="">/</li>
-            <a href="">Gallery</a>
+            <a href="/gallery">Gallery</a>
           </ul>
         </div>
       </div>
