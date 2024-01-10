@@ -1,10 +1,21 @@
-import React, { useState } from "react";
+import { useState, useEffect } from "react";
 import AdminBlogSection from "../components/AdminBlog";
 import AdminGallerySection from "../components/AdminGallery";
 
 const AdminContentPage = () => {
   const [activeTab, setActiveTab] = useState("blog"); // Default active tab
 
+  useEffect(() => {
+    // Check if the flag is set to click the Gallery tab
+    const shouldClickGallery = localStorage.getItem("autoClickGallery");
+    if (shouldClickGallery === "true") {
+      // Clear the flag
+      localStorage.removeItem("autoClickGallery");
+
+      // Activate the Gallery tab
+      setActiveTab("gallery");
+    }
+  }, []);
   const handleTabChange = (tab) => {
     setActiveTab(tab);
   };
@@ -16,7 +27,7 @@ const AdminContentPage = () => {
           className={activeTab === "blog" ? "active-tab" : ""}
           onClick={() => handleTabChange("blog")}
         >
-          Blog
+          News & Announcements
         </button>
         <button
           className={activeTab === "gallery" ? "active-tab" : ""}
