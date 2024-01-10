@@ -400,6 +400,11 @@ const AdminGallerySection = () => {
       key: "description",
     },
     {
+      title: "Upload date",
+      dataIndex: "upload_date",
+      key: "upload_date",
+    },
+    {
       title: "Action",
       dataIndex: "action",
       key: "action",
