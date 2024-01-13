@@ -422,7 +422,7 @@ const ProfilePage = () => {
               </Modal>
 
               <Modal
-                title="User Records"
+                title="Pet Records"
                 visible={isModalVisible}
                 onCancel={handleCancel}
                 width={1000}

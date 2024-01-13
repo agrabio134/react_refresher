@@ -190,6 +190,7 @@ const UserRecords = ({ id }) => {
 
 
   const columns = [
+    { title: "Pet Name", dataIndex: "name", key: "name" },
     { title: "Date", dataIndex: "date", key: "date" },
     { title: "Vet on Duty", dataIndex: "vet_on_duty", key: "vet_on_duty" },
     { title: "Body Weight", dataIndex: "body_wt", key: "body_wt" },
