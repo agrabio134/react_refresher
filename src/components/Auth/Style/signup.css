@@ -240,6 +240,35 @@
 }
 
 @media screen and (max-width: 768px) {
+
+  .main-user-signup-container,
+  .main-user-signup-container * {
+      opacity: 0;
+      transform: translateY(100%);
+  }
+
+  .main-user-signup-container,
+  .main-user-signup-container * {
+    animation: slideUp 0.3s ease-in-out forwards;
+    animation-delay: 0.3s;
+  }
+
+  /* Define keyframes for slide-up animation */
+  @keyframes slideUp {
+    from {
+      opacity: 0;
+      transform: translateY(100%);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+
+
+
+
   .signup-main-container {
     height: 160rem;
     background-color: #082342;

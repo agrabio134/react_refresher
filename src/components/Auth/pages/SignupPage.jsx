@@ -372,6 +372,9 @@ const SignupPage = () => {
 
             <input type="submit" value="Signup" className="btn1" />
           </form>
+          <p className="login-link">
+            Already have an account? <a href="/auth/login">Login here</a>
+          </p>
         </div>
       </section>
     </>

@@ -136,7 +136,7 @@ const AddPetForm = ({
         <div className="add-pet-grid-form">
           <div className="add-pet-form">
             <label>
-              <h1>Profile Image:</h1>
+              <h1>Pet Profile Image:</h1>
               <input
                 type="file"
                 accept="image/*"
