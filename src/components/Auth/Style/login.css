@@ -234,6 +234,11 @@ a:hover {
       transform: translateY(0);
     }
   }
+
+  .mobile-login-main-container{
+    /* add scroll */
+    overflow-y: scroll;
+  }
   .login-main-container {
     /* height: 160rem;
     background-color: #e12454;
@@ -278,7 +283,7 @@ a:hover {
   .login-title {
     margin-top: 0;
     text-transform: uppercase;
-    font-size: 40px;
+    font-size: 30px;
     font-weight: bold;
     text-align: center;
     letter-spacing: 1px;

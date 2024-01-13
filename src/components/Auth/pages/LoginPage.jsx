@@ -119,7 +119,7 @@ const LoginPage = () => {
                 onChange={handleChange}
                 required
               /> 
-              <i className="fa-solid fa-user"></i>
+              <i className="fa-solid fa-user fa-sm"></i>
               </div>
               <div className="user-login-form-control">
               <label htmlFor="password"></label>
@@ -131,7 +131,7 @@ const LoginPage = () => {
                 onChange={handleChange}
                 required
               /> 
-              <i className="fa-solid fa-lock"></i>
+              <i className="fa-solid fa-lock fa-sm"></i>
               </div>
               <div className="user-login-form-control rm">
               <label className="user-check-box">

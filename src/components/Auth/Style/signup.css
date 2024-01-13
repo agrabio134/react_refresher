@@ -191,8 +191,9 @@
   }
   
   .signup-side img {
-    width: 70vh;
-    height: 70vh;
+    width: 60dvw;
+    height: auto;
+    /* display: none; */
   }
 
   .user-signup-box .btn1 {
@@ -266,6 +267,9 @@
   }
 
 
+  .signup-main-container{
+    overflow: auto;
+  }
 
 
 
@@ -285,7 +289,7 @@
 .title {
   margin-top: 0;
   text-transform: uppercase;
-  font-size: 40px;
+  font-size: 30px;
   font-weight: bold;
   text-align: center;
   letter-spacing: 1px;
