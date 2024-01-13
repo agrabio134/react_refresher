@@ -216,6 +216,8 @@ const SignupPage = () => {
           <img src="/page/LGHD.png" alt="" />
         </div>
         <div className="main-user-signup-container">
+        <div className="scrollable-container">
+
           <p className="title">Happy Paws</p>
           <div className="signup-separator"></div>
 
@@ -375,6 +377,7 @@ const SignupPage = () => {
           <p className="login-link">
             Already have an account? <a href="/auth/login">Login here</a>
           </p>
+        </div>
         </div>
       </section>
     </>

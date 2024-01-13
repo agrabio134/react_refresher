@@ -336,6 +336,9 @@ a:hover {
     letter-spacing: 0.5px;
     padding: 14px 64px;
   }
+  .login-link{
+    margin-bottom: 100px;
+  }
 
   .user-login-box input ~ i {
     position: absolute;
@@ -455,5 +458,14 @@ a:hover {
     width: 60dvw;
     height: auto;
     /* display: none; */
+  }
+
+
+  .dnthave{
+    margin-bottom: 130px;
+  }
+  .scrollable-container {
+    max-height: 70vh; /* Adjust the height as needed */
+    overflow-y: auto;
   }
 }

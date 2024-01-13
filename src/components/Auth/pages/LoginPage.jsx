@@ -105,6 +105,7 @@ const LoginPage = () => {
       <img src="/page/LGHD.png" alt="" />
       </div>
         <div className="main-user-login-container">
+          <div className="scrollable-container">
         <p className="login-title mobile-title">Welcome!</p>
             <div className="user-separator"></div>
             <p className="welcome-message">Please, provide login credential to proceed and have access to all our services</p>
@@ -150,6 +151,7 @@ const LoginPage = () => {
             <input type="submit" value="Login" className="btn1" />
             <a href="/auth/signup" className="dnthave">Don’t have an account? Sign up</a>
           </form>
+          </div>
           </div>
 
       </section>
