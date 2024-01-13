@@ -325,7 +325,7 @@ const ProfilePage = () => {
               <div className="profile-header-container">
                 <h2>{userFullName}</h2>
                 <button className="recordsBtn" onClick={showModal}>
-                  My Records
+                  Pet Records
                 </button>
                 <div className="custom-dropdown-container">
                   <div
@@ -425,7 +425,7 @@ const ProfilePage = () => {
                 title="User Records"
                 visible={isModalVisible}
                 onCancel={handleCancel}
-                width={"500vh"}
+                width={1000}
                 footer={null}
               >
                 <UserRecords id={decodedToken.user_id} />
