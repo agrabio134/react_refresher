@@ -6,12 +6,19 @@ import AddPetForm from "./AddPetForm";
 import PetTable from "./PetTable";
 import "./Style/ProfilePage.css";
 import UserRecords from "./UserRecords";
-import { Modal, Button } from "antd";
+import { Modal, Button, Input } from "antd";
 
 const ProfilePage = () => {
+  const [isDropdownOpen, setDropdownOpen] = useState(false);
+  const [selectedOption, setSelectedOption] = useState("");
   const [decodedToken, setDecodedToken] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const [userFullName, setUserFullName] = useState("");
+  const [userFname, setUserFname] = useState("");
+  const [userLname, setUserLname] = useState("");
+  const [userContact, setUserContact] = useState("");
+  const [userAddress, setUserAddress] = useState("");
+
   const { isLogin, toggleLogin } = useAuth();
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [petName, setPetName] = useState("");
@@ -21,6 +28,13 @@ const ProfilePage = () => {
   const [petSex, setPetSex] = useState("");
   const [petList, setPetList] = useState([]);
   const [petImageUrl, setDownloadURL] = useState("");
+  const [profileModal, setProfileModal] = useState(false);
+  const [id, setId] = useState("");
+  const [userEmail, setUserEmail] = useState("");
+  const [fname, setFname] = useState("");
+  const [lname, setLname] = useState("");
+  const [contact, setContact] = useState("");
+  const [address, setAddress] = useState("");
 
   // console.log("petImageUrl", petImageUrl);
 
@@ -52,8 +66,8 @@ const ProfilePage = () => {
             return index === 0
               ? json + "}"
               : index === array.length - 1
-              ? "{" + json
-              : "{" + json + "}";
+                ? "{" + json
+                : "{" + json + "}";
           });
 
           jsonObjects.forEach((json) => {
@@ -141,6 +155,103 @@ const ProfilePage = () => {
     });
   };
 
+  const handleUpdateProfileSubmit = () => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You will be updating your profile!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonText: "Yes, update!",
+      cancelButtonText: "No, cancel!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        confirmUpdateProfile();
+      } else {
+        Swal.fire({
+          title: "Cancelled",
+          text: "Profile not updated",
+          icon: "error",
+          confirmButtonText: "Okay",
+        });
+      }
+    });
+  };
+
+  const confirmUpdateProfile = async () => {
+    let userFirstname = userFname || fname;
+    let userLastname = userLname || lname;
+    let userContactNo = userContact || contact;
+    let userAddressLoc = userAddress || address;
+    const userData = {
+      id: decodedToken.user_id,
+      fname: userFirstname,
+      lname: userLastname,
+      contact_no: userContactNo,
+      address: userAddressLoc,
+      email: userEmail,
+    };
+
+    console.log("userData", userData); // L
+
+    try {
+      const response = await fetch(
+        "https://happypawsolongapo.com/api/updateuser/" + decodedToken.user_id,
+        {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(userData),
+        }
+      );
+
+      console.log("response", response);
+
+      if (!response.ok) {
+        throw new Error("Failed to update user");
+      }
+
+      Swal.fire({
+        title: "Profile Updated!",
+        text: "Your profile has been updated successfully.",
+        icon: "success",
+      }).then((result) => {
+        if (result.isConfirmed) {
+          window.location.href = "/profile";
+        }
+      });
+    } catch (error) {
+      console.error("Error updating user:", error);
+      Swal.fire({
+        title: "Error",
+        text: "Failed to update user. Please try again.",
+        icon: "error",
+      });
+    }
+  };
+  const handleToggleDropdown = () => {
+    setDropdownOpen(!isDropdownOpen);
+  };
+
+  const handleOptionClick = (option) => {
+    setSelectedOption(option);
+
+    // Perform any additional actions based on the selected option
+    if (option === "updateProfile") {
+      handleUpdateProfile();
+    } else if (option === "logout") {
+      handleLogout();
+    }
+  };
+
+  const handleUpdateProfile = () => {
+    setProfileModal(true);
+  };
+
+  const closeProfileModal = () => {
+    setProfileModal(false);
+  };
+
   const checkLogin = () => {
     if (decodedToken) {
       const getUser = async () => {
@@ -181,6 +292,12 @@ const ProfilePage = () => {
               setUserFullName(
                 parsedJson.payload[0].fname + " " + parsedJson.payload[0].lname
               );
+
+              setFname(parsedJson.payload[0].fname);
+              setLname(parsedJson.payload[0].lname);
+              setUserEmail(parsedJson.payload[0].email);
+              setContact(parsedJson.payload[0].contact_no);
+              setAddress(parsedJson.payload[0].address);
             }
           });
         } catch (error) {
@@ -199,22 +316,116 @@ const ProfilePage = () => {
       const handleCancel = () => {
         setIsModalVisible(false);
       };
+
+      const handleInputChange = (e) => { };
       return (
         <>
           <section className="main-profile-container">
             <div className="whole-profile-container">
               <div className="profile-header-container">
                 <h2>{userFullName}</h2>
-                <button className="recordsBtn" onClick={showModal}>My Records</button>
-                <button className="logoutBtn" onClick={handleLogout}><i class="fa-solid fa-right-from-bracket  fa-lg "></i></button>
+                <button className="recordsBtn" onClick={showModal}>
+                  My Records
+                </button>
+                <div className="custom-dropdown-container">
+                  <div
+                    className="dropdown-header"
+                    onClick={handleToggleDropdown}
+                  >
+                    <div className="dropdown-icon">
+                      {isDropdownOpen ? (
+                        <i className="fa-solid fa-x fa-lg"></i>
+                      ) : (
+                        <i className="fa-solid fa-gear fa-lg"></i>
+                      )}
+                    </div>
+                  </div>
+                  {isDropdownOpen && (
+                    <div className="dropdown-options">
+                      <div
+                        className="option"
+                        onClick={() => handleOptionClick("updateProfile")}
+                      >
+                        Update Profile
+                      </div>
+                      <div
+                        className="option"
+                        onClick={() => handleOptionClick("logout")}
+                      >
+                        Logout
+                      </div>
+                    </div>
+                  )}
+                </div>
               </div>
 
+              <Modal
+                title="Update Profile"
+                visible={profileModal}
+                onCancel={closeProfileModal}
+                width={500} // Set the width without 'vh'
+                footer={null}
+              >
+                <div className="update-profile-container">
+                  <div className="update-profile-form">
+                    <div className="update-profile-input">
+                      <label htmlFor="fname">First Name</label>
+                      <Input
+                        type="text"
+                        name="fname"
+                        id="fname"
+                        defaultValue={fname}
+                        onChange={(e) => setUserFname(e.target.value)}
+                      />
+                    </div>
+                    <div className="update-profile-input">
+                      <label htmlFor="lname">Last Name</label>
+                      <Input
+                        type="text"
+                        name="lname"
+                        id="lname"
+                        defaultValue={lname}
+                        onChange={(e) => setUserLname(e.target.value)}
+                      />
+                    </div>
+                    <div className="update-profile-input">
+                      <label htmlFor="contact">Contact Number</label>
+                      <Input
+                        type="text"
+                        name="contact"
+                        id="contact"
+                        defaultValue={contact}
+                        onChange={(e) => setUserContact(e.target.value)}
+                      />
+                    </div>
+                    <div className="update-profile-input">
+                      <label htmlFor="address">Address</label>
+                      <Input
+                        type="text"
+                        name="address"
+                        id="address"
+                        defaultValue={address}
+                        onChange={(e) => setUserAddress(e.target.value)}
+                      />
+                    </div>
+                    {/* submit */}
+                    <div className="update-profile-input">
+                      <Button
+                        className="update-profile-btn"
+                        onClick={() => handleUpdateProfileSubmit()}
+                      >
+                        Update
+                      </Button>
+                    </div>
+                  </div>
+                </div>
+              </Modal>
 
               <Modal
                 title="User Records"
                 visible={isModalVisible}
                 onCancel={handleCancel}
-                width={'500vh'}
+                width={"500vh"}
                 footer={null}
               >
                 <UserRecords id={decodedToken.user_id} />
@@ -411,8 +622,8 @@ const ProfilePage = () => {
         return index === 0
           ? json + "}"
           : index === array.length - 1
-          ? "{" + json
-          : "{" + json + "}";
+            ? "{" + json
+            : "{" + json + "}";
       });
       // console.log("JSON objects:", jsonObjects);
 

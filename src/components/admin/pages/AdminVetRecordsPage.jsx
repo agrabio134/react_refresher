@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import DataFetching from "./records/DataFetching";
 import AppointmentDetailsModal from "./records/AppointmentDetailsModal";
-import { Form, Button, Tabs, Table, Modal, Select } from "antd";
+import { Form, Button, Tabs, Table, Modal, Select, Image } from "antd";
 import moment from "moment";
 import Swal from "sweetalert2";
 import jwt_decode from "jwt-decode";
@@ -9,6 +9,21 @@ import jwt_decode from "jwt-decode";
 const { TabPane } = Tabs;
 const { Option } = Select;
 
+const calculateAge = (birthdate) => {
+  const today = moment();
+  const birthdateMoment = moment(birthdate);
+  const years = today.diff(birthdateMoment, 'years');
+  const months = today.diff(birthdateMoment, 'months') % 12;
+  const days = today.diff(birthdateMoment, 'days');
+
+  if (years > 0) {
+    return `${years} ${years === 1 ? 'year' : 'years'}`;
+  } else if (months > 0) {
+    return `${months} ${months === 1 ? 'month' : 'months'}`;
+  } else {
+    return `${days} ${days === 1 ? 'day' : 'days'}`;
+  }
+};
 const VeterinaryRecord = () => {
   const [printableRecords, setPrintableRecords] = useState([]);
   const [selectedRecords, setSelectedRecords] = useState([]);
@@ -17,10 +32,12 @@ const VeterinaryRecord = () => {
   const [appointments, setAppointments] = useState([]);
   const [modalVisible, setModalVisible] = useState(false);
   const [recordModalVisible, setRecordModalVisible] = useState(false);
+  const [recordVetModalVisible, setRecordVetModalVisible] = useState(false);
   const [selectedAppointment, setSelectedAppointment] = useState(null);
   const [selectedClient, setSelectedClient] = useState(null); // [1]
   const [clients, setClients] = useState([]);
   const [vetRecord, setVetRecord] = useState([]);
+  const [vetPetRecord, setVetPetRecord] = useState([]);
   const [vetRecordError, setVetRecordError] = useState(null); // New state to store vet record fetching errors
   const fetchClientData = async () => {
     try {
@@ -133,7 +150,11 @@ const VeterinaryRecord = () => {
       title: "Account Status",
       dataIndex: "is_verified",
       key: "is_verified",
-      render: (text, record) => <p>{text ? "Verified" : "Not Verified"}</p>,
+      render: (text, record) => (
+        <p style={{ color: text ? "green" : "red" }}>
+          {text ? "Verified" : "Not Verified"}
+        </p>
+      ),
     },
     {
       title: "Action",
@@ -151,8 +172,45 @@ const VeterinaryRecord = () => {
       ),
     },
   ];
+
+
+  const PetRecordColumns = [
+    { title: "image", dataIndex: "image", key: "image",
+    render: (image) => <Image src={image} alt="Animal" width={50} height={50} />,
+  },
+
+    { title: "name", dataIndex: "name", key: "name" },
+    { title: "type", dataIndex: "type", key: "type" },
+    { title: "breed", dataIndex: "breed", key: "breed" },
+    {
+      title: 'Date of Birth / Age',
+      dataIndex: 'birthdate',
+      key: 'birthdate',
+      render: (birthdate) => (
+        <>
+          <div>{moment(birthdate).format('MMMM D, YYYY')} / {calculateAge(birthdate)} old</div>
+        </>
+      ),
+    },
+    {
+      title: "Action",
+      dataIndex: "action",
+      render: (text, record, index) => (
+        <Button
+          type="primary"
+          key={index}
+          onClick={() => {
+            handleViewPetDataClick(record);
+          }}
+        >
+          View Records
+        </Button>
+      ),
+    },
+  ];
   const VetRecordColumns = [
     // { title: "id", dataIndex: "t1_id", key: "t1_id" },
+    { title: "Pet Name", dataIndex: "name", key: "name" },
     { title: "Date", dataIndex: "date", key: "date" },
     { title: "Vet on Duty", dataIndex: "vet_on_duty", key: "vet_on_duty" },
     { title: "Body Weight", dataIndex: "body_wt", key: "body_wt" },
@@ -229,6 +287,7 @@ const VeterinaryRecord = () => {
   useEffect(() => {
     if (selectedClient) {
       getVeterinaryRecord(selectedClient.id);
+      getVeterinaryPetRecord(selectedClient.id);
     }
   }, [selectedClient /* other dependencies */]);
 
@@ -458,15 +517,32 @@ const VeterinaryRecord = () => {
     setPrintableRecords(vetRecord);
   }, [vetRecord]);
 
+
   const handleViewClientsDataClick = async (client) => {
     try {
       setSelectedClient(client);
       await getVeterinaryRecord(client.id);
+      await getVeterinaryPetRecord(client.id);
       setRecordModalVisible(true);
       setVetRecord((prevVetRecord) => [...prevVetRecord]);
+      setVetPetRecord((prevVetPetRecord) => [...prevVetPetRecord]);
     } catch (error) {
       console.error("Error fetching veterinary record:", error);
       setVetRecord([]);
+      setVetPetRecord([]);
+      setVetRecordError(error);
+    }
+  };
+  
+  const handleViewPetDataClick = async (client) => {
+    try {
+      setSelectedClient(client);
+      await getVeterinaryPetRecord(client.id);
+      setRecordVetModalVisible(true);
+      setVetPetRecord((prevVetPetRecord) => [...prevVetPetRecord]);
+    } catch (error) {
+      console.error("Error fetching veterinary record:", error);
+      setVetPetRecord([]);
       setVetRecordError(error);
     }
   };
@@ -476,10 +552,15 @@ const VeterinaryRecord = () => {
     setSelectedAppointment(null);
   };
 
+  const handleRecordVetModalCancel = () => {
+    setRecordVetModalVisible(false);
+    setSelectedAppointment(null);
+  };
+
   const getVeterinaryRecord = async (user_id) => {
     try {
       const response = await fetch(
-        `https://happypawsolongapo.com/api/get_vet_record_admin/${user_id}`
+        `https://happypawsolongapo.com/api/get_user_pets/${user_id}`
       );
 
       if (!response.ok) {
@@ -514,6 +595,61 @@ const VeterinaryRecord = () => {
               return [];
             }
           });
+
+          // console.log(vetRecordData);
+          setVetRecord(vetRecordData);
+          setVetPetRecord(vetRecordData);
+        } catch (jsonError) {
+          console.error("Error parsing JSON:", jsonError);
+          setVetRecord([]); // Clear the state in case of an error
+          setVetPetRecord([]); // Clear the state in case of an error
+        }
+      }
+    } catch (error) {
+      console.error("Error fetching data:", error.message);
+      setVetRecord([]); // Clear the state in case of an error
+    }
+  };
+  const getVeterinaryPetRecord = async (pet_id) => {
+    try {
+      const response = await fetch(
+        `https://happypawsolongapo.com/api/get_vet_record_admin_by_pet/${pet_id}`
+      );
+
+      if (!response.ok) {
+        // Check specifically for 404 status and handle it as a non-error
+        if (response.status === 404) {
+          // console.log(`No data found for user with ID ${user_id}`);
+          setVetRecord([]); // Set the state to an empty array
+          return; // Return early without throwing an error
+        } else {
+          throw new Error(`Failed to fetch data: ${response.status}`);
+        }
+      } else {
+        const textData = await response.text();
+
+        try {
+          const jsonObjects = textData
+            .split("}{")
+            .map((json, index, array) =>
+              index === 0
+                ? json + "}"
+                : index === array.length - 1
+                ? "{" + json
+                : "{" + json + "}"
+            );
+
+            const vetRecordData = jsonObjects.flatMap((json) => {
+              try {
+                const parsedResult = JSON.parse(json);
+                console.log(parsedResult.payload);  // Add this line to log data
+                return parsedResult.payload || [];
+              } catch (jsonError) {
+                console.error("Error parsing JSON:", jsonError);
+                return [];
+              }
+            });
+            
 
           // console.log(vetRecordData);
           setVetRecord(vetRecordData);
@@ -737,7 +873,28 @@ const VeterinaryRecord = () => {
         onOk={() => setRecordModalVisible(false)}
         width={1600}
       >
-        <h1>Veterinary Record</h1>
+        <h1>Users Pet</h1>
+        {vetPetRecord.length > 0 ? (
+          <Table
+            dataSource={vetPetRecord}
+            columns={PetRecordColumns}
+            style={{ marginTop: 20 }}
+            rowKey={(record, index) => `${record.t3_id}_${index}`}
+          />
+        ) : vetRecordError ? (
+          <p>Error fetching veterinary record: {vetRecordError.message}</p>
+        ) : (
+          <p>No Pet found.</p>
+        )}
+      </Modal>
+      <Modal
+        // other properties
+        visible={recordVetModalVisible}
+        onCancel={handleRecordVetModalCancel}
+        onOk={() => setRecordVetModalVisible(false)}
+        width={1600}
+      >
+        <h1>Veterinary Records</h1>
         {vetRecord.length > 0 ? (
           <Table
             dataSource={vetRecord}

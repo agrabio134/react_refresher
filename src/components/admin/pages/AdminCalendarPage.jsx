@@ -350,7 +350,7 @@ const AdminCalendarPage = () => {
           <span className="canceled" /> Cancelled
         </div>
         <div className="legend-item">
-          <span className="pending-cancellation" />Pending cancellation
+          <span className="pending-cancellation" />Pending Cancellation
         </div>
       </div>
       <Calendar

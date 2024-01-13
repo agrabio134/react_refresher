@@ -14,6 +14,43 @@
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
+.custom-dropdown-container {
+    position: relative;
+    border-radius: 4px;
+    padding: 6px;
+    border: 1px solid #eee;
+    margin-left: 4px;
+  }
+  .fa-solid  {
+    color: #ffffff;
+    font-size: 1.5rem;
+  }
+  
+  .fa-x {
+    color: #ffffff;
+    padding : 0px 3px;
+
+  }
+  
+  .dropdown-options {
+    position: absolute;
+    width: 16vh;
+    top: 100%;
+    left: 0;
+    z-index: 1;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  .option {
+    padding: 8px;
+    cursor: pointer;
+  }
+  
+  
+
 .profile-header-container {
     display: grid;
     grid-template-columns: 1fr auto auto;

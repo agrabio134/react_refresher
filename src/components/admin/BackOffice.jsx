@@ -46,7 +46,7 @@ const BackOfficePage = () => {
             <div className="adminText">
               <h1>Happy Paws | Backoffice</h1>
             </div>
-            <div className="notification-container">
+            {/* <div className="notification-container">
               <NotificationIcon
                 onClick={openNotifications}
                 className="notification-icon"
@@ -56,7 +56,7 @@ const BackOfficePage = () => {
                 onClose={closeNotifications}
                 notifications={[]}
               />
-            </div>
+            </div> */}
           </div>
 
           <Routes>
