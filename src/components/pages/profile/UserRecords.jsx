@@ -269,7 +269,7 @@ const UserRecords = ({ id }) => {
         visible={recordVetModalVisible}
         onCancel={() => setRecordVetModalVisible(false)}
         footer={null}
-        width={1000}
+        width={1200}
       > 
         <Table
           dataSource={vetRecord}
