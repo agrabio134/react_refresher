@@ -542,7 +542,7 @@ const ProfilePage = () => {
     if (hasAppointment === true) {
       Swal.fire({
         title: "Error",
-        text: "This pet cannot be deleted because it has an appointment.",
+        text: "This pet cannot be deleted because it has a Record.",
         icon: "error",
       });
       return;
