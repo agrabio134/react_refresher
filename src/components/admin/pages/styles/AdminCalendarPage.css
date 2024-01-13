@@ -136,3 +136,30 @@
   opacity: 0;
   transform: scale(0.8);
 }
+
+
+@media only screen and (max-width: 768px) {
+  .admin-calendar-page {
+    padding: 10px;
+  }
+
+  .legend {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .legend-item {
+    margin-right: 0;
+    margin-bottom: 10px;
+  }
+
+  .rbc-event,
+  .rbc-event.accepted,
+  .rbc-event.canceled,
+  .rbc-event.pending-cancellation,
+  .rbc-event.done,
+  .rbc-event.denied {
+    font-size: 12px;
+    padding: 5px;
+  }
+}

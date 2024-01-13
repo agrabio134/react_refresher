@@ -462,7 +462,7 @@ const AdminGallerySection = () => {
       {isLoading ? (
         <p>Loading...</p>
       ) : (
-        <Table columns={columns} dataSource={blogData} />
+        <Table columns={columns} dataSource={blogData}  scroll={{ x: true }}/>
       )}
 
       <Modal

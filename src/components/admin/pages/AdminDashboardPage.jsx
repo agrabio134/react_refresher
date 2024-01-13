@@ -292,7 +292,7 @@ const AdminDashboardPage = () => {
     }
   };
   return (
-    <div>
+    <div className="admin-dashboard-page">
       <div className="card-container">
         <div className="card user-card">
           <FontAwesomeIcon icon={faUsers} size="2x" />

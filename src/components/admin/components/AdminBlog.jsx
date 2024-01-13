@@ -485,7 +485,7 @@ const AdminBlogSection = () => {
 </div>
 
 
-      <Table columns={columns} dataSource={blogData} height="100%" />
+<Table columns={columns} dataSource={blogData} scroll={{ x: true }} />
       {/* Modal for editing */}
       <Modal
         title="Edit Content post"

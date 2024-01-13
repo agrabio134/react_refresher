@@ -5,8 +5,6 @@ import AdminUsersPage from "./pages/AdminUsersPage";
 import { useAdminAuth } from "./auth/AdminAuthContext";
 import "./styles/Dashboard.css";
 import "./styles/Card.css";
-import NotificationIcon from "./components/NotificationIcon";
-import NotificationPopup from "./components/NotificationPopup";
 import AdminCalendarPage from "./pages/AdminCalendarPage";
 
 import AdminDashboardPage from "./pages/AdminDashboardPage";
@@ -46,17 +44,7 @@ const BackOfficePage = () => {
             <div className="adminText">
               <h1>Happy Paws | Backoffice</h1>
             </div>
-            {/* <div className="notification-container">
-              <NotificationIcon
-                onClick={openNotifications}
-                className="notification-icon"
-              />
-              <NotificationPopup
-                isOpen={showNotifications}
-                onClose={closeNotifications}
-                notifications={[]}
-              />
-            </div> */}
+     
           </div>
 
           <Routes>

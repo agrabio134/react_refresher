@@ -839,6 +839,7 @@ const VeterinaryRecord = () => {
           pagination={false}
           style={{ marginTop: 20 }}
           rowKey={(record) => record.key}
+          scroll={{ x: true }}
         />
       </TabPane>
       <TabPane tab="Client Records" key="2">
@@ -849,6 +850,7 @@ const VeterinaryRecord = () => {
             columns={ClientsColumns}
             style={{ marginTop: 20 }}
             rowKey={(record) => record.id}
+            scroll={{ x: true }}
           />
         )}
       </TabPane>
@@ -880,6 +882,7 @@ const VeterinaryRecord = () => {
             columns={PetRecordColumns}
             style={{ marginTop: 20 }}
             rowKey={(record, index) => `${record.t3_id}_${index}`}
+            scroll={{ x: true }}
           />
         ) : vetRecordError ? (
           <p>Error fetching veterinary record: {vetRecordError.message}</p>
@@ -901,6 +904,8 @@ const VeterinaryRecord = () => {
             columns={VetRecordColumns}
             style={{ marginTop: 20 }}
             rowKey={(record, index) => `${record.t3_id}_${index}`}
+
+            scroll={{ x: true }}
           />
         ) : vetRecordError ? (
           <p>Error fetching veterinary record: {vetRecordError.message}</p>
