@@ -3,6 +3,7 @@
 .admin-dashboard-card-container {
   display: flex;
   justify-content: space-around;
+  
 }
 
 .admin-dashboard-card {

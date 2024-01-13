@@ -213,7 +213,7 @@ const MainLayout = () => {
                 {isLogin ? (
                   
                   <Link to="profile" className="side-auth_item" onClick={closeNav}>
-                    Profile
+                    Welcome, {userFName}
                   </Link>
                 ) : (
                   <>
@@ -248,10 +248,10 @@ const MainLayout = () => {
 
                 <div className="side-nav-content">
                   <div className="side-nav-home">
-                    <i className="fa-solid fa-blog"></i>
-                  </div>
+                  <i className="fa-solid fa-newspaper"></i>  
+                                  </div>
                   <Link to="blogs" className="sdie-nav_list" onClick={closeNav}>
-                    Blog
+                    News & Announcements
                   </Link>
                 </div>
 
