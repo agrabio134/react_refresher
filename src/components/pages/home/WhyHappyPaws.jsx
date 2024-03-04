@@ -5,7 +5,7 @@ const WhyHappyPawsPage = () => {
     <>
       <section className="main_whyhp_container">
         <div className="whyhp_content_container">
-          <h5 className="whyhp-home-section-heading2">Why Choose <span className="span">Happy Paws</span>?</h5>
+          <h5 className="whyhp-home-section-heading2">Why Choose <span className="span1">Vatan</span> <span className="span2">HP</span>?</h5>
             <div className="whyhp-section">
               <div className="whyhp_item,">
                 <div className="whyhp_item_container">
@@ -16,7 +16,7 @@ const WhyHappyPawsPage = () => {
                   </div>
                   <div className="whyhp_content">
                       <h5>Personalized Profiles</h5>
-                      <p>Creating personalized profiles for pets at a Happy Paws lets our staff know about each pet's health history, preferences, and specific needs. </p>
+                      <p>Creating personalized profiles for pets at a Vatan HP lets our staff know about each pet's health history, preferences, and specific needs. </p>
                   </div>
                   <div className="whyhp_content ">
                       <h5>Access Anytime, Anywhere</h5>

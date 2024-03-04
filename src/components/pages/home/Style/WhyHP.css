@@ -89,8 +89,11 @@ p {
     /* border: solid blue; */
 }
 
-.whyhp-home-section-heading2 span {
-    color: #FAD400;
+.whyhp-home-section-heading2 .span1 {
+    color: #f77509;
+}
+.whyhp-home-section-heading2 .span2 {
+    color: #d70100;
 }
 
 .main_whyhp_container .whyhp_content_container p {
@@ -177,10 +180,6 @@ p {
         text-align: center;
         font-weight: 600;
         /* border: solid blue; */
-    }
-    
-    .whyhp-home-section-heading2 span {
-        color: #FAD400;
     }
     
     .main_whyhp_container .whyhp_content_container p {

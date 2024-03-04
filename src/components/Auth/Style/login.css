@@ -199,13 +199,13 @@ a:hover {
 
 .side {
   display: flex;
-  margin-left: 26.8vh;
+  margin-left: 25vh;
   /* background-size: 100% 102%; */
 }
 
 .side img {
-  width: 75vh;
-  height: 75vh;
+  width: 71vh;
+  height: 71vh;
 }
 
 @media screen and (max-width: 768px) {

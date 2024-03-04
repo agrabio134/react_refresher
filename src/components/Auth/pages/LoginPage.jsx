@@ -102,7 +102,7 @@ const LoginPage = () => {
 
       <section className="login-main-container mobile-login-main-container">   
       <div className="side">
-      <img src="/page/LGHD.png" alt="" />
+      <img src="/page/NLHD.png" alt="" />
       </div>
         <div className="main-user-login-container">
           <div className="scrollable-container">

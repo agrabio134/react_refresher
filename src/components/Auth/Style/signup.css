@@ -185,14 +185,14 @@
 
   .signup-side {
     display: flex;
-    margin-left: 26.8vh;
+    margin-left: 25vh;
     /* background-size: 100% 102%; */
     
   }
   
   .signup-side img {
-    width: 75vh;
-    height: 75vh;
+    width: 71vh;
+    height: 71vh;
     /* display: none; */
   }
 
@@ -236,6 +236,12 @@
     transform: translateY(-50%);
     color: white;
     transition: color   0.4s;
+}
+
+.login-link {
+  font-family: "Franklin Gothic light";
+  text-align: center;
+  margin-top: 10px;
 }
 
 .user-signup-box input:focus ~ i {

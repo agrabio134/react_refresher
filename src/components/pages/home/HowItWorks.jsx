@@ -51,7 +51,7 @@ const HowItWorksPage = () => {
           <h2>How it works?</h2>
           <div className="hiw-separator"></div>
           <div className='hiw-text-container'>
-          <p>To schedule an appointment with Happy Paws, kindly navigate to the "Appointment" tab. There, you can choose a preferred date, time slot, selected pet and the reason for your visit. </p>
+          <p>To schedule an appointment with Vatan HP, kindly navigate to the "Appointment" tab. There, you can choose a preferred date, time slot, selected pet and the reason for your visit. </p>
           <br></br>
           <p>Following the booking process, the website will promptly notify you regarding the confirmation of your appointment reservation. Users can view their scheduling appointments and basic pet information in their user profile.</p>
         </div>

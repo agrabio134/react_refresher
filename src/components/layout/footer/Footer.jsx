@@ -8,7 +8,7 @@ const FooterPage = () => {
                 <div className="footer-content">
    
                     <div className="happy-paws-content">
-                        <img src="/page/LGHD.png" alt="" />
+                        <img src="/page/NLHD.png" alt="" />
                         {/* <h1>Happy Paws</h1> */}
                         <p>Veterinary Services & Pet Grooming</p>
                     </div>
@@ -44,7 +44,7 @@ const FooterPage = () => {
 
                 </div>
                 <div className="copyrigt-content">
-                    <h6>Copyright © 2023 Happy Paws. All Rights Reserved. Power</h6>
+                    <h6>Copyright © 2023 Vatan HP. All Rights Reserved. Power</h6>
                 </div>
             </div>
       </section>

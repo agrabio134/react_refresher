@@ -3,7 +3,7 @@
 	min-height: 100vh;
 	display: flex;
 	align-items: center;
-	background: url(../../../../assets/img/h11.png);
+	background: url(../../../../assets/img/vv.jpg);
 	background-size: cover;
 	/* background-position: center; */
 	background-repeat: no-repeat;
@@ -18,7 +18,7 @@
 .home .content h4{
 	font-family: 'montserrat';
 	font-weight: 700;
-	font-size: 36px;
+	font-size: 40px;
 	line-height: 35px;
 	text-transform: uppercase;
 	color: #082342;
@@ -28,20 +28,21 @@
 	font-family: 'montserrat';
 	font-weight: bold;
 	padding-top: 20px;
-    font-size: 54px;
+    font-size: 4.5rem;
 	width: 45rem;
+	color: #ff7400;
 }
 
 .home .content h2 .span{
-	color: #FF5C17;
+	color: #d70100;
 }
 
 .home .content p{
 	font-family: 'Franklin Gothic Light';
-	font-size: 16px;
+	font-size: 18px;
 	color: #082342;
 	line-height: 1.8;
-	width: 500px;
+	width: 550px;
     padding-top: 20px;
 }
 

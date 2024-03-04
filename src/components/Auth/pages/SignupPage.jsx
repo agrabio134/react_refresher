@@ -213,12 +213,12 @@ const SignupPage = () => {
     <>
       <section className="signup-main-container">
         <div className="signup-side">
-          <img src="/page/LGHD.png" alt="" />
+          <img src="/page/NLHD.png" alt="" />
         </div>
         <div className="main-user-signup-container">
         <div className="scrollable-container">
 
-          <p className="title">Happy Paws</p>
+          <p className="title">Vatan HP</p>
           <div className="signup-separator"></div>
 
           <form className="user-signup-box" onSubmit={handleSubmit}>
@@ -323,11 +323,11 @@ const SignupPage = () => {
               <div>
                 <p>
                   <strong>
-                    Happy Paws Pet Care Services Terms and Conditions
+                    Vatan HP Pet Care Services Terms and Conditions
                   </strong>
                 </p>
                 <p>
-                  <strong>Welcome to Happy Paws Pet Care Services.</strong> By
+                  <strong>Welcome to Vatan HP Pet Care Services.</strong> By
                   accessing our website, you agree to comply with and be bound
                   by the following terms and conditions.
                 </p>
@@ -335,7 +335,7 @@ const SignupPage = () => {
                   <li>
                     <strong>Service Description</strong>
                     <p>
-                      Happy Paws Pet Care Services offers various pet care
+                      Vatan HP Pet Care Services offers various pet care
                       services, including but not limited to pet sitting, dog
                       walking, and grooming. The specifics of each service are
                       detailed on the website.
@@ -353,9 +353,9 @@ const SignupPage = () => {
                   <li>
                     <strong>Booking and Payments</strong>
                     <p>
-                      The Happy Paws website will not handle any mode of payment
+                      The Vatan HP website will not handle any mode of payment
                       and will only be responsible for the user appointment for
-                      the Happy Paws customer.
+                      the Vatan HP customer.
                     </p>
                   </li>
                   {/* Add more sections as needed */}
