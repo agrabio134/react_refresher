@@ -151,7 +151,7 @@ const MainLayout = () => {
       </div>
           <div className="main_router">
             <div className="header_logo">
-              <img src="/page/NLHD.png" alt="" />
+              <img src="/page/LGHD.png" alt="" />
             </div>
             <div className="main_nav">
               <Link to="/" className="nav_list">

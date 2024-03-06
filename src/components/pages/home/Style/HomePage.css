@@ -34,7 +34,7 @@
 }
 
 .home .content h2 .span{
-	color: #d70100;
+	color: #ff7400;
 }
 
 .home .content p{
@@ -94,12 +94,12 @@
 	.phone-home .phone-content h2{
 		padding-top: 20px;
 		font-size:  42px;
-		color: black;
+		color: #ff7400;
 		width: 100%;
 	}
 	
 	.phone-home .phone-content h2 .span{
-		color: #FF5C17;
+		color: #ff7400;
 		font-weight: bold;
 	}
 	

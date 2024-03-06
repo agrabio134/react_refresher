@@ -213,12 +213,12 @@ const SignupPage = () => {
     <>
       <section className="signup-main-container">
         <div className="signup-side">
-          <img src="/page/NLHD.png" alt="" />
+          <img src="/page/LGHD.png" alt="" />
         </div>
         <div className="main-user-signup-container">
         <div className="scrollable-container">
 
-          <p className="title">Vatan HP</p>
+          <p className="title">Happy Paws</p>
           <div className="signup-separator"></div>
 
           <form className="user-signup-box" onSubmit={handleSubmit}>
@@ -309,9 +309,9 @@ const SignupPage = () => {
                 />
                 <span className="checkmark"></span>
               </label>
-              <span onClick={openTermsModal} className="terms-link">
-              I agree to the Terms and Conditions
-              </span>
+              <p className="terms-link">
+                I agree to the<span onClick={openTermsModal}>Terms and Conditions</span>
+             </p>
             </div>
 
             <Modal
@@ -323,11 +323,11 @@ const SignupPage = () => {
               <div>
                 <p>
                   <strong>
-                    Vatan HP Pet Care Services Terms and Conditions
+                    Happy Paws Pet Care Services Terms and Conditions
                   </strong>
                 </p>
                 <p>
-                  <strong>Welcome to Vatan HP Pet Care Services.</strong> By
+                  <strong>Welcome to Happy Paws Pet Care Services.</strong> By
                   accessing our website, you agree to comply with and be bound
                   by the following terms and conditions.
                 </p>
@@ -335,7 +335,7 @@ const SignupPage = () => {
                   <li>
                     <strong>Service Description</strong>
                     <p>
-                      Vatan HP Pet Care Services offers various pet care
+                      Happy Paws Pet Care Services offers various pet care
                       services, including but not limited to pet sitting, dog
                       walking, and grooming. The specifics of each service are
                       detailed on the website.
@@ -353,9 +353,9 @@ const SignupPage = () => {
                   <li>
                     <strong>Booking and Payments</strong>
                     <p>
-                      The Vatan HP website will not handle any mode of payment
+                      The Happy Paws website will not handle any mode of payment
                       and will only be responsible for the user appointment for
-                      the Vatan HP customer.
+                      the Happy Paws customer.
                     </p>
                   </li>
                   {/* Add more sections as needed */}

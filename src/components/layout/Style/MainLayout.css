@@ -107,8 +107,8 @@ html  {
 }
 
 .header_logo img {
-  height: 69.4px;
-  width: 69.4px;
+  height: 65px;
+  width: 65px;
 }
 
 .main_nav {
@@ -131,7 +131,7 @@ html  {
   font-family: 'montserrat';
   text-decoration: none;
   text-transform: uppercase;
-  /* font-weight: bold; */
+  font-weight: bold;
   
 }
 .nav_list:nth-child(5) {
@@ -216,7 +216,7 @@ html  {
   
   .header_logo img {
     height: auto;
-    width: 5rem;
+    width: 4.5rem;
   }
 
   .header_fixed .fa-solid {
@@ -252,7 +252,7 @@ html  {
 
   .side-nav-header_logo img{
     height: auto;
-    width: 5rem;
+    width: 4.5rem;
   }
 
   /* .side-nab-email h4{
@@ -334,54 +334,50 @@ html  {
     border-bottom-width: 2px;
     border-bottom-color: #eaeaea;
     border-bottom-style: solid;
-}
+  }
 
-.side-nav-content .fa-solid {
-  display: flex;
-  align-items: center;
-  flex-direction: row;
-  color: #082342;
-  font-size: 20px;
-  padding: 20px;
-}
+  .side-nav-content .fa-solid {
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    color: #082342;
+    font-size: 20px;
+    padding: 20px;
+  }
 
-.side-nav-content .fa-user{
-  display: flex;
-  align-items: center;
-  flex-direction: row;
-  color: #082342;
-  font-size: 20px;
-  padding: 20px 24px 20px 24px;
-}
+  .side-nav-content .fa-user{
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    color: #082342;
+    font-size: 20px;
+    padding: 20px 23px 20px 23px;
+  }
 
-.side-nav-content .fa-calendar-check {
-  display: flex;
-  align-items: center;
-  flex-direction: row;
-  color: #082342;
-  font-size: 20px;
-  padding: 20px 24px 20px 24px;
-}
+  .side-nav-content .fa-calendar-check {
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    color: #082342;
+    font-size: 20px;
+    padding: 20px 23px 20px 22px;
+  }
 
-.side-nav-content .fa-image{
-  display: flex;
-  align-items: center;
-  flex-direction: row;
-  color: #082342;
-  font-size: 20px;
-  padding: 20px 23px 20px 23px;
-}
+  .side-nav-content .fa-image{
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    color: #082342;
+    font-size: 20px;
+  }
 
-.side-nav-content .fa-blog {
-  display: flex;
-  align-items: center;
-  flex-direction: row;
-  color: #082342;
-  font-size: 20px;
-  padding: 20px 23px 20px 23px;
-}
-
-
+  .side-nav-content .fa-newspaper {
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    color: #082342;
+    font-size: 20px;
+  }
 }
 
 

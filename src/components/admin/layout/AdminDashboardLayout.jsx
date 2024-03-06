@@ -58,7 +58,7 @@ const AdminDashboardLayout = ({ children }) => {
         onBreakpoint={toggleDrawer}
       >
         <div className="logo" onClick={toggleDrawer}>
-          Admin
+        <img src="/page/LGHD.png" alt="" />
         </div>
         <Menu theme="dark" mode="vertical" defaultSelectedKeys={["1"]}>
           <Menu.Item key="1" className="menu-item-text">

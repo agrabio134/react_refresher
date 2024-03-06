@@ -8,7 +8,7 @@ const FooterPage = () => {
                 <div className="footer-content">
    
                     <div className="happy-paws-content">
-                        <img src="/page/NLHD.png" alt="" />
+                        <img src="/page/LGHD.png" alt="" />
                         {/* <h1>Happy Paws</h1> */}
                         <p>Veterinary Services & Pet Grooming</p>
                     </div>

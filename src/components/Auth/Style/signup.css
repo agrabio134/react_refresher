@@ -52,10 +52,16 @@
   font: 1em sans-serif;
   font-size: 15px;
   font-weight: bold;
-  color: #082342;
+}
+.terms-link span {
   cursor: pointer;
+  color: #082342;
 }
 
+.terms-link span:hover {
+  color: #fad400;
+  text-decoration: underline
+}
 .scroll-wrapper {
   max-height: 200px; /* Adjust the height according to your design */
   overflow-y: auto;
@@ -78,7 +84,7 @@
     width: 150px;
     height: 4px;
     background-color: #FAD400;
-    margin-bottom: 24px;
+    margin: 24px auto 24px auto;
 }
 
 .main-user-signup-container {
@@ -185,14 +191,14 @@
 
   .signup-side {
     display: flex;
-    margin-left: 25vh;
+    margin-left: 26vh;
     /* background-size: 100% 102%; */
     
   }
   
   .signup-side img {
-    width: 71vh;
-    height: 71vh;
+    width: 75vh;
+    height: 75vh;
     /* display: none; */
   }
 
@@ -432,7 +438,7 @@ color: #082342;
 }
 
 .signup-side img {
-  width: 40dvw;
+  width: 45dvw;
   height: auto;
   /* display: none; */
 }

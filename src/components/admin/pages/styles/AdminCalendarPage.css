@@ -45,10 +45,19 @@
   color: #e9e7e7;
 }
 
+.rbc-toolbar-label {
+  color: #000000;
+}
+
+.rbc-header {
+  color: #000000;
+}
+
 /* Legend styles */
 .legend {
   display: flex;
   margin-top: 10px;
+  color: #000000;
 }
 
 .legend-item {

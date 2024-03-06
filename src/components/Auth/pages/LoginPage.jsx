@@ -102,13 +102,13 @@ const LoginPage = () => {
 
       <section className="login-main-container mobile-login-main-container">   
       <div className="side">
-      <img src="/page/NLHD.png" alt="" />
+      <img src="/page/LGHD.png" alt="" />
       </div>
         <div className="main-user-login-container">
           <div className="scrollable-container">
         <p className="login-title mobile-title">Welcome!</p>
             <div className="user-separator"></div>
-            <p className="welcome-message">Please, provide login credential to proceed and have access to all our services</p>
+            <p className="welcome-message">Please provide login credential to proceed and have access to all our services</p>
           <form className="user-login-box" onSubmit={handleLoginSubmit}>
             <div className="user-login-form-control">
               <label htmlFor="email"></label>
@@ -149,7 +149,9 @@ const LoginPage = () => {
 
             </div>              
             <input type="submit" value="Login" className="btn1" />
-            <a href="/auth/signup" className="dnthave">Don’t have an account? Sign up</a>
+            <p className="login-link">
+            Don’t have an account?<a href="/auth/signup" className="dnthave"> Sign up</a>
+            </p>
           </form>
           </div>
           </div>

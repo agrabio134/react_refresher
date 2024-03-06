@@ -165,6 +165,37 @@ margin-right: calc(var(--bs-gutter-x)/ -2);
 margin-left: calc(var(--bs-gutter-x)/ -2);
 }
 
+@media screen and (max-width: 1512px) {
+    
+    .about-img .row .content{
+    flex: 1 1 40rem;
+    padding: 2rem;
+    
+    }
+
+}
+
+@media screen and (max-width: 1456px) {
+    
+  .about-img .row .content{
+  flex: 1 1 35rem;
+  padding: 2rem;
+  
+  }
+
+}
+
+@media screen and (max-width: 1363px) {
+    
+  .about-img .row .content{
+  flex: 1 1 30rem;
+  padding: 2rem;
+  
+  }
+
+}
+
+
 @media (max-width: 580px) {
 .about-img .image-section .image-content {
   left: 30px;

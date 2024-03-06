@@ -152,6 +152,29 @@
   background-color: #f44336;
 }
 
+.tab-buttons button {
+  color: black !important;
+}
+
+.file-uploader {
+  color: black !important;
+}
+
+.form-container {
+  color: black;
+}
+
+.logo {
+  padding: 20px;
+  margin-bottom: 25px;
+}
+
+.logo img {
+  width: 4rem;
+  height: auto;
+}
+
+
 /* Add any additional styles as needed */
 
 @media screen and (max-width: 768px) {

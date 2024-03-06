@@ -40,7 +40,7 @@
   width: 150px;
   height: 4px;
   background-color: #fad400;
-  margin: 24px;
+  margin: 24px auto 24px auto;
 }
 
 .welcome-message {
@@ -199,13 +199,13 @@ a:hover {
 
 .side {
   display: flex;
-  margin-left: 25vh;
+  margin-left: 26vh;
   /* background-size: 100% 102%; */
 }
 
 .side img {
-  width: 71vh;
-  height: 71vh;
+  width: 75vh;
+  height: 75vh;
 }
 
 @media screen and (max-width: 768px) {
@@ -294,7 +294,7 @@ a:hover {
     width: 50dvw;
     height: 4px;
     background-color: #fad400;
-    margin: 20px;
+    margin: 24px auto 24px auto;
   }
 
   .welcome-message {
@@ -454,7 +454,7 @@ a:hover {
   }
 
   .side img {
-    width: 60dvw;
+    width: 65dvw;
     height: auto;
     /* display: none; */
   }

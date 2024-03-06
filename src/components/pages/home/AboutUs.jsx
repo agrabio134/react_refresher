@@ -8,7 +8,7 @@ const AboutPage = () => {
         <div className="image-section ps-rel ">
         <img src="/page/time.jpg" alt="" />
                   <div className="image-content ">
-                     <h5>Open Hours</h5>
+                     <h5>Office Hours</h5>
                      <ul className="content-box">
                         <li>
                            <ul>
@@ -49,7 +49,7 @@ const AboutPage = () => {
                      Care in Full Measure
                   </h4>
                   <p className="py-3">
-                  Vatan HP is a special place that focuses on taking great care of your pets. We're not just about regular vet services; we go the extra mile to make sure your furry friends are happy and healthy. In addition to basic vet care, we offer grooming, handpicked pet products, and other services designed to meet the specific needs of your pets. We're all about making sure your beloved animals are well taken care of in every way possible.
+                  Happy Paws is a special place that focuses on taking great care of your pets. We're not just about regular vet services; we go the extra mile to make sure your furry friends are happy and healthy. In addition to basic vet care, we offer grooming, handpicked pet products, and other services designed to meet the specific needs of your pets. We're all about making sure your beloved animals are well taken care of in every way possible.
                   </p>
 
           </div>

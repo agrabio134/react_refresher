@@ -5,7 +5,7 @@ const WhyHappyPawsPage = () => {
     <>
       <section className="main_whyhp_container">
         <div className="whyhp_content_container">
-          <h5 className="whyhp-home-section-heading2">Why Choose <span className="span1">Vatan</span> <span className="span2">HP</span>?</h5>
+          <h5 className="whyhp-home-section-heading2">Why Choose <span className="span1">Happy</span> <span className="span2">Paws</span>?</h5>
             <div className="whyhp-section">
               <div className="whyhp_item,">
                 <div className="whyhp_item_container">
