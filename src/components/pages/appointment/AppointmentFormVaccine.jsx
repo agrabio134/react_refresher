@@ -507,7 +507,7 @@ const AppointmentFormVaccine = () => {
             ))}
           </select>
 
-          <label>Reason of Appointment:</label>
+          {/* <label>Reason of Appointment:</label>
 
           <select
             value={selectedType}
@@ -534,7 +534,7 @@ const AppointmentFormVaccine = () => {
               />
               <p>Max Character: {selectedReason.length}/15</p>
             </div>
-          )}
+          )} */}
         </div>
       </div>
 

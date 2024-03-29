@@ -24,7 +24,7 @@ const AppointmentPage = () => {
           {/* Appointment Type Cards */}
           {selectedAppointment === null && (
             <div className="appointment-type">
-              <h2>Appointment</h2>
+              <h1>Appointment Categories</h1>
               <div className="appointment-type-container">
                 <div className="appointment-type-card" onClick={() => handleAppointmentSelection('Consultation')}>
                   <img src="/page/stethoscope.png" alt="consultation" />
@@ -49,9 +49,9 @@ const AppointmentPage = () => {
           {selectedAppointment && (
             <div>
               <button onClick={handleGoBack} className='backBtn'>Back</button>
-              {selectedAppointment === 'Grooming' && <AppointmentFormGroom />}
-              {selectedAppointment === 'Vaccination' && <AppointmentFormVaccine />}
-              {selectedAppointment === 'Consultation' && <AppointmentFormConsult />}
+              {selectedAppointment === 'Grooming' && <div><h1>Grooming</h1><p>For grooming</p><AppointmentFormGroom /></div>}
+              {selectedAppointment === 'Vaccination' && <div><h1>Vaccination</h1><p>For vaccination and immunization</p><AppointmentFormVaccine /></div>}
+              {selectedAppointment === 'Consultation' && <div><h1>Consultation</h1><p>For general checkup and consultation</p><AppointmentFormConsult  /></div>}
             </div>
           )}
 
