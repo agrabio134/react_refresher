@@ -1,14 +1,17 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, lazy, Suspense } from "react";
 import { Modal, Table } from "antd";
 import { Button, Image } from "antd";
 import moment from "moment";
 
+
+const LazyTable = lazy(() => import("antd/lib/table"));
+
+
 const UserRecords = ({ id }) => {
-  const [records, setRecords] = useState([]);
   const [vetRecord, setVetRecord] = useState([]);
   const [vetPetRecord, setVetPetRecord] = useState([]);
-  const [recordVetModalVisible, setRecordVetModalVisible] = useState(false);
-  const [vetRecordError, setVetRecordError] = useState(null);
+  const [selectedAppointment, setSelectedAppointment] = useState(null);
+  const [selectedPet, setSelectedPet] = useState(null);
   
 
   useEffect(() => {
@@ -18,16 +21,16 @@ const UserRecords = ({ id }) => {
   const calculateAge = (birthdate) => {
     const today = moment();
     const birthdateMoment = moment(birthdate);
-    const years = today.diff(birthdateMoment, 'years');
-    const months = today.diff(birthdateMoment, 'months') % 12;
-    const days = today.diff(birthdateMoment, 'days');
-  
+    const years = today.diff(birthdateMoment, "years");
+    const months = today.diff(birthdateMoment, "months") % 12;
+    const days = today.diff(birthdateMoment, "days");
+
     if (years > 0) {
-      return `${years} ${years === 1 ? 'year' : 'years'}`;
+      return `${years} ${years === 1 ? "year" : "years"}`;
     } else if (months > 0) {
-      return `${months} ${months === 1 ? 'month' : 'months'}`;
+      return `${months} ${months === 1 ? "month" : "months"}`;
     } else {
-      return `${days} ${days === 1 ? 'day' : 'days'}`;
+      return `${days} ${days === 1 ? "day" : "days"}`;
     }
   };
   const getVeterinaryRecord = async () => {
@@ -37,11 +40,10 @@ const UserRecords = ({ id }) => {
       );
 
       if (!response.ok) {
-        // Check specifically for 404 status and handle it as a non-error
         if (response.status === 404) {
-          // console.log(`No data found for user with ID ${user_id}`);
-          setVetRecord([]); // Set the state to an empty array
-          return; // Return early without throwing an error
+
+          setVetRecord([]);
+          return;
         } else {
           throw new Error(`Failed to fetch data: ${response.status}`);
         }
@@ -79,7 +81,7 @@ const UserRecords = ({ id }) => {
         }
       }
     } catch (error) {
-      console.error("Error fetching data:", error.message);
+      // console.error("Error fetching data:", error.message);
       setVetRecord([]); // Clear the state in case of an error
     }
   };
@@ -91,11 +93,9 @@ const UserRecords = ({ id }) => {
       );
 
       if (!response.ok) {
-        // Check specifically for 404 status and handle it as a non-error
         if (response.status === 404) {
-          // console.log(`No data found for user with ID ${user_id}`);
-          setVetRecord([]); // Set the state to an empty array
-          return; // Return early without throwing an error
+          setVetRecord([]);
+          return; 
         } else {
           throw new Error(`Failed to fetch data: ${response.status}`);
         }
@@ -113,22 +113,21 @@ const UserRecords = ({ id }) => {
                 : "{" + json + "}"
             );
 
-            const vetRecordData = jsonObjects.flatMap((json) => {
-              try {
-                const parsedResult = JSON.parse(json);
-                console.log(parsedResult.payload);  // Add this line to log data
-                return parsedResult.payload || [];
-              } catch (jsonError) {
-                console.error("Error parsing JSON:", jsonError);
-                return [];
-              }
-            });
-            
+          const vetRecordData = jsonObjects.flatMap((json) => {
+            try {
+              const parsedResult = JSON.parse(json);
+              // console.log(parsedResult.payload);
+              return parsedResult.payload || [];
+            } catch (jsonError) {
+              // console.error("Error parsing JSON:", jsonError);
+              return [];
+            }
+          });
 
           // console.log(vetRecordData);
           setVetRecord(vetRecordData);
         } catch (jsonError) {
-          console.error("Error parsing JSON:", jsonError);
+          // console.error("Error parsing JSON:", jsonError);
           setVetRecord([]); // Clear the state in case of an error
         }
       }
@@ -138,21 +137,60 @@ const UserRecords = ({ id }) => {
     }
   };
 
+  const handleGoBack = () => {
+    setSelectedAppointment(null);
+    setVetRecord([]);
+
+    setSelectedPet(null); 
+
+    
+
+    
+
+  
+  };
+
+  const handleAppointmentSelection = (appointment) => {
+    setSelectedAppointment(appointment);
+
+
+  };
+
+  const handleViewRecordDataClick = (id) => {
+    // get veterinary record id
+    console.log(id);
+    setSelectedPet(id);
+
+    // handleViewPetDataClick(id);
+  };
+
+  const viewPetRecords = (id) => {
+    handleViewPetDataClick(id);
+  };
+
   const PetRecordColumns = [
-    { title: "image", dataIndex: "image", key: "image",
-    render: (image) => <Image src={image} alt="Animal" width={50} height={50} />,
-  },
+    {
+      title: "image",
+      dataIndex: "image",
+      key: "image",
+      render: (image) => (
+        <Image src={image} alt="Animal" width={50} height={50} />
+      ),
+    },
 
     { title: "name", dataIndex: "name", key: "name" },
     { title: "type", dataIndex: "type", key: "type" },
     { title: "breed", dataIndex: "breed", key: "breed" },
     {
-      title: 'Date of Birth / Age',
-      dataIndex: 'birthdate',
-      key: 'birthdate',
+      title: "Date of Birth / Age",
+      dataIndex: "birthdate",
+      key: "birthdate",
       render: (birthdate) => (
         <>
-          <div>{moment(birthdate).format('MMMM D, YYYY')} / {calculateAge(birthdate)} old</div>
+          <div>
+            {moment(birthdate).format("MMMM D, YYYY")} /{" "}
+            {calculateAge(birthdate)} old
+          </div>
         </>
       ),
     },
@@ -164,7 +202,8 @@ const UserRecords = ({ id }) => {
           type="primary"
           key={index}
           onClick={() => {
-            handleViewPetDataClick(record.id);
+            // handleViewPetDataClick(record.id);
+            handleViewRecordDataClick(record.id);
           }}
         >
           View Records
@@ -179,15 +218,12 @@ const UserRecords = ({ id }) => {
     try {
       // setSelectedClient(client);
       await getVeterinaryPetRecord(id);
-      setRecordVetModalVisible(true);
-      setVetPetRecord((prevVetPetRecord) => [...prevVetPetRecord]);
+            setVetPetRecord((prevVetPetRecord) => [...prevVetPetRecord]);
     } catch (error) {
       console.error("Error fetching veterinary record:", error);
       setVetPetRecord([]);
-      setVetRecordError(error);
     }
   };
-
 
   const columns = [
     { title: "Pet Name", dataIndex: "name", key: "name" },
@@ -196,92 +232,174 @@ const UserRecords = ({ id }) => {
     { title: "Body Weight", dataIndex: "body_wt", key: "body_wt" },
     { title: "Temperature", dataIndex: "temp", key: "temp" },
     {
-        title: "Complaint History",
-        dataIndex: "complaint_history",
-        key: "complaint_history",
-        render: (text) => (
-          <div style={{ maxWidth: "200px", maxHeight: "100px", overflow: "auto" }}>
-            {text}
-          </div>
-        ),
-      },
-      {
-        title: "Diagnostic Tool",
-        dataIndex: "diagnostic_tool",
-        key: "diagnostic_tool",
-        render: (text) => (
-          <div style={{ maxWidth: "200px", maxHeight: "100px", overflow: "auto" }}>
-            {text}
-          </div>
-        ),
-      },
-      {
-        title: "Laboratory Findings",
-        dataIndex: "laboratory_findings",
-        key: "laboratory_findings",
-        render: (text) => (
-          <div style={{ maxWidth: "200px", maxHeight: "100px", overflow: "auto" }}>
-            {text}
-          </div>
-        ),
-      },
-      {
-        title: "General Assessment",
-        dataIndex: "general_assessment",
-        key: "general_assessment",
-        render: (text) => (
-          <div style={{ maxWidth: "200px", maxHeight: "100px", overflow: "auto" }}>
-            {text}
-          </div>
-        ),
-      },
-      {
-        title: "Medication Treatment",
-        dataIndex: "medication_treatment",
-        key: "medication_treatment",
-        render: (text) => (
-          <div style={{ maxWidth: "200px", maxHeight: "100px", overflow: "auto" }}>
-            {text}
-          </div>
-        ),
-      },
+      title: "Complaint History",
+      dataIndex: "complaint_history",
+      key: "complaint_history",
+      render: (text) => (
+        <div
+          style={{ maxWidth: "200px", maxHeight: "100px", overflow: "auto" }}
+        >
+          {text}
+        </div>
+      ),
+    },
+    {
+      title: "Diagnostic Tool",
+      dataIndex: "diagnostic_tool",
+      key: "diagnostic_tool",
+      render: (text) => (
+        <div
+          style={{ maxWidth: "200px", maxHeight: "100px", overflow: "auto" }}
+        >
+          {text}
+        </div>
+      ),
+    },
+    {
+      title: "Laboratory Findings",
+      dataIndex: "laboratory_findings",
+      key: "laboratory_findings",
+      render: (text) => (
+        <div
+          style={{ maxWidth: "200px", maxHeight: "100px", overflow: "auto" }}
+        >
+          {text}
+        </div>
+      ),
+    },
+    {
+      title: "General Assessment",
+      dataIndex: "general_assessment",
+      key: "general_assessment",
+      render: (text) => (
+        <div
+          style={{ maxWidth: "200px", maxHeight: "100px", overflow: "auto" }}
+        >
+          {text}
+        </div>
+      ),
+    },
+    {
+      title: "Medication Treatment",
+      dataIndex: "medication_treatment",
+      key: "medication_treatment",
+      render: (text) => (
+        <div
+          style={{ maxWidth: "200px", maxHeight: "100px", overflow: "auto" }}
+        >
+          {text}
+        </div>
+      ),
+    },
     { title: "Remarks", dataIndex: "remarks", key: "remarks" },
-    { title: "Next Follow-up Checkup", dataIndex: "next_followup_checkup", key: "next_followup_checkup" },
+    {
+      title: "Next Follow-up Checkup",
+      dataIndex: "next_followup_checkup",
+      key: "next_followup_checkup",
+    },
   ];
 
   return (
     <div className="user-records-container">
+   
       {/* <h2>User Records</h2> */}
-      {vetPetRecord.length > 0 ? (
-        <Table
-          dataSource={vetPetRecord}
-          columns={PetRecordColumns}
-          rowKey={(vetPetRecord) => vetPetRecord.t1_id}
-          pagination={true}
-
-        />
-      ) : (
-        <p>No records found.</p>
+      {selectedPet === null && (
+        <div>
+          {vetPetRecord.length > 0 ? (
+            <Table
+              dataSource={vetPetRecord}
+              columns={PetRecordColumns}
+              rowKey={(vetPetRecord) => vetPetRecord.t1_id}
+              pagination={true}
+            />
+          ) : (
+            <p>No records found.</p>
+          )}
+        </div>
       )}
 
-      
-      <Modal 
-        title="Veterinary Records"
-        visible={recordVetModalVisible}
-        onCancel={() => setRecordVetModalVisible(false)}
-        footer={null}
-        width={1200}
-      > 
-        <Table
-          dataSource={vetRecord}
-          columns={columns}
-          rowKey={(vetRecord) => vetRecord.t1_id}
-          pagination={true}
-        />
-      </Modal>
+      <div>
+        {selectedPet != null && (
+          <div>
+            {selectedAppointment === null && (
+              <div className="appointment-type">
+                <h1>Record Categories</h1>
+                <button
+                  onClick={() => {
+                    setSelectedPet(null);
+                  }}
+                >
+                  Back
+                </button>
+                <div className="appointment-type-container">
+                  <div
+                    className="appointment-type-card"
+                    onClick={() => handleAppointmentSelection("Consultation")}
+                  >
+                    <img src="/page/stethoscope.png" alt="consultation" />
+                    <h3>Consultation</h3>
+                    <p>For general checkup and consultation</p>
+                  </div>
+                  <div
+                    className="appointment-type-card"
+                    onClick={() => handleAppointmentSelection("Vaccination")}
+                  >
+                    <img src="/page/vaccine.png" alt="vaccination" />
+                    <h3>Vaccination</h3>
+                    <p>For vaccination and immunization</p>
+                  </div>
+                  <div
+                    className="appointment-type-card"
+                    onClick={() => handleAppointmentSelection("Grooming")}
+                  >
+                    <img src="/page/scissor-tool.png" alt="grooming" />
+                    <h3>Grooming</h3>
+                    <p>For grooming</p>
+                  </div>
+                </div>
+              </div>
+            )}
 
+            {selectedAppointment && (
+              <div>
+                <button onClick={handleGoBack} className="backBtn">
+                  Back
+                </button>
+                {selectedAppointment === "Grooming" && (
+                  <div>
+                    <h1>Grooming</h1>
+                    <p>For grooming</p>
+                  </div>
+                )}
+                {selectedAppointment === "Vaccination" && (
+                  <div>
+                    <h1>Vaccination</h1>
+                    <p>For vaccination and immunization</p>
+                  </div>
+                )}
+                {selectedAppointment === "Consultation" && (
+                  <div>
+                    <h1>Consultation</h1>
+                    <p>For general checkup and consultation</p>
 
+                    {(viewPetRecords(selectedPet))}
+                    <Suspense fallback={<div>Loading...</div>}>
 
+                    <LazyTable
+                      dataSource={vetRecord}
+                      columns={columns}
+                      rowKey={(vetRecord) => vetRecord.t1_id}
+                      pagination={true}
+                    />
+                                    </Suspense>
+
+                  </div>
+                )}
+              </div>
+            )}
+          </div>
+        )}
+      </div>
     </div>
   );
 };

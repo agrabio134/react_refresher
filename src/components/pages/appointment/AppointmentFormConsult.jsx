@@ -507,22 +507,17 @@ const AppointmentFormConsult = () => {
             ))}
           </select>
 
-          <label>Reason of Appointment:</label>
+          {/* <label style={{ visibility: "hidden" }}>Reason of Appointment:</label> */}
 
-          <select
+          {/* <select
             value={selectedType}
             onChange={(e) => handleTypeChange(e.target.value)}
             disabled={isSubmitting}
-            // not clickable 
-            style={{ pointerEvents: 'none' }}
-
-            
-
+            // not clickable
+            style={{ pointerEvents: "none", visibility: "hidden" }}
           >
             <option value="Checkup">Checkup</option>
-          </select>
-
-
+          </select> */}
         </div>
       </div>
 
