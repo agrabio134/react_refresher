@@ -5,15 +5,22 @@ import "../Style/login.css";
 
 const LoginPage = () => {
   const { toggleLogin, isLogin } = useAuth(); // Use the hook to access the global state
+  const [ isPhoneLogin, setIsPhoneLogin ] = useState(false); // Add a new state variable [1
 
   const [formData, setFormData] = useState({
     email: "",
     password: "",
   });
 
+  const [phoneFormData, setPhoneFormData] = useState({
+    phoneNumber: "",
+    verificationCode: "",
+  });
+
   if (isLogin) {
     window.location.href = "/";
   }
+
   const handleChange = (event) => {
     const { name, value } = event.target;
     setFormData({
@@ -97,6 +104,23 @@ const LoginPage = () => {
     }
   };
 
+  const handlePhoneChange = (event) => {
+    const { name, value } = event.target;
+    setPhoneFormData({
+      ...phoneFormData,
+      [name]: value,
+    });
+  };
+
+  const handlePhoneLoginSubmit = async (event) => {
+    event.preventDefault();
+    // console.log(phoneFormData);
+  };
+
+  const handlePhoneOtp = async (event) => {
+    console.log(phoneFormData.phoneNumber);
+  }
+
   return (
     <>
 
@@ -109,6 +133,15 @@ const LoginPage = () => {
         <p className="login-title mobile-title">Welcome!</p>
             <div className="user-separator"></div>
             <p className="welcome-message">Please provide login credential to proceed and have access to all our services</p>
+      {/* radio select */}
+      <div className="radio-select">
+        <input type="radio" id="email" name="login" value="email" checked={!isPhoneLogin} onChange={() => setIsPhoneLogin(false)} />
+        <label htmlFor="email">Email</label>
+        <input type="radio" id="phone" name="login" value="phone" checked={isPhoneLogin} onChange={() => setIsPhoneLogin(true)} />
+        <label htmlFor="phone">Phone</label>
+      </div>
+
+          {isPhoneLogin === false && (
           <form className="user-login-box" onSubmit={handleLoginSubmit}>
             <div className="user-login-form-control">
               <label htmlFor="email"></label>
@@ -153,6 +186,45 @@ const LoginPage = () => {
             Don’t have an account?<a href="/auth/signup" className="dnthave"> Sign up</a>
             </p>
           </form>
+         )} 
+
+
+  
+          {isPhoneLogin === true && (
+          <form className="user-login-box" onSubmit={handlePhoneLoginSubmit}>
+            <div className="user-login-form-control">
+              <label htmlFor="phoneNumber"></label>
+              <input
+                type="text"
+                name="phoneNumber"
+                placeholder="Phone Number"
+                value={phoneFormData.phoneNumber}
+                onChange={handlePhoneChange}
+                required
+                
+              /> 
+              {/* send otp */}
+              <a onClick={handlePhoneOtp}> Send Phone Verification</a>
+
+   
+              <i className="fa-solid fa-phone fa-sm"></i>
+              </div>
+              <div className="user-login-form-control">
+              <label htmlFor="verificationCode"></label>
+              <input
+                type="text"
+                name="verificationCode"
+                placeholder="Verification Code"
+                value={phoneFormData.verificationCode}
+                onChange={handlePhoneChange}
+                required
+              /> 
+              <i className="fa-solid fa-key fa-sm"></i>
+              </div>
+              <input type="submit" value="Login with Phone" className="btn1" />
+          </form>
+          )}
+
           </div>
           </div>
 
