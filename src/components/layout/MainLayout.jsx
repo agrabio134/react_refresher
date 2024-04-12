@@ -15,13 +15,14 @@ const MainLayout = () => {
   const [user, setUser] = useState({}); // Initialize the user state with an empty object
   const [storedToken, setStoredToken] = useState(localStorage.getItem("authToken"));
   const [userFName, setUserFName] = useState("");
+
   // get user 
   useEffect(() => {
     const storedToken = localStorage.getItem("authToken");
-  
+
     if (storedToken) {
       const decodedToken = jwt_decode(storedToken);
-  
+
       if (decodedToken.exp * 1000 < Date.now()) {
         localStorage.removeItem("authToken");
         toggleLogin(false); // Update the global state to indicate logout
@@ -32,59 +33,38 @@ const MainLayout = () => {
     }
   }, [storedToken]);
 
-  // console.log(user.user_id);
-
-
-
   useEffect(() => {
     const storedToken = localStorage.getItem("authToken") || sessionStorage.getItem("authToken");
-    // console.log(storedToken);
-  
+
     if (storedToken) {
       const decodedToken = jwt_decode(storedToken);
 
-  
       if (decodedToken.exp * 1000 < Date.now()) {
         localStorage.removeItem("authToken");
         toggleLogin(false);
       } else {
         toggleLogin(true);
-  
+
         axios
           .get(`https://happypawsolongapo.com/api/getuser/${decodedToken.user_id}`)
           .then((res) => {
             const result = res.data;
-            // console.log(result);
 
             const jsonObjects = result.split("}{");
             jsonObjects[0] = jsonObjects[0] + "}";
             jsonObjects[1] = "{" + jsonObjects[1];
             const jsonObject1 = JSON.parse(jsonObjects[0]);
-            // console.log(jsonObject1);
 
-            // get full name
             const fName = jsonObject1.payload[0].fname;
 
-           setUserFName(fName);
-            
-            
-  
+            setUserFName(fName);
           })
           .catch((err) => {
-            // console.log(err);
+            console.error(err);
           });
       }
     }
-    
   }, [storedToken]);
-
-  // console.log(" user id " + user.user_id);
-
-
-
-  
-
-  
 
   const openNav = () => {
     setSideNavHeight('auto');
@@ -95,6 +75,23 @@ const MainLayout = () => {
     setSideNavHeight('0%');
     setMarginTop('0%');
   };
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 100) {
+        document.querySelector('.header-main_container').classList.add('is-sticky');
+      } else {
+        document.querySelector('.header-main_container').classList.remove('is-sticky');
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+
+    // Cleanup function to remove the event listener when the component unmounts
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
 
   useEffect(() => {
     const storedToken = localStorage.getItem("authToken");
@@ -113,81 +110,56 @@ const MainLayout = () => {
 
   return (
     <>
-      <div className="main_container">
-        {/* <Router> */}
-          <div className="header_fixed">
-          <div className="top_header_section">
-              <div className="email_container">
-                <i className="fa-solid fa-envelope"></i>
-                <h6>happypaws@example.com</h6> 
-              </div>
-
-          <div className="auth_content">
-              <div className="icon">
-              <i className="fa-brands fa-square-facebook"></i>
-              <i className="fa-brands fa-x-twitter"></i>
-              <i className="fa-brands fa-instagram"></i>
-           </div>
-              <div className="header_auth_container">
-                {/* Conditionally render Profile or Login/Signup based on authentication status */}
-                
-                {isLogin ? (
-                  <Link to="profile" className="auth_item">
-                    Profile
-                  </Link>
-                ) : (
-                  <>
-                    <Link to="/auth/login" className="auth_item">
-                      Login
-                    </Link>
-                    /
-                    <Link to="/auth/signup" className="auth_item">
-                      Signup
-                    </Link>
-                  </>
-                )}
-              </div>
-          </div>             
-      </div>
-          <div className="main_router">
+      <header className="header-main_container">
+        <div className="header-main-box-container">
+          {/* <Router> */}
             <div className="header_logo">
-              <img src="/page/LGHD.png" alt="" />
+              <img src="/page/NLHD.png" alt="" />
+              <h1>PawsPro</h1>
             </div>
+              
             <div className="main_nav">
+
               <Link to="/" className="nav_list">
                 Home
               </Link>
+
               <Link to="/appointments" className="nav_list">
                 Appointment
               </Link>
+
               <Link to="gallery" className="nav_list">
                 Gallery
               </Link>
+
               <Link to="blogs" className="nav_list">
-                News & Announcements
+                Promos
               </Link> 
-            </div>
-
-            <div className="header_auth_container">
-                {/* Conditionally render Profile or Login/Signup based on authentication status */}
+              
+              <div className="auth-main-container">
+              {/* Conditionally render Profile or Login/Signup based on authentication status */}
                 
-                {isLogin ? (
-                  <Link to="profile" className="auth_item">
-                    Welcome, {userFName}
-                  </Link>
-                ) : (
-                  <>
-                    <Link to="/auth/login" className="auth_item" >
-                      Login
-                    </Link>
-                    /
-                    <Link to="/auth/signup" className="auth_item">
-                      Signup
-                    </Link>
-                  </>
-                )}
-              </div>
+            {isLogin ? (
+              
+                <Link to="profile" className="auth_item">
+                  Welcome, {userFName}
+                </Link>
 
+              ) : (
+              <>
+                <Link to="/auth/login" className="auth_item" >
+                  Login
+                </Link>
+                /
+                <Link to="/auth/signup" className="auth_item">
+                  Signup
+                </Link>
+              </>
+              )
+              }
+              <span></span>
+              </div>
+            </div>
 
       <div id="mySidenav" style={{ height: sideNavHeight}}  className="sidenav">
         
@@ -272,15 +244,16 @@ const MainLayout = () => {
       <button className="sidebar-button"  onClick={openNav}><i className="fa-solid fa-bars"></i></button>
 
 
-          </div>
-          </div>
-          <div className="sub_container">
+        {/* </Router> */}
+        
+        </div>
+      </header>
+      {/* <div className="sub_container">
             <div className="main_page" style={{ marginTop }}>
               <AppRoutes />
             </div>
-          </div>
-        {/* </Router> */}
-      </div>
+          </div> */}
+      <AppRoutes />
       <FooterPage />
     </>
   );

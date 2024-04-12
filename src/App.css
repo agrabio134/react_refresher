@@ -45,12 +45,12 @@ Swal.fire {
   -webkit-text-size-adjust: 100%;
 }
 
-body {
+/* body {
   margin: 0;
-}
+} */
 
 /* Adjust heading sizes for better mobile readability */
-h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
+/* h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
   font-family: "Roboto", sans-serif;
   line-height: 1.1;
   font-weight: 500;
@@ -65,10 +65,10 @@ h6, .h6 {
 
 h5, .h5 {
   font-size: 30px;
-}
+} */
 
 /* Additional styling for h6 and h5 */
-.h6 {
+/* .h6 {
   display: block;
   font-size: 0.67em;
   margin-block-start: 2.33em;
@@ -76,9 +76,9 @@ h5, .h5 {
   margin-inline-start: 0px;
   margin-inline-end: 0px;
   font-weight: bold;
-}
+} */
 
-.h5 {
+/* .h5 {
   display: block;
   font-size: 0.83em;
   margin-block-start: 1.67em;
@@ -86,10 +86,10 @@ h5, .h5 {
   margin-inline-start: 0px;
   margin-inline-end: 0px;
   font-weight: bold;
-}
+} */
 
 /* General styling for paragraphs */
-p {
+/* p {
   display: block;
   margin-block-start: 1em;
   margin-block-end: 1em;
@@ -98,7 +98,7 @@ p {
   margin-top: 0;
   margin-bottom: 1rem;
   color: #808080;
-}
+} */
 
 /* Light color scheme for light mode */
 @media (prefers-color-scheme: light) {

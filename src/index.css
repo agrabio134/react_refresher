@@ -1,4 +1,109 @@
+@import url("https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100;0,200;0,300;0,400;0,423;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,423;1,500;1,600;1,700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200;0,300;0,400;0,600;0,700;0,800;0,900;1,200;1,300;1,400;1,600;1,700;1,800;1,900&display=swap");
+
+body {
+  padding: 0;
+  margin: 0;
+  color: #646464;
+  font-family: "Josefin Sans", sans-serif !important;
+}
+
+a {
+  -webkit-transition: 0.5s;
+  transition: 0.5s;
+  color: var(--btnSecondary);
+  text-decoration: none;
+}
+
+a:hover, a:focus {
+  text-decoration: none;
+  color:  var(--btnPrimary);
+  outline: 0;
+}
+
+button:focus, input:focus {
+  outline: 0;
+}
+
+p {
+  color: #646464;
+  line-height: 1.6;
+  margin-bottom: 12px;
+  font-size: 16px;
+  font-family: "Nunito", sans-serif;
+}
+
+p:last-child {
+  margin-bottom: 0;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  color: #000000;
+  font-weight: bold;
+  text-transform: capitalize;
+}
+
 :root {
+  --primary: #e2cc92;
+  --secondary: #fffedd;
+  --ascend: #d1a650;
+  --darkcolor: #000000;
+  --lightcolor: #ffffff;
+  --gray: #646464;
+
+  --bg-primary: #ffffff;
+  --bg-secondary: #fafafa;
+  --bg-ascend: #e2cc92;
+
+  --btnPrimary: #fa7705;
+  --btnSecondary: #4d3326;
+  --btnSuccess: #28a745;
+  --btnDanger: #dc3545;
+  --btnWarning: #ffc107;
+
+  --btn1:#fa7705;
+  --c1:#fffedd;
+  --c2:#e2cc92;
+  --c3:#d1a650;
+  --c4:#da7a24;
+  --c5:#c74e1a;
+  --DB:#4d3326;
+
+  --barc: #dc3545;
+
+  --vatan: #fa7705;
+  --hp:#cf0905;
+}
+
+@-webkit-keyframes MOVE-BG {
+  from {
+    -webkit-transform: translateX(0);
+  }
+  to {
+    -webkit-transform: translateX(85px);
+  }
+}
+
+@keyframes MOVE-BG {
+  from {
+    -webkit-transform: translateX(0);
+            transform: translateX(0);
+  }
+  to {
+    -webkit-transform: translateX(85px);
+            transform: translateX(85px);
+  }
+}
+
+@media (prefers-color-scheme: light) {
+  :root {
+    color: #213547;
+    background-color: #ffffff;
+  }
+
+}
+
+/* :root {
   font-family: 'montserrat';
   line-height: 1.5;
   font-weight: 400;
@@ -12,78 +117,10 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   -webkit-text-size-adjust: 100%;
-}
+} */
 
-
-body {
-  margin: 0;
- 
-}
-
-
-h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
-  font-family: 'montserrat';
-  line-height: 1.1;
-  font-weight: 500;
-  color: #222222;
-  margin: 0;
-  padding: 0;
-}
-
-h6, .h6 {
-  font-size: 28px;
-}
-
-h5, .h5 {
-  font-size: 30px;
-}
-
-.h6 {
-  display: block;
-  font-size: 0.67em;
-  margin-block-start: 2.33em;
-  margin-block-end: 2.33em;
-  margin-inline-start: 0px;
-  margin-inline-end: 0px;
-  font-weight: bold;
-}
-
-.h5 {
-  display: block;
-  font-size: 0.83em;
-  margin-block-start: 1.67em;
-  margin-block-end: 1.67em;
-  margin-inline-start: 0px;
-  margin-inline-end: 0px;
-  font-weight: bold;
-}
-
-p {
-  display: block;
-  margin-block-start: 1em;
-  margin-block-end: 1em;
-  margin-inline-start: 0px;
-  margin-inline-end: 0px;
-}
-
-p {
-  margin-top: 0;
-  margin-bottom: 1rem;
-}
-
-p {
-  margin: 0;
-}
-
-p {
-  color: #808080;
-}
-
-
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
-  }
-
-}
+/* *{
+  background: #000 !important;
+  color: #0f0 !important;
+  outline: solid #f00 1px !important;
+} */

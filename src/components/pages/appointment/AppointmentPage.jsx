@@ -18,33 +18,39 @@ const AppointmentPage = () => {
   };
 
   return (
-    <section className="whole-appointment-container">
+    <section id="appointment">
       <div className="main-appointment-container">
         <ErrorBoundary>
           {/* Appointment Type Cards */}
           {selectedAppointment === null && (
             <div className="appointment-type">
-              <h1>Appointment Categories</h1>
+              <h2>Appointment Categories</h2>
+              <div class="bar"></div>
               <div className="appointment-type-container">
-                <div className="appointment-type-card" onClick={() => handleAppointmentSelection('Consultation')}>
-                  <img src="/page/stethoscope.png" alt="consultation" />
+                <div className="single-features" onClick={() => handleAppointmentSelection('Consultation')}>
+                  <div className='img-container'>
+                    <img src="/page/consultation.png" alt="consultation" />
+                  </div>
                   <h3>Consultation</h3>
                   <p>For general checkup and consultation</p>
                 </div>
-                <div className="appointment-type-card" onClick={() => handleAppointmentSelection('Vaccination')}>
-                  <img src="/page/vaccine.png" alt="vaccination" />
+                <div className="single-features" onClick={() => handleAppointmentSelection('Vaccination')}>
+                <div className='img-container'>
+                    <img src="/page/vaccination.png" alt="Vaccination" />
+                  </div>
                   <h3>Vaccination</h3>
                   <p>For vaccination and immunization</p>
                 </div>
-                <div className="appointment-type-card" onClick={() => handleAppointmentSelection('Grooming')}>
-                  <img src="/page/scissor-tool.png" alt="grooming" />
+                <div className="single-features" onClick={() => handleAppointmentSelection('Grooming')}>
+                <div className='img-container'>
+                    <img src="/page/groom.png" alt="Grooming" />
+                  </div>
                   <h3>Grooming</h3>
                   <p>For grooming</p>
                 </div>
               </div>
             </div>
           )}
-
           {/* Selected Appointment Form */}
           {selectedAppointment && (
             <div>
@@ -60,6 +66,7 @@ const AppointmentPage = () => {
         </ErrorBoundary>
       </div>
     </section>
+    
   );
 };
 

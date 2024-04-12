@@ -1,3 +1,148 @@
+#appointment {
+  width: 100%;
+  height: 100vh;
+  background-color: var(--bg-secondary);
+  display: flex;
+  justify-content: center;
+}
+
+.main-appointment-container {
+    width: 1340px;
+    text-align: center;
+    padding: 25px;
+    border-radius: 5px;
+    z-index: 1;
+}
+
+.appointment-type-container {
+    width: 100%;
+    display: flex;
+    gap: 30px;
+    justify-content: center;
+}
+
+.single-features {
+  width: 400px;
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 30px;
+  background-color: #ffffff;
+  -webkit-box-shadow: 0 0 1.25rem rgba(108, 118, 134, 0.1);
+          box-shadow: 0 0 1.25rem rgba(108, 118, 134, 0.1);
+  -webkit-transition: 0.5s;
+  transition: 0.5s;
+  border-radius: 5px;
+}
+
+.single-features .icon i {
+  display: inline-block;
+  height: 60px;
+  width: 60px;
+  line-height: 60px;
+  background-color: var(--c3);
+  color: var(--DB);
+  font-size: 25px;
+  border-radius: 50px;
+  -webkit-transition: 0.5s;
+  transition: 0.5s;
+}
+
+.single-features h3 {
+  font-size: 25px;
+  margin-top: 25px;
+  margin-bottom: 12px;
+  -webkit-transition: 0.5s;
+  transition: 0.5s;
+}
+
+.single-features p {
+  margin-bottom: 0;
+  -webkit-transition: 0.5s;
+  transition: 0.5s;
+}
+
+.single-features::before {
+  top: 50%;
+  left: 50%;
+  width: 0%;
+  z-index: -1;
+  height: 100%;
+  content: "";
+  position: absolute;
+  -webkit-transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
+  background-color: var(--c3);
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+  border-radius: 5px;
+}
+
+.single-features:hover {
+  -webkit-transform: translateY(-10px);
+          transform: translateY(-10px);
+}
+
+.single-features:hover::before {
+  width: 100%;
+}
+
+.single-features:hover .icon i {
+  background-color: #ffffff;
+  color: var(--DB);
+}
+
+.single-features:hover h3 {
+  color: var(--DB);
+}
+
+.single-features:hover p {
+  color: #ffffff;
+}
+
+.appointment-type .bar {
+  height: 4px;
+  width: 85px;
+  background: var(--c3);
+  margin: 20px auto 20px;
+  position: relative;
+  border-radius: 5px;
+  overflow: hidden;
+}
+
+.appointment-type .bar::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 5px;
+  background: #ffffff;
+  -webkit-animation-duration: 2s;
+          animation-duration: 2s;
+  -webkit-animation-timing-function: linear;
+          animation-timing-function: linear;
+  -webkit-animation-iteration-count: infinite;
+          animation-iteration-count: infinite;
+  -webkit-animation-name: MOVE-BG;
+          animation-name: MOVE-BG;
+}
+
+#appointment .img-container {
+  background-color: white;
+  width: 100px;
+  height: 100px;
+  border-radius: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
 .appointment-type {
     text-align: center;
     margin: 50px 0;
@@ -5,16 +150,12 @@
 
   .appointment-type h2 {
     color: #333;
-    font-size: 24px;
+    font-size: 48px;
     margin-bottom: 20px;
 
   }
 
-  .appointment-type-container {
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-  }
+
 
   .appointment-type-card {
     width: 250px;
@@ -31,8 +172,9 @@
   }
 
 
-  .appointment-type-card img {
-    width: 100px;
+  .single-features img {
+    width: 65px;
+    height: 65px;
     margin: 0 auto;
   }
 
@@ -54,23 +196,8 @@
     background-color: #666;
     color: white;
   }
-  
-  
-  .whole-appointment-container {
-    padding-top: 60px;
-    background-color: white;
-    display: flex;
-    justify-content: center;
-}
 
-.main-appointment-container {
-    /* background-color: white; */
-    margin-top: 10px;
-    text-align: center;
-    padding: 25px;
-    border-radius: 5px;
-    /* box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19); */
-}
+
 
 @media screen and (max-width: 768px) {
     .whole-appointment-container {
