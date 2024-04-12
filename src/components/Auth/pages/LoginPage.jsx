@@ -9,23 +9,53 @@ import { firebaseApp } from "./firebase";
 const auth = getAuth(firebaseApp);
 
 const LoginPage = () => {
-  const { toggleLogin, isLogin } = useAuth();
+  const { toggleLogin } = useAuth();
   const [isPhoneLogin, setIsPhoneLogin] = useState(false);
   const [formData, setFormData] = useState({
     email: "",
     password: "",
-    rememberMe: false, // Adding a default value for rememberMe
+    rememberMe: false,
   });
+  const [timer, setTimer] = useState(0);
+  const [isSendingCode, setIsSendingCode] = useState(false);
+  const [recaptchaInitialized, setRecaptchaInitialized] = useState(false);
   const [phoneNumber, setPhoneNumber] = useState("");
   const [verificationId, setVerificationId] = useState("");
   const [verificationCode, setVerificationCode] = useState("");
   const [error, setError] = useState(null);
+  const [recaptchaVerifier, setRecaptchaVerifier] = useState(null);
+
+  const initializeRecaptcha = () => {
+    try {
+      if (!recaptchaInitialized) {
+        const recaptchaContainer = document.getElementById(
+          "recaptcha-container"
+        );
+        if (!recaptchaContainer) {
+          console.error("Error: recaptcha-container element not found.");
+          return;
+        }
+
+        const recaptchaVerifierInstance = new firebase.auth.RecaptchaVerifier(
+          recaptchaContainer,
+          { size: "invisible" }
+        );
+        setRecaptchaVerifier(recaptchaVerifierInstance); // Set the recaptchaVerifier in the state
+        setRecaptchaInitialized(true);
+      }
+    } catch (error) {
+      console.error("Error initializing reCAPTCHA:", error);
+    }
+  };
+
+  // initialize initializeRecaptcha once the component mounts for the first time
+  useEffect(() => {
+    initializeRecaptcha();
+  }, [recaptchaInitialized]);
 
   const handleChangePhoneNumber = (event) => {
-    let inputNumber = event.target.value.replace(/\D/g, ""); // Remove non-numeric characters
-    // Limit input to a maximum of 10 digits after the country code
+    let inputNumber = event.target.value.replace(/\D/g, "");
     inputNumber = inputNumber.substring(0, 10);
-    // Format the number only if it's longer than the country code
     if (inputNumber.length > 0) {
       setPhoneNumber(inputNumber.replace(/(\d{3})(\d{3})(\d+)/, "$1-$2-$3"));
     } else {
@@ -35,23 +65,43 @@ const LoginPage = () => {
 
   const handleSendVerificationCode = async () => {
     try {
-      const fullPhoneNumber = "+63 " + phoneNumber; // Adding "+63" to the phone number
-      const recaptchaVerifier = new firebase.auth.RecaptchaVerifier(
-        "recaptcha-container",
-        {
-          size: "invisible",
-        }
-      );
-      const confirmationResult = await signInWithPhoneNumber(
-        auth,
-        fullPhoneNumber, // Using the full phone number with the country code
-        recaptchaVerifier
-      );
-      setVerificationId(confirmationResult.verificationId);
-      setError(null); // Clear any previous errors
+      setIsSendingCode(true);
+      setTimer(60);
+
+      const intervalId = setInterval(() => {
+        setTimer((prevTimer) => (prevTimer === 0 ? 0 : prevTimer - 1));
+      }, 1000);
+
+      setTimeout(() => {
+        clearInterval(intervalId);
+        setVerificationId("");
+      }, 60000);
+
+      const fullPhoneNumber = "+63 " + phoneNumber;
+
+      if (recaptchaVerifier) {
+        // Check if recaptchaVerifier is truthy
+        const confirmationResult = await signInWithPhoneNumber(
+          auth,
+          fullPhoneNumber,
+          recaptchaVerifier
+        );
+        setVerificationId(confirmationResult.verificationId);
+        setError(null);
+      } else {
+        console.error("Recaptcha verifier is not initialized.");
+        setError("Error sending verification code. Please try again.");
+        setIsSendingCode(false);
+      }
     } catch (error) {
       console.error("Error sending verification code:", error);
-      setError("Error sending verification code. Please try again."); // Update error state
+      setError("Error sending verification code. Please try again.");
+      setIsSendingCode(false);
+      Swal.fire({
+        icon: "error",
+        title: "Error",
+        text: `Error sending verification code: ${error.message}. Please try again.`,
+      });
     }
   };
 
@@ -61,20 +111,27 @@ const LoginPage = () => {
         verificationId,
         verificationCode
       );
-      await auth.signInWithCredential(credential);
-      // User signed in successfully
+      await firebase.auth().signInWithCredential(credential);
+      alert("Code matched.");
     } catch (error) {
-      setError(error.message);
+      console.error("Error verifying code:", error);
+      if (error.code === "auth/code-expired") {
+        Swal.fire({
+          title: "Code Expired",
+          text: "The verification code has expired. Please resend the code.",
+          icon: "error",
+          confirmButtonText: "Resend Code",
+        }).then(handleSendVerificationCode);
+      } else {
+        alert("Code did not match. Please try again.");
+      }
     }
   };
 
   const handleChange = (event) => {
     const { name, value, checked, type } = event.target;
     const newValue = type === "checkbox" ? checked : value;
-    setFormData({
-      ...formData,
-      [name]: newValue,
-    });
+    setFormData({ ...formData, [name]: newValue });
   };
 
   const handleLoginSubmit = async (event) => {
@@ -240,12 +297,20 @@ const LoginPage = () => {
                       placeholder="Enter your phone number"
                       value={phoneNumber}
                       onChange={handleChangePhoneNumber}
-                      maxLength={12} // Maximum length for the phone number
-                      pattern="\d*" // Only allow digits
+                      maxLength={12}
+                      pattern="\d*"
+                      required
                     />
                   </div>
-                  <button onClick={handleSendVerificationCode}>
-                    Send Verification Code
+                  <button
+                    onClick={handleSendVerificationCode}
+                    disabled={
+                      !phoneNumber || phoneNumber.length !== 12 || timer !== 0
+                    }
+                  >
+                    {timer === 0
+                      ? "Send OTP"
+                      : `Resend OTP in ${timer} seconds`}
                   </button>
                 </div>
                 <div>
@@ -257,7 +322,7 @@ const LoginPage = () => {
                   />
                   <button onClick={handleVerifyCode}>Verify Code</button>
                 </div>
-                {error && <p>{error}</p>}
+                {/* {error && <p>{error}</p>} */}
               </div>
             )}
           </div>
