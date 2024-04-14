@@ -54,9 +54,11 @@ h1, h2, h3, h4, h5, h6 {
   --bg-primary: #ffffff;
   --bg-secondary: #fafafa;
   --bg-ascend: #e2cc92;
+  --bg-ascend2: #d1a650;
 
   --btnPrimary: #fa7705;
   --btnSecondary: #4d3326;
+  --btnAscend: #d1a650;
   --btnSuccess: #28a745;
   --btnDanger: #dc3545;
   --btnWarning: #ffc107;

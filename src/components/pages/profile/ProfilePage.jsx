@@ -320,8 +320,8 @@ const ProfilePage = () => {
       const handleInputChange = (e) => { };
       return (
         <>
-          <section className="main-profile-container">
-            <div className="whole-profile-container">
+          <section id="profile" className="main-profile-container">
+            <div className="container">
               <div className="profile-header-container">
                 <h2>{userFullName}</h2>
                 <button className="recordsBtn" onClick={showModal}>
@@ -357,7 +357,6 @@ const ProfilePage = () => {
                     </div>
                   )}
                 </div>
-              </div>
 
               <Modal
                 title="Update Profile"
@@ -432,7 +431,9 @@ const ProfilePage = () => {
 
                 <Button onClick={handleCancel}>Close</Button>
               </Modal>
-              <AddPetForm
+            </div>
+            <div className="pet-form-table-container">
+            <AddPetForm
                 petName={petName}
                 setPetName={setPetName}
                 petType={petType}
@@ -447,12 +448,13 @@ const ProfilePage = () => {
                 setDownloadURL={setDownloadURL}
                 handleAddPet={handleAddPet}
               />
-              <PetTable
+            <PetTable
                 petList={petList}
                 handleUpdatePet={handleUpdatePet}
                 handleDeletePet={handleDeletePet}
               />
-            </div>
+              </div>
+              </div>
           </section>
         </>
       );
