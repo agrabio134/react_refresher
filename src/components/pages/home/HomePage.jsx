@@ -53,7 +53,7 @@ const HomePage = () => {
       </section>
       <AboutPage />
       <WhyHappyPawsPage />
-      {/* <PromoSection /> */}
+      <PromoSection />
       <ServicePage />
       {/* <EmergencyPage /> */}
       {/* <HowItWorksPage /> */}

@@ -9,7 +9,7 @@
     display: grid;
     grid-template-columns: 2fr 1fr;
     position: fixed;
-    z-index: 1;
+    z-index: 3;
     /* padding:2rem 7%; */
  }
 .user-signup-check-box {

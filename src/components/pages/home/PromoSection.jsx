@@ -53,19 +53,20 @@ const PromoSection = () => {
     <>
       <section id="promo">
         <div className="promo-main-box-container">
-            <h2>PROMOS</h2>
+            <h2>Promos</h2>
+            <div class="bar"></div>
             <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quidem in numquam, architecto cum qui dolorum recusandae adipisci vero magnam obcaecati doloribus eaque doloremque tempore temporibus distinctio veritatis sequi! Itaque, quisquam?</p>
             <div className="promo-card-main-container">
             {loading ? (
         <p>Loading...</p>
       ) : (
-        <ul className="promo-list">
+        <div className="promo-list">
           {blogData.map((post) => (
-            <li key={post.id} className="promo-post">
+            <div key={post.id} className="promo-post">
               <Image src={`${post.thumbnail}`} alt={post.title} />
-            </li>
+            </div>
           ))}
-        </ul>
+        </div>
       )}
             </div>
         </div>
