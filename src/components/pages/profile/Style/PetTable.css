@@ -32,6 +32,33 @@
     padding: 10px;
   }
 
+  .profile-pet-card-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 20px;
+}
+
+.profile-pet-card {
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 20px;
+}
+
+.profile-pet-card img {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+  margin-bottom: 10px;
+}
+
+.profile-pet-card p {
+  margin-bottom: 10px;
+}
+
+.profile-pet-card button {
+  margin-right: 10px;
+}
+
   
 
   .pet-item {
@@ -242,6 +269,8 @@
       width: 50px !important;
       height: auto !important;
     } */
-
+    .profile-pet-card-container {
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    }
 
   }
