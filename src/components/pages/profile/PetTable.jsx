@@ -108,6 +108,12 @@ const PetTable = ({ petList, handleUpdatePet, handleDeletePet }) => {
       <div className="main-pet-table-container">
         <h2>Your Pets</h2>
         <div className="pet-table-separator"></div>
+        <div className="profile-pet-card-container">
+          <div className="profile-pet-card">
+
+          </div>
+
+        </div>
         <div className="mobile-table">
           <table className="whole-pet-table">
             <thead>

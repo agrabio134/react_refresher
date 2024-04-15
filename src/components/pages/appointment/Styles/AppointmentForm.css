@@ -3,8 +3,9 @@
 .appointment-form-container {
   display: grid;
   grid-template-columns: 1fr 2fr;
-  max-width: 1200px; /* Adjust the maximum width as needed */
-  margin: 0 auto;
+  width: 100%;
+  margin: 0;
+  padding: 0;
 }
 
 /* Make the calendar larger */
@@ -18,16 +19,16 @@
 } */
 
 .react-calendar__navigation button:enabled:hover, .react-calendar__navigation button:enabled:focus {
-  background-color: #FAD400;
+  background-color: var(--btnSecondary);
 }
 
 .react-calendar__navigation button:disabled {
-  background-color: #FAD400;
+  background-color: var(--btnSecondary);
 }
 
 .react-calendar__navigation button {
   min-width: 44px;
-  background-color: #082342;
+  background-color: var(--btnAscend);
   color: #eaeaea;
 }
 
@@ -41,14 +42,14 @@
 }
 
 .react-calendar__tile--active:enabled {
-  background-color: #082342;
+  background-color: var(--btnSecondary);
   color: #eaeaea;
 
 }
 
 
 .react-calendar__tile--active:enabled:hover, .react-calendar__tile--active:enabled:focus {
-  background: #082342;
+  background: var(--btnSecondary);
   color: #eaeaea;
 }
 
@@ -62,9 +63,9 @@
   font-size: 0.833em;
 } */
 
-.react-calendar__month-view__days {
+/* .react-calendar__month-view__days {
 
-}
+} */
 
 .react-calendar__month-view__days__day {
   color: black;
@@ -101,7 +102,7 @@
   background-color: white;
 }
 .react-calendar__tile--now{
-  background-color: #FF5C17;
+  background-color: var(--btnPrimary);
   color: white;
 }
 
@@ -112,13 +113,13 @@
   height: 100%;
   padding: 20px;
   margin-bottom: 10px;
-  background-color: #082342;
+  background-color: var(--btnSecondary);
   color: #fff;
 }
 
 .value-container {
   font-size: 1rem;
-  background-color: #082342;
+  background-color: var(--btnAscend);
 }
 
 
@@ -150,7 +151,7 @@
 
 .apoint-submit-button {
   margin-left: 20px;
-  background-color: #FF5C17;
+  background-color: var(--btnPrimary);
   color: #fff;
   padding: 10px;
   cursor: pointer;
@@ -160,7 +161,7 @@
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 
   &:hover {
-    background-color: #082342;
+    background-color: var(--btnSecondary);
   }
 
   &:disabled {
@@ -176,12 +177,11 @@
 }
 
 .form-group {
-  background-color: white;
+  background-color: var(--lightcolor);
   text-align: center;
   padding: 25px;
   border-radius: 5px;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-
   grid-area: form-group;
 }
 
@@ -189,9 +189,8 @@
   text-align: center;
   margin-left: 20px;
   border-radius: 5px 5px 0px 0px;
-  background-color: white;
+  background-color: var(--lightcolor);
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-
   grid-area: pet-card;
 }
 
@@ -199,9 +198,9 @@
   font-family: 'montserrat';
   font-weight: bold;
   border-radius: 5px 5px 0px 0px;
-  background-color: #082342;;
+  background-color: var(--bg-ascend2);
   padding: 12px;
-  color: white;
+  color: var(--lightcolor);
 }
 
 .pet-card-body {
@@ -221,15 +220,12 @@
   flex-grow: 1;
 }
 .pet-card-body p {
-  font-family: 'Franklin Gothic Light';
-  font-weight: lighter;
-  color: #FF5C17;
   margin: 8px 0;
 }
 
 .pet-card-body p b {
-  font-family: 'Franklin Gothic Medium';
-  color: #082342;
+  font-weight: bold;
+  color: var(--c3);
 }
 
 
@@ -247,10 +243,10 @@
   padding: 5px 15px;
   margin-bottom: 16px;
   height: 100%;
-  border: 1px solid #ddd;
   border-radius: 8px;
   overflow: hidden;
   margin-bottom: 16px;
+  border: 2px solid transparent;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   transition: box-shadow 0.3s ease;
   cursor: pointer;
@@ -263,11 +259,11 @@
 
 .pet-checkbox:hover,
 .pet-checkbox.checked {
-  border: 2px solid #FAD400; /* Change the border color as needed */
+  border: 2px solid var(--btnSecondary); /* Change the border color as needed */
 }
 
 .pet-checkbox.checked {
-  background-color: #082342;
+  background-color: var(--btnSecondary);
 
 }
 
@@ -275,14 +271,14 @@
 .pet-checkbox.checked .pet-breed,
 .pet-checkbox.checked .pet-age,
 .pet-checkbox.checked .pet-sex {
-  color: #FAD400;
+  color: var(--ascend);
 }
 
 .pet-checkbox.checked .pet-name b,
 .pet-checkbox.checked .pet-breed b,
 .pet-checkbox.checked .pet-age b,
 .pet-checkbox.checked .pet-sex b {
-  color: white;
+  color: var(--lightcolor);
 }
 
 .add-pet-card {
@@ -298,7 +294,7 @@
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   transition: box-shadow 0.3s ease;
   cursor: pointer;
-  background-color: #FAD400;
+  background-color: var(--btnSecondary);
 }
 
 .add-pet-card .fa-solid {
@@ -309,7 +305,7 @@
 
 .pet-card-Item:hover,
 .add-pet-card:hover {
-  border-color: #FAD400;
+  border-color: var(--btnAscend);
 }
 .today {
   color: white;
@@ -407,9 +403,9 @@
   /* padding: 30px; */
 }
 
-.react-calendar__viewContainer {
+/* .react-calendar__viewContainer {
   
-}
+} */
 
 .react-calendar button {
   margin: 0;
@@ -431,9 +427,9 @@
   color: #eaeaea;
 }
 
-.react-calendar__month-view__days {
+/* .react-calendar__month-view__days {
 
-}
+} */
 
 .react-calendar__month-view__days__day {
   color: black;

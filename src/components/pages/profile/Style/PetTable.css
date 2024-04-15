@@ -1,4 +1,5 @@
 .main-pet-table-container {
+  border: solid red;
     padding: 20px;
 }
 
@@ -49,6 +50,7 @@
   }
 
   .pet-table-item td {
+    border: solid blue;
     padding: 15px;
   }
 

@@ -3,11 +3,10 @@ import "./Style/WhyHP.css";
 const WhyHappyPawsPage = () => {
   return (
     <>
-      <section className="main_whyhp_container">
-        <div className="whyhp_content_container">
-          <h5 className="whyhp-home-section-heading2">Why Choose <span className="span1">Happy</span> <span className="span2">Paws</span>?</h5>
-            <div className="whyhp-section">
-              <div className="whyhp_item,">
+      <section id="whyhp">
+        <div className="container">
+          <h2>Why Choose <span className="span1">Vatan</span> <span className="span2">HP</span>?</h2>
+            <div class="bar"></div>
                 <div className="whyhp_item_container">
                   <div className="whyhp_content">
                       <h5>Simplified Booking </h5>
@@ -24,8 +23,6 @@ const WhyHappyPawsPage = () => {
                         allowing you to manage appointments at your convenience.</p>
                   </div>
                 </div>
-              </div>
-            </div>
           </div>
       </section>
     </>

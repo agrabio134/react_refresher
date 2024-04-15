@@ -1,26 +1,37 @@
-.main-profile-container {
-    padding-top: 80px;
+#profile {
+    width: 100%;
+    padding-top: 100px;
+    padding-bottom: 30px;
     background-color: white;
     color: black;
     display: flex;
+    align-items: center;
     justify-content: center;
-    
 }
 
-.whole-profile-container {
-    background-color: white;
-    margin-top: 10px;
-    width: 90%;
-    border-radius: 5px;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+#profile .container {
+    width: 1340px;
+}
+
+.pet-form-table-container {
+    display: grid;
+    grid-template-columns: 1fr 1.5fr;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+
 }
 
 .custom-dropdown-container {
+    width: 45px;
+    height: 45px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     position: relative;
+    padding: 7px 0px 0px 0px;
     border-radius: 4px;
-    padding: 6px;
-    border: 1px solid #eee;
-    margin-left: 4px;
+    border: 1px solid #eee; 
   }
   .fa-solid  {
     color: #ffffff;
@@ -35,7 +46,7 @@
   
   .dropdown-options {
     position: absolute;
-    width: 16vh;
+    width: 130px;
     top: 100%;
     left: 0;
     z-index: 1;
@@ -58,10 +69,10 @@
     width: 100%;
     border-radius: 5px 5px 0px 0px;
     background-color: #082342;
-    /* display: flex; */
-    /* justify-content: space-between; */
     padding: 20px;
     align-items: center;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
 .recordsBtn {
