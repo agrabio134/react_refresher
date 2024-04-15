@@ -205,38 +205,40 @@ const LoginPage = () => {
 
   return (
     <>
-      <section className="login-main-container mobile-login-main-container">
-        <div className="side">
-          <img src="/page/LGHD.png" alt="" />
-        </div>
-        <div className="main-user-login-container">
-          <div className="scrollable-container">
-            <p className="login-title mobile-title">Welcome!</p>
-            <div className="user-separator"></div>
-            <p className="welcome-message">
-              Please provide login credential to proceed and have access to all
-              our services
-            </p>
-            <div className="radio-select">
-              <input
-                type="radio"
-                id="email"
-                name="login"
-                value="email"
-                checked={!isPhoneLogin}
-                onChange={() => setIsPhoneLogin(false)}
-              />
-              <label htmlFor="email">Email</label>
-              <input
-                type="radio"
-                id="phone"
-                name="login"
-                value="phone"
-                checked={isPhoneLogin}
-                onChange={() => setIsPhoneLogin(true)}
-              />
-              <label htmlFor="phone">Phone</label>
+      <section id="login">
+        <div className="container">
+          <div className="main-login-container">
+
+            <div className="login-logo-container">
+              <img src="/page/NLHD.png" alt="" />
+              <h1>Paws Pro</h1>
             </div>
+
+            <div className="main-user-login-container">
+              <h2>Welcome!</h2>
+            <div class="bar"></div>
+              <p>Please provide login credential to proceed and have access to all our services</p>
+            <div className="scrollable-container">
+              <div className="radio-select">
+                <input
+                  type="radio"
+                  id="email"
+                  name="login"
+                  value="email"
+                  checked={!isPhoneLogin}
+                  onChange={() => setIsPhoneLogin(false)}
+                />
+                <label htmlFor="email">Email</label>
+                <input
+                  type="radio"
+                  id="phone"
+                  name="login"
+                  value="phone"
+                  checked={isPhoneLogin}
+                  onChange={() => setIsPhoneLogin(true)}
+                />
+                <label htmlFor="phone">Phone</label>
+              </div>
             {isPhoneLogin === false && (
               <form className="user-login-box" onSubmit={handleLoginSubmit}>
                 <div className="user-login-form-control">
@@ -327,6 +329,29 @@ const LoginPage = () => {
             )}
           </div>
         </div>
+        </div>
+        </div>
+        <div className="default-shape">
+                <div className="shape-1">
+                <img src="/page/paws.png" width="100px" height="auto" alt="" />
+                </div>
+
+                <div className="shape-2 rotateme">
+                <img src="/page/dog-toy-1.png" width="100px" height="auto" alt="" />
+                </div>
+
+                <div className="shape-3">
+                <img src="/page/groom-1.png" width="70px" height="auto" alt="" />
+                </div>
+
+                <div className="shape-4">
+                <img src="/page/cat-toy.png" width="60px" height="auto" alt="" />
+                </div>
+
+                <div className="shape-5">
+                <img src="/page/medicine.png" width="75px" height="auto" alt="" />
+                </div>
+          </div>
       </section>
     </>
   );
