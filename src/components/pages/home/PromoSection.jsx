@@ -9,7 +9,7 @@ const PromoSection = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch('https://happypawsolongapo.com/api/get_blog_posts');
+        const response = await fetch('https://happypawsolongapo.com/api/get_blog_posts_featured');
         const textData = await response.text(); // Get the raw response as text
 
         // Split the response into individual JSON objects
