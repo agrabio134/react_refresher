@@ -1,58 +1,103 @@
-.login-main-container {
-  min-height: 100vh;
-  background: url(../../../assets/img/wave5.png);
-  background-size: cover;
-  background-color: white;
-  background-position: center;
-  background-repeat: no-repeat;
+#login {
   width: 100%;
-  display: grid;
-  grid-template-columns: 2fr 1fr;
+  height: 785px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   position: fixed;
   z-index: 3;
+  background-color: var(--bg-secondary);
 }
 
-.main-user-login-container {
-  margin-top: 50px;
-  width: 450px;
-  height: 85%;
-  padding: 24px;
+#login .container {
+  width: 1340px;
   display: flex;
-  flex-direction: column;
   align-items: center;
-  background-color: white;
-  border-radius: 10px;
+  justify-content: center;
+}
+
+#login .main-login-container {
+  width: 1000px;
+  display: flex;
+  border-radius: 8px;
+  background-color: var(--bg-primary);
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
-
-.login-title {
-  font-family: "montserrat";
-  text-transform: uppercase;
-  font-size: 3rem;
-  font-weight: bold;
+#login .login-logo-container{
+  width: 50%;
+  display: flex;
   text-align: center;
-  letter-spacing: 1px;
-  color: #082342;
-  /* border: solid green; */
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  border-radius: 8px 0px 0px 8px;
+  background-color: var(--secondary);
 }
 
-.user-separator {
-  width: 150px;
-  height: 4px;
-  background-color: #fad400;
-  margin: 24px auto 24px auto;
+#login .login-logo-container img {
+  width: 300px;
+  height: auto;
 }
 
-.welcome-message {
-  font-family: "Franklin Gothic light";
-  /* font-weight: 100; */
+#login .main-user-login-container {
+  width: 50%;
+  padding: 25px 40px 25px 40px;
+  display: flex;
   text-align: center;
-  font-size: 1.1em;
-  line-height: 28px;
+  justify-content: center;
+  flex-direction: column;
+  border-radius: 0px 8px 8px 0px;
+  background-color: var(--bg-primary);
+}
+
+#login .main-user-login-container h2 {
+  font-size: 54px;
+  padding: 0;
+  margin: 20px 0px 0px 0px;
+}
+
+#login .main-user-login-container p{
+  width: 320px;
+  align-self: center;
   margin-bottom: 30px;
-  color: #082342;
-  /* border: solid yellow; */
+}
+
+#login .container .bar {
+  height: 4px;
+  width: 85px;
+  background: var(--barc);
+  margin: 20px auto 20px;
+  position: relative;
+  border-radius: 5px;
+  overflow: hidden;
+}
+
+#login .container .bar::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 5px;
+  background: #ffffff;
+  -webkit-animation-duration: 2s;
+          animation-duration: 2s;
+  -webkit-animation-timing-function: linear;
+          animation-timing-function: linear;
+  -webkit-animation-iteration-count: infinite;
+          animation-iteration-count: infinite;
+  -webkit-animation-name: MOVE-BG;
+          animation-name: MOVE-BG;
+}
+
+#login .radio-select {
+  display: flex;
+  position: relative;
+}
+
+#login .radio-select input{
+  
 }
 
 .user-login-box {
@@ -69,26 +114,25 @@
 
 .user-login-box input,
 .user-login-box button {
-  font-family: "Franklin Gothic light";
-  color: #082342;
   border: none;
   outline: none;
-  border-radius: 30px;
+  /* border-radius: 30px; */
   font-size: 1.1em;
 }
 
 .user-login-box input {
   width: 100%;
-  background: #e6e6e6;
-  color: #333;
+  /* background: #e6e6e6;
+  color: #333; */
   letter-spacing: 0.5px;
-  padding: 14px 64px;
+  padding: 14px 14px 14px 50px;
+  border-bottom: solid 3px var(--DB);
 }
 
 .user-login-box input ~ i {
   position: absolute;
-  left: 32px;
-  top: 50%;
+  left: 18px;
+  top: 23px;
   transform: translateY(-50%);
   color: #888;
   transition: color 0.4s;
@@ -196,17 +240,6 @@ a {
 a:hover {
   color: #fad400;
   text-decoration: underline;
-}
-
-.side {
-  display: flex;
-  margin-left: 26vh;
-  /* background-size: 100% 102%; */
-}
-
-.side img {
-  width: 75vh;
-  height: 75vh;
 }
 
 @media screen and (max-width: 768px) {

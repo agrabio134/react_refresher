@@ -48,7 +48,7 @@ const HomePage = () => {
                 <div className="shape-5">
                 <img src="/page/medicine.png" width="75px" height="auto" alt="" />
                 </div>
-            </div>
+          </div>
 
       </section>
       <AboutPage />
