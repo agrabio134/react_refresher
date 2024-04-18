@@ -1,54 +1,125 @@
 .main-add-pet-form-container {
-    padding: 20px;
+    padding: 10px;
+    margin-top: 30px;
+    border-radius: 5px;
+    background-color: var(--lightcolor);
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
 .main-add-pet-form-container h2 {
-    font-size: 30px;
-    color: #082342;
-    font-family: 'montserrat';
-    font-weight: bold;
-    margin-left: 5px;
+    text-align: left;
+    font-size: 24px;
+    /* font-weight: 600; */
 }
 
-.add-pet-separator {
-    width: 150px;
+.main-add-pet-form-container .bar {
     height: 4px;
-    margin: 10px 0px 20px 5px;
-    background-color: #FAD400;
-}
+    width: 85px;
+    background: var(--barc);
+    margin: 0;
+    padding: 0;
+    position: relative;
+    border-radius: 5px;
+    overflow: hidden;
+  }
+  
+  .main-add-pet-form-container .bar::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 5px;
+    background: #ffffff;
+    -webkit-animation-duration: 2s;
+            animation-duration: 2s;
+    -webkit-animation-timing-function: linear;
+            animation-timing-function: linear;
+    -webkit-animation-iteration-count: infinite;
+            animation-iteration-count: infinite;
+    -webkit-animation-name: MOVE-BG;
+            animation-name: MOVE-BG;
+  }
 
 .add-pet-grid-form {
     display: grid;
     grid-template-columns: 1fr 1fr;
 }
 
-.main-form-body-container input,
-.main-form-body-container button,
-.main-form-body-container select {
-    border: none;
-    outline: none;
-    border-radius: 30px;
-    font-size: 1.1em;
-}
-
 .main-form-body-container button {
-    padding: 11px 41px;
+    font-weight: bold;
+    padding: 13px 50px;
     margin-left: 5px;
-    color: #fff;
+    color: var();
     text-transform: uppercase;
     letter-spacing: 2px;
     font-weight: bold;
-    background-color: #FF5C17;
     cursor: pointer;
     transition: opacity 0.4s;
+    background-color: var(--btnPrimary);
+    color: var(--lightcolor) !important;
+    border-radius: 8px;
+    border: none;
+}
+
+.main-form-body-container button:hover {
+    background-color: var(--btnSecondary);
+    color: var(--lightcolor) !important;
 }
 
 .main-form-body-container input {
     width: 100%;
     background: #e6e6e6;
-    color: #333;
     letter-spacing: 0.5px;
     padding: 14px 30px; /* Adjusted padding values */
+}
+
+.main-form-body-container input[type=text] {
+    width: 100%;
+    padding: 12px 12px;
+    margin: 8px 0;
+    box-sizing: border-box;
+    border: none;
+    border-bottom: 3px solid var(--DB);
+  }
+
+  .main-form-body-container input[type=text]:focus {
+    border-bottom: 3px solid var(--DB);
+  }
+
+  .main-form-body-container input[type=date] {
+    width: 100%;
+    padding: 12px 12px;
+    margin: 8px 0;
+    box-sizing: border-box;
+    border: none;
+    border-bottom: 3px solid var(--DB);
+  }
+
+  .main-form-body-container input[type=date]:focus {
+    border-bottom: 3px solid var(--DB);
+  }
+
+  .main-form-body-container input[type=file] {
+    width: 100%;
+    padding: 9.5px 0px;
+    margin: 8px 0;
+    box-sizing: border-box;
+    border: none;
+    border-bottom: 3px solid var(--DB);
+  }
+
+  .main-form-body-container input[type=file]:focus {
+    border-bottom: 3px solid var(--DB);
+  }
+
+  .add-pet-form select {
+    width: 100%;
+    padding: 12px 12px;
+    margin: 8px 0;
+    box-sizing: border-box;
+    border: none;
+    border-bottom: 3px solid var(--DB);
 }
 
 .add-pet-form {
@@ -60,22 +131,11 @@
     padding-right: 5px;
 }
 
-.add-pet-form h1 {
-    font-size: 20px;
-    color: #082342;
-    font-family: 'montserrat';
-    font-weight: bold;
-}
-
-.add-pet-form select {
-    border-radius: 100px;
-    width: 100%;
-    margin-bottom: 10px;
-    font-size: 1rem;
-    text-align: center;
-    padding: 17px 64px;
-    background-color: #082342;
-    color: #fff;
+.add-pet-form h3 {
+    display: block;
+    font-size: 18px;
+    line-height: 21px;
+    margin: 0px 0px 10px 0px;
 }
 
 .profile-img {
@@ -85,8 +145,8 @@
 }
 
 .profile-img img {
-    width: 20vh;
-    height: auto;
+    width: 100px;
+    height: 100px;
     border-radius: 100%;
 }
 

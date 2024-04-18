@@ -114,8 +114,7 @@ const AddPetForm = ({
   return (
     <div className="main-add-pet-form-container">
       <h2>Add Pet</h2>
-
-      <div className="add-pet-separator"></div>
+      <div class="bar"></div>
       <div className="profile-img">
         {thumbnailPreview && (
           <img
@@ -136,7 +135,7 @@ const AddPetForm = ({
         <div className="add-pet-grid-form">
           <div className="add-pet-form">
             <label>
-              <h1>Pet Profile Image:</h1>
+              <h3>Pet Profile Image:</h3>
               <input
                 type="file"
                 accept="image/*"
@@ -149,7 +148,7 @@ const AddPetForm = ({
           {/* pet name */}
           <div className="add-pet-form">
             <label>
-              <h1>Name:</h1>
+              <h3>Name:</h3>
               <input
                 type="text"
                 value={petName}
@@ -160,7 +159,7 @@ const AddPetForm = ({
           </div>
           <div className="add-pet-form autocomplete-container">
             <label>
-              <h1>Type:</h1>
+              <h3>Type:</h3>
               <input
                 type="text"
                 value={petType}
@@ -193,7 +192,7 @@ const AddPetForm = ({
 
           <div className="add-pet-form">
             <label>
-              <h1>Breed:</h1>
+              <h3>Breed:</h3>
               <input
                 type="text"
                 value={petBreed}
@@ -211,7 +210,7 @@ const AddPetForm = ({
           </div>
           <div className="add-pet-form">
             <label>
-              <h1>Birthdate:</h1>
+              <h3>Birthdate:</h3>
               <input
                 type="date"
                 value={petAge}
@@ -222,7 +221,7 @@ const AddPetForm = ({
           </div>
           <div className="add-pet-form">
             <label>
-              <h1>Sex:</h1>
+              <h3>Sex:</h3>
               <select
                 value={petSex}
                 onChange={(e) => setPetSex(e.target.value)}
