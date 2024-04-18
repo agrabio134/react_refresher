@@ -20,8 +20,9 @@ import Swal from "sweetalert2";
 const { Item } = Form;
 const storage = getStorage(initializeApp(firebaseConfig));
 
-const PetTable = ({ petList, handleUpdatePet, handleDeletePet }) => {
+const PetTable = ({ petList, handleUpdatePet, handleDeletePet, ArchivedPetList }) => {
   const [isModalVisible, setIsModalVisible] = useState(false);
+  const [archivedModalVisible, setArchivedModalVisible] = useState(false);
   const [selectedPet, setSelectedPet] = useState(null);
   const [file, setFile] = useState(null);
   const [thumbnailPreview, setThumbnailPreview] = useState(null);
@@ -97,10 +98,77 @@ const PetTable = ({ petList, handleUpdatePet, handleDeletePet }) => {
     }
   };
 
+  const handleArchivedClicked = async (id) => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You are about to archive this pet.",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonText: "Yes",
+      cancelButtonText: "No",
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        try {
+          const response = await axios.put(
+            `https://happypawsolongapo.com/api/archive_pet/${id}`
+          );
+
+          Swal.fire({
+            title: "Success!",
+            text: "Pet archived successfully!",
+            icon: "success",
+            confirmButtonText: "OK",
+          }).then(() => {
+            window.location.reload();
+          });
+        } catch (error) {
+          console.error("Error archiving pet:", error);
+        }
+      }
+    });
+
+  };
+
+
   return (
     <>
       <div className="main-pet-table-container">
         <h2>Your Pets</h2>
+        <Button onClick={() => setArchivedModalVisible(true)}>Archived Pets</Button>
+        {/* archived modal */}
+
+        <Modal
+        title="Archived Pets"
+        visible={archivedModalVisible}
+        onCancel={() => setArchivedModalVisible(false)}
+        footer={[
+          <Button key="cancel" onClick={() => setArchivedModalVisible(false)}>
+            Close
+          </Button>,
+        ]}
+        destroyOnClose={true}
+      >
+        <div className="profile-pet-card-container">
+          {ArchivedPetList && ArchivedPetList.length > 0 ? (
+            ArchivedPetList.map((pet) => (
+              pet.is_archived == 1 ? (
+              <Card key={pet.id} className="profile-pet-card">
+                <Image src={`${pet.image}`} alt={pet.image} width={100} height={100} />
+                <p>Name: {pet.name}</p>
+                <p>Type: {pet.type}</p>
+                <p>Breed: {pet.breed}</p>
+                <Button onClick={() => handleUnarchivedClicked(pet.id)}>Unarchived</Button>
+              </Card>
+              ) : null
+            ))
+          ) : (
+            <p>No pets available</p>
+          )}
+        </div>
+      </Modal>
+
+
+
         <div className="pet-table-separator"></div>
         <div className="profile-pet-card-container">
           {petList && petList.length > 0 ? (
@@ -156,6 +224,7 @@ const PetTable = ({ petList, handleUpdatePet, handleDeletePet }) => {
                 </p>
                 <Button onClick={() => handleEditPet(pet)}>Edit</Button>
                 <Button onClick={() => handleDeletePet(pet.id)}>Delete</Button>
+                <Button onClick={() => handleArchivedClicked(pet.id)}>Archived</Button>
               </Card>
             ))
           ) : (
