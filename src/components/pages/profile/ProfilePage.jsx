@@ -41,41 +41,39 @@ const ProfilePage = () => {
 
   const user_id = decodedToken ? decodedToken.user_id : null;
 
-  useEffect(() => {
-    const abortController = new AbortController();
-    const signal = abortController.signal;
-
-    if (user_id !== null) {
-      const fetchUserPets = async () => {
+  const useFetchPets = (url, setter) => {
+    useEffect(() => {
+      const abortController = new AbortController();
+      const signal = abortController.signal;
+  
+      const fetchData = async () => {
         try {
-          const response = await fetch(
-            `https://happypawsolongapo.com/api/get_user_pets/${user_id}`,
-            {
-              method: "GET",
-              headers: {
-                "Content-Type": "application/json",
-              },
-            }
-          );
-
+          const response = await fetch(url, {
+            method: "GET",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            signal: signal,
+          });
+  
           if (!response.ok) {
             throw new Error(`Failed to fetch pets. Status: ${response.status}`);
           }
-
+  
           const result = await response.text();
           const jsonObjects = result.split("}{").map((json, index, array) => {
             return index === 0
               ? json + "}"
               : index === array.length - 1
-                ? "{" + json
-                : "{" + json + "}";
+              ? "{" + json
+              : "{" + json + "}";
           });
-
+  
           jsonObjects.forEach((json) => {
             try {
               const parsedResult = JSON.parse(json);
               if (parsedResult.payload) {
-                setPetList(parsedResult.payload);
+                setter(parsedResult.payload);
               }
             } catch (jsonError) {
               console.error("Error parsing JSON:", jsonError);
@@ -85,20 +83,28 @@ const ProfilePage = () => {
           console.error("Error fetching pet data:", error);
         }
       };
-
-      fetchUserPets();
-    } else {
-      // console.error("decodedToken is null or undefined");
-    }
-    
-
-
-
-    return () => abortController.abort();
-
-
-  }, [user_id]);
-
+  
+      if (user_id !== null) {
+        fetchData();
+      } else {
+        // console.error("decodedToken is null or undefined");
+      }
+  
+      return () => abortController.abort();
+    }, [url, setter]);
+  };
+  
+  // Usage
+  useFetchPets(
+    `https://happypawsolongapo.com/api/get_user_pets_archived/${user_id}`,
+    setArchivedPetList
+  );
+  
+  useFetchPets(
+    `https://happypawsolongapo.com/api/get_user_pets/${user_id}`,
+    setPetList
+  );
+  
 
 
   useEffect(() => {
@@ -199,7 +205,7 @@ const ProfilePage = () => {
       email: userEmail,
     };
 
-    console.log("userData", userData); // L
+    // console.log("userData", userData); // L
 
     try {
       const response = await fetch(
@@ -213,7 +219,7 @@ const ProfilePage = () => {
         }
       );
 
-      console.log("response", response);
+      // console.log("response", response);
 
       if (!response.ok) {
         throw new Error("Failed to update user");
@@ -324,6 +330,8 @@ const ProfilePage = () => {
       const handleCancel = () => {
         setIsModalVisible(false);
       };
+
+
 
       const handleInputChange = (e) => { };
       return (
@@ -458,7 +466,7 @@ const ProfilePage = () => {
               />
             <PetTable
                 petList={petList}
-                ArchivedPetList={archivedPetList}
+                archivedPetList={archivedPetList}
                 handleUpdatePet={handleUpdatePet}
                 handleDeletePet={handleDeletePet}
               />
