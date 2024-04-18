@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from "react";
 import DataFetching from "./records/DataFetching";
 import AppointmentDetailsModal from "./records/AppointmentDetailsModal";
-import { Form, Button, Tabs, Table, Modal, Select, Image } from "antd";
+import { Form, Button, Tabs, Table, Modal, Select, Image, Card } from "antd";
 import moment from "moment";
 import Swal from "sweetalert2";
 import jwt_decode from "jwt-decode";
+import './styles/card-style.css';
 
 const { TabPane } = Tabs;
 const { Option } = Select;
@@ -26,7 +27,9 @@ const calculateAge = (birthdate) => {
 };
 const VeterinaryRecord = () => {
   const [printableRecords, setPrintableRecords] = useState([]);
-  const [selectedRecords, setSelectedRecords] = useState([]);
+  const [selectedPet, setSelectedPet] = useState([]);
+  const [optionModalVisible, setOptionModalVisible] = useState(false);
+  const [selectedOption, setSelectedOption] = useState(null);
 
   const [form] = Form.useForm();
   const [appointments, setAppointments] = useState([]);
@@ -39,6 +42,13 @@ const VeterinaryRecord = () => {
   const [vetRecord, setVetRecord] = useState([]);
   const [vetPetRecord, setVetPetRecord] = useState([]);
   const [vetRecordError, setVetRecordError] = useState(null); // New state to store vet record fetching errors
+  
+
+  useEffect(() => {
+    if (selectedOption !== null) {
+      handleOptionClicked(selectedOption);
+    }
+  }, [selectedOption]);
   const fetchClientData = async () => {
     try {
       const clientsResponse = await fetch("https://happypawsolongapo.com/api/get_clients");
@@ -51,8 +61,8 @@ const VeterinaryRecord = () => {
             index === 0
               ? json + "}"
               : index === array.length - 1
-              ? "{" + json
-              : "{" + json + "}"
+                ? "{" + json
+                : "{" + json + "}"
           );
 
         const clientsData = jsonObjects.flatMap((json, index) => {
@@ -102,8 +112,8 @@ const VeterinaryRecord = () => {
             index === 0
               ? json + "}"
               : index === array.length - 1
-              ? "{" + json
-              : "{" + json + "}"
+                ? "{" + json
+                : "{" + json + "}"
           );
 
         const appointmentsData = jsonObjects.flatMap((json) => {
@@ -174,40 +184,7 @@ const VeterinaryRecord = () => {
   ];
 
 
-  const PetRecordColumns = [
-    { title: "image", dataIndex: "image", key: "image",
-    render: (image) => <Image src={image} alt="Animal" width={50} height={50} />,
-  },
 
-    { title: "name", dataIndex: "name", key: "name" },
-    { title: "type", dataIndex: "type", key: "type" },
-    { title: "breed", dataIndex: "breed", key: "breed" },
-    {
-      title: 'Date of Birth / Age',
-      dataIndex: 'birthdate',
-      key: 'birthdate',
-      render: (birthdate) => (
-        <>
-          <div>{moment(birthdate).format('MMMM D, YYYY')} / {calculateAge(birthdate)} old</div>
-        </>
-      ),
-    },
-    {
-      title: "Action",
-      dataIndex: "action",
-      render: (text, record, index) => (
-        <Button
-          type="primary"
-          key={index}
-          onClick={() => {
-            handleViewPetDataClick(record);
-          }}
-        >
-          View Records
-        </Button>
-      ),
-    },
-  ];
   const VetRecordColumns = [
     // { title: "id", dataIndex: "t1_id", key: "t1_id" },
     { title: "Pet Name", dataIndex: "name", key: "name" },
@@ -266,7 +243,7 @@ const VeterinaryRecord = () => {
         </div>
       ),
     },
-  
+
     { title: "Remarks", dataIndex: "remarks", key: "remarks" },
     {
       title: "Next Follow-up Checkup",
@@ -533,11 +510,40 @@ const VeterinaryRecord = () => {
       setVetRecordError(error);
     }
   };
-  
-  const handleViewPetDataClick = async (client) => {
+
+  const handleViewPetDataClick = async (pet) => {
     try {
-      setSelectedClient(client);
-      await getVeterinaryPetRecord(client.id);
+      setSelectedPet(pet);
+
+      // add 3 card option if consultation, vaccination, grooming
+      setOptionModalVisible(true);
+
+    } catch (error) {
+      console.error("Error fetching veterinary record:", error);
+      setVetRecord([]);
+      setVetRecordError(error);
+    }
+  };
+
+
+  const handleOptionClicked = () => {
+    if (selectedOption === "consultation") {
+      handleViewPetViewConsultation(selectedPet);
+    }
+    if (selectedOption === "vaccination") {
+      console.log("vaccination");
+    }
+    if (selectedOption === "grooming") {
+      console.log("grooming");
+    }
+
+  }
+
+
+  const handleViewPetViewConsultation = async (pet) => {
+    try {
+      setSelectedClient(pet);
+      await getVeterinaryPetRecord(pet.id);
       setRecordVetModalVisible(true);
       setVetPetRecord((prevVetPetRecord) => [...prevVetPetRecord]);
     } catch (error) {
@@ -554,6 +560,7 @@ const VeterinaryRecord = () => {
 
   const handleRecordVetModalCancel = () => {
     setRecordVetModalVisible(false);
+    setSelectedOption(null);
     setSelectedAppointment(null);
   };
 
@@ -582,8 +589,8 @@ const VeterinaryRecord = () => {
               index === 0
                 ? json + "}"
                 : index === array.length - 1
-                ? "{" + json
-                : "{" + json + "}"
+                  ? "{" + json
+                  : "{" + json + "}"
             );
 
           const vetRecordData = jsonObjects.flatMap((json) => {
@@ -635,21 +642,21 @@ const VeterinaryRecord = () => {
               index === 0
                 ? json + "}"
                 : index === array.length - 1
-                ? "{" + json
-                : "{" + json + "}"
+                  ? "{" + json
+                  : "{" + json + "}"
             );
 
-            const vetRecordData = jsonObjects.flatMap((json) => {
-              try {
-                const parsedResult = JSON.parse(json);
-                console.log(parsedResult.payload);  // Add this line to log data
-                return parsedResult.payload || [];
-              } catch (jsonError) {
-                console.error("Error parsing JSON:", jsonError);
-                return [];
-              }
-            });
-            
+          const vetRecordData = jsonObjects.flatMap((json) => {
+            try {
+              const parsedResult = JSON.parse(json);
+              console.log(parsedResult.payload);  // Add this line to log data
+              return parsedResult.payload || [];
+            } catch (jsonError) {
+              console.error("Error parsing JSON:", jsonError);
+              return [];
+            }
+          });
+
 
           // console.log(vetRecordData);
           setVetRecord(vetRecordData);
@@ -679,9 +686,8 @@ const VeterinaryRecord = () => {
       dateOfBirth: appointment.birthdate,
       petSex: appointment.sex,
       date: moment(appointment.start).format("YYYY-MM-DD"),
-      time: `${moment(appointment.start).format("hh:mm")} ${
-        isAM ? "AM" : "PM"
-      }`,
+      time: `${moment(appointment.start).format("hh:mm")} ${isAM ? "AM" : "PM"
+        }`,
       reason: appointment.reason,
       petId: appointment.t2_id,
       userId: appointment.t3_id,
@@ -859,6 +865,53 @@ const VeterinaryRecord = () => {
 
   const renderModal = () => (
     <>
+
+
+<Modal
+  // other properties
+  visible={optionModalVisible}
+  onCancel={() => setOptionModalVisible(false)}
+  width={1600}
+>
+  <h1>Choose Option</h1>
+  <div style={{ display: 'flex', flexWrap: 'wrap' }}>
+    <Card
+      className="consultation-card"
+            onClick={() => {
+              setSelectedOption("consultation");
+              setOptionModalVisible(false);
+              // setRecordVetModalVisible(true);
+              handleOptionClicked(selectedOption);
+            }}    >
+      <h3>Consultation</h3>
+      <p>Description of Consultation</p>
+    </Card>
+    <Card
+      className="vaccination-card"
+            onClick={() => {
+              setSelectedOption("vaccination");
+              setOptionModalVisible(false);
+              // setRecordVetModalVisible(true);
+              handleOptionClicked(selectedOption);
+            }}    >
+      <h3>Vaccination</h3>
+      <p>Description of Vaccination</p>
+    </Card>
+    <Card
+      className="grooming-card"
+            onClick={() => {
+              setSelectedOption("grooming");
+              setOptionModalVisible(false);
+              // setRecordVetModalVisible(true);
+              handleOptionClicked(selectedOption);
+            }}    >
+      <h3>Grooming</h3>
+      <p>Description of Grooming</p>
+    </Card>
+  </div>
+</Modal>
+
+
       <AppointmentDetailsModal
         modalVisible={modalVisible}
         handleModalCancel={handleModalCancel}
@@ -868,28 +921,50 @@ const VeterinaryRecord = () => {
         Option={Option}
       />
 
-      <Modal
-        // other properties
-        visible={recordModalVisible}
-        onCancel={handleRecordModalCancel}
-        onOk={() => setRecordModalVisible(false)}
-        width={1600}
-      >
-        <h1>Users Pet</h1>
-        {vetPetRecord.length > 0 ? (
-          <Table
-            dataSource={vetPetRecord}
-            columns={PetRecordColumns}
-            style={{ marginTop: 20 }}
-            rowKey={(record, index) => `${record.t3_id}_${index}`}
-            scroll={{ x: true }}
+<Modal
+  // other properties
+  visible={recordModalVisible}
+  onCancel={handleRecordModalCancel}
+  onOk={() => setRecordModalVisible(false)}
+  width={1600}
+>
+  <h1>Users Pet</h1>
+  {vetPetRecord.length > 0 ? (
+    <div style={{ display: 'flex', flexWrap: 'wrap', gap: '20px' }}>
+      {vetPetRecord.map((pet, index) => (
+        <Card
+          key={index}
+          style={{ width: 300, marginBottom: 20 }}
+          cover={<Image src={pet.image} alt="Animal" />}
+        >
+          <Card.Meta
+            title={pet.name}
+            description={
+              <div>
+                <p>Type: {pet.type}</p>
+                <p>Breed: {pet.breed}</p>
+                <p>Date of Birth: {moment(pet.birthdate).format('MMMM D, YYYY')}</p>
+                <p>Age: {calculateAge(pet.birthdate)} years old</p>
+              </div>
+            }
           />
-        ) : vetRecordError ? (
-          <p>Error fetching veterinary record: {vetRecordError.message}</p>
-        ) : (
-          <p>No Pet found.</p>
-        )}
-      </Modal>
+          <Button
+            type="primary"
+            onClick={() => {
+              handleViewPetDataClick(pet);
+            }}
+          >
+            View Records
+          </Button>
+        </Card>
+      ))}
+    </div>
+  ) : vetRecordError ? (
+    <p>Error fetching veterinary record: {vetRecordError.message}</p>
+  ) : (
+    <p>No Pet found.</p>
+  )}
+</Modal>;
       <Modal
         // other properties
         visible={recordVetModalVisible}

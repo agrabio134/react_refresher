@@ -27,6 +27,7 @@ const ProfilePage = () => {
   const [petAge, setPetAge] = useState("");
   const [petSex, setPetSex] = useState("");
   const [petList, setPetList] = useState([]);
+  const [archivedPetList, setArchivedPetList] = useState([]);
   const [petImageUrl, setDownloadURL] = useState("");
   const [profileModal, setProfileModal] = useState(false);
   const [id, setId] = useState("");
@@ -89,9 +90,16 @@ const ProfilePage = () => {
     } else {
       // console.error("decodedToken is null or undefined");
     }
+    
+
+
 
     return () => abortController.abort();
+
+
   }, [user_id]);
+
+
 
   useEffect(() => {
     const delay = setTimeout(() => {
@@ -450,6 +458,7 @@ const ProfilePage = () => {
               />
             <PetTable
                 petList={petList}
+                ArchivedPetList={archivedPetList}
                 handleUpdatePet={handleUpdatePet}
                 handleDeletePet={handleDeletePet}
               />
