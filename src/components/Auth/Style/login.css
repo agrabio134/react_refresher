@@ -1,6 +1,6 @@
 #login {
   width: 100%;
-  height: 785px;
+  height: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -18,6 +18,7 @@
 
 #login .main-login-container {
   width: 1000px;
+  height: 620px;
   display: flex;
   border-radius: 8px;
   background-color: var(--bg-primary);
@@ -39,6 +40,13 @@
   width: 300px;
   height: auto;
 }
+
+#login .login-logo-container h1{
+  font-size: 50px;
+  padding: 0;
+  margin: 0;
+}
+
 
 #login .main-user-login-container {
   width: 50%;
@@ -93,43 +101,39 @@
 
 #login .radio-select {
   display: flex;
-  position: relative;
+  align-items: center;
+  margin-bottom: 20px;
 }
 
-#login .radio-select input{
-  
+#login .radio-select  label{
+  font-weight: 600;
+  margin-top: 5.5px;
+  color: var(--darkcolor);
 }
 
-.user-login-box {
+#login .user-login-box {
   width: 100%;
   display: flex;
   flex-direction: column;
 }
 
-.user-login-form-control {
+#login .user-login-form-control {
   width: 100%;
   position: relative;
   margin-bottom: 24px;
 }
 
-.user-login-box input,
-.user-login-box button {
+#login .user-login-box input {
   border: none;
   outline: none;
-  /* border-radius: 30px; */
   font-size: 1.1em;
-}
-
-.user-login-box input {
   width: 100%;
-  /* background: #e6e6e6;
-  color: #333; */
   letter-spacing: 0.5px;
-  padding: 14px 14px 14px 50px;
+  padding: 14px 14px 14px 60px;
   border-bottom: solid 3px var(--DB);
 }
 
-.user-login-box input ~ i {
+#login .user-login-box input ~ i {
   position: absolute;
   left: 18px;
   top: 23px;
@@ -138,12 +142,12 @@
   transition: color 0.4s;
 }
 
-.user-login-box input:focus ~ i {
-  color: #ff5c17;
+#login .user-login-box input:focus ~ i {
+  color: var(--btnPrimary);
 }
 
 /* Hide the browser's default checkbox */
-.user-check-box input {
+#login .user-check-box input {
   position: absolute;
   opacity: 0;
   cursor: pointer;
@@ -152,7 +156,7 @@
 }
 
 /* Create a custom checkbox */
-.checkmark {
+#login .checkmark {
   position: absolute;
   top: 0;
   left: 0;
@@ -162,29 +166,29 @@
 }
 
 /* On mouse-over, add a grey background color */
-.user-check-box :hover input ~ .checkmark {
+#login .user-check-box :hover input ~ .checkmark {
   background-color: #ccc;
 }
 
 /* When the checkbox is checked, add a blue background */
-.user-check-box input:checked ~ .checkmark {
-  background-color: #082342;
+#login .user-check-box input:checked ~ .checkmark {
+  background-color: var(--btnPrimary);
 }
 
 /* Create the checkmark/indicator (hidden when not checked) */
-.checkmark:after {
+#login .checkmark:after {
   content: "";
   position: absolute;
   display: none;
 }
 
 /* Show the checkmark when checked */
-.user-check-box input:checked ~ .checkmark:after {
+#login .user-check-box input:checked ~ .checkmark:after {
   display: block;
 }
 
 /* Style the checkmark/indicator */
-.user-check-box .checkmark:after {
+#login .user-check-box .checkmark:after {
   left: 8px;
   top: 4px;
   width: 5px;
@@ -196,50 +200,116 @@
   transform: rotate(45deg);
 }
 
-.user-check-box {
+#login .user-check-box {
   padding: 10px;
 }
 
-.rm span {
-  padding-left: 10px;
-  color: black;
-  font-size: 15px;
+#login .rm span {
+  padding-top: 4px;
+  padding-left: 5px;
+  font-size: 16px;
+  font-weight: bold;
+  color: var(--btnPrimary);
 }
 
-.user-login-box .btn1 {
-  font-family: "montserrat";
+#login .user-login-box .btn1 {
   color: #fff;
   text-transform: uppercase;
   letter-spacing: 2px;
   font-weight: bold;
-  background-image: linear-gradient(to right, #024ca1, #082342);
+  padding: 14px;
+  border: none;
+  border-radius: 100px;
   cursor: pointer;
   transition: opacity 0.4s;
+  background-color: var(--btnPrimary);
 }
 
-.user-login-box .btn1:hover {
+#login .user-login-box .btn1:hover {
   opacity: 0.9;
 }
 
-.user-login-box span {
-  font-family: "Franklin Gothic light";
-  color: #082342;
-}
-
-.dnthave {
-  font-family: "Franklin Gothic light";
+#login .dnthave {
   text-align: center;
   margin-top: 10px;
 }
 
-a {
+#login a {
   color: black;
   text-decoration: none;
 }
 
-a:hover {
-  color: #fad400;
+#login a:hover {
+  color: var(--btnPrimary);
   text-decoration: underline;
+}
+
+#login .phone-input {
+  position: relative;
+}
+
+#login .phone-input input{
+  border: none;
+  outline: none;
+  font-size: 1.1em;
+  width: 100%;
+  letter-spacing: 0.5px;
+  padding: 14px 14px 14px 50px;
+  border-bottom: solid 3px var(--DB);
+}
+
+#login .phone-input span{
+    position: absolute;
+    top: 16.5px;
+    left: 10px;
+    font-size: 1.2em;
+}
+
+#login .phone-input-container button {
+  margin-top: 5px;
+  color: #fff;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  font-weight: bold;
+  padding: 14px;
+  border-radius: 100px;
+  border: none;
+  cursor: pointer;
+  transition: opacity 0.4s;
+  background-color: var(--btnPrimary);
+}
+
+#login .phone-input-container button:hover {
+  background-color: var(--btnSecondary);
+}
+
+#login .verification-container{
+  display: flex;
+  align-items: center;
+  margin-top: 20px;
+}
+
+#login .verification-container input{
+  border: none;
+  outline: none;
+  font-size: 1.1em;
+  width: 65%;
+  letter-spacing: 0.5px;
+  padding: 14px 14px 14px 14px;
+  border-bottom: solid 3px var(--DB);
+}
+
+#login .verification-container button{
+  color: #fff;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  font-weight: bold;
+  padding: 14px;
+  border: none;
+  cursor: pointer;
+  border-radius: 100px;
+  transition: opacity 0.4s;
+  background-color: var(--btnPrimary);
 }
 
 @media screen and (max-width: 768px) {

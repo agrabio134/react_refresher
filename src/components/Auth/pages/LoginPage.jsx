@@ -228,7 +228,7 @@ const LoginPage = () => {
                   checked={!isPhoneLogin}
                   onChange={() => setIsPhoneLogin(false)}
                 />
-                <label htmlFor="email">Email</label>
+                <label htmlFor="email"> Email</label>
                 <input
                   type="radio"
                   id="phone"
@@ -291,7 +291,7 @@ const LoginPage = () => {
               <div>
                 {!verificationId && <div id="recaptcha-container"></div>}
                 <h1>Phone Number Sign-In</h1>
-                <div>
+                <div className="phone-input-container">
                   <div className="phone-input">
                     <span className="country-code">+63</span>
                     <input
@@ -315,7 +315,7 @@ const LoginPage = () => {
                       : `Resend OTP in ${timer} seconds`}
                   </button>
                 </div>
-                <div>
+                <div className="verification-container">
                   <input
                     type="text"
                     placeholder="Enter verification code"

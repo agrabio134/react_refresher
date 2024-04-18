@@ -180,10 +180,17 @@ const PetTable = ({ petList, handleUpdatePet, handleDeletePet, ArchivedPetList }
                   width={100}
                   height={100}
                 />
-                <p>Name: {pet.name}</p>
-                <p>Type: {pet.type}</p>
-                <p>Breed: {pet.breed}</p>
-                <p>Age: {
+                <p className="pet-name">
+                  Name: <b>{pet.name}</b>
+                </p>
+                <p className="pet-type">
+                  Type: <b>{pet.type}</b>
+                </p>
+                <p className="pet-breed">
+                  Breed: <b>{pet.breed}</b>
+                </p>
+                <p className="pet-age">
+                  Age: <b>{
                   calculateAgeInMonths(pet.birthdate) >= 12 ? (
                     <>
                       {Math.floor(calculateAgeInMonths(pet.birthdate) / 12)}{" "}
@@ -221,10 +228,15 @@ const PetTable = ({ petList, handleUpdatePet, handleDeletePet, ArchivedPetList }
                       )}
                     </>
                   )}
+                  </b>
                 </p>
                 <Button onClick={() => handleEditPet(pet)}>Edit</Button>
                 <Button onClick={() => handleDeletePet(pet.id)}>Delete</Button>
                 <Button onClick={() => handleArchivedClicked(pet.id)}>Archived</Button>
+                <div className="btn-container">
+                  <Button className="btn-warning" onClick={() => handleEditPet(pet)}>Edit</Button>
+                  <Button className="btn-danger" onClick={() => handleDeletePet(pet.id)}>Delete</Button>
+                </div>
               </Card>
             ))
           ) : (
