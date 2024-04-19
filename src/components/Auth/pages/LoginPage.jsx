@@ -278,7 +278,7 @@ const LoginPage = () => {
                   <span>Remember Me</span>
                 </div>
                 <input type="submit" value="Login" className="btn1" />
-                <p className="login-link">
+                <p>
                   Don’t have an account?
                   <a href="/auth/signup" className="dnthave">
                     {" "}

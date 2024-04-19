@@ -211,50 +211,58 @@ const SignupPage = () => {
 
   return (
     <>
-      <section className="signup-main-container">
-        <div className="signup-side">
-          <img src="/page/LGHD.png" alt="" />
+      <section id="signup">
+        <div className="container">
+          <div className="main-signup-container">
+
+          <div className="signup-logo-container">
+          <img src="/page/NLHD.png" alt="" />
+          {/* <h1>Paws Pro</h1> */}
         </div>
         <div className="main-user-signup-container">
         <div className="scrollable-container">
 
-          <p className="title">Happy Paws</p>
-          <div className="signup-separator"></div>
+          <h2 className="title">Paws Pro</h2>
+          <div class="bar"></div>
 
           <form className="user-signup-box" onSubmit={handleSubmit}>
             <div className="user-signup-grid-container">
               <div className="user-signup-form-control">
-                <label htmlFor="fname">First Name</label>
+                {/* <label htmlFor="fname">First Name</label> */}
                 <input
                   type="text"
                   name="fname"
+                  placeholder="First Name"
                   value={formData.fname}
                   onChange={handleChange}
                 />
               </div>
               <div className="user-signup-form-control">
-                <label htmlFor="lname">Last Name</label>
+                {/* <label htmlFor="lname">Last Name</label> */}
                 <input
                   type="text"
                   name="lname"
+                  placeholder="Last Name"
                   value={formData.lname}
                   onChange={handleChange}
                 />
               </div>
               <div className="user-signup-form-control">
-                <label htmlFor="contact">Contact Number</label>
+                {/* <label htmlFor="contact">Contact Number</label> */}
                 <input
                   type="tel"
                   name="contact"
+                  placeholder="Contact No."
                   value={formData.contact}
                   onChange={handleChange}
                 />
               </div>
               <div className="user-signup-form-control">
-                <label htmlFor="address">Address</label>
+                {/* <label htmlFor="address">Address</label> */}
                 <input
                   type="text"
                   name="address"
+                  placeholder="Address"
                   value={formData.address}
                   onChange={handleChange}
                 />
@@ -262,20 +270,22 @@ const SignupPage = () => {
             </div>
 
             <div className="user-signup-form-control">
-              <label htmlFor="email">Email</label>
+              {/* <label htmlFor="email">Email</label> */}
               <input
                 type="email"
                 name="email"
+                placeholder="Email Address"
                 value={formData.email}
                 onChange={handleChange}
               />
             </div>
             <div className="user-signup-grid-container">
               <div className="user-signup-form-control">
-                <label htmlFor="password">Password</label>
+                {/* <label htmlFor="password">Password</label> */}
                 <input
                   type="password"
                   name="password"
+                  placeholder="Password"
                   value={formData.password}
                   pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{,}"
                   title="Must contain at least one number and one uppercase and lowercase letter"
@@ -285,10 +295,11 @@ const SignupPage = () => {
               </div>
 
               <div className="user-signup-form-control">
-                <label htmlFor="confirmPass">Confirm Password</label>
+                {/* <label htmlFor="confirmPass">Confirm Password</label> */}
                 <input
                   type="password"
                   name="confirmPass"
+                  placeholder="Confirm Password"
                   value={formData.confirmPass}
                   onChange={handleChange}
                 />
@@ -378,6 +389,9 @@ const SignupPage = () => {
             Already have an account? <a href="/auth/login">Login here</a>
           </p>
         </div>
+        </div>
+
+          </div>
         </div>
       </section>
     </>

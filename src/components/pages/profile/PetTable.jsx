@@ -165,16 +165,18 @@ const PetTable = ({ petList, handleUpdatePet, handleDeletePet, archivedPetList }
   return (
     <>
       <div className="main-pet-table-container">
+        <div className="pet-table-header">
         <h2>Your Pets</h2>
-        <Button onClick={() => setArchivedModalVisible(true)}>Archived Pets</Button>
+        <Button className="btn-archive" onClick={() => setArchivedModalVisible(true)}>Archived Pets</Button>
         {/* archived modal */}
+        </div>
 
         <Modal
           title="Archived Pets"
           visible={archivedModalVisible}
           onCancel={() => setArchivedModalVisible(false)}
           footer={[
-            <Button key="cancel" onClick={() => setArchivedModalVisible(false)}>
+            <Button className="btn-archive" key="cancel" onClick={() => setArchivedModalVisible(false)}>
               Close
             </Button>,
           ]}
@@ -190,10 +192,10 @@ const PetTable = ({ petList, handleUpdatePet, handleDeletePet, archivedPetList }
                   width={100}
                   height={100}
                 />                 
-                 <p>Name: {pet.name}</p>
-                  <p>Type: {pet.type}</p>
-                  <p>Breed: {pet.breed}</p>
-                  <Button onClick={() => handleUnarchivedClicked(pet.id)}>Unarchived</Button>
+                 <p>Name: <b>{pet.name}</b></p>
+                  <p>Type: <b>{pet.type}</b></p>
+                  <p>Breed: <b>{pet.breed}</b></p>
+                  <Button className="btn-archive" onClick={() => handleUnarchivedClicked(pet.id)}>Unarchived</Button>
                 </Card>
               ))
             ) : (
@@ -201,10 +203,7 @@ const PetTable = ({ petList, handleUpdatePet, handleDeletePet, archivedPetList }
             )}
           </div>
         </Modal>
-
-
-
-        <div className="pet-table-separator"></div>
+        <div class="bar"></div>
         <div className="profile-pet-card-container">
           {petList && petList.length > 0 ? (
             petList.map((pet) => (
@@ -265,12 +264,10 @@ const PetTable = ({ petList, handleUpdatePet, handleDeletePet, archivedPetList }
                     )}
                   </b>
                 </p>
-                <Button onClick={() => handleEditPet(pet)}>Edit</Button>
-                <Button onClick={() => handleDeletePet(pet.id)}>Delete</Button>
-                <Button onClick={() => handleArchivedClicked(pet.id)}>Archived</Button>
                 <div className="btn-container">
-                  <Button className="btn-warning" onClick={() => handleEditPet(pet)}>Edit</Button>
-                  <Button className="btn-danger" onClick={() => handleDeletePet(pet.id)}>Delete</Button>
+                <Button className="btn-warning" onClick={() => handleEditPet(pet)}>Edit</Button>
+                <Button className="btn-danger"  onClick={() => handleDeletePet(pet.id)}>Delete</Button>
+                <Button className="btn-archive" onClick={() => handleArchivedClicked(pet.id)}>Archived</Button>
                 </div>
               </Card>
             ))

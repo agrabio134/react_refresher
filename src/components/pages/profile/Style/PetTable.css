@@ -9,14 +9,44 @@
 .main-pet-table-container h2{
     color: black;
     font-weight: bold;
-    margin-left: 5px;
 }
 
-.pet-table-separator {
-    width: 150px;
-    height: 4px;
-    margin: 10px 0px 20px 5px;
-    background-color: #FAD400;
+.pet-table-header {
+  display: flex;
+  margin-top: 0;
+  padding: 0;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.main-pet-table-container .bar {
+  height: 4px;
+  width: 85px;
+  background: var(--barc);
+  margin: 0;
+  margin-bottom: 20px;
+  padding: 0;
+  position: relative;
+  border-radius: 5px;
+  overflow: hidden;
+}
+
+.main-pet-table-container .bar::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 5px;
+  background: #ffffff;
+  -webkit-animation-duration: 2s;
+          animation-duration: 2s;
+  -webkit-animation-timing-function: linear;
+          animation-timing-function: linear;
+  -webkit-animation-iteration-count: infinite;
+          animation-iteration-count: infinite;
+  -webkit-animation-name: MOVE-BG;
+          animation-name: MOVE-BG;
 }
 
 .whole-pet-table {
@@ -54,7 +84,7 @@
   text-align: center;
   padding: 0;
   margin: 0;
-  background-color: #ffffff;
+  background-color: var(--lightcolor);
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   -webkit-transition: 0.5s;
   transition: 0.5s;
@@ -71,7 +101,7 @@
   position: absolute;
   -webkit-transition: all 0.3s ease-in-out;
   transition: all 0.3s ease-in-out;
-  background-color: var(--btnSecondary);
+  background-color: var(--bg-ascend2);
   -webkit-transform: translate(-50%, -50%);
           transform: translate(-50%, -50%);
   border-radius: 5px;
@@ -87,7 +117,7 @@
 }
 
 .profile-pet-card:hover p {
-  color: var(--ascend);
+  color: var(--darkcolor);
 }
 
 /* .profile-pet-card{
@@ -166,7 +196,33 @@
   background-color: var(--btnDanger);
 }
 
-  
+.main-pet-table-container .btn-archive {
+  color: var(--btnDefault);
+  background-color: transparent;
+  border: solid 2px var(--btnDefault);
+  -webkit-transition: 0.5s;
+  transition: 0.5s;
+}
+
+.main-pet-table-container .btn-archive:hover {
+  color: var(--lightcolor) !important;
+  border: solid 2px var(--btnDefault) !important;
+  background-color: var(--btnDefault);
+}
+
+.profile-pet-card-container .btn-archive {
+  color: var(--btnDefault);
+  background-color: transparent;
+  border: solid 2px var(--btnDefault);
+  -webkit-transition: 0.5s;
+  transition: 0.5s;
+}
+
+.profile-pet-card-container .btn-archive:hover {
+  color: var(--lightcolor) !important;
+  border: solid 2px var(--btnDefault) !important;
+  background-color: var(--btnDefault);
+}
 
   .pet-item {
     text-align: center;
