@@ -20,8 +20,9 @@ import Swal from "sweetalert2";
 const { Item } = Form;
 const storage = getStorage(initializeApp(firebaseConfig));
 
-const PetTable = ({ petList, handleUpdatePet, handleDeletePet }) => {
+const PetTable = ({ petList, handleUpdatePet, handleDeletePet, archivedPetList }) => {
   const [isModalVisible, setIsModalVisible] = useState(false);
+  const [archivedModalVisible, setArchivedModalVisible] = useState(false);
   const [selectedPet, setSelectedPet] = useState(null);
   const [file, setFile] = useState(null);
   const [thumbnailPreview, setThumbnailPreview] = useState(null);
@@ -97,11 +98,112 @@ const PetTable = ({ petList, handleUpdatePet, handleDeletePet }) => {
     }
   };
 
+  const handleArchivedClicked = async (id) => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You are about to archive this pet.",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonText: "Yes",
+      cancelButtonText: "No",
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        try {
+          const response = await axios.put(
+            `https://happypawsolongapo.com/api/archive_pet/${id}`
+          );
+
+          Swal.fire({
+            title: "Success!",
+            text: "Pet archived successfully!",
+            icon: "success",
+            confirmButtonText: "OK",
+          }).then(() => {
+            window.location.reload();
+          });
+        } catch (error) {
+          console.error("Error archiving pet:", error);
+        }
+      }
+    });
+
+  };
+
+
+  const handleUnarchivedClicked = async (id) => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You are about to archive this pet.",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonText: "Yes",
+      cancelButtonText: "No",
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        try {
+          const response = await axios.put(
+            `https://happypawsolongapo.com/api/unarchive_pet/${id}`
+          );
+
+          Swal.fire({
+            title: "Success!",
+            text: "Pet archived successfully!",
+            icon: "success",
+            confirmButtonText: "OK",
+          }).then(() => {
+            window.location.reload();
+          });
+        } catch (error) {
+          console.error("Error archiving pet:", error);
+        }
+      }
+    });
+
+  };
+
+
   return (
     <>
       <div className="main-pet-table-container">
+        <div className="pet-table-header">
         <h2>Your Pets</h2>
-        <div className="pet-table-separator"></div>
+        <Button className="btn-archive" onClick={() => setArchivedModalVisible(true)}>Archived Pets</Button>
+        {/* archived modal */}
+        </div>
+
+        <Modal
+          title="Archived Pets"
+          visible={archivedModalVisible}
+          onCancel={() => setArchivedModalVisible(false)}
+          footer={[
+            <Button className="btn-archive" key="cancel" onClick={() => setArchivedModalVisible(false)}>
+              Close
+            </Button>,
+          ]}
+          destroyOnClose={true}
+        >
+          <div className="profile-pet-card-container">
+            {archivedPetList  && archivedPetList .length > 0 ? (
+              archivedPetList.map((pet) => (
+                <Card key={pet.id} className="profile-pet-card">
+                <Image
+                  src={`${pet.image}`}
+                  alt={pet.image}
+                  width={100}
+                  height={100}
+                />                 
+                 <p>Name: <b>{pet.name}</b></p>
+                  <p>Type: <b>{pet.type}</b></p>
+                  <p>Breed: <b>{pet.breed}</b></p>
+                  <Button className="btn-archive" onClick={() => handleUnarchivedClicked(pet.id)}>Unarchived</Button>
+                </Card>
+              ))
+            ) : (
+              <p>No pets available</p>
+            )}
+          </div>
+        </Modal>
+        <div class="bar"></div>
         <div className="profile-pet-card-container">
           {petList && petList.length > 0 ? (
             petList.map((pet) => (
@@ -112,50 +214,61 @@ const PetTable = ({ petList, handleUpdatePet, handleDeletePet }) => {
                   width={100}
                   height={100}
                 />
-                <p>Name: {pet.name}</p>
-                <p>Type: {pet.type}</p>
-                <p>Breed: {pet.breed}</p>
-                <p>Age: {
-                  calculateAgeInMonths(pet.birthdate) >= 12 ? (
-                    <>
-                      {Math.floor(calculateAgeInMonths(pet.birthdate) / 12)}{" "}
-                      {Math.floor(
-                        calculateAgeInMonths(pet.birthdate) / 12
-                      ) === 1
-                        ? "year"
-                        : "years"}
-                      {calculateAgeInMonths(pet.birthdate) % 12 > 0 && (
-                        <>
-                          {" and "}
-                          {calculateAgeInMonths(pet.birthdate) % 12}{" "}
-                          {calculateAgeInMonths(pet.birthdate) % 12 === 1
-                            ? "month"
-                            : "months"}
-                        </>
-                      )}
-                    </>
-                  ) : (
-                    <>
-                      {calculateAgeInMonths(pet.birthdate) < 1 ? (
-                        <>
-                          {calculateAgeInDays(pet.birthdate)}{" "}
-                          {calculateAgeInDays(pet.birthdate) === 1
-                            ? "day"
-                            : "days"}
-                        </>
-                      ) : (
-                        <>
-                          {calculateAgeInMonths(pet.birthdate)}{" "}
-                          {calculateAgeInMonths(pet.birthdate) < 2
-                            ? "month"
-                            : "months"}
-                        </>
-                      )}
-                    </>
-                  )}
+                <p className="pet-name">
+                  Name: <b>{pet.name}</b>
                 </p>
-                <Button onClick={() => handleEditPet(pet)}>Edit</Button>
-                <Button onClick={() => handleDeletePet(pet.id)}>Delete</Button>
+                <p className="pet-type">
+                  Type: <b>{pet.type}</b>
+                </p>
+                <p className="pet-breed">
+                  Breed: <b>{pet.breed}</b>
+                </p>
+                <p className="pet-age">
+                  Age: <b>{
+                    calculateAgeInMonths(pet.birthdate) >= 12 ? (
+                      <>
+                        {Math.floor(calculateAgeInMonths(pet.birthdate) / 12)}{" "}
+                        {Math.floor(
+                          calculateAgeInMonths(pet.birthdate) / 12
+                        ) === 1
+                          ? "year"
+                          : "years"}
+                        {calculateAgeInMonths(pet.birthdate) % 12 > 0 && (
+                          <>
+                            {" and "}
+                            {calculateAgeInMonths(pet.birthdate) % 12}{" "}
+                            {calculateAgeInMonths(pet.birthdate) % 12 === 1
+                              ? "month"
+                              : "months"}
+                          </>
+                        )}
+                      </>
+                    ) : (
+                      <>
+                        {calculateAgeInMonths(pet.birthdate) < 1 ? (
+                          <>
+                            {calculateAgeInDays(pet.birthdate)}{" "}
+                            {calculateAgeInDays(pet.birthdate) === 1
+                              ? "day"
+                              : "days"}
+                          </>
+                        ) : (
+                          <>
+                            {calculateAgeInMonths(pet.birthdate)}{" "}
+                            {calculateAgeInMonths(pet.birthdate) < 2
+                              ? "month"
+                              : "months"}
+                          </>
+                        )}
+                      </>
+                    )}
+                  </b>
+                </p>
+                <div className="btn-container">
+                <Button className="btn-warning" onClick={() => handleEditPet(pet)}>Edit</Button>
+                <Button className="btn-danger"  onClick={() => handleDeletePet(pet.id)}>Delete</Button>
+                <Button className="btn-archive" onClick={() => handleArchivedClicked(pet.id)}>Archived</Button>
+                </div>
               </Card>
             ))
           ) : (
@@ -195,77 +308,76 @@ const PetTable = ({ petList, handleUpdatePet, handleDeletePet }) => {
               )}
             </Item>
             <Item label="Image File">
-            <Upload
-      customRequest={async ({ file, onSuccess, onError }) => {
-        try {
-          const storageRef = ref(storage, `petImages/${file.name}`);
-          const uploadTask = uploadBytesResumable(storageRef, file);
+              <Upload
+                customRequest={async ({ file, onSuccess, onError }) => {
+                  try {
+                    const storageRef = ref(storage, `petImages/${file.name}`);
+                    const uploadTask = uploadBytesResumable(storageRef, file);
 
-          await uploadTask;
+                    await uploadTask;
 
-          const url = await getDownloadURL(storageRef);
-          setDownloadURL(url);
+                    const url = await getDownloadURL(storageRef);
+                    setDownloadURL(url);
 
-          onSuccess();
+                    onSuccess();
 
-          // Display success message using SweetAlert
-          Swal.fire({
-            title: "Success!",
-            text: "File uploaded successfully.",
-            icon: "success",
-            confirmButtonText: "OK",
-          });
-        } catch (error) {
-          onError(error);
-          console.error("File upload failed:", error);
+                    // Display success message using SweetAlert
+                    Swal.fire({
+                      title: "Success!",
+                      text: "File uploaded successfully.",
+                      icon: "success",
+                      confirmButtonText: "OK",
+                    });
+                  } catch (error) {
+                    onError(error);
+                    console.error("File upload failed:", error);
 
-          // Display error message using SweetAlert
-          Swal.fire({
-            title: "Error!",
-            text: "File upload failed. Please try again.",
-            icon: "error",
-            confirmButtonText: "OK",
-          });
-        }
-      }}
-      beforeUpload={(file) => {
-        const maxSize = 5 * 1024 * 1024; // 5 MB
-        const allowedFormats = ["image/jpeg", "image/png", "image/gif"];
+                    // Display error message using SweetAlert
+                    Swal.fire({
+                      title: "Error!",
+                      text: "File upload failed. Please try again.",
+                      icon: "error",
+                      confirmButtonText: "OK",
+                    });
+                  }
+                }}
+                beforeUpload={(file) => {
+                  const maxSize = 5 * 1024 * 1024; // 5 MB
+                  const allowedFormats = ["image/jpeg", "image/png", "image/gif"];
 
-        if (file.size > maxSize) {
-          const errorMessage = `File size must be smaller than ${
-            maxSize / 1024 / 1024
-          } MB!`;
-          // Display error message using SweetAlert
-          Swal.fire({
-            title: "Error!",
-            text: errorMessage,
-            icon: "error",
-            confirmButtonText: "OK",
-          });
+                  if (file.size > maxSize) {
+                    const errorMessage = `File size must be smaller than ${maxSize / 1024 / 1024
+                      } MB!`;
+                    // Display error message using SweetAlert
+                    Swal.fire({
+                      title: "Error!",
+                      text: errorMessage,
+                      icon: "error",
+                      confirmButtonText: "OK",
+                    });
 
-          return false;
-        }
+                    return false;
+                  }
 
-        if (!allowedFormats.includes(file.type.toLowerCase())) {
-          const errorMessage = "Only JPEG, PNG, and GIF formats are allowed!";
-          // Display error message using SweetAlert
-          Swal.fire({
-            title: "Error!",
-            text: errorMessage,
-            icon: "error",
-            confirmButtonText: "OK",
-          });
-          return false;
-        }
+                  if (!allowedFormats.includes(file.type.toLowerCase())) {
+                    const errorMessage = "Only JPEG, PNG, and GIF formats are allowed!";
+                    // Display error message using SweetAlert
+                    Swal.fire({
+                      title: "Error!",
+                      text: errorMessage,
+                      icon: "error",
+                      confirmButtonText: "OK",
+                    });
+                    return false;
+                  }
 
-        return true;
-      }}
-      onChange={handleFileInputChange}
-      showUploadList={false}
-    >
-      <Button icon={<UploadOutlined />}>Upload File</Button>
-    </Upload>
+                  return true;
+                }}
+                onChange={handleFileInputChange}
+                showUploadList={false}
+              >
+                <Button icon={<UploadOutlined />}>Upload File</Button>
+              </Upload>
             </Item>
             <Item label="Name">
               <Input

@@ -12,9 +12,13 @@ import { Image } from "antd";
 import "./styles/AdminDashboardPage.css";
 import Swal from "sweetalert2";
 import BlinkingDot from "../components/BlinkingDot";
+import { faStar as solidStar } from "@fortawesome/free-solid-svg-icons";
+import { faStar as regularStar } from "@fortawesome/free-regular-svg-icons";
+// import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
 
 const AdminDashboardPage = () => {
-  const [activeTab, setActiveTab] = useState("preview");
+  const [activeTab, setActiveTab] = useState("live");
   const [userCount, setUserCount] = useState(0);
   const [galleryCount, setGalleryCount] = useState(0);
   const [blogCount, setBlogCount] = useState(0);
@@ -22,6 +26,8 @@ const AdminDashboardPage = () => {
   const [scheduledAppointmentCount, setScheduledAppointmentCount] = useState(0);
   const [unpublishedBlogPosts, setUnpublishedBlogPosts] = useState([]);
   const [publishedBlogPosts, setPublishedBlogPosts] = useState([]);
+  const [featuredBlogPosts, setFeaturedBlogPosts] = useState([]);
+
 
   const fetchData = async (url) => {
     try {
@@ -39,8 +45,8 @@ const AdminDashboardPage = () => {
           index === 0
             ? json + "}"
             : index === array.length - 1
-            ? "{" + json
-            : "{" + json + "}"
+              ? "{" + json
+              : "{" + json + "}"
         )
         .flatMap((json) => {
           try {
@@ -89,6 +95,10 @@ const AdminDashboardPage = () => {
       "https://happypawsolongapo.com/api/get_published_blog_posts",
       setPublishedBlogPosts
     );
+    fetchBlogData(
+      "https://happypawsolongapo.com/api/get_blog_posts_featured",
+      setFeaturedBlogPosts
+    );
   }, []); // Fix: Added dependency array
 
   const fetchBlogData = async (url, setBlogPosts) => {
@@ -100,8 +110,8 @@ const AdminDashboardPage = () => {
         index === 0
           ? json + "}"
           : index === array.length - 1
-          ? "{" + json
-          : "{" + json + "}"
+            ? "{" + json
+            : "{" + json + "}"
       );
 
     const blogPosts = jsonObjects.flatMap((json) => {
@@ -291,6 +301,113 @@ const AdminDashboardPage = () => {
       console.error(`Error unpublishing blog post: ${error.message}`);
     }
   };
+
+
+
+
+  const handleFeature = async (blogPostId) => {
+    // Show Swal confirmation dialog
+    Swal.fire({
+      title: "Are you sure?",
+      text: "Do you want to feature this blog post?",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, feature it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        // Call the function to feature the blog post with the given ID
+        featureBlogPost(blogPostId);
+      }
+    });
+  };
+  
+  const handleUnfeature = async (blogPostId) => {
+    // Show Swal confirmation dialog
+    Swal.fire({
+      title: "Are you sure?",
+      text: "Do you want to unfeature this blog post?",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, unfeature it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        // Call the function to unfeature the blog post with the given ID
+        unfeatureBlogPost(blogPostId);
+      }
+    });
+  };
+
+  const featureBlogPost = async (blogPostId) => {
+    try {
+      const response = await fetch(
+        `https://happypawsolongapo.com/api/update_featured/${blogPostId}`,
+        {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ featured: true }),
+        }
+      );
+  
+      if (!response.ok) {
+        throw new Error(`Failed to feature blog post: ${response.status}`);
+      }
+  
+      const textData = await response.text();
+      const parsedResult = JSON.parse(textData);
+  
+      if (parsedResult.success) {
+        alert("Blog post featured successfully!");
+        // Update featured blog posts state
+        setFeaturedBlogPosts([...featuredBlogPosts, blogPostId]);
+        // Reload data after successful feature
+        fetchDataAndUpdateState();
+      }
+      window.location.reload();
+    } catch (error) {
+      console.error(`Error featuring blog post: ${error.message}`);
+    }
+  };
+  
+  const unfeatureBlogPost = async (blogPostId) => {
+    try {
+      const response = await fetch(
+        `https://happypawsolongapo.com/api/update_not_featured/${blogPostId}`,
+        {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ featured: false }),
+        }
+      );
+  
+      if (!response.ok) {
+        throw new Error(`Failed to unfeature blog post: ${response.status}`);
+      }
+  
+      const textData = await response.text();
+      const parsedResult = JSON.parse(textData);
+  
+      if (parsedResult.success) {
+        alert("Blog post unfeatured successfully!");
+        // Update featured blog posts state
+        setFeaturedBlogPosts(featuredBlogPosts.filter((post) => post !== blogPostId));
+        // Reload data after successful unfeature
+        fetchDataAndUpdateState();
+      }
+
+      window.location.reload();
+    } catch (error) {
+      console.error(`Error unfeaturing blog post: ${error.message}`);
+    }
+  };
+  
   return (
     <div className="admin-dashboard-page">
       <div className="card-container">
@@ -322,24 +439,25 @@ const AdminDashboardPage = () => {
       </div>
 
       <div className="tab-buttons">
-        <button
-          className={activeTab === "preview" ? "active-tab" : ""}
-          onClick={() => setActiveTab("preview")}
-        >
-          Preview
-        </button>
-        <button
-          className={activeTab === "live" ? "active-tab" : ""}
-          onClick={() => setActiveTab("live")}
-        >
-          <div className="live-dot">
-            <div className="liveBtnItem">Live</div>
-            <div className="liveBtnItem">
-              <BlinkingDot />
-            </div>
-          </div>
-        </button>
+  <button
+    className={activeTab === "live" ? "active-tab" : ""}
+    onClick={() => setActiveTab("live")}
+  >
+    <div className="live-dot">
+      <div className="liveBtnItem">Live</div>
+      <div className="liveBtnItem">
+        <BlinkingDot />
       </div>
+    </div>
+  </button>
+  <button
+    className={activeTab === "preview" ? "active-tab" : ""}
+    onClick={() => setActiveTab("preview")}
+  >
+    Preview
+  </button>
+</div>
+
 
       {activeTab === "preview" && (
         <>
@@ -349,7 +467,7 @@ const AdminDashboardPage = () => {
             {unpublishedBlogPosts.map((blogPost) => (
               <div key={blogPost.id} className="admin-dashboard-blog-card">
                 <div className="admin-dashboard-blog-card-content">
-                  <Image src={`${blogPost.thumbnail}`} alt="" height="200px" width="100%"/>
+                  <Image src={`${blogPost.thumbnail}`} alt="" height="200px" width="100%" />
                   <h3>{blogPost.title}</h3>
                   <div className="blog-post-content-container">
                     <p className="blog-post-content">{blogPost.content}</p>
@@ -383,6 +501,15 @@ const AdminDashboardPage = () => {
             {publishedBlogPosts.map((blogPost) => (
               <div key={blogPost.id} className="admin-dashboard-blog-card">
                 <div className="admin-dashboard-blog-card-content">
+                  <FontAwesomeIcon
+                    icon={featuredBlogPosts.some((featuredPost) => featuredPost.id === blogPost.id) ? solidStar : regularStar}
+                    className={`star-icon ${featuredBlogPosts.some((featuredPost) => featuredPost.id === blogPost.id) ? "featured-icon" : "not-featured-icon"}`}
+                    onClick={() => {
+                      featuredBlogPosts.some((featuredPost) => featuredPost.id === blogPost.id)
+                        ? handleUnfeature(blogPost.id)
+                        : handleFeature(blogPost.id)
+                    }}
+                  />
                   <Image src={`${blogPost.thumbnail}`} alt="" height="200px" width="100%" />
                   <h3>{blogPost.title}</h3>
                   <div className="blog-post-content-container">
@@ -396,14 +523,13 @@ const AdminDashboardPage = () => {
                   >
                     Unpublished
                   </button>
-                  {/* <button className="edit" onClick={() => handleEdit(blogPost)}>
-                    Edit
-                  </button> */}
                 </div>
               </div>
+
             ))}
           </div>
         </>
+
       )}
     </div>
   );

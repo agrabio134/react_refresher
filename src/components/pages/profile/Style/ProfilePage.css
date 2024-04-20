@@ -15,7 +15,8 @@
 
 .pet-form-table-container {
     display: grid;
-    grid-template-columns: 1fr 1.5fr;
+    gap: 20px;
+    grid-template-columns: 1fr 2fr;
     width: 100%;
     margin: 0;
     padding: 0;
@@ -31,15 +32,15 @@
     position: relative;
     padding: 7px 0px 0px 0px;
     border-radius: 4px;
-    border: 1px solid #eee; 
+    border: 1px solid var(--btnPrimary); 
   }
   .fa-solid  {
-    color: #ffffff;
+    color: var(--btnPrimary);
     font-size: 1.5rem;
   }
   
   .fa-x {
-    color: #ffffff;
+    color: var(--btnPrimary);
     padding : 0px 3px;
 
   }
@@ -68,7 +69,7 @@
     grid-template-columns: 1fr auto auto;
     width: 100%;
     border-radius: 5px 5px 0px 0px;
-    background-color: #082342;
+    background-color: var(--secondary);
     padding: 20px;
     align-items: center;
     border-radius: 5px;
@@ -76,13 +77,15 @@
 }
 
 .recordsBtn {
-    background-color: #FAD400;
-    color: #082342 !important;
+    background-color: var(--btnPrimary);
+    color: var(--lightcolor) !important;
+    border-radius: 8px;
+    border: none;
 }
 
 .recordsBtn:hover { 
-    background-color: #868686;
-    color: #fff !important;
+    background-color: var(--btnSecondary);
+    color: var(--lightcolor) !important;
 }
 
 .logoutBtn {
@@ -94,17 +97,16 @@
 }
 
 .profile-header-container h2 {
-    font-family: 'montserrat';
-    color: white;
+
+    color: var(--darkcolor);
     font-weight: bold;
 }
 
 .profile-header-container button {
-    font-family: 'montserrat';
     font-weight: bold;
     padding: 13px 50px;
     margin-left: 5px;
-    color: #fff;
+    color: var();
     text-transform: uppercase;
     letter-spacing: 2px;
     font-weight: bold;

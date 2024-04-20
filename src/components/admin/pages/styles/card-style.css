@@ -1,0 +1,20 @@
+.consultation-card,
+.vaccination-card,
+.grooming-card {
+  width: 200px;
+  margin: 10px;
+  cursor: pointer;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.consultation-card:hover,
+.vaccination-card:hover,
+.grooming-card:hover {
+  transform: scale(1.05);
+}
+
+.consultation-card:active,
+.vaccination-card:active,
+.grooming-card:active {
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}

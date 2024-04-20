@@ -1,18 +1,15 @@
 import React, { useState, useEffect, lazy, Suspense } from "react";
-import { Modal, Table } from "antd";
+import { Modal, Table, Card } from "antd"; // Import Card component
 import { Button, Image } from "antd";
 import moment from "moment";
 
-
 const LazyTable = lazy(() => import("antd/lib/table"));
-
 
 const UserRecords = ({ id }) => {
   const [vetRecord, setVetRecord] = useState([]);
   const [vetPetRecord, setVetPetRecord] = useState([]);
   const [selectedAppointment, setSelectedAppointment] = useState(null);
   const [selectedPet, setSelectedPet] = useState(null);
-  
 
   useEffect(() => {
     getVeterinaryRecord();
@@ -168,49 +165,25 @@ const UserRecords = ({ id }) => {
     handleViewPetDataClick(id);
   };
 
-  const PetRecordColumns = [
-    {
-      title: "image",
-      dataIndex: "image",
-      key: "image",
-      render: (image) => (
-        <Image src={image} alt="Animal" width={50} height={50} />
-      ),
-    },
-
-    { title: "name", dataIndex: "name", key: "name" },
-    { title: "type", dataIndex: "type", key: "type" },
-    { title: "breed", dataIndex: "breed", key: "breed" },
-    {
-      title: "Date of Birth / Age",
-      dataIndex: "birthdate",
-      key: "birthdate",
-      render: (birthdate) => (
-        <>
-          <div>
-            {moment(birthdate).format("MMMM D, YYYY")} /{" "}
-            {calculateAge(birthdate)} old
-          </div>
-        </>
-      ),
-    },
-    {
-      title: "Action",
-      dataIndex: "action",
-      render: (text, record, index) => (
-        <Button
-          type="primary"
-          key={index}
-          onClick={() => {
-            // handleViewPetDataClick(record.id);
-            handleViewRecordDataClick(record.id);
-          }}
-        >
-          View Records
-        </Button>
-      ),
-    },
-  ];
+  const PetRecordCard = ({ record }) => (
+    <Card style={{ width: 300, marginBottom: 20 }}>
+      <Image src={record.image} alt="Animal" width={50} height={50} />
+      <p>Name: {record.name}</p>
+      <p>Type: {record.type}</p>
+      <p>Breed: {record.breed}</p>
+      <p>
+        Date of Birth / Age:{" "}
+        {moment(record.birthdate).format("MMMM D, YYYY")} /{" "}
+        {calculateAge(record.birthdate)} old
+      </p>
+      <Button
+        type="primary"
+        onClick={() => handleViewRecordDataClick(record.id)}
+      >
+        View Records
+      </Button>
+    </Card>
+  );
 
   const handleViewPetDataClick = async (id) => {
     // get veterinary record id
@@ -302,16 +275,14 @@ const UserRecords = ({ id }) => {
   return (
     <div className="user-records-container">
    
-      {/* <h2>User Records</h2> */}
-      {selectedPet === null && (
+   {selectedPet === null && (
         <div>
           {vetPetRecord.length > 0 ? (
-            <Table
-              dataSource={vetPetRecord}
-              columns={PetRecordColumns}
-              rowKey={(vetPetRecord) => vetPetRecord.t1_id}
-              pagination={true}
-            />
+            <div style={{ display: "flex", flexWrap: "wrap" }}>
+              {vetPetRecord.map((record) => (
+                <PetRecordCard key={record.id} record={record} />
+              ))}
+            </div>
           ) : (
             <p>No records found.</p>
           )}
