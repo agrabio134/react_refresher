@@ -3,8 +3,8 @@ import { useAuth } from "../AuthContext";
 import Swal from "sweetalert2";
 import "../Style/login.css";
 import PhoneLogin from "./PhoneLogin";
-
-
+import ForgotPassword from "./ForgotPassword";
+import { Modal, Button } from "antd";
 
 const LoginPage = () => {
   const { toggleLogin } = useAuth();
@@ -14,9 +14,15 @@ const LoginPage = () => {
     password: "",
     rememberMe: false,
   });
+  const [forgotPasswordVisible, setForgotPasswordVisible] = useState(false);
 
+  const handleForgotPasswordClick = () => {
+    setForgotPasswordVisible(true);
+  };
 
-
+  const handleForgotPasswordCancel = () => {
+    setForgotPasswordVisible(false);
+  };
 
   const handleChange = (event) => {
     const { name, value, checked, type } = event.target;
@@ -98,7 +104,6 @@ const LoginPage = () => {
       <section id="login">
         <div className="container">
           <div className="main-login-container">
-
             <div className="login-logo-container">
               <img src="/page/NLHD.png" alt="" />
               <h1>Paws Pro</h1>
@@ -107,7 +112,10 @@ const LoginPage = () => {
             <div className="main-user-login-container">
               <h2>Welcome!</h2>
               <div class="bar"></div>
-              <p>Please provide login credential to proceed and have access to all our services</p>
+              <p>
+                Please provide login credential to proceed and have access to
+                all our services
+              </p>
               <div className="scrollable-container">
                 <div className="radio-select">
                   <input
@@ -168,6 +176,12 @@ const LoginPage = () => {
                       <span>Remember Me</span>
                     </div>
                     <input type="submit" value="Login" className="btn1" />
+                    <p
+                      className="forgot-password-text"
+                      onClick={handleForgotPasswordClick}
+                    >
+                      Forgot Password?
+                    </p>
                     <p>
                       Don’t have an account?
                       <a href="/auth/signup" className="dnthave">
@@ -175,11 +189,19 @@ const LoginPage = () => {
                         Sign up
                       </a>
                     </p>
+           
+                    <Modal
+                      title="Forgot Password"
+                      visible={forgotPasswordVisible}
+                      onCancel={handleForgotPasswordCancel}
+                      footer={null}
+                    >
+                      <ForgotPassword />
+                    </Modal>
+                    {/* Forgot Password Text */}
                   </form>
                 )}
-                {isPhoneLogin === true && (
-                  <PhoneLogin />
-                )}
+                {isPhoneLogin === true && <PhoneLogin />}
               </div>
             </div>
           </div>

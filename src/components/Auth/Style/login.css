@@ -25,6 +25,20 @@
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
+.forgot-password-text {
+  color: var(--btnPrimary);
+  font-size: 16px;
+  font-weight: bold;
+  margin-top: 10px;
+}
+
+.forgot-password-text:hover {
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+
+
 #login .login-logo-container{
   width: 50%;
   display: flex;
