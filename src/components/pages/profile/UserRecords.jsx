@@ -8,6 +8,7 @@ const LazyTable = lazy(() => import("antd/lib/table"));
 const UserRecords = ({ id }) => {
   const [vetRecord, setVetRecord] = useState([]);
   const [vetPetRecord, setVetPetRecord] = useState([]);
+  const [vetGroomRecord, setVetGroomRecord] = useState([]);
   const [selectedAppointment, setSelectedAppointment] = useState(null);
   const [selectedPet, setSelectedPet] = useState(null);
 
@@ -82,6 +83,59 @@ const UserRecords = ({ id }) => {
       setVetRecord([]); // Clear the state in case of an error
     }
   };
+
+  const getGroomingPetRecord = async (pet_id) => {
+    try {
+      const response = await fetch(
+        `https://happypawsolongapo.com/api/get_grooming_record_admin_by_pet/${pet_id}`
+      );
+
+      if (!response.ok) {
+        if (response.status === 404) {
+          setVetGroomRecord([]);
+          return;
+        } else {
+          throw new Error(`Failed to fetch data: ${response.status}`);
+        }
+      } else {
+        const textData = await response.text();
+
+        try {
+          const jsonObjects = textData // Split the JSON objects
+            .split("}{")
+            .map((json, index, array) =>
+              index === 0
+                ? json + "}"
+                : index === array.length - 1
+                ? "{" + json // Add the missing bracket for the last object
+                : "{" + json + "}"
+            );
+
+          const vetRecordData = jsonObjects.flatMap((json) => {
+            try {
+              const parsedResult = JSON.parse(json);
+              return parsedResult.payload || [];
+            } catch (jsonError) {
+              console.error("Error parsing JSON:", jsonError);
+              return [];
+            }
+          });
+
+          // console.log(vetRecordData);
+          setVetGroomRecord(vetRecordData);
+
+        } catch (jsonError) {
+          console.error("Error parsing JSON:", jsonError);
+          setVetGroomRecord([]); // Clear the state in case of an error
+        }
+      }
+    } catch (error) {
+      console.error("Error fetching data:", error.message);
+      setVetGroomRecord([]); // Clear the state in case of an error
+    }
+  };
+
+
 
   const getVeterinaryPetRecord = async (pet_id) => {
     try {
@@ -162,7 +216,10 @@ const UserRecords = ({ id }) => {
   };
 
   const viewPetRecords = (id) => {
+
     handleViewPetDataClick(id);
+    handleViewPetGroomingDataClick(id);
+
   };
 
   const PetRecordCard = ({ record }) => (
@@ -196,7 +253,35 @@ const UserRecords = ({ id }) => {
       console.error("Error fetching veterinary record:", error);
       setVetPetRecord([]);
     }
+
+
+    
   };
+
+  const handleViewPetGroomingDataClick = async (id) => {
+    // get veterinary record id
+    
+    try {
+      // setSelectedClient(client);
+      await getGroomingPetRecord(id);
+      setVetGroomRecord((prevVetGroomRecord) => [...prevVetGroomRecord]);
+    } catch (error) {
+      console.error("Error fetching grooming record:", error);
+      setVetGroomRecord([]);
+
+      
+    }
+  };
+
+  const groomColumn = [
+    { title: "Pet Name", dataIndex: "name", key: "name" },
+    { title: "Date", dataIndex: "date", key: "date" },
+    
+  ];
+
+
+
+
 
   const columns = [
     { title: "Pet Name", dataIndex: "name", key: "name" },
@@ -272,6 +357,8 @@ const UserRecords = ({ id }) => {
     },
   ];
 
+    
+
   return (
     <div className="user-records-container">
    
@@ -340,6 +427,16 @@ const UserRecords = ({ id }) => {
                   <div>
                     <h1>Grooming</h1>
                     <p>For grooming</p>
+
+                    <Suspense fallback={<div>Loading...</div>}>
+                    <LazyTable
+                      dataSource={vetRecord}
+                      columns={groomColumn}
+                      rowKey={(vetRecord) => vetRecord.t1_id}
+                      pagination={true}
+                    />
+                    </Suspense>
+
                   </div>
                 )}
                 {selectedAppointment === "Vaccination" && (
