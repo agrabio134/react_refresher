@@ -16,6 +16,14 @@ const LoginPage = () => {
   });
   const [forgotPasswordVisible, setForgotPasswordVisible] = useState(false);
 
+
+  const handlePhoneLogin = (token) => {
+    const storage = formData.rememberMe ? localStorage : sessionStorage;
+    storage.setItem("authToken", token);
+    toggleLogin();
+  };
+
+
   const handleForgotPasswordClick = () => {
     setForgotPasswordVisible(true);
   };
@@ -69,7 +77,7 @@ const LoginPage = () => {
         let responseDataText;
         try {
           responseDataText = await response.text();
-          console.log("Response Data:", responseDataText);
+          // console.log("Response Data:", responseDataText);
         } catch (error) {
           console.error(
             "An error occurred while reading the response text:",
@@ -189,7 +197,7 @@ const LoginPage = () => {
                         Sign up
                       </a>
                     </p>
-           
+
                     <Modal
                       title="Forgot Password"
                       visible={forgotPasswordVisible}
@@ -201,7 +209,9 @@ const LoginPage = () => {
                     {/* Forgot Password Text */}
                   </form>
                 )}
-                {isPhoneLogin === true && <PhoneLogin />}
+                {isPhoneLogin === true && (
+                  <PhoneLogin onPhoneLogin={handlePhoneLogin} />
+                )}
               </div>
             </div>
           </div>

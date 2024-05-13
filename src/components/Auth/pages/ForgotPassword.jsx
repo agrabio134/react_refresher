@@ -87,7 +87,7 @@ const ForgotPassword = () => {
         }
       );
 
-      console.log(response);
+      // console.log(response);
 
       if (response.status === 200) {
         // Proceed to the next step (password reset).

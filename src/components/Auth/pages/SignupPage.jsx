@@ -127,8 +127,8 @@ const SignupPage = () => {
       // Add code here to save passcode to database
       updatePasscode(phoneNumber);
 
-      console.log(phoneNumber);
-      console.log(passcode);
+      // console.log(phoneNumber);
+      // console.log(passcode);
 
 
     }
@@ -153,13 +153,13 @@ const SignupPage = () => {
       );
 
       const responseDataText = await response.text();
-      console.log("Response Data:", responseDataText);
+      // console.log("Response Data:", responseDataText);
 
       if (responseDataText === "") {
-        console.log("No data found in users.");
+        // console.log("No data found in users.");
 
       } else {
-        console.log("Data found in users.");
+        // console.log("Data found in users.");
         Swal.fire({
           title: "Phone number already exists",
           icon: "error",
@@ -327,8 +327,8 @@ const SignupPage = () => {
       }
     );
 
-    // console.log("test if email is sent");
-    // console.log(formData.email);
+    console.log("test if email is sent");
+    console.log(formData.email);
   };
 
   const openTermsModal = () => {
@@ -382,7 +382,7 @@ const SignupPage = () => {
 
     // if empty field then alert user
 
-    console.log(formData);
+    // console.log(formData);
     sendVerificationEmail();
 
     // add useEffect to check if email already exists
@@ -396,12 +396,12 @@ const SignupPage = () => {
         body: JSON.stringify(formData),
       });
 
-      console.log(response);
+      // console.log(response);
       const responseDataText = await response.json();
-      console.log("Response Data:", responseDataText);
+      // console.log("Response Data:", responseDataText);
 
       if (response.status === 404) {
-        console.log("No data found in users.");
+        // console.log("No data found in users.");
         if (formData.password !== formData.confirmPass) {
           Swal.fire({
             title: "Password does not match",

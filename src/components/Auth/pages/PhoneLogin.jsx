@@ -1,33 +1,69 @@
 import { useState } from "react";
 import Swal from "sweetalert2";
+import { EyeOutlined, EyeInvisibleOutlined } from '@ant-design/icons';
 
 const PhoneLogin = ({ onPhoneLogin }) => {
   const [phoneNumber, setPhoneNumber] = useState("");
   const [pinCode, setPinCode] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
+
+  const toggleShowPassword = () => {
+    setShowPassword(!showPassword);
+  };
 
   const handleLoginWithPhoneNumber = async () => {
     try {
-      const response = await fetch("https://happypawsolongapo.com/api/login", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ contact_no: phoneNumber, pincode: pinCode }),
-      });
+      const formattedPhoneNumber = "63" + phoneNumber;
+      // console.log("Phone Number:", formattedPhoneNumber);
+      // console.log("Pin Code:", pinCode);
 
-      if (response.ok) {
-        const responseData = await response.json();
-        const { token } = responseData.payload;
-        // Call the callback function passed from the parent component
-        onPhoneLogin(token);
+      const response = await fetch(
+        "https://happypawsolongapo.com/api/phone-login",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            contact_no: formattedPhoneNumber,
+            pincode: pinCode,
+          }),
+        }
+      );
+
+      const responseDataText = await response.text();
+      // console.log("Response Data Text:", responseDataText);
+
+      // Check if response data is not empty and ends with 'null'
+      if (responseDataText && responseDataText.trim().endsWith("null")) {
+        // Remove 'null' from the end of the response data
+        const trimmedResponseDataText = responseDataText.trim().slice(0, -4);
+
+        // Parse the trimmed response data
+        const responseData = JSON.parse(trimmedResponseDataText);
+
+        if (response.ok) {
+          onPhoneLogin(responseData.payload.token);
+          Swal.fire({
+            title: "Login successful",
+            icon: "success",
+            confirmButtonText: "Okay",
+          }).then((result) => {
+            if (result.isConfirmed) {
+              window.location.href = "/";
+            }
+          });
+        } else {
+          Swal.fire({
+            title: "Login failed",
+            icon: "error",
+            text: responseData.message,
+            confirmButtonText: "Okay",
+          });
+        }
       } else {
-        const responseData = await response.json();
-        Swal.fire({
-          title: "Login failed",
-          icon: "error",
-          text: responseData.message,
-          confirmButtonText: "Okay",
-        });
+        console.error("Invalid response data:", responseDataText);
+        // Handle invalid response data
       }
     } catch (error) {
       console.error("An error occurred:", error);
@@ -35,11 +71,31 @@ const PhoneLogin = ({ onPhoneLogin }) => {
   };
 
   const handleChangePhoneNumber = (event) => {
-    setPhoneNumber(event.target.value);
+    // Remove non-numeric characters
+    const cleanedPhoneNumber = event.target.value.replace(/[^\d]/g, "");
+
+    // Format the phone number with dashes
+    let formattedPhoneNumber = "";
+    if (cleanedPhoneNumber.length > 5) {
+      formattedPhoneNumber = `${cleanedPhoneNumber.slice(
+        0,
+        3
+      )}-${cleanedPhoneNumber.slice(3, 6)}-${cleanedPhoneNumber.slice(6)}`;
+    } else {
+      formattedPhoneNumber = `${cleanedPhoneNumber}`;
+    }
+
+    // Update the phone number state
+    setPhoneNumber(formattedPhoneNumber);
   };
 
   const handleChangePinCode = (event) => {
-    setPinCode(event.target.value);
+    // Remove non-numeric characters
+    const cleanedPinCode = event.target.value.replace(/[^\d]/g, "");
+
+    // Update the pin code state
+    setPinCode(cleanedPinCode);
+
   };
 
   return (
@@ -60,11 +116,18 @@ const PhoneLogin = ({ onPhoneLogin }) => {
         </div>
         <div className="verification-container">
           <input
-            type="text"
-            placeholder="Enter verification code"
+            type={showPassword ? "text" : "password"}
+            placeholder="Enter Pin code"
             value={pinCode}
+            maxLength={4}
             onChange={handleChangePinCode}
+            iconRender={(visible) =>
+              visible ? <EyeOutlined /> : <EyeInvisibleOutlined />
+            }
           />
+          <button onClick={toggleShowPassword}>
+          {showPassword ? <EyeOutlined /> : <EyeInvisibleOutlined />}
+          </button>
           <button onClick={handleLoginWithPhoneNumber}>Login</button>
         </div>
       </div>
