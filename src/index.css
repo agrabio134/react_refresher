@@ -107,6 +107,25 @@ h1, h2, h3, h4, h5, h6 {
 
 }
 
+  /* SMALL SCREEN SIZE CSS */
+
+  @media screen and (max-width: 1441px) {
+
+  }
+  
+    /* TABLET SIZE CSS */
+  
+  @media screen and (max-width: 769px) {
+  
+  }
+  
+    /* MOBILE SIZE CSS */
+  
+  @media screen and (max-width: 426px) {
+      
+  
+  }
+
 /* :root {
   font-family: 'montserrat';
   line-height: 1.5;

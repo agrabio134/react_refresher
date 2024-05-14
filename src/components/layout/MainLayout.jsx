@@ -165,11 +165,12 @@ const MainLayout = () => {
         
       <div className="main-side-nav-header">
       <div className="side-nav-header_logo">
-              <img src="/page/LGHD.png" alt="" />
+      <img src="/page/NLHD.png" alt="" />
+              <h1>PawsPro</h1>
             </div>
 
 <div className="top-nav-close-btn">
-<button href="" className="closebtn" onClick={closeNav}><i className="fa-solid fa-xmark"></i></button>
+  <button href="" className="closebtn" onClick={closeNav}><i className="fa-solid fa-xmark"></i></button>
 </div>
             
             </div>
