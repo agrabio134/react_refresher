@@ -389,6 +389,7 @@ const UserRecords = ({ id }) => {
           <div>
             {selectedAppointment === null && (
               <div className="appointment-type">
+                <div className="appointment-type-header">
                 <h1>Record Categories</h1>
                 <button
                   onClick={() => {
@@ -397,6 +398,7 @@ const UserRecords = ({ id }) => {
                 >
                   Back
                 </button>
+                </div>
                 <div className="appointment-type-container">
                   <div
                     className="single-features"
@@ -460,7 +462,7 @@ const UserRecords = ({ id }) => {
                   </div>
                 )}
                 {selectedAppointment === "Consultation" && (
-                  <div>
+                  <div className="test">
                     <h1>Consultation</h1>
                     <p>For general checkup and consultation</p>
 

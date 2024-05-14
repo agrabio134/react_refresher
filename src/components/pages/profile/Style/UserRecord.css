@@ -48,6 +48,33 @@
     justify-content: center;
 }
 
+.user-records-container .appointment-type-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.user-records-container .appointment-type-header button {
+    font-weight: bold;
+    padding: 13px 50px;
+    margin-left: 5px;
+    color: var();
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: opacity 0.4s;
+    background-color: var(--btnPrimary);
+    color: var(--lightcolor) !important;
+    border-radius: 8px;
+    border: none;
+}
+
+.user-records-container .appointment-type-header button:hover {
+    background-color: var(--btnSecondary);
+    color: var(--lightcolor) !important;
+}
+
 .user-records-container .single-features {
   width: 400px;
   position: relative;
@@ -110,8 +137,8 @@
 }
 
 .user-records-container .single-features:hover {
-  -webkit-transform: translateY(-10px);
-          transform: translateY(-10px);
+  -webkit-transform: translateY(0px);
+          transform: translateY(0px);
 }
 
 .user-records-container .single-features:hover::before {
@@ -139,4 +166,19 @@
     display: flex;
     justify-content: center;
     align-items: center;
+  }
+
+  .test .ant-table-wrapper {
+    width: 1400px !important;
+  }
+
+  .test .ant-table-thead tr .ant-table-cell {
+    background-color: var(--bg-ascend) !important;
+    color: var(--lightcolor);
+    font-size: 10px !important;
+  }
+
+  .test .ant-table-tbody tr .ant-table-cell {
+    color: var(--darkcolor);
+    font-size: 10px !important;
   }

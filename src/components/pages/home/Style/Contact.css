@@ -1,4 +1,4 @@
-#contact {
+#contactsec {
     width: 100%;
     height: 1150px;
     display: flex;
@@ -6,16 +6,16 @@
     background-color: var(--bg-primary);
 }
 
-#contact .container {
+#contactsec .container {
     width: 1340px;
 }
 
-#contact .container h2{
+#contactsec .container h2{
     text-align: center;
     font-size: 35px;
 }
 
-#contact .container .bar {
+#contactsec .container .bar {
     height: 4px;
     width: 85px;
     background: var(--barc);
@@ -25,7 +25,7 @@
     overflow: hidden;
   }
   
-  #contact .container .bar::before {
+  #contactsec .container .bar::before {
     content: '';
     position: absolute;
     left: 0;
@@ -43,18 +43,18 @@
             animation-name: MOVE-BG;
   }
 
-#contact .contact-info-container {
+#contactsec .contact-info-container {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
 }
 
-#contact .contact-info-card {
+#contactsec .contact-info-card {
     text-align: center;
     background-color: var(--bg-secondary);
 }
 
-#contact .contact-info-card {
+#contactsec .contact-info-card {
     width: 430px;
     position: relative;
     z-index: 1;
@@ -72,7 +72,7 @@
     border-radius: 5px;
   }
   
-  #contact .contact-info-card .icon i {
+  #contactsec .contact-info-card .icon i {
     display: inline-block;
     height: 60px;
     width: 60px;
@@ -85,7 +85,7 @@
     transition: 0.5s;
   }
   
-  #contact .contact-info-card h5 {
+  #contactsec .contact-info-card h5 {
     font-size: 25px;
     margin-top: 25px;
     margin-bottom: 12px;
@@ -93,13 +93,13 @@
     transition: 0.5s;
   }
   
-  #contact .contact-info-card p {
+  #contactsec .contact-info-card p {
     margin-bottom: 0;
     -webkit-transition: 0.5s;
     transition: 0.5s;
   }
   
-  #contact .contact-info-card::before {
+  #contactsec .contact-info-card::before {
     top: 50%;
     left: 50%;
     width: 0%;
@@ -115,36 +115,36 @@
     border-radius: 5px;
   }
   
-  /* #contact .contact-info-card:hover {
+  /* #contactsec .contact-info-card:hover {
     -webkit-transform: translateY(-10px);
             transform: translateY(-10px);
   } */
   
-  #contact .contact-info-card:hover::before {
+  #contactsec .contact-info-card:hover::before {
     width: 100%;
   }
   
-  #contact .contact-info-card:hover .icon i {
+  #contactsec .contact-info-card:hover .icon i {
     background-color: #ffffff;
     color: var(--DB);
   }
   
-  #contact .contact-info-cardt:hover h5 {
+  #contactsec .contact-info-cardt:hover h5 {
     color: var(--DB);
   }
 
-  #contact .contact-info-card:hover p {
+  #contactsec .contact-info-card:hover p {
     color: #ffffff;
   }
 
-#contact .contact-form-map-container {
+#contactsec .contact-form-map-container {
   margin-top: 25px;
     display: flex;
     width: 100%;
     gap: 20px;
 }
 
-#contact .contact-form-container {
+#contactsec .contact-form-container {
     width: 50%;
     border-radius: 8px;
     padding: 1rem;
@@ -153,58 +153,58 @@
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
-#contact .contact-form-container:hover {
+#contactsec .contact-form-container:hover {
     border: solid 3px var(--DB);
   }
 
-#contact .contact-form-container h2{ 
+#contactsec .contact-form-container h2{ 
     text-align: left;
     font-size: 24px;
     font-weight: 600;
 }
 
-#contact .contact-form-container .form-control{ 
+#contactsec .contact-form-container .form-control{ 
     /* margin-top: 1rem; */
   }
   
-#contact .contact-form-container .contact-from-grid-container {
+#contactsec .contact-form-container .contact-from-grid-container {
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 20px;
   }
 
-  #contact .contact-form-container .contact-form img {
+  #contactsec .contact-form-container .contact-form img {
     width: 3rem;
     height: auto;
 }
 
-#contact .contact-form-container.contact-form h3 {
+#contactsec .contact-form-container.contact-form h3 {
     display: block;
     font-size: 18px;
     font-weight: 400;
     line-height: 21px;
     margin: 0px 0px 10px 0px;
 }
-#contact .contact-form-containerr .contact-form .h3-img img {
+#contactsec .contact-form-containerr .contact-form .h3-img img {
     vertical-align: text-top;
     width: 1rem;
     height: auto;
 }
 
-#contact input {
+#contactsec input {
     margin-top: 2rem;
     color: var(--darkcolor);
     font-size: 16px;
     font-weight: 500;
 }
 
-#contact ::placeholder {
+#contactsec ::placeholder {
     color: var(--gray);
     font-size: 16px;
 }
 
 
-#contact input[type=text] {
+#contactsec input[type=text] {
     width: 100%;
     padding: 12px 0px;
     margin: 8px 0;
@@ -213,11 +213,11 @@
     border-bottom: 3px solid var(--DB);
   }
 
-  #contact input[type=text]:focus {
+  #contactsec input[type=text]:focus {
     border-bottom: 3px solid var(--DB);
   }
 
-  #contact  textarea {
+  #contactsec  textarea {
     width: 100%;
     height: 150px;
     padding: 12px 0px;
@@ -233,11 +233,11 @@
     resize: vertical;
   }
 
-  #contact textarea:focus {
+  #contactsec textarea:focus {
     border-bottom: 3px solid var(--DB);
   }
 
-  #contact  button {
+  #contactsec  button {
     margin-top: 5rem;
     padding: 20px 30px 20px 30px;
     font-size: 14px;
@@ -251,22 +251,22 @@
     background-color: var(--btnPrimary);
   }
   
-  #contact button:hover {
+  #contactsec button:hover {
     background-color: var(--btnSecondary);
   }
 
-  #contact .contact-map-container {
+  #contactsec .contact-map-container {
     width: 50%;
   }
 
-  #contact .contact-map-container h2 {
+  #contactsec .contact-map-container h2 {
     text-align: left;
     font-size: 48px;
     padding: 0;
     margin: 0;
   }
 
-  #contact .contact-map-container .bar {
+  #contactsec .contact-map-container .bar {
     height: 4px;
     width: 85px;
     background: var(--barc);
@@ -277,7 +277,7 @@
     overflow: hidden;
   }
   
-  #contact .contact-map-container .bar::before {
+  #contactsec .contact-map-container .bar::before {
     content: '';
     position: absolute;
     left: 0;
