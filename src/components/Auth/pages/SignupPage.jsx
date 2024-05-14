@@ -627,7 +627,7 @@ const SignupPage = () => {
                           <span className="checkmark"></span>
                         </label>
                         <p className="terms-link">
-                          I agree to the<span onClick={openTermsModal}>Terms and Conditions</span>
+                          I agree to the <span onClick={openTermsModal}>Terms and Conditions</span>
                         </p>
                       </div>
 

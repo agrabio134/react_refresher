@@ -88,6 +88,14 @@
     color: var(--lightcolor) !important;
 }
 
+/* .pet-record-container {
+    border: solid red;
+    gap: 20px !important;
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+} */
+
 .logoutBtn {
     border: solid 2px rgb(188, 188, 188);
     background-color: transparent;

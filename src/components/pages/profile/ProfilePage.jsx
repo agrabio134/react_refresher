@@ -444,8 +444,7 @@ const ProfilePage = () => {
                 footer={null}
               >
                 <UserRecords id={decodedToken.user_id} />
-
-                <Button onClick={handleCancel}>Close</Button>
+                {/* <Button onClick={handleCancel}>Close</Button> */}
               </Modal>
             </div>
             <div className="pet-form-table-container">

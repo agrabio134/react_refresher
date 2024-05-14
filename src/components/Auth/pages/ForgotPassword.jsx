@@ -1,5 +1,6 @@
 import { useState } from "react";
 import Swal from "sweetalert2";
+import "../Style/forgotpass.css";
 
 const ForgotPassword = () => {
   const [verificationCode, setVerificationCode] = useState("");
