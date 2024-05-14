@@ -82,7 +82,6 @@
 #login .main-user-login-container p{
   width: 320px;
   align-self: center;
-  margin-bottom: 30px;
 }
 
 #login .container .bar {
@@ -325,6 +324,7 @@
   transition: opacity 0.4s;
   background-color: var(--btnPrimary);
 }
+
 
 @media screen and (max-width: 768px) {
 
