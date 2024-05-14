@@ -33,6 +33,7 @@ const VeterinaryRecord = () => {
   const [selectedOption, setSelectedOption] = useState(null);
 
   const [form] = Form.useForm();
+  const [formVaccine] = Form.useForm();
   const [appointments, setAppointments] = useState([]);
   const [modalVisible, setModalVisible] = useState(false);
   const [recordModalVisible, setRecordModalVisible] = useState(false);
@@ -901,6 +902,75 @@ const VeterinaryRecord = () => {
   const decodedAdminToken = jwt_decode(adminAuthToken);
   const adminId = decodedAdminToken.user_id;
 
+  const handleSubmitVaccineForm = async (values) => {
+    const formData = new FormData();
+    const formattedNextFollowUpDate = moment(values.next_due_date).format(
+      "YYYY-MM-DD"
+    );
+    const formattedDate = moment(values.date_administered).format("YYYY-MM-DD");
+// vaccine_name
+    formData.append("date_administered", formattedDate);
+    formData.append("vaccine_name", values.vaccine_name);
+    formData.append("administered_by", values.administered_by);
+    formData.append("next_due_date", formattedNextFollowUpDate);
+
+    formData.append("pet_id", values.pet_id);
+
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#d33",
+      confirmButtonText: "Yes, submit it!",
+      showDenyButton: true,
+      denyButtonColor: "#3085d6",
+      denyButtonText: "No, cancel!",
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        try {
+          const response = await fetch(
+            "https://happypawsolongapo.com/api/submit_vaccine_record_admin",
+            {
+              method: "POST",
+              body: formData,
+            }
+          );
+
+          if (!response.ok) {
+            console.error(`Request failed with status: ${response.status}`);
+            const contentType = response.headers.get("content-type");
+            
+            if (contentType && contentType.includes("application/json")) {
+              const errorJson = await response.json();
+              console.error("Error response JSON:", errorJson);
+            } else {
+              const errorText = await response.text();
+              console.error(`Error response text: ${errorText}`);
+            }
+
+            throw new Error("Failed to submit vaccine record");
+
+          }
+
+          const data = await response.json(); 
+          console.log(data);
+
+          Swal.fire("Submitted!", "Record has been submitted.", "success");
+          setModalVaccineVisible(false);
+        } catch (error) {
+          console.error("Error submitting vaccine record:", error);
+        }
+      }
+    });
+  };
+
+
+
+
+
+    
+
   const handleSubmit = async (values) => {
     const formData = new FormData();
     const formattedNextFollowUpDate = moment(values.nextFollowupCheckup).format(
@@ -1059,8 +1129,8 @@ const VeterinaryRecord = () => {
         // other properties
         modalVisible={modalVaccineVisible}
         handleModalCancel={handleModalCancel}
-        form={form}
-        handleSubmit={handleSubmit}
+        form={formVaccine}
+        handleSubmit ={handleSubmitVaccineForm}
         selectedAppointment={selectedAppointment}
         Option={Option}
       >

@@ -5,7 +5,7 @@ const { Option } = Select;
 const AppointmentVaccinationModal = ({
   modalVisible,
   handleModalCancel,
-  form,
+  formVaccine,
   handleSubmit,
   selectedAppointment,
 }) => (
@@ -17,7 +17,7 @@ const AppointmentVaccinationModal = ({
     width={800}
   >
     {selectedAppointment && (
-      <Form form={form} onFinish={handleSubmit} layout="vertical">
+      <Form form={formVaccine} onFinish={handleSubmit} layout="vertical">
         <div className="grid-container">
           <div>
             <h2 className="info-box">CLIENT NAME: {selectedAppointment.fullName}</h2>
@@ -28,18 +28,7 @@ const AppointmentVaccinationModal = ({
           </div>
         </div>
 
-        <Row gutter={16}>
-          <Col span={24}>
-            <Form.Item
-              name="pet_id"
-              initialValue={selectedAppointment.petId}
-              style={{ display: "none" }}
-              rules={[{ required: true, message: "Please enter the pet ID" }]}
-            >
-              <Input type="hidden" />
-            </Form.Item>
-          </Col>
-        </Row>
+
 
         <Row gutter={16}>
           <Col span={24}>
@@ -90,7 +79,18 @@ const AppointmentVaccinationModal = ({
             </Form.Item>
           </Col>
         </Row>
-
+        <Row gutter={16}>
+          <Col span={24}>
+            <Form.Item
+              label="Pet ID"
+              name="pet_id"
+              initialValue={selectedAppointment.petId}
+              rules={[{ required: true, message: "Please enter the pet ID" }]}
+            >
+              <Input placeholder="Pet ID" disabled />
+            </Form.Item>
+          </Col>
+        </Row>
         <Form.Item>
           <Button type="primary" htmlType="submit">
             Submit
