@@ -1,5 +1,5 @@
 import firebase from "firebase/compat/app";
-import 'firebase/compat/auth'; // Import the compatibility version of auth
+import 'firebase/compat/auth';
 import 'firebase/compat/firestore';
 
 const firebaseConfig = {
@@ -12,10 +12,24 @@ const firebaseConfig = {
   measurementId: "G-XDW1V85YM0",
 };
 
+// Initialize Firebase
+export const firebaseApp = firebase.initializeApp(firebaseConfig);
+export const auth = firebase.auth();
+// export const db = firebase.firestore();
+export const google_provider = new firebase.auth.GoogleAuthProvider();
+export const facebook_provider = new firebase.auth.FacebookAuthProvider();
 
-    // Initialize Firebase
-    export const firebaseApp = firebase.initializeApp(firebaseConfig);
-    export const auth = firebase.auth();
-    // export const db = firebase.firestore();
-    export const google_provider = new firebase.auth.GoogleAuthProvider();
-    export const facebook_provider = new firebase.auth.FacebookAuthProvider();
+// Set up reCAPTCHA verifier for phone authentication
+export const setupRecaptcha = (containerId) => {
+  return new firebase.auth.RecaptchaVerifier(containerId, {
+    'size': 'invisible',
+    'callback': function(response) {
+      // reCAPTCHA solved, allow signInWithPhoneNumber.
+      console.log('reCAPTCHA solved', response);
+    },
+    'expired-callback': function() {
+      // Response expired. Ask user to solve reCAPTCHA again.
+      console.log('reCAPTCHA expired');
+    }
+  });
+};
