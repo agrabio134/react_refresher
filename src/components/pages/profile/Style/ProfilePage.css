@@ -123,6 +123,35 @@
     transition: opacity 0.4s;
 }
 
+.update-profile-container input {
+    border: none;
+    outline: none;
+    font-size: 1.1em;
+    width: 100%;
+    letter-spacing: 0.5px;
+    padding: 14px;
+    border-radius: 0%;
+    border-bottom: solid 3px var(--DB);
+  }
+
+.update-profile-container input:focus {
+    border-bottom: solid 3px var(--DB);
+    box-shadow: none;
+  }
+
+.update-profile-container input:hover {
+    border-bottom: solid 3px var(--DB);
+    box-shadow: none;
+  }
+
+.update-profile-container  .update-profile-btn {
+    
+}
+
+.update-profile-input {
+    margin-top: 20px;
+}
+
 @media screen and (max-width: 768px) {
 
     .recordsBtn {
