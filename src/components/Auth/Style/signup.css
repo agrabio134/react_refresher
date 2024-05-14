@@ -290,6 +290,79 @@
     opacity: 0.9;
 }
 
+#signup .phone-input {
+  position: relative;
+}
+
+#signup .phone-input input{
+  border: none;
+  outline: none;
+  font-size: 1.1em;
+  width: 100%;
+  letter-spacing: 0.5px;
+  padding: 14px 14px 14px 50px;
+  border-bottom: solid 3px var(--DB);
+}
+
+#signup .phone-input span{
+    position: absolute;
+    top: 16.5px;
+    left: 10px;
+    font-size: 1.2em;
+}
+
+#signup .phone-input-container {
+ display: flex;
+ gap: 20px;
+}
+
+#signup .phone-input-container button {
+  margin-top: 5px;
+  color: #fff;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  font-weight: bold;
+  padding: 14px;
+  border-radius: 100px;
+  border: none;
+  cursor: pointer;
+  transition: opacity 0.4s;
+  background-color: var(--btnPrimary);
+}
+
+#signup .phone-input-container button:hover {
+  background-color: var(--btnSecondary);
+}
+
+#signup .verification-container{
+  display: flex;
+  align-items: center;
+  margin-top: 20px;
+}
+
+#signup .verification-container input{
+  border: none;
+  outline: none;
+  font-size: 1.1em;
+  width: 65%;
+  letter-spacing: 0.5px;
+  padding: 14px 14px 14px 14px;
+  border-bottom: solid 3px var(--DB);
+}
+
+#signup .verification-container button{
+  color: #fff;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  font-weight: bold;
+  padding: 14px;
+  border: none;
+  cursor: pointer;
+  border-radius: 100px;
+  transition: opacity 0.4s;
+  background-color: var(--btnPrimary);
+}
+
 @media screen and (max-width: 768px) {
 
   .main-user-signup-container,

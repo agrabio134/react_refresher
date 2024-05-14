@@ -4,7 +4,7 @@ import VatanHP from "./VatanHP";
 const ContactSection = () => {
   return (
     <>
-      <section id="contact">
+      <section id="contactsec">
         <div className="container">
         <h2>Contact Us</h2>
           <div class="bar"></div>

@@ -1,0 +1,43 @@
+
+.forgot-password-container {
+    display: flex;
+    flex-direction: column;
+  }
+  
+.forgot-password-container input{
+    border: none;
+    outline: none;
+    font-size: 1.1em;
+    width: 100%;
+    letter-spacing: 0.5px;
+    padding: 14px 14px 14px 50px;
+    border-bottom: solid 3px var(--DB);
+  }
+  
+.forgot-password-container span{
+      position: absolute;
+      top: 16.5px;
+      left: 10px;
+      font-size: 1.2em;
+  }
+  
+.forgot-password-container button {
+    margin-top: 5px;
+    color: #fff;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-weight: bold;
+    padding: 14px;
+    border-radius: 100px;
+    border: none;
+    cursor: pointer;
+    transition: opacity 0.4s;
+    background-color: var(--btnPrimary);
+  }
+  
+.forgot-password-container button:hover {
+    background-color: var(--btnSecondary);
+  }
+
+  
+  

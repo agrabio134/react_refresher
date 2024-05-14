@@ -295,6 +295,54 @@
     background-color: #c0392b; /* Darker red color on hover */
   }
 
+  .pet-table-edit-form {
+    width: 400px; 
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    font-family: "Josefin Sans", sans-serif !important;
+  } 
+
+  .pet-table-edit-form .sep {
+    width: 100%;
+    display: flex;
+    flex-direction: column  ;
+  } 
+
+  .pet-table-edit-form label{
+    color: black !important;
+    font-size: 16px !important;
+    font-weight: bold;
+    font-family: "Josefin Sans", sans-serif !important;
+  } 
+  
+  .pet-table-edit-form img{
+    display: flex;
+    align-self: center;
+    border-radius: 100%;
+  }  
+
+  .pet-table-edit-form input {
+    border: none;
+    outline: none;
+    font-size: 1.1em;
+    width: 100%;
+    letter-spacing: 0.5px;
+    padding: 14px;
+    border-radius: 0%;
+    border-bottom: solid 3px var(--DB);
+  }
+
+  .pet-table-edit-form input:focus {
+    border-bottom: solid 3px var(--DB);
+    box-shadow: none;
+  }
+
+  .pet-table-edit-form input:hover {
+    border-bottom: solid 3px var(--DB);
+    box-shadow: none;
+  }
+
   @media screen and (max-width: 768px) {
 
     .main-pet-table-container {

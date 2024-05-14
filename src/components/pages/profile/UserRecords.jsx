@@ -2,6 +2,7 @@ import React, { useState, useEffect, lazy, Suspense } from "react";
 import { Modal, Table, Card } from "antd"; // Import Card component
 import { Button, Image } from "antd";
 import moment from "moment";
+import "./Style/UserRecord.css";
 
 const LazyTable = lazy(() => import("antd/lib/table"));
 
@@ -223,15 +224,21 @@ const UserRecords = ({ id }) => {
   };
 
   const PetRecordCard = ({ record }) => (
-    <Card style={{ width: 300, marginBottom: 20 }}>
-      <Image src={record.image} alt="Animal" width={50} height={50} />
-      <p>Name: {record.name}</p>
-      <p>Type: {record.type}</p>
-      <p>Breed: {record.breed}</p>
-      <p>
-        Date of Birth / Age:{" "}
+    <Card className="pet-record-card" style={{ width: 300, marginBottom: 20 }}>
+      <Image src={record.image} alt="Animal" width={100} height={100} />
+      <p className="pet-name">
+          Name: <b>{record.name}</b>
+      </p>
+      <p className="pet-type">
+        Type: <b>{record.type}</b>
+      </p>
+      <p className="pet-breed">
+        Breed: <b>{record.breed}</b>
+      </p>
+      <p className="pet-age">
+        Date of Birth / Age: <b>{" "}
         {moment(record.birthdate).format("MMMM D, YYYY")} /{" "}
-        {calculateAge(record.birthdate)} old
+        {calculateAge(record.birthdate)} old</b>
       </p>
       <Button
         type="primary"
@@ -365,7 +372,8 @@ const UserRecords = ({ id }) => {
    {selectedPet === null && (
         <div>
           {vetPetRecord.length > 0 ? (
-            <div style={{ display: "flex", flexWrap: "wrap" }}>
+            <div className="pet-record-container">
+             {/* <div style={{ display: "flex", flexWrap: "wrap" }}> */}
               {vetPetRecord.map((record) => (
                 <PetRecordCard key={record.id} record={record} />
               ))}
@@ -381,6 +389,7 @@ const UserRecords = ({ id }) => {
           <div>
             {selectedAppointment === null && (
               <div className="appointment-type">
+                <div className="appointment-type-header">
                 <h1>Record Categories</h1>
                 <button
                   onClick={() => {
@@ -389,28 +398,35 @@ const UserRecords = ({ id }) => {
                 >
                   Back
                 </button>
+                </div>
                 <div className="appointment-type-container">
                   <div
-                    className="appointment-type-card"
+                    className="single-features"
                     onClick={() => handleAppointmentSelection("Consultation")}
                   >
-                    <img src="/page/stethoscope.png" alt="consultation" />
+                  <div className='img-container'>
+                    <img src="/page/consultation.png" alt="consultation" />
+                  </div>
                     <h3>Consultation</h3>
                     <p>For general checkup and consultation</p>
                   </div>
                   <div
-                    className="appointment-type-card"
+                    className="single-features"
                     onClick={() => handleAppointmentSelection("Vaccination")}
                   >
-                    <img src="/page/vaccine.png" alt="vaccination" />
+                  <div className='img-container'>
+                    <img src="/page/vaccination.png" alt="Vaccination" />
+                  </div>
                     <h3>Vaccination</h3>
                     <p>For vaccination and immunization</p>
                   </div>
                   <div
-                    className="appointment-type-card"
+                    className="single-features"
                     onClick={() => handleAppointmentSelection("Grooming")}
                   >
-                    <img src="/page/scissor-tool.png" alt="grooming" />
+                  <div className='img-container'>
+                    <img src="/page/groom.png" alt="Grooming" />
+                  </div>
                     <h3>Grooming</h3>
                     <p>For grooming</p>
                   </div>
@@ -446,7 +462,7 @@ const UserRecords = ({ id }) => {
                   </div>
                 )}
                 {selectedAppointment === "Consultation" && (
-                  <div>
+                  <div className="test">
                     <h1>Consultation</h1>
                     <p>For general checkup and consultation</p>
 

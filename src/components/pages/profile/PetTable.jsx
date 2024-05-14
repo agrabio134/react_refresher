@@ -291,7 +291,7 @@ const PetTable = ({ petList, handleUpdatePet, handleDeletePet, archivedPetList }
         destroyOnClose={true}
       >
         {selectedPet && (
-          <Form layout="vertical">
+          <Form layout="vertical" className="pet-table-edit-form">
             <Item label="Image">
               {thumbnailPreview ? (
                 <Image
@@ -379,6 +379,7 @@ const PetTable = ({ petList, handleUpdatePet, handleDeletePet, archivedPetList }
                 <Button icon={<UploadOutlined />}>Upload File</Button>
               </Upload>
             </Item>
+            <div className="sep">
             <Item label="Name">
               <Input
                 value={selectedPet.name}
@@ -415,6 +416,7 @@ const PetTable = ({ petList, handleUpdatePet, handleDeletePet, archivedPetList }
                 }
               />
             </Item>
+            </div>
           </Form>
         )}
       </Modal>
