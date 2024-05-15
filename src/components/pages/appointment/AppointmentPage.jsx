@@ -92,7 +92,11 @@ const AppointmentPage = () => {
           )}
 
           {/* Appointment Log */}
+
+          {selectedAppointment === null && 
           <AppointmentLog />
+          }
+
         </ErrorBoundary>
       </div>
     </section>
