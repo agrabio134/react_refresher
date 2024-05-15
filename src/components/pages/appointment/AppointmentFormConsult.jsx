@@ -45,7 +45,7 @@ const AppointmentFormConsult = () => {
   const fetchBookedTimeSlots = async () => {
     try {
       const response = await fetch(
-        "https://happypawsolongapo.com/api/get_all_appointment_date_time"
+        "https://happypawsolongapo.com/api/get_checkup_date_time"
       );
       const rawData = await response.text();
 

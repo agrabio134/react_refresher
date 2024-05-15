@@ -349,108 +349,120 @@
 	width: 100%;
 }
 
-.home .content{
-	max-width: 60rem;
-	/* border: solid red; */
-}
-.home .content h4{
-	font-family: 'montserrat';
-	font-weight: 700;
-	font-size: 40px;
-	line-height: 35px;
-	text-transform: uppercase;
-	color: #082342;
-}
 
-.home .content h2{
-	font-family: 'montserrat';
-	font-weight: bold;
-	padding-top: 20px;
-    font-size: 4.5rem;
-	width: 45rem;
-	color: #ff7400;
-}
+  /* SMALL SCREEN SIZE CSS */
 
-.home .content h2 .span{
-	color: #ff7400;
-}
+  @media screen and (max-width: 1441px) {
+    #home .home-main-box-container{
+      padding: 0 5rem;
+      width: 100%;
+    }
+  }
 
-.home .content p{
-	font-family: 'Franklin Gothic Light';
-	font-size: 18px;
-	color: #082342;
-	line-height: 1.8;
-	width: 550px;
-    padding-top: 20px;
-}
+  @media screen and (max-width: 1341px) {
+    #home .home-main-box-container{
+      padding: 0 4rem;
+    }
+  }
 
-@media screen and (max-width: 768px) {
+  @media screen and (max-width: 1241px) {
+    #home .home-main-box-container{
+      padding: 0 3rem;
+    }
+  }
 
-	.home {
-		display: none;
-	}
-	
-	.phone-home{
-		/* margin-top: 50px; */
-		min-height: 80vh;
-		/* width: 37; */
-		width: 100dvw;
-		padding: 0%;
-		display: flex;
-		align-items: center;
-		background: url(../../../../assets/img/phonebg2.jpg);
-		background-size: cover;
-		background-position: center;
-		/* background-repeat: no-repeat; */
-		/* background-attachment: fixed; */
-		justify-content: center;
-	}
+  @media screen and (max-width: 1141px) {
+    #home .home-main-box-container{
+      padding: 0 2rem;
+    }
+  }
 
-	.home .content{
-		display: none;
+  @media screen and (max-width: 941px) {
+    #home .home-main-box-container{
+      padding: 0 1.5rem;
+    }
+  }
 
-	}
-	
-	.phone-home .phone-content{
-		display: flex;
-		flex-direction: column;
-		justify-content: center;
-		align-items: center;
-		width: 100dvw;
-		/* border: solid red; */
-		text-align: center;
-
-	}
-	.phone-home .phone-content h4{
-		font-size: 45px;
-		width: 100%;
-		font-weight: bold;
-		text-transform: uppercase;
-		color: black;
-	}
-	
-	.phone-home .phone-content h2{
-		padding-top: 20px;
-		font-size:  42px;
-		color: #ff7400;
-		width: 100%;
-	}
-	
-	.phone-home .phone-content h2 .span{
-		color: #ff7400;
-		font-weight: bold;
-	}
-	
-	.phone-home .phone-content p{
-		width: 100%;
-		font-size: 16px;
-		color: black;
-		text-align: justify;
-		padding: 25px;
-		font-weight: 500;
-		padding-top: 20px;
-	}
-	
+@media screen and (max-width: 841px) {
+  #home .home-main-box-container{
+    padding: 0 1rem;
+  }
 }
 
+@media screen and (max-width: 769px) {
+  #home{
+    height: 600px;
+  }
 
+  .home-content-container {
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+    gap: 0 !important;
+  }
+  
+  .home-content-container h1 {
+    font-size: 50px;
+  }
+  
+  .home-content-container h2 {
+    font-size: 50px;
+  }
+  
+  .home-content-container span {
+    color: var(--hp);
+  }
+
+  .home-content-container p {
+    font-size: 16px;
+  }
+  
+  .home-img-container {
+    width: 50%;
+    position: relative;
+  }
+  
+  .home-img-container img{
+    width: 100%;
+  }
+}
+
+@media screen and (max-width: 426px) {
+  #home{
+    height: 1000px;
+  }
+
+  #home .home-main-box-container {
+    flex-direction: column;
+  }
+
+  .home-content-container {
+    width:  100%;
+    text-align: center  ;
+  }
+  
+  .home-content-container h1 {
+    font-size: 50px;
+  }
+  
+  .home-content-container h2 {
+    font-size: 50px;
+  }
+  
+  .home-content-container span {
+    color: var(--hp);
+  }
+
+  .home-content-container p {
+    font-size: 16px;
+  }
+  
+  .home-img-container {
+    width: 100%;
+    position: relative;
+  }
+  
+  .home-img-container img{
+    width: 100%;
+  }
+}
