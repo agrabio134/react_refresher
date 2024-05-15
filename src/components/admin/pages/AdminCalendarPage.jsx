@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { Calendar, momentLocalizer } from "react-big-calendar";
 import "react-big-calendar/lib/css/react-big-calendar.css";
 import moment from "moment";
-import { Modal, Button, Descriptions, Image } from "antd";
+import { Modal, Button, Descriptions, Image, Tooltip  } from "antd";
 
 import "./styles/AdminCalendarPage.css";
 import Swal from "sweetalert2";
@@ -26,6 +26,18 @@ const AdminCalendarPage = () => {
     // This useEffect will run whenever appointments state changes
     // console.log(appointments);
   }, [appointments]);
+
+  const isToday = (date) => {
+    const today = new Date();
+    return (
+      date.getDate() === today.getDate() &&
+      date.getMonth() === today.getMonth() &&
+      date.getFullYear() === today.getFullYear()
+    );
+  };
+  
+  const isDoneButtonDisabled = !isToday(new Date(selectedEvent?.date));
+  
 
   const fetchData = async () => {
     try {
@@ -441,16 +453,22 @@ const AdminCalendarPage = () => {
             )}
 
 
-            {selectedEvent.status === "accepted" && (
-              <div>
-                <Button
-                  onClick={handleDone}
-                  style={{ marginTop: 10, marginRight: 10 }}
-                >
-                  Done
-                </Button>
-              </div>
-            )}
+
+{selectedEvent.status === "accepted" && (
+  <Tooltip
+    title={isDoneButtonDisabled ? "Cannot mark as done if not today" : ""}
+  >
+    <div>
+      <Button
+        onClick={handleDone}
+        style={{ marginTop: 10, marginRight: 10 }}
+        disabled={isDoneButtonDisabled}
+      >
+        Done
+      </Button>
+    </div>
+  </Tooltip>
+)}
 
             {selectedEvent.status === "pending cancellation" && (
               <div>

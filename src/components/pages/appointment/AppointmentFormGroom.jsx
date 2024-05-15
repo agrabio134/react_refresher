@@ -45,7 +45,7 @@ const AppointmentFormGroom = () => {
   const fetchBookedTimeSlots = async () => {
     try {
       const response = await fetch(
-        "https://happypawsolongapo.com/api/get_all_appointment_date_time"
+        "https://happypawsolongapo.com/api/get_grooming_date_time"
       );
       const rawData = await response.text();
 
@@ -67,7 +67,7 @@ const AppointmentFormGroom = () => {
       const formattedDate = date.toISOString().split("T")[0];
 
       const response = await fetch(
-        `https://happypawsolongapo.com/api/get_available_time_slots/${formattedDate}`
+        `https://happypawsolongapo.com/api/get_available_grooming_time_slots/${formattedDate}`
       );
 
       const rawResponse = await response.text();
