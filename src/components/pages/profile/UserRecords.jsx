@@ -290,7 +290,6 @@ const UserRecords = ({ id }) => {
 
   const vaccineColumns = [
     { title: "Pet Name", dataIndex: "name", key: "name" },
-    { title: "Date", dataIndex: "date", key: "date" },
     { title: "Vaccine Name", dataIndex: "vaccine_name", key: "vaccine_name" },
     { title: "Date Administered", dataIndex: "date_administered", key: "date_administered" },
     { title: "Next Due Date", dataIndex: "next_due_date", key: "next_due_date" },
