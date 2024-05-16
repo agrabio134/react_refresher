@@ -207,6 +207,10 @@
   font-size: 30px;
 }
 
+.whyhp_content {
+  width: 100%;
+} 
+
 }
 
 @media screen and (max-width: 401px) {
@@ -216,7 +220,4 @@
 
   }
 
-  .whyhp_content {
-    width: 345px;
-  } 
 }

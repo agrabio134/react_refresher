@@ -138,7 +138,7 @@
   }
 
 #contactsec .contact-form-map-container {
-  margin-top: 25px;
+    margin-top: 25px;
     display: flex;
     width: 100%;
     gap: 20px;
@@ -294,3 +294,101 @@
     -webkit-animation-name: MOVE-BG;
             animation-name: MOVE-BG;
   }
+
+  /* SMALL SCREEN SIZE CSS */
+
+@media screen and (max-width: 1441px) {
+  
+  #contactsec .container {
+    padding: 0 5rem;
+    width: 100%;
+  }
+
+  #contactsec .contact-info-container {
+    gap: 20px;
+  }
+
+  #contactsec .contact-info-card {
+    width: 100%;
+  }
+}
+
+@media screen and (max-width: 1341px) {
+  #contactsec .container {
+    padding: 0 4rem;
+  }
+
+}
+
+@media screen and (max-width: 1241px) {
+  #contactsec .container {
+      padding: 0 3rem;
+  }
+}
+
+@media screen and (max-width: 1141px) {
+  #contactsec .container {
+      padding: 0 2rem;
+    }
+}
+
+@media screen and (max-width: 941px) {
+
+  #contactsec {
+      height: 1200px;
+  }
+  
+  #contactsec .container {
+    padding: 0 1.5rem;
+  }
+
+}
+
+@media screen and (max-width: 841px) {
+
+  #contactsec {
+    height: 1900px;
+  }
+
+  #contactsec .container {
+    padding: 0 1rem;
+  }
+
+  #contactsec .contact-form-map-container {
+    margin-top: 25px;
+    flex-direction: column;
+    gap: 50px;
+  }
+
+  #contactsec .contact-form-container {
+    width: 100%;
+  }
+
+  #contactsec .contact-map-container {
+    width: 100%;
+  }
+
+}
+
+@media screen and (max-width: 769px) {
+  
+}
+
+@media screen and (max-width: 426px) {
+
+  #contactsec {
+    height: 2450px!important;
+  }
+
+  #contactsec .contact-info-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+}
+
+@media screen and (max-width: 401px) {
+
+
+}
