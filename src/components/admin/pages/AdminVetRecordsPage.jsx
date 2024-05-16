@@ -1,7 +1,18 @@
 import React, { useState, useEffect } from "react";
 import DataFetching from "./records/DataFetching";
 import AppointmentDetailsModal from "./records/AppointmentDetailsModal";
-import { Form, Button, Tabs, Table, Modal, Select, Image, Card } from "antd";
+import {
+  Form,
+  Button,
+  Tabs,
+  Table,
+  Modal,
+  Select,
+  Image,
+  Card,
+  Tooltip,
+} from "antd";
+import { PrinterOutlined } from "@ant-design/icons";
 import moment from "moment";
 import Swal from "sweetalert2";
 import jwt_decode from "jwt-decode";
@@ -18,6 +29,7 @@ const calculateAge = (birthdate) => {
   const months = today.diff(birthdateMoment, "months") % 12;
   const days = today.diff(birthdateMoment, "days");
 
+
   if (years > 0) {
     return `${years} ${years === 1 ? "year" : "years"}`;
   } else if (months > 0) {
@@ -31,6 +43,7 @@ const VeterinaryRecord = () => {
   const [selectedPet, setSelectedPet] = useState([]);
   const [optionModalVisible, setOptionModalVisible] = useState(false);
   const [selectedOption, setSelectedOption] = useState(null);
+  const [allClientRecord, setAllClientRecord] = useState([]);
 
   const [form] = Form.useForm();
   const [formVaccine] = Form.useForm();
@@ -38,8 +51,10 @@ const VeterinaryRecord = () => {
   const [modalVisible, setModalVisible] = useState(false);
   const [recordModalVisible, setRecordModalVisible] = useState(false);
   const [recordVetModalVisible, setRecordVetModalVisible] = useState(false);
-  const [recordGroomingModalVisible, setRecordGroomingModalVisible] = useState(false);
-  const [recordVaccineModalVisible, setRecordVaccineModalVisible] = useState(false);
+  const [recordGroomingModalVisible, setRecordGroomingModalVisible] =
+    useState(false);
+  const [recordVaccineModalVisible, setRecordVaccineModalVisible] =
+    useState(false);
   const [modalVaccineVisible, setModalVaccineVisible] = useState(false);
 
   const [selectedAppointment, setSelectedAppointment] = useState(null);
@@ -47,6 +62,7 @@ const VeterinaryRecord = () => {
   const [clients, setClients] = useState([]);
   const [vetRecord, setVetRecord] = useState([]);
   const [vetGroomRecord, setVetGroomRecord] = useState([]);
+  const [vetVaccineRecord, setVetVaccineRecord] = useState([]);
   const [vetPetRecord, setVetPetRecord] = useState([]);
   const [vetRecordError, setVetRecordError] = useState(null); // New state to store vet record fetching errors
 
@@ -91,6 +107,7 @@ const VeterinaryRecord = () => {
     } catch (error) {
       console.error("Error fetching client data:", error.message);
     }
+
   };
 
   useEffect(() => {
@@ -141,6 +158,7 @@ const VeterinaryRecord = () => {
     } catch (error) {
       console.error("Error fetching data:", error.message);
     }
+
   };
 
   const mapAppointmentData = (appointment) => {
@@ -178,16 +196,66 @@ const VeterinaryRecord = () => {
       title: "Action",
       dataIndex: "action",
       render: (text, record, index) => (
-        <Button
-          type="primary"
-          key={index}
-          onClick={() => {
-            handleViewClientsDataClick(record);
-          }}
-        >
-          View
-        </Button>
+        <>
+          <Tooltip title="View Client Data">
+            <Button
+              type="primary"
+              key={`${index}_view`}
+              onClick={() => {
+                handleViewClientsDataClick(record);
+              }}
+              style={{
+                marginRight: "4px",
+                marginBottom: "8px",
+                fontSize: "16px",
+              }} // Add margin and increase font size
+            >
+              View
+            </Button>
+          </Tooltip>
+          <Tooltip title="Generate Report">
+            <Button
+              type="default"
+              key={`${index}_print`}
+              onClick={() => {
+                handlePrintClientsDataClick(record);
+              }}
+              icon={<PrinterOutlined />}
+              style={{
+                background: "#f50",
+                color: "#fff",
+                borderColor: "#f50",
+                marginRight: "8px",
+                marginBottom: "8px",
+                fontSize: "16px",
+              }} // Add margin, change color, and increase font size
+            />
+          </Tooltip>
+        </>
       ),
+    },
+  ];
+
+
+  
+
+  const vetVaccineColumns = [
+    { title: "Pet Name", dataIndex: "name", key: "name" },
+    {
+      title: "Date Administered",
+      dataIndex: "date_administered",
+      key: "date_administered",
+    },
+    { title: "Vaccine Name", dataIndex: "vaccine_name", key: "vaccine_name" },
+    {
+      title: "Administered By",
+      dataIndex: "administered_by",
+      key: "administered_by",
+    },
+    {
+      title: "Next Due Date",
+      dataIndex: "next_due_date",
+      key: "next_due_date",
     },
   ];
 
@@ -288,6 +356,150 @@ const VeterinaryRecord = () => {
       getVeterinaryPetRecord(selectedClient.id);
     }
   }, [selectedClient /* other dependencies */]);
+
+  const handlePrintClientsDataClick = async (client) => {
+    try {
+        const response = await fetch(
+            `https://happypawsolongapo.com/api/get_all_clients_data/${client.id}`
+        );
+
+        if (!response.ok) {
+            throw new Error(`Failed to fetch data: ${response.status}`);
+        }
+
+        const textData = await response.text();
+
+        try {
+            const jsonObjects = textData
+                .split("}{")
+                .map((json, index, array) =>
+                    index === 0
+                        ? json + "}"
+                        : index === array.length - 1
+                            ? "{" + json
+                            : "{" + json + "}"
+                );
+
+            const vetRecordData = jsonObjects.flatMap((json) => {
+                try {
+                    const parsedResult = JSON.parse(json);
+                    return parsedResult.payload || [];
+                } catch (jsonError) {
+                    console.error("Error parsing JSON:", jsonError);
+                    return [];
+                }
+            });
+
+            const groupedData = groupByClient(vetRecordData);
+            const htmlContent = generateHTML(groupedData); // Generate HTML content
+            printHTML(htmlContent); // Print HTML content in a new window
+        } catch (splitError) {
+            console.error("Error splitting JSON:", splitError);
+        }
+    } catch (error) {
+        console.error("Error fetching data:", error.message);
+    }
+};
+
+const groupByClient = (vetRecordData) => {
+    // Group records by client name
+    const groupedData = {};
+    vetRecordData.forEach((record) => {
+        const clientKey = record.first_name + ' ' + record.last_name;
+        if (!groupedData[clientKey]) {
+            groupedData[clientKey] = {
+                client: {
+                    first_name: record.first_name,
+                    last_name: record.last_name,
+                    contact_number: record.contact_number,
+                    address: record.address,
+                    email: record.email,
+                },
+                pets: {},
+            };
+        }
+        if (!groupedData[clientKey].pets[record.pet_id]) {
+            groupedData[clientKey].pets[record.pet_id] = {
+                id: record.pet_id,
+                name: record.pet_name,
+                type: record.pet_type,
+                breed: record.pet_breed,
+                birthdate: record.pet_birthdate,
+                sex: record.pet_sex,
+                appointments: [],
+            };
+        }
+        groupedData[clientKey].pets[record.pet_id].appointments.push({
+            id: record.appointment_id,
+            date: record.appointment_date,
+            time: record.appointment_time,
+            reason: record.appointment_reason,
+            cancellation_reason: record.appointment_cancellation_reason,
+            status: record.appointment_status,
+        });
+    });
+    return Object.values(groupedData);
+};
+
+const generateHTML = (groupedData) => {
+    // Generate HTML content dynamically using the grouped data
+    let htmlContent = "<html><head><title>Client Data</title>";
+    htmlContent += "<style>";
+    htmlContent += "body { font-family: Arial, sans-serif; }";
+    htmlContent += "h1 { font-size: 24px; margin-bottom: 10px; }";
+    htmlContent += "h2 { font-size: 20px; margin-bottom: 5px; }";
+    htmlContent += "h3 { font-size: 18px; margin-bottom: 5px; }";
+    htmlContent += "p { margin: 5px 0; }";
+    htmlContent += "</style>";
+    htmlContent += "</head><body>";
+
+    groupedData.forEach((clientData) => {
+        htmlContent += `<h1>${clientData.client.first_name} ${clientData.client.last_name}</h1>`;
+        htmlContent += "<div>";
+        for (const petId in clientData.pets) {
+            const pet = clientData.pets[petId];
+            htmlContent += `<h2>${pet.name}</h2>`;
+            htmlContent += `<p><strong>Type:</strong> ${pet.type}</p>`;
+            htmlContent += `<p><strong>Breed:</strong> ${pet.breed}</p>`;
+            htmlContent += `<p><strong>Birthdate:</strong> ${pet.birthdate}</p>`;
+            htmlContent += `<p><strong>Sex:</strong> ${pet.sex}</p>`;
+            htmlContent += "<h3>Appointments</h3>";
+            htmlContent += "<ul>";
+            pet.appointments.forEach((appointment) => {
+                htmlContent += "<li>";
+                htmlContent += `<p><strong>ID:</strong> ${appointment.id}</p>`;
+                htmlContent += `<p><strong>Date:</strong> ${appointment.date}</p>`;
+                htmlContent += `<p><strong>Time:</strong> ${appointment.time}</p>`;
+                htmlContent += `<p><strong>Reason:</strong> ${appointment.reason}</p>`;
+                htmlContent += `<p><strong>Cancellation Reason:</strong> ${appointment.cancellation_reason}</p>`;
+                htmlContent += `<p><strong>Status:</strong> ${appointment.status}</p>`;
+                htmlContent += "</li>";
+            });
+            htmlContent += "</ul>";
+        }
+        htmlContent += "</div>";
+    });
+
+    htmlContent += "</body></html>";
+
+    return htmlContent;
+};
+
+const printHTML = (htmlContent) => {
+    const newWindow = window.open('', '_blank');
+    newWindow.document.open();
+    newWindow.document.write(htmlContent);
+    newWindow.document.close();
+};
+
+  
+
+
+
+ 
+
+
+    
 
   const handlePrint = (targetId) => {
     const printableData = vetRecord.filter(
@@ -563,6 +775,8 @@ const VeterinaryRecord = () => {
       setSelectedClient(pet);
       await getGroomingPetRecord(pet.id);
       setRecordGroomingModalVisible(true);
+      setRecordVetModalVisible(false);
+      setRecordVaccineModalVisible(false);
       setVetPetRecord((prevVetPetRecord) => [...prevVetPetRecord]);
     } catch (error) {
       console.error("Error fetching veterinary record:", error);
@@ -575,7 +789,9 @@ const VeterinaryRecord = () => {
     try {
       setSelectedClient(pet);
       await getVaccinePetRecord(pet.id);
-      setRecordVetModalVisible(true);
+      setRecordVaccineModalVisible(true);
+      setRecordGroomingModalVisible(false);
+      setRecordVetModalVisible(false);
       setVetPetRecord((prevVetPetRecord) => [...prevVetPetRecord]);
     } catch (error) {
       console.error("Error fetching veterinary record:", error);
@@ -589,6 +805,8 @@ const VeterinaryRecord = () => {
       setSelectedClient(pet);
       await getVeterinaryPetRecord(pet.id);
       setRecordVetModalVisible(true);
+      setRecordGroomingModalVisible(false);
+      setRecordVaccineModalVisible(false);
       setVetPetRecord((prevVetPetRecord) => [...prevVetPetRecord]);
     } catch (error) {
       console.error("Error fetching veterinary record:", error);
@@ -608,6 +826,60 @@ const VeterinaryRecord = () => {
     setRecordVaccineModalVisible(false);
     setSelectedOption(null);
     setSelectedAppointment(null);
+  };
+
+  const getVaccinePetRecord = async (pet_id) => {
+    try {
+      const response = await fetch(
+        `https://happypawsolongapo.com/api/get_vaccine_record_admin_by_pet/${pet_id}`
+      );
+
+      if (!response.ok) {
+        // Check specifically for 404 status and handle it as a non-error
+        if (response.status === 404) {
+          // console.log(`No data found for user with ID ${user_id}`);
+          setVetVaccineRecord([]); // Set the state to an empty array
+          return; // Return early without throwing an error
+        } else {
+          throw new Error(`Failed to fetch data: ${response.status}`);
+        }
+      } else {
+        const textData = await response.text();
+
+        try {
+          const jsonObjects = textData
+            .split("}{")
+            .map((json, index, array) =>
+              index === 0
+                ? json + "}"
+                : index === array.length - 1
+                ? "{" + json
+                : "{" + json + "}"
+            );
+
+          const vetRecordData = jsonObjects.flatMap((json) => {
+            try {
+              const parsedResult = JSON.parse(json);
+              console.log(parsedResult.payload); // Add this line to log data
+              return parsedResult.payload || [];
+            } catch (jsonError) {
+              console.error("Error parsing JSON:", jsonError);
+              return [];
+            }
+          });
+
+          // console.log(vetRecordData);
+          setVetVaccineRecord(vetRecordData);
+        } catch (jsonError) {
+          console.error("Error parsing JSON:", jsonError);
+
+          setVetVaccineRecord([]); // Clear the state in case of an error
+        }
+      }
+    } catch (error) {
+      console.error("Error fetching data:", error.message);
+      setVetRecord([]); // Clear the state in case of an error
+    }
   };
 
   const getVeterinaryRecord = async (user_id) => {
@@ -828,17 +1100,17 @@ const VeterinaryRecord = () => {
       key: "action",
       render: (text, record) => (
         <Button
-        type="primary"
-        onClick={() => {
-          if (record.reason != 'Checkup') {
-            handleVaccinationClick(record);
-          } else {
-            handleHistoryClick(record);
-          }
-        }}
-      >
-        Details
-      </Button>
+          type="primary"
+          onClick={() => {
+            if (record.reason != "Checkup") {
+              handleVaccinationClick(record);
+            } else {
+              handleHistoryClick(record);
+            }
+          }}
+        >
+          Details
+        </Button>
       ),
     },
   ];
@@ -865,9 +1137,6 @@ const VeterinaryRecord = () => {
     setSelectedAppointment(appointment);
     setModalVaccineVisible(true);
   };
-
-
-
 
   const handleHistoryClick = (appointment) => {
     const initialValues = {
@@ -908,7 +1177,7 @@ const VeterinaryRecord = () => {
       "YYYY-MM-DD"
     );
     const formattedDate = moment(values.date_administered).format("YYYY-MM-DD");
-// vaccine_name
+    // vaccine_name
     formData.append("date_administered", formattedDate);
     formData.append("vaccine_name", values.vaccine_name);
     formData.append("administered_by", values.administered_by);
@@ -940,7 +1209,7 @@ const VeterinaryRecord = () => {
           if (!response.ok) {
             console.error(`Request failed with status: ${response.status}`);
             const contentType = response.headers.get("content-type");
-            
+
             if (contentType && contentType.includes("application/json")) {
               const errorJson = await response.json();
               console.error("Error response JSON:", errorJson);
@@ -950,10 +1219,9 @@ const VeterinaryRecord = () => {
             }
 
             throw new Error("Failed to submit vaccine record");
-
           }
 
-          const data = await response.json(); 
+          const data = await response.json();
           console.log(data);
 
           Swal.fire("Submitted!", "Record has been submitted.", "success");
@@ -964,12 +1232,6 @@ const VeterinaryRecord = () => {
       }
     });
   };
-
-
-
-
-
-    
 
   const handleSubmit = async (values) => {
     const formData = new FormData();
@@ -1124,18 +1386,15 @@ const VeterinaryRecord = () => {
         selectedAppointment={selectedAppointment}
         Option={Option}
       />
-
       <AppoinmentVaccinationModal
         // other properties
         modalVisible={modalVaccineVisible}
         handleModalCancel={handleModalCancel}
         form={formVaccine}
-        handleSubmit ={handleSubmitVaccineForm}
+        handleSubmit={handleSubmitVaccineForm}
         selectedAppointment={selectedAppointment}
         Option={Option}
-      >
-
-      </AppoinmentVaccinationModal>
+      ></AppoinmentVaccinationModal>
       <Modal
         // other properties
         visible={recordModalVisible}
@@ -1227,12 +1486,30 @@ const VeterinaryRecord = () => {
         ) : (
           <p>No veterinary record found.</p>
         )}
-
-
+      </Modal>
+      <Modal
+        // other properties
+        visible={recordVaccineModalVisible}
+        onCancel={handleRecordVetModalCancel}
+        onOk={() => setRecordVetModalVisible(false)}
+        width={1600} // Set the width of the modal
+      >
+        <h1>Vaccine Records</h1>
+        {vetVaccineRecord.length > 0 ? (
+          <Table
+            dataSource={vetVaccineRecord}
+            columns={vetVaccineColumns}
+            style={{ marginTop: 20 }}
+            rowKey={(record, index) => `${record.t3_id}_${index}`}
+            scroll={{ x: true }}
+          />
+        ) : vetRecordError ? (
+          <p>Error fetching veterinary record: {vetRecordError.message}</p>
+        ) : (
+          <p>No veterinary record found.</p>
+        )}
       </Modal>
     </>
-
-
   );
 
   return (
