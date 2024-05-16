@@ -146,3 +146,94 @@ html{
 /* #about .about-content-container p{
   
 } */
+
+  /* SMALL SCREEN SIZE CSS */
+
+  @media screen and (max-width: 1441px) {
+    #about .about-main-box-container{
+      padding: 0 5rem;
+      width: 100%;
+    }
+  }
+
+  @media screen and (max-width: 1341px) {
+    #about .about-main-box-container{
+      padding: 0 4rem;
+    }
+  }
+
+  @media screen and (max-width: 1241px) {
+    #about .about-main-box-container{
+      padding: 0 3rem;
+    }
+  }
+
+  @media screen and (max-width: 1141px) {
+    #about .about-main-box-container{
+      padding: 0 2rem;
+    }
+  }
+
+  @media screen and (max-width: 941px) {
+    #about .about-main-box-container{
+      padding: 0 1.5rem;
+    }
+
+    #about .about-office-hour-container img {
+      width: 320px;
+      
+    }
+    
+    #about .about-office-hour-schedule-container {
+      bottom: 48px;
+      right: 30px;
+    }
+    
+    #about .twofourseven-container img{
+      width: 55px;
+    }
+
+  }
+
+@media screen and (max-width: 841px) {
+    #about .about-main-box-container{
+    padding: 0 1rem;
+  }
+
+}
+
+@media screen and (max-width: 769px) {
+
+  
+}
+
+@media screen and (max-width: 426px) {
+
+  #about {
+    height: 900px;
+    align-items: center;
+    margin-bottom: 250px;
+  
+  }
+
+  #about .about-main-box-container {
+    justify-content: center;
+    flex-direction: column-reverse;
+    gap: 20px;
+}
+
+#about .about-office-hour-container {
+  width: 100%;
+  position: relative;
+}
+
+#about .about-office-hour-schedule-container {
+  bottom: -250px;
+  right: 30px;
+}
+
+#about .about-content-container {
+  width: 100%;
+}
+
+}

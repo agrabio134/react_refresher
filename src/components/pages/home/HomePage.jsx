@@ -24,7 +24,8 @@ const HomePage = () => {
               </p>
           </div>
           <div className="home-img-container">
-            <img src="/page/24-7.png" alt="" />
+            <img src="/page/freecon.png" alt="" />
+            <h2>Free Consultation!</h2>
           </div>
         </div>
         
