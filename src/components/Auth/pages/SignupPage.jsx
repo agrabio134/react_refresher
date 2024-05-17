@@ -505,12 +505,10 @@ const SignupPage = () => {
               {/* <h1>Paws Pro</h1> */}
             </div>
             <div className="main-user-signup-container">
-              <div className="scrollable-container">
 
                 <h2 className="title">Paws Pro</h2>
                 <div class="bar"></div>
 
-                <div className="scrollable-container">
                   <div className="radio-select">
                     <input
                       type="radio"
@@ -531,6 +529,7 @@ const SignupPage = () => {
                     />
                     <label htmlFor="phone">Phone</label>
                   </div>
+                  <div className="scrollable-container">
                   {isPhoneLogin === false && (
                     <form className="user-signup-box" onSubmit={handleSubmit}>
                       <div className="user-signup-grid-container">
@@ -761,7 +760,6 @@ const SignupPage = () => {
                 <p className="login-link">
                   Already have an account? <a href="/auth/login">Login here</a>
                 </p>
-              </div>
               {!verificationId && <div id="recaptcha-container"></div>}
 
             </div>
