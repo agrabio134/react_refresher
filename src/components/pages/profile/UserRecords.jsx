@@ -263,6 +263,7 @@ const UserRecords = ({ id }) => {
 
 
   const PetRecordCard = ({ record }) => (
+    <div className="user-records-container">
     <Card className="pet-record-card" style={{ width: 300, marginBottom: 20 }}>
       <Image src={record.image} alt="Animal" width={100} height={100} />
       <p className="pet-name">
@@ -285,7 +286,7 @@ const UserRecords = ({ id }) => {
       >
         View Records
       </Button>
-    </Card>
+    </Card></div>
   );
 
   const vaccineColumns = [
@@ -420,7 +421,7 @@ const UserRecords = ({ id }) => {
             <div className="appointment-details">
               <h3>Consultation Records</h3>
               <Suspense fallback={<div>Loading...</div>}>
-                <LazyTable dataSource={vetRecord} columns={columns} />
+                <LazyTable dataSource={vetRecord} columns={columns} className="test"/>
               </Suspense>
             </div>
           )}
@@ -429,7 +430,7 @@ const UserRecords = ({ id }) => {
             <div className="appointment-details">
               <h3>Vaccination Records</h3>
               <Suspense fallback={<div>Loading...</div>}>
-                <LazyTable dataSource={vetVaccineRecord} columns={vaccineColumns} />
+                <LazyTable dataSource={vetVaccineRecord} columns={vaccineColumns} className="test"/>
               </Suspense>
             </div>
           )}
@@ -438,7 +439,7 @@ const UserRecords = ({ id }) => {
             <div className="appointment-details">
               <h3>Grooming Records</h3>
               <Suspense fallback={<div>Loading...</div>}>
-                <LazyTable dataSource={vetGroomRecord} columns={groomColumn} />
+                <LazyTable dataSource={vetGroomRecord} columns={groomColumn} className="test"/>
               </Suspense>
             </div>
           )}

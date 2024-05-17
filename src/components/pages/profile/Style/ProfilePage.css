@@ -152,70 +152,72 @@
     margin-top: 20px;
 }
 
-@media screen and (max-width: 768px) {
+/* SMALL SCREEN SIZE CSS */
 
-    .recordsBtn {
-        background-color: #FAD400 !important;
-        color: #082342 !important;
+@media screen and (max-width: 1441px) {
+  
+    #profile .container {
+        padding: 0 5rem;
+        width: 100%;
+      }
     }
-
-    .logoutBtn {
-        border: solid 2px rgb(188, 188, 188) !important;
-        background-color: transparent !important;
-        padding: 13px !important;
-
-
+        
+@media screen and (max-width: 1341px) {
+    #profile .container {
+        padding: 0 4rem;
+      }
     }
-
-    .main-profile-container {
-        height: auto;
-        width: 100dvw;
-        padding-top: 10dvh;
-        background-color: white;
-        color: black;
+        
+@media screen and (max-width: 1241px) {
+    #profile .container {
+        padding: 0 3rem;
+      }
+    }
+        
+@media screen and (max-width: 1141px) {
+    #profile .container {
+        padding: 0 2rem;
+      }
+    }
+        
+@media screen and (max-width: 941px) { 
+    #profile .container {
+        padding: 0 1.5rem;
+      }
+    }
+        
+@media screen and (max-width: 841px) { 
+    #profile .container {
+        padding: 0 1rem;
+      }
+    }
+        
+@media screen and (max-width: 769px) {
+      
+    .pet-form-table-container {
         display: flex;
-        justify-content: center;
-        padding-bottom: 2dvh;
+        gap: 20px;
+        flex-direction: column;
+        width: 100%;
+        margin: 0;
+        padding: 0;
+        
     }
-
-    .whole-profile-container {
-        background-color: #082342;
-        margin-top: 10px;
-        width: 90dvw;
-        border-radius: 20px;
-        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-    }
-
+      
+}
+        
+@media screen and (max-width: 426px) {
+  
     .profile-header-container {
         display: flex;
-        width: 100%;
-        border-radius: 5px 5px 0px 0px;
-        background-color: #082342;
-        border-radius: 20px;
-        justify-content: space-between;
-        padding: 20px;
-        align-items: center;
-        padding-top: 30px;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 20px;
     }
-
-    .profile-header-container h2 {
-        font-size: 20px;
-        color: white;
-        font-weight: bold;
-        border-bottom: solid #FAD400;
-    }
-
-    .profile-header-container button {
-        padding: 10px 10px;
-        font-size: 12px;
-        margin-left: 5px;
-        color: #fff;
-        text-transform: uppercase;
-        letter-spacing: 1px;
-        font-weight: bold;
-        background-color: #FF5C17;
-        cursor: pointer;
-        transition: opacity 0.4s;
-    }
-
+        
 }
+        
+@media screen and (max-width: 401px) {
+      
+}
+  

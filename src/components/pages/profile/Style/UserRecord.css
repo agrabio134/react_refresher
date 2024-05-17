@@ -173,12 +173,18 @@
   }
 
   .test .ant-table-thead tr .ant-table-cell {
-    background-color: var(--bg-ascend) !important;
+    background-color: var(--bg-ascend2) !important;
     color: var(--lightcolor);
+    font-weight: bold;
     font-size: 10px !important;
   }
 
   .test .ant-table-tbody tr .ant-table-cell {
     color: var(--darkcolor);
     font-size: 10px !important;
+  }
+
+  .appointment-selection {
+    display: flex;
+    gap: 20px;
   }
