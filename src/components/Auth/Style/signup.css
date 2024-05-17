@@ -435,8 +435,8 @@
       overflow: auto;
     }
   
-    .scrollable-container {
-      height: 70vh; /* Adjust the height as needed */
+    #signup .scrollable-container {
+      height: 50vh; /* Adjust the height as needed */
       overflow-y: auto;
     }
     

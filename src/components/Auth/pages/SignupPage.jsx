@@ -689,6 +689,9 @@ const SignupPage = () => {
                       </Modal>
 
                       <input type="submit" value="Signup" className="btn1" />
+                      <p className="login-link">
+                  Already have an account? <a href="/auth/login">Login here</a>
+                </p>
                     </form>
                   )}
                   {isPhoneLogin === true && !isCodeMatched && (
@@ -729,6 +732,7 @@ const SignupPage = () => {
                       </div>
                     </div>
                   )}
+
                 </div>
 
                 {isPhoneLogin === true && isCodeMatched && (
@@ -753,13 +757,11 @@ const SignupPage = () => {
 
 
                       <button onClick={handlePasscodeSubmit}>Submit Passcode</button>
+                      
                     </div>
                   </div>
                 )}
 
-                <p className="login-link">
-                  Already have an account? <a href="/auth/login">Login here</a>
-                </p>
               {!verificationId && <div id="recaptcha-container"></div>}
 
             </div>

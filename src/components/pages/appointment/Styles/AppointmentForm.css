@@ -140,7 +140,7 @@
 
 .form-sub-container label {
   display: block;
-  margin-bottom: 10px;
+  /* margin-bottom: 10px; */
 }
 
 .form-group select {
@@ -341,300 +341,86 @@
   color: #777;
 }
 
+/* SMALL SCREEN SIZE CSS */
 
-@media screen and (max-width: 768px) {
-  .appointment-form-container {
-    grid-template-columns: 1fr; /* Change to a single column layout on smaller screens */
-    grid-template-rows: 0.4fr 0.4fr;
-
-    grid-template-areas:
-    "form-group"
-    "pet-card";
-  }
-
-  .form-group {
-    width: 95dvw;
-    background-color: white;
-    text-align: center;
-    padding: 25px;
-    border-radius: 5px;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-  }
-
-  .form-group label {
-    font-size: 18px;
-    color: black;
-    font-weight: bold;
-  }
-
-  .form-sub-container label {
-    font-size: 14px;
-    display: block;
-    margin-bottom: 10px;
-  }
-
-
-  /* Make the calendar larger */
-.react-calendar {
-  width: 100%; /* Adjust the width according to your needs */
-  min-height: 300px;
-  border: 0;
-}
-
-.react-calendar__navigation button:enabled:hover, .react-calendar__navigation button:enabled:focus {
-  background-color: #FAD400;
-}
-
-.react-calendar__navigation button:disabled {
-  background-color: #FAD400;
-}
-
-.react-calendar__navigation button {
-  font-size: 18px;
-  background-color: #082342;
-  color: #eaeaea;
-    padding: 16px;
-}
-
-.react-calendar__navigation {
-
-  width: 100%;
-  height: 50%;
-  /* padding: 30px; */
-}
-
-/* .react-calendar__viewContainer {
+@media screen and (max-width: 1441px) {
   
-} */
+  .main-appointment-container {
+      padding: 0 5rem;
+      width: 100%;
+    }
+  }
+      
+  @media screen and (max-width: 1341px) {
+  .main-appointment-container {
+      padding: 0 4rem;
+    }
+  }
+      
+  @media screen and (max-width: 1241px) {
+  .main-appointment-container {
+      padding: 0 3rem;
+    }
+  }
+      
+  @media screen and (max-width: 1141px) {
+  .main-appointment-container {
+      padding: 0 2rem;
+    }
+  }
+      
+  @media screen and (max-width: 941px) { 
+  .main-appointment-container {
+      padding: 0 1.5rem;
+    }
+  }
+      
+  @media screen and (max-width: 841px) { 
+  .main-appointment-container {
+      padding: 0 1rem;
+    }
+  }
+      
+  @media screen and (max-width: 769px) {
+    
+    .appointment-form-container {
+      display: flex;
+      justify-content: center;
+      flex-direction: column;
+      gap: 20px;
+    }
 
-.react-calendar button {
-  margin: 0;
-  border: 0;
-  outline: none;
-  border: 1px solid #eaeaea;
-  
-}
+    .pet-card {
+      width: 100%;
+      margin: 0;
+    }
 
-.react-calendar__tile--active:enabled {
-  background-color: #082342;
-  color: #eaeaea;
-
-}
-
-
-.react-calendar__tile--active:enabled:hover, .react-calendar__tile--active:enabled:focus {
-  background: #082342;
-  color: #eaeaea;
-}
-
-/* .react-calendar__month-view__days {
-
-} */
-
-.react-calendar__month-view__days__day {
-  color: black;
-}
-
-.react-calendar__month-view__days__day--weekend {
-  color: #d10000;
-}
-
-.react-calendar__month-view__days__day--neighboringMonth {
-  color: #757575;
-}
-
-.react-calendar__month-view__weekdays__weekday {
-
-  color: black;
-}
-
-.react-calendar__year-view__months__month {
-  color: black;
-}
-
-.react-calendar__decade-view__years__year {
-  color: black;
-}
-
-.react-calendar__century-view__decades__decade {
-  color: black;
-}
-
-/* Position the calendar on the left side */
-.static-calendar {
-  margin-bottom: 20px;
-  font-size: 20px;
-  background-color: white;
-}
-.react-calendar__tile--now{
-  background-color: #FF5C17;
-  color: #eaeaea;
-}
-
-.form-group select {
-  font-size: 18px;
-  text-align: center;
-  width: 50%;
-  height: 100%;
-  padding: 15px;
-  margin-bottom: 10px;
-  background-color: #082342;
-  color: #fff;
-  z-index: 2;
-  overflow-y: auto;
-}
-
-.value-container {
-  font-size: 12px;
-  width: 10%;
-  background-color: #ffa500;
-}
-
-.form-sub-container {
-  margin-top: 20px;
-  width: 100%;
-}
-
-.form-input-container {
-  padding: 0;
-  display: flex;
-  flex-direction: column;
-  margin-bottom: 16px;
-}
-
-
-.pet-card {
-  width: auto;
-  text-align: center;
-  margin: 0;
-  border-radius: 5px 5px 0px 0px;
-  background-color: white;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-}
-
-.pet-card-header {
-  border-radius: 5px 5px 0px 0px;
-  background-color: #082342;
-  font-size: 12px;
-  padding: 12px;
-  color: white;
-}
-
-.pet-card-body img {
-  width: 40%;
-  height: auto;
-  object-fit: cover;
-  border-radius: 50%;
-  /* margin-right: 16px; */
-}
-
-.pet-card-body .pet-details {
-  flex-grow: 1;
-}
-
-.pet-details{
-  padding-top: 10px;
-}
-
-.pet-card-body p {
-  font-size: 13px;
-  margin: 8px 0;
-}
-
-.pet-card-body {
-  width: auto;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 16px;
-}
-.pet-card-container {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  grid-gap: 16px;
-}
-.pet-checkbox {
-  padding: 5px 15px;
-  margin-bottom: 16px;
-  width: auto;
-  height: 100%;
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  overflow: hidden;
-  margin-bottom: 16px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  transition: box-shadow 0.3s ease;
-  cursor: pointer;
-}
-
-/* Hide the checkbox visually */
-.pet-checkbox input {
-  display: none;
-}
-
-.pet-checkbox:hover,
-.pet-checkbox.checked {
-  border: 2px solid #FAD400; /* Change the border color as needed */
-}
-
-.pet-checkbox.checked {
-  background-color: #082342;
-
-}
-
-.pet-checkbox.checked .pet-name,
-.pet-checkbox.checked .pet-breed,
-.pet-checkbox.checked .pet-age {
-  color: #fff;
-}
-
-.add-pet-card {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 5px 15px;
-  margin-bottom: 16px;
-  height: 100%;
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  overflow: hidden;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  transition: box-shadow 0.3s ease;
-  cursor: pointer;
-  background-color: #FAD400;
-}
-
-.add-pet-card .fa-solid {
-  font-size: 12px;
-  font-weight: bold;
-  color: white;
-}
-
-.pet-card-Item:hover,
-.add-pet-card:hover {
-  border-color: #FF5C17;
-}
-
-.apoint-submit-button {
-  font-size: 12px;
-  margin-left: 0;
-  background-color: #FF5C17;
-  color: #fff;
-  padding: 10px;
-  cursor: pointer;
-  border: none;
-  border-radius: 0px 0px 5px 5px;
-  transition: background-color 0.3s ease;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-
-  &:hover {
-    background-color: #082342;
+    .apoint-submit-button {
+      margin: 0;
+    }
+    
+  }
+      
+  @media screen and (max-width: 426px) {
+    
+    .appointment-type-container {
+      flex-wrap: wrap;
+      gap: 20px;
   }
 
-  &:disabled {
-    background-color: #d3d3d3;
-    cursor: not-allowed;
+  .form-input-container {
+    width: 100%;
   }
-}
-  
-}
+
+  .pet-card-container {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+  }
+      
+  }
+      
+  @media screen and (max-width: 401px) {
+    
+  }
