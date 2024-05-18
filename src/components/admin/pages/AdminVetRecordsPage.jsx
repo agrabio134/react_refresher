@@ -402,7 +402,6 @@ const VeterinaryRecord = () => {
 };
 
 const groupByClient = (vetRecordData) => {
-    // Group records by client name
     const groupedData = {};
     vetRecordData.forEach((record) => {
         const clientKey = record.first_name + ' ' + record.last_name;
@@ -427,6 +426,8 @@ const groupByClient = (vetRecordData) => {
                 birthdate: record.pet_birthdate,
                 sex: record.pet_sex,
                 appointments: [],
+                vet_records: [], // Include vet records for each pet
+                vaccinations: [], // Include vaccinations for each pet
             };
         }
         groupedData[clientKey].pets[record.pet_id].appointments.push({
@@ -437,53 +438,255 @@ const groupByClient = (vetRecordData) => {
             cancellation_reason: record.appointment_cancellation_reason,
             status: record.appointment_status,
         });
+
+        // Include veterinary records and vaccinations
+        if (record.appointment_reason === 'Checkup') {
+            groupedData[clientKey].pets[record.pet_id].vet_records.push({
+                // Add fields from veterinary_records
+                vet_record_id: record.vet_record_id,
+                vet_record_date: record.vet_record_date,
+                vet_on_duty: record.vet_on_duty,
+                body_wt: record.body_wt,
+                temp: record.temp,
+                complaint_history: record.complaint_history,
+                diagnostic_tool: record.diagnostic_tool,
+                laboratory_findings: record.laboratory_findings,
+                general_assessment: record.general_assessment,
+                medication_treatment: record.medication_treatment,
+                remarks: record.remarks,
+
+                // Include additional fields from veterinary_records here
+            });
+        } else if (record.appointment_reason === 'Vaccination') {
+            groupedData[clientKey].pets[record.pet_id].vaccinations.push({
+                // Add fields from vaccinations
+                vaccination_id: record.vaccination_id,
+                vaccine_name: record.vaccine_name,
+                date_administered: record.date_administered,
+                administered_by: record.administered_by,
+
+
+                // Include additional fields from vaccinations here
+            });
+        }
     });
     return Object.values(groupedData);
 };
 
 const generateHTML = (groupedData) => {
-    // Generate HTML content dynamically using the grouped data
-    let htmlContent = "<html><head><title>Client Data</title>";
-    htmlContent += "<style>";
-    htmlContent += "body { font-family: Arial, sans-serif; }";
-    htmlContent += "h1 { font-size: 24px; margin-bottom: 10px; }";
-    htmlContent += "h2 { font-size: 20px; margin-bottom: 5px; }";
-    htmlContent += "h3 { font-size: 18px; margin-bottom: 5px; }";
-    htmlContent += "p { margin: 5px 0; }";
-    htmlContent += "</style>";
-    htmlContent += "</head><body>";
+  // Helper function to format dates
+  const formatDate = (dateString) => {
+      const date = new Date(dateString);
+      const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+      return date.toLocaleDateString(undefined, options);
+  };
 
-    groupedData.forEach((clientData) => {
-        htmlContent += `<h1>${clientData.client.first_name} ${clientData.client.last_name}</h1>`;
-        htmlContent += "<div>";
-        for (const petId in clientData.pets) {
-            const pet = clientData.pets[petId];
-            htmlContent += `<h2>${pet.name}</h2>`;
-            htmlContent += `<p><strong>Type:</strong> ${pet.type}</p>`;
-            htmlContent += `<p><strong>Breed:</strong> ${pet.breed}</p>`;
-            htmlContent += `<p><strong>Birthdate:</strong> ${pet.birthdate}</p>`;
-            htmlContent += `<p><strong>Sex:</strong> ${pet.sex}</p>`;
-            htmlContent += "<h3>Appointments</h3>";
-            htmlContent += "<ul>";
-            pet.appointments.forEach((appointment) => {
-                htmlContent += "<li>";
-                htmlContent += `<p><strong>ID:</strong> ${appointment.id}</p>`;
-                htmlContent += `<p><strong>Date:</strong> ${appointment.date}</p>`;
-                htmlContent += `<p><strong>Time:</strong> ${appointment.time}</p>`;
-                htmlContent += `<p><strong>Reason:</strong> ${appointment.reason}</p>`;
-                htmlContent += `<p><strong>Cancellation Reason:</strong> ${appointment.cancellation_reason}</p>`;
-                htmlContent += `<p><strong>Status:</strong> ${appointment.status}</p>`;
-                htmlContent += "</li>";
+  // Helper function to format times to 12-hour format with AM/PM
+  const formatTime = (timeString) => {
+      const [hours, minutes] = timeString.split(':');
+      let hour = parseInt(hours);
+      const ampm = hour >= 12 ? 'PM' : 'AM';
+      hour = hour % 12 || 12;
+      return `${hour}:${minutes} ${ampm}`;
+  };
+
+  // Remove duplicate date-time entries
+  groupedData.forEach(clientData => {
+      for (const petId in clientData.pets) {
+          const pet = clientData.pets[petId];
+          pet.appointments = pet.appointments.filter((appointment, index, self) =>
+              index === self.findIndex(a => (
+                  a.date === appointment.date && a.time === appointment.time
+              ))
+          );
+      }
+  });
+
+  // Generate HTML content dynamically using the grouped data
+  let htmlContent = `
+      <html>
+      <head>
+          <title>Client Data</title>
+          <style>
+              body { 
+                  font-family: Arial, sans-serif; 
+                  margin: 20px; 
+                  background-color: #f7f7f7;
+                  color: #333;
+              }
+              .card { 
+                  border: 1px solid #ddd; 
+                  border-radius: 8px; 
+                  padding: 15px; 
+                  margin-bottom: 20px; 
+                  background-color: #fff; 
+                  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+              }
+              h1 { 
+                  font-size: 24px; 
+                  color: #333; 
+                  margin-top: 0; 
+              }
+              h2 { 
+                  font-size: 20px; 
+                  color: #555; 
+                  margin-top: 15px; 
+              }
+              h3 { 
+                  font-size: 18px; 
+                  color: #777; 
+                  margin-top: 10px; 
+              }
+              p { 
+                  margin: 5px 0; 
+                  font-size: 16px; 
+              }
+              strong { 
+                  color: #000; 
+              }
+              table { 
+                  width: 100%; 
+                  border-collapse: collapse; 
+                  margin-top: 10px; 
+              }
+              table, th, td { 
+                  border: 1px solid #ddd; 
+              }
+              th, td { 
+                  padding: 8px; 
+                  text-align: left; 
+              }
+              th { 
+                  background-color: #f2f2f2; 
+              }
+              .appointment-info { 
+                  margin-top: 10px; 
+              }
+              .table-wrapper { 
+                  display: flex; 
+                  justify-content: space-between; 
+              }
+              .table-column { 
+                  flex: 1; 
+                  margin: 0 10px; 
+              }
+          </style>
+          
+      </head>
+      <body>
+  `;
+
+  groupedData.forEach((clientData) => {
+      htmlContent += `
+          <div class="card">
+              <h1>${clientData.client.first_name} ${clientData.client.last_name}</h1>
+              <p><strong>Contact Number:</strong> ${clientData.client.contact_number}</p>
+              <p><strong>Address:</strong> ${clientData.client.address}</p>
+              <p><strong>Email:</strong> ${clientData.client.email}</p>
+      `;
+
+      for (const petId in clientData.pets) {
+          const pet = clientData.pets[petId];
+          htmlContent += `
+              <div class="card">
+                  <h2>${pet.name}</h2>
+                  <p><strong>Type:</strong> ${pet.type}</p>
+                  <p><strong>Breed:</strong> ${pet.breed}</p>
+                  <p><strong>Birthdate:</strong> ${pet.birthdate}</p>
+                  <p><strong>Sex:</strong> ${pet.sex}</p>
+                  <h3>Appointments</h3>
+                  <div class='table-wrapper'>
+          `;
+
+          // Group appointments by reason
+          const appointmentsByReason = pet.appointments.reduce((acc, appointment) => {
+              if (!acc[appointment.reason]) {
+                  acc[appointment.reason] = [];
+              }
+              acc[appointment.reason].push(appointment);
+              return acc;
+          }, {});
+
+          // Display appointments in a table
+          htmlContent += `<div class='table-column'>`;
+          for (const reason in appointmentsByReason) {
+              htmlContent += `
+                  <h4>${reason}</h4>
+                  <table>
+                      <tr><th>Date</th><th>Time</th></tr>
+              `;
+              appointmentsByReason[reason].forEach((appointment) => {
+                  htmlContent += `
+                      <tr>
+                          <td>${formatDate(appointment.date)}</td>
+                          <td>${formatTime(appointment.time)}</td>
+                      </tr>
+                  `;
+              });
+              htmlContent += `</table>`;
+          }
+          htmlContent += `</div>`;
+
+          // Display vet records
+          if (pet.vet_records.length > 0) {
+              htmlContent += `<div class='table-column'>`;
+              htmlContent += `<h3>Veterinary Records</h3>`;
+              pet.vet_records.forEach(record => {
+                  htmlContent += `
+                      <table>
+                          <tr><th>Vet Record Date</th><td>${formatDate(record.vet_record_date)}</td></tr>
+                          <tr><th>Vet on Duty</th><td>${record.vet_on_duty}</td></tr>
+                          <tr><th>Body Weight</th><td>${record.body_wt}</td></tr>
+                          <tr><th>Temperature</th><td>${record.temp}</td></tr>
+                          <tr><th>Complaint History</th><td>${record.complaint_history}</td></tr>
+                          <tr><th>Diagnostic Tool</th><td>${record.diagnostic_tool}</td></tr>
+                          <tr><th>Laboratory Findings</th><td>${record.laboratory_findings}</td></tr>
+                          <tr><th>General Assessment</th><td>${record.general_assessment}</td></tr>
+                          <tr><th>Medication Treatment</th><td>${record.medication_treatment}</td></tr>
+                          <tr><th>Remarks</th><td>${record.remarks}</td></tr>
+                      </table>
+                  `;
+              });
+              htmlContent += `</div>`;
+          }
+
+          // Display vaccinations if at least one valid vaccination
+          const validVaccinations = pet.vaccinations.filter(vaccination => vaccination.vaccine_name !== null && vaccination.administered_by !== undefined);
+          if (validVaccinations.length > 0) {
+            htmlContent += `<div class='table-column'>`;
+            htmlContent += `<h3>Vaccinations</h3>`;
+            htmlContent += `<table>`;
+            htmlContent += `<tr><th>Vaccine Name</th><th>Date Administered</th><th>Administered By</th></tr>`;
+            validVaccinations.forEach(vaccination => {
+                htmlContent += `
+                    <tr>
+                        <td>${vaccination.vaccine_name}</td>
+                        <td>${formatDate(vaccination.date_administered)}</td>
+                        <td>${vaccination.administered_by}</td>
+                    </tr>
+                `;
             });
-            htmlContent += "</ul>";
+            htmlContent += `</table>`;
+            htmlContent += `</div>`;
         }
-        htmlContent += "</div>";
-    });
 
-    htmlContent += "</body></html>";
+        htmlContent += `</div></div>`;
+    }
 
-    return htmlContent;
+    htmlContent += `</div>`;
+});
+
+htmlContent += `</body></html>`;
+return htmlContent;
 };
+
+
+
+
+
+          
+
+
 
 const printHTML = (htmlContent) => {
     const newWindow = window.open('', '_blank');
