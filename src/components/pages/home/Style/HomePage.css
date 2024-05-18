@@ -350,40 +350,11 @@
 	width: 80%;
 }
 
-.home-img-container h2 {
-	font-size: 60px;
-	margin: 0;
-	padding: 0;
-}
-
-
-  /* SMALL SCREEN SIZE CSS */
 
   @media screen and (max-width: 1441px) {
     #home .home-main-box-container{
       padding: 0 5rem;
       width: 100%;
-    }
-  }
-
-  @media screen and (max-width: 1341px) {
-    #home .home-main-box-container{
-      padding: 0 4rem;
-    }
-
-    .home-img-container h2 {
-      font-size: 55px;
-    }
-    
-  }
-
-  @media screen and (max-width: 1241px) {
-    #home .home-main-box-container{
-      padding: 0 3rem;
-    }
-
-    .home-img-container h2 {
-      font-size: 50px;
     }
   }
 
@@ -398,9 +369,6 @@
       padding: 0 1.5rem;
     }
 
-    .home-img-container h2 {
-      font-size: 40px;
-    }
   }
 
 @media screen and (max-width: 841px) {
@@ -408,17 +376,6 @@
     padding: 0 1rem;
   }
 
-  .home-content-container h1 {
-    font-size: 65px;
-  }
-  
-  .home-content-container h2 {
-    font-size: 65px;
-  }
-
-  .home-img-container h2 {
-    font-size: 35px;
-  }
 }
 
 @media screen and (max-width: 769px) {
@@ -454,37 +411,11 @@
     position: relative;
   }
 
-  .home-img-container h2 {
-    font-size: 35px;
-  }
-  
 }
 
 @media screen and (max-width: 426px) {
   #home{
     height: 1000px;
-  }
-
-  #home .home-main-box-container {
-    flex-direction: column;
-    gap: 20px;
-  }
-
-  .home-content-container {
-    width:  100%;
-    text-align: center  ;
-  }
-  
-  .home-content-container h1 {
-    font-size: 50px;
-  }
-  
-  .home-content-container h2 {
-    font-size: 50px;
-  }
-  
-  .home-content-container span {
-    color: var(--hp);
   }
 
   .home-content-container p {
@@ -493,13 +424,6 @@
   
   .home-img-container {
     width: 100%;
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-    position: relative;
-  }
 
-  .home-img-container h2 {
-    font-size: 35px;
   }
 }
