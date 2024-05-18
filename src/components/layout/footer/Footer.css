@@ -18,6 +18,7 @@
     justify-content: center;
     background-color: var(--c1);
 }
+
 .footer-color-2 {
     width: 100%;
     display: flex;
@@ -110,130 +111,119 @@
     color: var(--darkcolor);
 }
 
-@media screen and (max-width: 768px) {
-    .main_footer_container {
-        width: 100%;
-        height: auto;
-        background: url(../../../assets/img/footer.jpg);
-        background-size: cover;
-        /* background-position: center; */
-        background-repeat: no-repeat;
-        background-attachment: fixed;
-        /* padding:2rem 7%; */
+  /* SMALL SCREEN SIZE CSS */
+
+@media screen and (max-width: 1441px) {
+  
+#footer .container {
+      padding: 0 5rem;
+      width: 100%;
+    }
+  
+    #contactsec .contact-info-container {
+      gap: 20px;
+    }
+  
+    #contactsec .contact-info-card {
+      width: 100%;
+    }
+}
+  
+  @media screen and (max-width: 1341px) {
+#footer .container {
+      padding: 0 4rem;
+    }
+  
+  }
+  
+  @media screen and (max-width: 1241px) {
+#footer .container {
+        padding: 0 3rem;
+    }
+  }
+  
+  @media screen and (max-width: 1141px) {
+#footer .container {
+        padding: 0 2rem;
+      }
+  }
+  
+  @media screen and (max-width: 941px) {
+  
+    #contactsec {
+        height: 1200px;
     }
     
-    .footer-content-container{
-        /* border: solid blue; */
-        height: 100%;
-        width: 100%;
+#footer .container {
+      padding: 0 1.5rem;
     }
+  
+  }
+  
+  @media screen and (max-width: 841px) {
+  
+    #contactsec {
+      height: 1900px;
+    }
+  
+#footer .container {
+      padding: 0 1rem;
+    }
+  
+    #contactsec .contact-form-map-container {
+      margin-top: 25px;
+      flex-direction: column;
+      gap: 50px;
+    }
+  
+    #contactsec .contact-form-container {
+      width: 100%;
+    }
+  
+    #contactsec .contact-map-container {
+      width: 100%;
+    }
+  
+  }
+  
+  @media screen and (max-width: 769px) {
     
-    .footer-content {
-        display: flex;
+  }
+  
+  @media screen and (max-width: 426px) {
+
+    .footer-color-1 {
+        height: 800px;
+    }
+
+    #footer .container .footer-content {
+        gap: 50px;
         text-align: center;
+        align-items: center;
         flex-direction: column;
-        /* border: solid red; */
-        height: 90%;
     }
 
-    .footer-content img {
-        height: auto;
-        width: 7rem;
-    }
-    
-    .footer-content h1 {
-        font-size: 18px;
-        padding-bottom: 25px;
-        color: #fff;
-    }
-
-    .footer-content p {
-        font-size: 16px;
-        padding-bottom: 25px;
-    }
-    
-    
-    .happy-paws-content {
-        /* border: solid green; */
-    }
-    
     .quick-links-content {
         display: flex;
+        align-items: center;
         flex-direction: column;
-        color: #fff;
-        padding-bottom: 25px;
     }
-    
-    .quick-links-content a {
-        display: flex;
-        font-size: 16px;
-        padding-top: 5px;
-        text-decoration: none;
-        flex-direction: column;
-        color: #fff;
-    }
-    
+
     .contactus-content {
         display: flex;
         align-items: center;
         flex-direction: column;
-        /* border: solid violet; */
-        padding-bottom: 25px;
-    }
-    
-    .contacus-details h6 {
-        display: flex;
-        color: white;
-        align-self: center;
-        font-size: 14px;
-        padding: 10px;
-    }
-    
-    .contacus-details .fa-solid{
-        padding: 0;
-        display: flex;
-        color: white;
-        align-self: center;
-        font-size: 14px;
-    }
-    
-    
-    .contacus-details {
-        display: flex;
-        color: white;
-    }
-    
-    
-    .followus-content {
-        /* border: solid brown; */
-    }
-    
-    .followus-icon {
-        padding-top: 0;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    
-    }
-    
-    .followus-icon .fa-brands {
-        color: white;
-        font-size: 20px;
-        padding: 20px;
-    }
-    
-    .copyrigt-content {
-        margin-top: 50px;
-        display: flex;
-        justify-content: center;
-        border-top: 2px solid #516c75;
-    }
-    
-    .copyrigt-content h6 {
-        text-align: center;
-        padding-top: 20px;
-        font-size: 13px;
-        color: white;
     }
 
-}
+    .copyright-content {
+        width: 100%;
+        display: flex;
+        text-align: center;
+        justify-content: center;
+    }
+  
+  }
+  
+  @media screen and (max-width: 401px) {
+
+  }

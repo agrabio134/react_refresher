@@ -10,12 +10,19 @@ const UserRecords = ({ id }) => {
   const [vetRecord, setVetRecord] = useState([]);
   const [vetPetRecord, setVetPetRecord] = useState([]);
   const [vetGroomRecord, setVetGroomRecord] = useState([]);
-  const [selectedAppointment, setSelectedAppointment] = useState(null);
+  const [vetVaccineRecord, setVetVaccineRecord] = useState([]);
+  const [selectedAppointment, setSelectedAppointment] = useState("Consultation");
   const [selectedPet, setSelectedPet] = useState(null);
 
   useEffect(() => {
     getVeterinaryRecord();
   }, [id]);
+
+  useEffect(() => {
+    if (selectedPet) {
+      viewPetRecords(selectedPet);
+    }
+  }, [selectedPet]);
 
   const calculateAge = (birthdate) => {
     const today = moment();
@@ -32,6 +39,7 @@ const UserRecords = ({ id }) => {
       return `${days} ${days === 1 ? "day" : "days"}`;
     }
   };
+
   const getVeterinaryRecord = async () => {
     try {
       const response = await fetch(
@@ -40,7 +48,6 @@ const UserRecords = ({ id }) => {
 
       if (!response.ok) {
         if (response.status === 404) {
-
           setVetRecord([]);
           return;
         } else {
@@ -70,7 +77,6 @@ const UserRecords = ({ id }) => {
             }
           });
 
-          // console.log(vetRecordData);
           setVetRecord(vetRecordData);
           setVetPetRecord(vetRecordData);
         } catch (jsonError) {
@@ -80,10 +86,61 @@ const UserRecords = ({ id }) => {
         }
       }
     } catch (error) {
-      // console.error("Error fetching data:", error.message);
+      console.error("Error fetching data:", error.message);
       setVetRecord([]); // Clear the state in case of an error
     }
   };
+
+  const getVaccinePetRecord = async (pet_id) => {
+    try {
+      const response = await fetch(
+        `https://happypawsolongapo.com/api/get_vaccine_record_admin_by_pet/${pet_id}`
+      );
+
+      if (!response.ok) {
+        if (response.status === 404) {
+          setVetVaccineRecord([]);
+          return;
+        } else {
+          throw new Error(`Failed to fetch data: ${response.status}`);
+        }
+      } else {
+        const textData = await response.text();
+
+        try {
+          const jsonObjects = textData
+            .split("}{")
+            .map((json, index, array) =>  
+              index === 0
+                ? json + "}"
+                : index === array.length - 1
+                ? "{" + json
+                : "{" + json + "}"
+            );
+
+          const vetRecordData = jsonObjects.flatMap((json) => {
+            try {
+              const parsedResult = JSON.parse(json);
+              return parsedResult.payload || [];
+            } catch (jsonError) {
+              console.error("Error parsing JSON:", jsonError);
+              return [];
+            }
+          });
+
+          setVetVaccineRecord(vetRecordData);
+        } catch (jsonError) {
+          console.error("Error parsing JSON:", jsonError);
+          setVetVaccineRecord([]); // Clear the state in case of an error
+        }
+      }
+    } catch (error) {
+      console.error("Error fetching data:", error.message);
+      setVetVaccineRecord([]); // Clear the state in case of an error
+    }
+  };
+
+
 
   const getGroomingPetRecord = async (pet_id) => {
     try {
@@ -122,9 +179,7 @@ const UserRecords = ({ id }) => {
             }
           });
 
-          // console.log(vetRecordData);
           setVetGroomRecord(vetRecordData);
-
         } catch (jsonError) {
           console.error("Error parsing JSON:", jsonError);
           setVetGroomRecord([]); // Clear the state in case of an error
@@ -136,8 +191,6 @@ const UserRecords = ({ id }) => {
     }
   };
 
-
-
   const getVeterinaryPetRecord = async (pet_id) => {
     try {
       const response = await fetch(
@@ -147,7 +200,7 @@ const UserRecords = ({ id }) => {
       if (!response.ok) {
         if (response.status === 404) {
           setVetRecord([]);
-          return; 
+          return;
         } else {
           throw new Error(`Failed to fetch data: ${response.status}`);
         }
@@ -168,18 +221,16 @@ const UserRecords = ({ id }) => {
           const vetRecordData = jsonObjects.flatMap((json) => {
             try {
               const parsedResult = JSON.parse(json);
-              // console.log(parsedResult.payload);
               return parsedResult.payload || [];
             } catch (jsonError) {
-              // console.error("Error parsing JSON:", jsonError);
+              console.error("Error parsing JSON:", jsonError);
               return [];
             }
           });
 
-          // console.log(vetRecordData);
           setVetRecord(vetRecordData);
         } catch (jsonError) {
-          // console.error("Error parsing JSON:", jsonError);
+          console.error("Error parsing JSON:", jsonError);
           setVetRecord([]); // Clear the state in case of an error
         }
       }
@@ -189,41 +240,30 @@ const UserRecords = ({ id }) => {
     }
   };
 
+  const viewPetRecords = (pet_id) => {
+    getVeterinaryPetRecord(pet_id);
+    getGroomingPetRecord(pet_id);
+    getVaccinePetRecord(pet_id);
+  };
+
   const handleGoBack = () => {
-    setSelectedAppointment(null);
+    // setSelectedAppointment(null);
     setVetRecord([]);
-
-    setSelectedPet(null); 
-
-    
-
-    
-
-  
+    setSelectedPet(null);
+    setVetGroomRecord([]);
   };
 
   const handleAppointmentSelection = (appointment) => {
     setSelectedAppointment(appointment);
-
-
   };
 
   const handleViewRecordDataClick = (id) => {
-    // get veterinary record id
-    console.log(id);
     setSelectedPet(id);
-
-    // handleViewPetDataClick(id);
   };
 
-  const viewPetRecords = (id) => {
-
-    handleViewPetDataClick(id);
-    handleViewPetGroomingDataClick(id);
-
-  };
 
   const PetRecordCard = ({ record }) => (
+    <div className="user-records-container">
     <Card className="pet-record-card" style={{ width: 300, marginBottom: 20 }}>
       <Image src={record.image} alt="Animal" width={100} height={100} />
       <p className="pet-name">
@@ -246,49 +286,22 @@ const UserRecords = ({ id }) => {
       >
         View Records
       </Button>
-    </Card>
+    </Card></div>
   );
 
-  const handleViewPetDataClick = async (id) => {
-    // get veterinary record id
+  const vaccineColumns = [
+    { title: "Pet Name", dataIndex: "name", key: "name" },
+    { title: "Vaccine Name", dataIndex: "vaccine_name", key: "vaccine_name" },
+    { title: "Date Administered", dataIndex: "date_administered", key: "date_administered" },
+    { title: "Next Due Date", dataIndex: "next_due_date", key: "next_due_date" },
+    { title: "Administered By", dataIndex: "administered_by", key: "administered_by"}
+  ];
 
-    try {
-      // setSelectedClient(client);
-      await getVeterinaryPetRecord(id);
-            setVetPetRecord((prevVetPetRecord) => [...prevVetPetRecord]);
-    } catch (error) {
-      console.error("Error fetching veterinary record:", error);
-      setVetPetRecord([]);
-    }
-
-
-    
-  };
-
-  const handleViewPetGroomingDataClick = async (id) => {
-    // get veterinary record id
-    
-    try {
-      // setSelectedClient(client);
-      await getGroomingPetRecord(id);
-      setVetGroomRecord((prevVetGroomRecord) => [...prevVetGroomRecord]);
-    } catch (error) {
-      console.error("Error fetching grooming record:", error);
-      setVetGroomRecord([]);
-
-      
-    }
-  };
 
   const groomColumn = [
     { title: "Pet Name", dataIndex: "name", key: "name" },
     { title: "Date", dataIndex: "date", key: "date" },
-    
   ];
-
-
-
-
 
   const columns = [
     { title: "Pet Name", dataIndex: "name", key: "name" },
@@ -364,126 +377,74 @@ const UserRecords = ({ id }) => {
     },
   ];
 
-    
-
   return (
-    <div className="user-records-container">
-   
-   {selectedPet === null && (
-        <div>
+    <div className="user-records">
+      {!selectedPet && (
+        <div className="pet-card-container">
           {vetPetRecord.length > 0 ? (
-            <div className="pet-record-container">
-             {/* <div style={{ display: "flex", flexWrap: "wrap" }}> */}
-              {vetPetRecord.map((record) => (
-                <PetRecordCard key={record.id} record={record} />
-              ))}
-            </div>
+            vetPetRecord.map((record) => (
+              <PetRecordCard key={record.id} record={record} />
+            ))
           ) : (
-            <p>No records found.</p>
+            <p>No pets found.</p>
           )}
         </div>
       )}
 
-      <div>
-        {selectedPet != null && (
-          <div>
-            {selectedAppointment === null && (
-              <div className="appointment-type">
-                <div className="appointment-type-header">
-                <h1>Record Categories</h1>
-                <button
-                  onClick={() => {
-                    setSelectedPet(null);
-                  }}
-                >
-                  Back
-                </button>
-                </div>
-                <div className="appointment-type-container">
-                  <div
-                    className="single-features"
-                    onClick={() => handleAppointmentSelection("Consultation")}
-                  >
-                  <div className='img-container'>
-                    <img src="/page/consultation.png" alt="consultation" />
-                  </div>
-                    <h3>Consultation</h3>
-                    <p>For general checkup and consultation</p>
-                  </div>
-                  <div
-                    className="single-features"
-                    onClick={() => handleAppointmentSelection("Vaccination")}
-                  >
-                  <div className='img-container'>
-                    <img src="/page/vaccination.png" alt="Vaccination" />
-                  </div>
-                    <h3>Vaccination</h3>
-                    <p>For vaccination and immunization</p>
-                  </div>
-                  <div
-                    className="single-features"
-                    onClick={() => handleAppointmentSelection("Grooming")}
-                  >
-                  <div className='img-container'>
-                    <img src="/page/groom.png" alt="Grooming" />
-                  </div>
-                    <h3>Grooming</h3>
-                    <p>For grooming</p>
-                  </div>
-                </div>
-              </div>
-            )}
-
-            {selectedAppointment && (
-              <div>
-                <button onClick={handleGoBack} className="backBtn">
-                  Back
-                </button>
-                {selectedAppointment === "Grooming" && (
-                  <div>
-                    <h1>Grooming</h1>
-                    <p>For grooming</p>
-
-                    <Suspense fallback={<div>Loading...</div>}>
-                    <LazyTable
-                      dataSource={vetRecord}
-                      columns={groomColumn}
-                      rowKey={(vetRecord) => vetRecord.t1_id}
-                      pagination={true}
-                    />
-                    </Suspense>
-
-                  </div>
-                )}
-                {selectedAppointment === "Vaccination" && (
-                  <div>
-                    <h1>Vaccination</h1>
-                    <p>For vaccination and immunization</p>
-                  </div>
-                )}
-                {selectedAppointment === "Consultation" && (
-                  <div className="test">
-                    <h1>Consultation</h1>
-                    <p>For general checkup and consultation</p>
-
-                    {(viewPetRecords(selectedPet))}
-                    <Suspense fallback={<div>Loading...</div>}>
-
-                    <LazyTable
-                      dataSource={vetRecord}
-                      columns={columns}
-                      rowKey={(vetRecord) => vetRecord.t1_id}
-                      pagination={true}
-                    />
-                                    </Suspense>
-
-                  </div>
-                )}
-              </div>
-            )}
+      {selectedPet && (
+        <>
+          <div className="appointment-selection">
+            <Button
+              type="primary"
+              onClick={() => handleAppointmentSelection("Consultation")}
+            >
+              Consultation
+            </Button>
+            <Button
+              type="primary"
+              onClick={() => handleAppointmentSelection("Vaccination")}
+            >
+              Vaccination
+            </Button>
+            <Button
+              type="primary"
+              onClick={() => handleAppointmentSelection("Grooming")}
+            >
+              Grooming
+            </Button>
+            <Button type="default" onClick={handleGoBack}>
+              Back to Pet List
+            </Button>
           </div>
-        )}
-      </div>
+
+          {selectedAppointment === "Consultation" && (
+            <div className="appointment-details">
+              <h3>Consultation Records</h3>
+              <Suspense fallback={<div>Loading...</div>}>
+                <LazyTable dataSource={vetRecord} columns={columns} className="test"/>
+              </Suspense>
+            </div>
+          )}
+
+          {selectedAppointment === "Vaccination" && (
+            <div className="appointment-details">
+              <h3>Vaccination Records</h3>
+              <Suspense fallback={<div>Loading...</div>}>
+                <LazyTable dataSource={vetVaccineRecord} columns={vaccineColumns} className="test"/>
+              </Suspense>
+            </div>
+          )}
+
+          {selectedAppointment === "Grooming" && (
+            <div className="appointment-details">
+              <h3>Grooming Records</h3>
+              <Suspense fallback={<div>Loading...</div>}>
+                <LazyTable dataSource={vetGroomRecord} columns={groomColumn} className="test"/>
+              </Suspense>
+            </div>
+          )}
+        </>
+      )}
     </div>
   );
 };

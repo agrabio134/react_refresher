@@ -23,12 +23,12 @@ const FooterPage = () => {
               <div className="contactus-content">
                     <h1>Contact Us</h1>
                 <div className="contacus-details">
-                  <i className="fa-solid fa-envelope"></i>
-                  <h6>happypawsolongapo@gmail.com</h6>
-                </div>
-                <div className="contacus-details">
                   <i className="fa-solid fa-phone-volume"></i>
                   <h6>+63 923-960-1739</h6>
+                </div>
+                <div className="contacus-details">
+                  <i className="fa-solid fa-envelope"></i>
+                  <h6>happypawsolongapo@gmail.com</h6>
                 </div>
               </div>
 

@@ -24,7 +24,7 @@
 
 .whyhp_item_container {
     display: flex;
-    justify-content: space-between
+    justify-content: space-between;
 }
 
 .whyhp_content {
@@ -121,79 +121,103 @@
             animation-name: MOVE-BG;
   }
 
-@media screen and (max-width: 768px) {
+  /* SMALL SCREEN SIZE CSS */
 
-    .main_whyhp_container {
-        background-color: #ebf5f5;
-        border-bottom-width: 2px;
-        border-bottom-color: #eaeaea;
-        border-bottom-style: solid;
-        border-top-width: 2px;
-        border-top-color: #eaeaea;
-        border-top-style: solid;
-        padding: 2rem;
-        /* width: 37%; */
-		width: 100dvw;
-        height: auto;
+  @media screen and (max-width: 1441px) {
+    #whyhp {
+      height: 390px;
+  }
+  
+  #whyhp .container{
+      padding: 0 5rem;
+      width: 100%;
     }
-    
-    /* .home1-section-heading1 {
-        color: #e12454;
-        text-align: center;
-        padding-bottom: 12px;
-        border: solid red;
-    } */
-    
-    .whyhp-home-section-heading2 {
-        color: black;
-        font-size: 25px;
-        text-align: center;
-        font-weight: 600;
-        /* border: solid blue; */
+  }
+
+  @media screen and (max-width: 1341px) {
+  #whyhp .container{
+      padding: 0 4rem;
     }
-    
-    .main_whyhp_container .whyhp_content_container p {
-        text-align: justify;
-        margin-top: 10px;
-        /* margin: 20px 50px 50px 0px; */
-        font-size: 18px;
-        width: 100%;
-        /* border: solid green; */
-    }
-    
-    .whyhp-section {
-        display: flex;
-        justify-content: center;
-        /* border: solid yellow; */
-        /* margin: 50px; */
-    
-    }
-    
+
     .whyhp_item_container {
-        display: flex;
-        flex-direction: column;
-        /* border: solid violet; */
+      display: flex;
+      gap: 20px;
+  }
+  }
+
+  @media screen and (max-width: 1241px) {
+  #whyhp .container{
+      padding: 0 3rem;
     }
-    
-    
-    .whyhp_content {
-        margin-top: 10px;
-        text-align: center;
-        width: 100%;
-        height: auto;
-        background-color: #fff;
-        box-sizing: border-box;
-        border-radius: 5px;
-        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-        /* border: solid orange; */
+  }
+
+  @media screen and (max-width: 1141px) {
+    #whyhp {
+      height: 430px;
+  }
+  
+  #whyhp .container{
+      padding: 0 2rem;
     }
-    
-    .whyhp_content h5 {
-        /* margin-top: 50px; */
-        color: black;
-        font-weight: 600;
-        font-size: 20px;
-        /* border: solid red; */
+  }
+
+  @media screen and (max-width: 941px) {
+    #whyhp {
+      height: 450px;
+  }
+  
+  #whyhp .container{
+      padding: 0 1.5rem;
     }
-    
+
+  }
+
+@media screen and (max-width: 841px) {
+  #whyhp .container{
+    padding: 0 1rem;
+  }
+
+}
+
+@media screen and (max-width: 769px) {
+  #whyhp {
+    height: 850px;
+    align-items: center;
+    justify-content: center;
+}
+
+.whyhp_item_container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+  
+}
+
+@media screen and (max-width: 426px) {
+
+#whyhp .container {
+    justify-content: center;
+    flex-direction: column-reverse;
+    gap: 20px;
+}
+
+#whyhp .container h2{
+  font-size: 30px;
+}
+
+.whyhp_content {
+  width: 100%;
+} 
+
+}
+
+@media screen and (max-width: 401px) {
+  #whyhp {
+    height: 900px;
+    align-items: center;
+
+  }
+
 }

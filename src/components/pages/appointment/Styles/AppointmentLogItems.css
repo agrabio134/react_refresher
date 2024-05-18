@@ -18,23 +18,23 @@
   
   .status-column {
     text-transform: uppercase;
-    color: #27ae60; /* Default color for status */
-    /* text bold */
+    color: var(--btnSuccess); /* Default color for status */
   }
   
   .status-column.canceled {
     color: #615b5b; /* Light muted orange for canceled status */
   }
+  
   .status-column.pending {
-    color: #f39c12; /* Orange color for pending status */
+    color: var(--btnWarning); /* Orange color for pending status */
   }
   
   .status-column.accepted {
-    color: #2ecc71; /* Green color for accepted status */
+    color: var(--btnSuccess); /* Green color for accepted status */
   }
   
   .status-column.denied {
-    color: #e74c3c; /* Red color for denied status */
+    color: var(--btnDanger) /* Red color for denied status */
   }
   
   .name-column {
@@ -48,13 +48,14 @@
   }
   
   
-.action-column {
+.action-column i{
     text-align: center;
+    color: var(--bgPrimary);
   }
   
   /* Style for the action button */
   .action-button {
-    background-color: #e74c3c; /* Red color for the button */
+    background-color: var(--btnDanger); /* Red color for the button */
     color: white;
     padding: 5px 10px;
     cursor: pointer;
@@ -63,7 +64,7 @@
   }
   
   .action-button:hover {
-    background-color: #c0392b; /* Darker red color on hover */
+    background-color: var(--btnDanger); /* Darker red color on hover */
   }
 
   /*AppoointmentHistory css*/
@@ -207,19 +208,19 @@
     
     .status-column {
       text-transform: uppercase;
-      color: #27ae60; /* Default color for status */
+      color: var(--btnSuccess); /* Default color for status */
     }
     
     .status-column.pending {
-      color: #f39c12; /* Orange color for pending status */
+      color: var(--btnWarning); /* Orange color for pending status */
     }
     
     .status-column.accepted {
-      color: #2ecc71; /* Green color for accepted status */
+      color: var(--btnSuccess); /* Green color for accepted status */
     }
     
     .status-column.denied {
-      color: #e74c3c; /* Red color for denied status */
+      color: var(--btnDanger) /* Red color for denied status */
     }
     
     .name-column {

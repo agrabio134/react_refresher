@@ -120,11 +120,11 @@ const LoginPage = () => {
             <div className="main-user-login-container">
               <h2>Welcome!</h2>
               <div class="bar"></div>
-              <p>
+              <p className="mobile-none">
                 Please provide login credential to proceed and have access to
                 all our services
               </p>
-              <div className="scrollable-container">
+
                 <div className="radio-select">
                   <input
                     type="radio"
@@ -145,6 +145,7 @@ const LoginPage = () => {
                   />
                   <label htmlFor="phone">Phone</label>
                 </div>
+                <div className="scrollable-container">
                 {isPhoneLogin === false && (
                   <form className="user-login-box" onSubmit={handleLoginSubmit}>
                     <div className="user-login-form-control">
