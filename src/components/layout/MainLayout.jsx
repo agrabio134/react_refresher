@@ -224,7 +224,7 @@ const MainLayout = () => {
                   <i className="fa-solid fa-newspaper"></i>  
                                   </div>
                   <Link to="blogs" className="sdie-nav_list" onClick={closeNav}>
-                    News & Announcements
+                    Promo
                   </Link>
                 </div>
 
