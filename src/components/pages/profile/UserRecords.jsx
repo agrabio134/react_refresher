@@ -294,7 +294,8 @@ const UserRecords = ({ id }) => {
     { title: "Vaccine Name", dataIndex: "vaccine_name", key: "vaccine_name" },
     { title: "Date Administered", dataIndex: "date_administered", key: "date_administered" },
     { title: "Next Due Date", dataIndex: "next_due_date", key: "next_due_date" },
-    { title: "Administered By", dataIndex: "administered_by", key: "administered_by"}
+    { title: "Administered By", dataIndex: "administered_by", key: "administered_by"},
+    { title: "Remarks", dataIndex: "remarks", key: "remarks" },
   ];
 
 
@@ -396,18 +397,23 @@ const UserRecords = ({ id }) => {
           <div className="appointment-selection">
             <Button
               type="primary"
+              className={`appointment-button ${selectedAppointment === "Consultation" ? "active" : ""}`}
               onClick={() => handleAppointmentSelection("Consultation")}
             >
               Consultation
             </Button>
             <Button
               type="primary"
+              className={`appointment-button ${selectedAppointment === "Vaccination" ? "active" : ""}`}
+
               onClick={() => handleAppointmentSelection("Vaccination")}
             >
               Vaccination
             </Button>
             <Button
               type="primary"
+              className={`appointment-button ${selectedAppointment === "Grooming" ? "active" : ""}`}
+
               onClick={() => handleAppointmentSelection("Grooming")}
             >
               Grooming
@@ -421,7 +427,7 @@ const UserRecords = ({ id }) => {
             <div className="appointment-details">
               <h3>Consultation Records</h3>
               <Suspense fallback={<div>Loading...</div>}>
-                <LazyTable dataSource={vetRecord} columns={columns} className="test"/>
+                <LazyTable dataSource={vetRecord} columns={columns} className="test lazy-table"/>
               </Suspense>
             </div>
           )}
@@ -430,7 +436,7 @@ const UserRecords = ({ id }) => {
             <div className="appointment-details">
               <h3>Vaccination Records</h3>
               <Suspense fallback={<div>Loading...</div>}>
-                <LazyTable dataSource={vetVaccineRecord} columns={vaccineColumns} className="test"/>
+                <LazyTable dataSource={vetVaccineRecord} columns={vaccineColumns} className="test lazy-table" />
               </Suspense>
             </div>
           )}
@@ -439,7 +445,7 @@ const UserRecords = ({ id }) => {
             <div className="appointment-details">
               <h3>Grooming Records</h3>
               <Suspense fallback={<div>Loading...</div>}>
-                <LazyTable dataSource={vetGroomRecord} columns={groomColumn} className="test"/>
+                <LazyTable dataSource={vetGroomRecord} columns={groomColumn} className="test lazy-table"/>
               </Suspense>
             </div>
           )}
