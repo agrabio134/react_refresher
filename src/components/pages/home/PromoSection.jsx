@@ -55,7 +55,6 @@ const PromoSection = () => {
         <div className="promo-main-box-container">
             <h2>Promos</h2>
             <div class="bar"></div>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quidem in numquam, architecto cum qui dolorum recusandae adipisci vero magnam obcaecati doloribus eaque doloremque tempore temporibus distinctio veritatis sequi! Itaque, quisquam?</p>
             <div className="promo-card-main-container">
             {loading ? (
         <p>Loading...</p>

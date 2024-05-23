@@ -59,7 +59,7 @@ const ContactSection = () => {
                             <textarea type="text" id="qa" name="qa" placeholder="Your Message" ></textarea>
                         </div>
 
-                        <button>View More</button>
+                        <button>Submit</button>
 
                 </div>
                 <div className="contact-map-container">
