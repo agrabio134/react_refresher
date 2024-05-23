@@ -11,6 +11,7 @@ import {
   Image,
   Card,
   Tooltip,
+  Input,
 } from "antd";
 import { PrinterOutlined } from "@ant-design/icons";
 import moment from "moment";
@@ -29,7 +30,6 @@ const calculateAge = (birthdate) => {
   const months = today.diff(birthdateMoment, "months") % 12;
   const days = today.diff(birthdateMoment, "days");
 
-
   if (years > 0) {
     return `${years} ${years === 1 ? "year" : "years"}`;
   } else if (months > 0) {
@@ -44,6 +44,9 @@ const VeterinaryRecord = () => {
   const [optionModalVisible, setOptionModalVisible] = useState(false);
   const [selectedOption, setSelectedOption] = useState(null);
   const [allClientRecord, setAllClientRecord] = useState([]);
+  const [remarks, setRemarks] = useState("");
+  const [isModalVisible, setIsModalVisible] = useState(false);
+  const [currentRecord, setCurrentRecord] = useState(null);
 
   const [form] = Form.useForm();
   const [formVaccine] = Form.useForm();
@@ -107,7 +110,6 @@ const VeterinaryRecord = () => {
     } catch (error) {
       console.error("Error fetching client data:", error.message);
     }
-
   };
 
   useEffect(() => {
@@ -158,7 +160,6 @@ const VeterinaryRecord = () => {
     } catch (error) {
       console.error("Error fetching data:", error.message);
     }
-
   };
 
   const mapAppointmentData = (appointment) => {
@@ -213,7 +214,7 @@ const VeterinaryRecord = () => {
               View
             </Button>
           </Tooltip>
-          <Tooltip title="Generate Report">
+          {/* <Tooltip title="Generate Report">
             <Button
               type="default"
               key={`${index}_print`}
@@ -230,14 +231,53 @@ const VeterinaryRecord = () => {
                 fontSize: "16px",
               }} // Add margin, change color, and increase font size
             />
-          </Tooltip>
+          </Tooltip> */}
         </>
       ),
     },
   ];
 
+  const showModal = (record) => {
+    setCurrentRecord(record);
+    setIsModalVisible(true);
+  };
 
-  
+  const handleSubmitRemarks = async () => {
+    const response = await fetch(
+      "https://happypawsolongapo.com/api/update_vet_record_remarks/" +
+        currentRecord.id,
+      {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          remarks: remarks,
+        }),
+      }
+    );
+
+    if (response.ok) {
+      Swal.fire({
+        title: "Remarks Updated",
+        icon: "success",
+      }).then(() => {
+        // Call getVaccinePetRecord to refresh the data
+        getVaccinePetRecord(currentRecord.id);
+      });
+    } else {
+      Swal.fire({
+        title: "Failed to Update Remarks",
+        icon: "error",
+      });
+    }
+
+    setIsModalVisible(false);
+  };
+
+  const handleCancel = () => {
+    setIsModalVisible(false);
+  };
 
   const vetVaccineColumns = [
     { title: "Pet Name", dataIndex: "name", key: "name" },
@@ -256,6 +296,27 @@ const VeterinaryRecord = () => {
       title: "Next Due Date",
       dataIndex: "next_due_date",
       key: "next_due_date",
+    },
+    {
+      title: "Remarks",
+      dataIndex: "remarks",
+      key: "remarks",
+      render: (text) => (text ? text : "No remarks"),
+    },
+    {
+      title: "Action",
+      key: "action",
+      //if no remarks, show add remarks button else show view button should be edit remarks
+      render: (text, record) =>
+        record.remarks ? (
+          <Button type="primary" onClick={() => showModal(record)}>
+            Edit Remarks
+          </Button>
+        ) : (
+          <Button type="primary" onClick={() => showModal(record)}>
+            Add Remarks
+          </Button>
+        ),
     },
   ];
 
@@ -359,151 +420,157 @@ const VeterinaryRecord = () => {
 
   const handlePrintClientsDataClick = async (client) => {
     try {
-        const response = await fetch(
-            `https://happypawsolongapo.com/api/get_all_clients_data/${client.id}`
-        );
+      const response = await fetch(
+        `https://happypawsolongapo.com/api/get_all_clients_data/${client.id}`
+      );
 
-        if (!response.ok) {
-            throw new Error(`Failed to fetch data: ${response.status}`);
-        }
+      if (!response.ok) {
+        throw new Error(`Failed to fetch data: ${response.status}`);
+      }
 
-        const textData = await response.text();
+      const textData = await response.text();
 
-        try {
-            const jsonObjects = textData
-                .split("}{")
-                .map((json, index, array) =>
-                    index === 0
-                        ? json + "}"
-                        : index === array.length - 1
-                            ? "{" + json
-                            : "{" + json + "}"
-                );
+      try {
+        const jsonObjects = textData
+          .split("}{")
+          .map((json, index, array) =>
+            index === 0
+              ? json + "}"
+              : index === array.length - 1
+              ? "{" + json
+              : "{" + json + "}"
+          );
 
-            const vetRecordData = jsonObjects.flatMap((json) => {
-                try {
-                    const parsedResult = JSON.parse(json);
-                    return parsedResult.payload || [];
-                } catch (jsonError) {
-                    console.error("Error parsing JSON:", jsonError);
-                    return [];
-                }
-            });
-
-            const groupedData = groupByClient(vetRecordData);
-            const htmlContent = generateHTML(groupedData); // Generate HTML content
-            printHTML(htmlContent); // Print HTML content in a new window
-        } catch (splitError) {
-            console.error("Error splitting JSON:", splitError);
-        }
-    } catch (error) {
-        console.error("Error fetching data:", error.message);
-    }
-};
-
-const groupByClient = (vetRecordData) => {
-    const groupedData = {};
-    vetRecordData.forEach((record) => {
-        const clientKey = record.first_name + ' ' + record.last_name;
-        if (!groupedData[clientKey]) {
-            groupedData[clientKey] = {
-                client: {
-                    first_name: record.first_name,
-                    last_name: record.last_name,
-                    contact_number: record.contact_number,
-                    address: record.address,
-                    email: record.email,
-                },
-                pets: {},
-            };
-        }
-        if (!groupedData[clientKey].pets[record.pet_id]) {
-            groupedData[clientKey].pets[record.pet_id] = {
-                id: record.pet_id,
-                name: record.pet_name,
-                type: record.pet_type,
-                breed: record.pet_breed,
-                birthdate: record.pet_birthdate,
-                sex: record.pet_sex,
-                appointments: [],
-                vet_records: [], // Include vet records for each pet
-                vaccinations: [], // Include vaccinations for each pet
-            };
-        }
-        groupedData[clientKey].pets[record.pet_id].appointments.push({
-            id: record.appointment_id,
-            date: record.appointment_date,
-            time: record.appointment_time,
-            reason: record.appointment_reason,
-            cancellation_reason: record.appointment_cancellation_reason,
-            status: record.appointment_status,
+        const vetRecordData = jsonObjects.flatMap((json) => {
+          try {
+            const parsedResult = JSON.parse(json);
+            return parsedResult.payload || [];
+          } catch (jsonError) {
+            console.error("Error parsing JSON:", jsonError);
+            return [];
+          }
         });
 
-        // Include veterinary records and vaccinations
-        if (record.appointment_reason === 'Checkup') {
-            groupedData[clientKey].pets[record.pet_id].vet_records.push({
-                // Add fields from veterinary_records
-                vet_record_id: record.vet_record_id,
-                vet_record_date: record.vet_record_date,
-                vet_on_duty: record.vet_on_duty,
-                body_wt: record.body_wt,
-                temp: record.temp,
-                complaint_history: record.complaint_history,
-                diagnostic_tool: record.diagnostic_tool,
-                laboratory_findings: record.laboratory_findings,
-                general_assessment: record.general_assessment,
-                medication_treatment: record.medication_treatment,
-                remarks: record.remarks,
+        const groupedData = groupByClient(vetRecordData);
+        const htmlContent = generateHTML(groupedData); // Generate HTML content
+        printHTML(htmlContent); // Print HTML content in a new window
+      } catch (splitError) {
+        console.error("Error splitting JSON:", splitError);
+      }
+    } catch (error) {
+      console.error("Error fetching data:", error.message);
+    }
+  };
 
-                // Include additional fields from veterinary_records here
-            });
-        } else if (record.appointment_reason === 'Vaccination') {
-            groupedData[clientKey].pets[record.pet_id].vaccinations.push({
-                // Add fields from vaccinations
-                vaccination_id: record.vaccination_id,
-                vaccine_name: record.vaccine_name,
-                date_administered: record.date_administered,
-                administered_by: record.administered_by,
+  const groupByClient = (vetRecordData) => {
+    const groupedData = {};
+    vetRecordData.forEach((record) => {
+      const clientKey = record.first_name + " " + record.last_name;
+      if (!groupedData[clientKey]) {
+        groupedData[clientKey] = {
+          client: {
+            first_name: record.first_name,
+            last_name: record.last_name,
+            contact_number: record.contact_number,
+            address: record.address,
+            email: record.email,
+          },
+          pets: {},
+        };
+      }
+      if (!groupedData[clientKey].pets[record.pet_id]) {
+        groupedData[clientKey].pets[record.pet_id] = {
+          id: record.pet_id,
+          name: record.pet_name,
+          type: record.pet_type,
+          breed: record.pet_breed,
+          birthdate: record.pet_birthdate,
+          sex: record.pet_sex,
+          appointments: [],
+          vet_records: [], // Include vet records for each pet
+          vaccinations: [], // Include vaccinations for each pet
+        };
+      }
+      groupedData[clientKey].pets[record.pet_id].appointments.push({
+        id: record.appointment_id,
+        date: record.appointment_date,
+        time: record.appointment_time,
+        reason: record.appointment_reason,
+        cancellation_reason: record.appointment_cancellation_reason,
+        status: record.appointment_status,
+      });
 
+      // Include veterinary records and vaccinations
+      if (record.appointment_reason === "Checkup") {
+        groupedData[clientKey].pets[record.pet_id].vet_records.push({
+          // Add fields from veterinary_records
+          vet_record_id: record.vet_record_id,
+          vet_record_date: record.vet_record_date,
+          vet_on_duty: record.vet_on_duty,
+          body_wt: record.body_wt,
+          temp: record.temp,
+          complaint_history: record.complaint_history,
+          diagnostic_tool: record.diagnostic_tool,
+          laboratory_findings: record.laboratory_findings,
+          general_assessment: record.general_assessment,
+          medication_treatment: record.medication_treatment,
+          remarks: record.remarks,
 
-                // Include additional fields from vaccinations here
-            });
-        }
+          // Include additional fields from veterinary_records here
+        });
+      } else if (record.appointment_reason === "Vaccination") {
+        groupedData[clientKey].pets[record.pet_id].vaccinations.push({
+          // Add fields from vaccinations
+          vaccination_id: record.vaccination_id,
+          vaccine_name: record.vaccine_name,
+          date_administered: record.date_administered,
+          administered_by: record.administered_by,
+
+          // Include additional fields from vaccinations here
+        });
+      }
     });
     return Object.values(groupedData);
-};
-
-const generateHTML = (groupedData) => {
-  // Helper function to format dates
-  const formatDate = (dateString) => {
-      const date = new Date(dateString);
-      const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
-      return date.toLocaleDateString(undefined, options);
   };
 
-  // Helper function to format times to 12-hour format with AM/PM
-  const formatTime = (timeString) => {
-      const [hours, minutes] = timeString.split(':');
+  const generateHTML = (groupedData) => {
+    // Helper function to format dates
+    const formatDate = (dateString) => {
+      const date = new Date(dateString);
+      const options = {
+        weekday: "long",
+        year: "numeric",
+        month: "long",
+        day: "numeric",
+      };
+      return date.toLocaleDateString(undefined, options);
+    };
+
+    // Helper function to format times to 12-hour format with AM/PM
+    const formatTime = (timeString) => {
+      const [hours, minutes] = timeString.split(":");
       let hour = parseInt(hours);
-      const ampm = hour >= 12 ? 'PM' : 'AM';
+      const ampm = hour >= 12 ? "PM" : "AM";
       hour = hour % 12 || 12;
       return `${hour}:${minutes} ${ampm}`;
-  };
+    };
 
-  // Remove duplicate date-time entries
-  groupedData.forEach(clientData => {
+    // Remove duplicate date-time entries
+    groupedData.forEach((clientData) => {
       for (const petId in clientData.pets) {
-          const pet = clientData.pets[petId];
-          pet.appointments = pet.appointments.filter((appointment, index, self) =>
-              index === self.findIndex(a => (
-                  a.date === appointment.date && a.time === appointment.time
-              ))
-          );
+        const pet = clientData.pets[petId];
+        pet.appointments = pet.appointments.filter(
+          (appointment, index, self) =>
+            index ===
+            self.findIndex(
+              (a) => a.date === appointment.date && a.time === appointment.time
+            )
+        );
       }
-  });
+    });
 
-  // Generate HTML content dynamically using the grouped data
-  let htmlContent = `
+    // Generate HTML content dynamically using the grouped data
+    let htmlContent = `
       <html>
       <head>
           <title>Client Data</title>
@@ -576,7 +643,7 @@ const generateHTML = (groupedData) => {
       <body>
   `;
 
-  groupedData.forEach((clientData) => {
+    groupedData.forEach((clientData) => {
       htmlContent += `
           <div class="card">
               <h1>${clientData.client.first_name} ${clientData.client.last_name}</h1>
@@ -586,8 +653,8 @@ const generateHTML = (groupedData) => {
       `;
 
       for (const petId in clientData.pets) {
-          const pet = clientData.pets[petId];
-          htmlContent += `
+        const pet = clientData.pets[petId];
+        htmlContent += `
               <div class="card">
                   <h2>${pet.name}</h2>
                   <p><strong>Type:</strong> ${pet.type}</p>
@@ -598,111 +665,117 @@ const generateHTML = (groupedData) => {
                   <div class='table-wrapper'>
           `;
 
-          // Group appointments by reason
-          const appointmentsByReason = pet.appointments.reduce((acc, appointment) => {
-              if (!acc[appointment.reason]) {
-                  acc[appointment.reason] = [];
-              }
-              acc[appointment.reason].push(appointment);
-              return acc;
-          }, {});
+        // Group appointments by reason
+        const appointmentsByReason = pet.appointments.reduce(
+          (acc, appointment) => {
+            if (!acc[appointment.reason]) {
+              acc[appointment.reason] = [];
+            }
+            acc[appointment.reason].push(appointment);
+            return acc;
+          },
+          {}
+        );
 
-          // Display appointments in a table
-          htmlContent += `<div class='table-column'>`;
-          for (const reason in appointmentsByReason) {
-              htmlContent += `
+        // Display appointments in a table
+        htmlContent += `<div class='table-column'>`;
+        for (const reason in appointmentsByReason) {
+          htmlContent += `
                   <h4>${reason}</h4>
                   <table>
                       <tr><th>Date</th><th>Time</th></tr>
               `;
-              appointmentsByReason[reason].forEach((appointment) => {
-                  htmlContent += `
+          appointmentsByReason[reason].forEach((appointment) => {
+            htmlContent += `
                       <tr>
                           <td>${formatDate(appointment.date)}</td>
                           <td>${formatTime(appointment.time)}</td>
                       </tr>
                   `;
-              });
-              htmlContent += `</table>`;
-          }
-          htmlContent += `</div>`;
+          });
+          htmlContent += `</table>`;
+        }
+        htmlContent += `</div>`;
 
-          // Display vet records
-          if (pet.vet_records.length > 0) {
-              htmlContent += `<div class='table-column'>`;
-              htmlContent += `<h3>Veterinary Records</h3>`;
-              pet.vet_records.forEach(record => {
-                  htmlContent += `
+        // Display vet records
+        if (pet.vet_records.length > 0) {
+          htmlContent += `<div class='table-column'>`;
+          htmlContent += `<h3>Veterinary Records</h3>`;
+          pet.vet_records.forEach((record) => {
+            htmlContent += `
                       <table>
-                          <tr><th>Vet Record Date</th><td>${formatDate(record.vet_record_date)}</td></tr>
-                          <tr><th>Vet on Duty</th><td>${record.vet_on_duty}</td></tr>
-                          <tr><th>Body Weight</th><td>${record.body_wt}</td></tr>
+                          <tr><th>Vet Record Date</th><td>${formatDate(
+                            record.vet_record_date
+                          )}</td></tr>
+                          <tr><th>Vet on Duty</th><td>${
+                            record.vet_on_duty
+                          }</td></tr>
+                          <tr><th>Body Weight</th><td>${
+                            record.body_wt
+                          }</td></tr>
                           <tr><th>Temperature</th><td>${record.temp}</td></tr>
-                          <tr><th>Complaint History</th><td>${record.complaint_history}</td></tr>
-                          <tr><th>Diagnostic Tool</th><td>${record.diagnostic_tool}</td></tr>
-                          <tr><th>Laboratory Findings</th><td>${record.laboratory_findings}</td></tr>
-                          <tr><th>General Assessment</th><td>${record.general_assessment}</td></tr>
-                          <tr><th>Medication Treatment</th><td>${record.medication_treatment}</td></tr>
+                          <tr><th>Complaint History</th><td>${
+                            record.complaint_history
+                          }</td></tr>
+                          <tr><th>Diagnostic Tool</th><td>${
+                            record.diagnostic_tool
+                          }</td></tr>
+                          <tr><th>Laboratory Findings</th><td>${
+                            record.laboratory_findings
+                          }</td></tr>
+                          <tr><th>General Assessment</th><td>${
+                            record.general_assessment
+                          }</td></tr>
+                          <tr><th>Medication Treatment</th><td>${
+                            record.medication_treatment
+                          }</td></tr>
                           <tr><th>Remarks</th><td>${record.remarks}</td></tr>
                       </table>
                   `;
-              });
-              htmlContent += `</div>`;
-          }
+          });
+          htmlContent += `</div>`;
+        }
 
-          // Display vaccinations if at least one valid vaccination
-          const validVaccinations = pet.vaccinations.filter(vaccination => vaccination.vaccine_name !== null && vaccination.administered_by !== undefined);
-          if (validVaccinations.length > 0) {
-            htmlContent += `<div class='table-column'>`;
-            htmlContent += `<h3>Vaccinations</h3>`;
-            htmlContent += `<table>`;
-            htmlContent += `<tr><th>Vaccine Name</th><th>Date Administered</th><th>Administered By</th></tr>`;
-            validVaccinations.forEach(vaccination => {
-                htmlContent += `
+        // Display vaccinations if at least one valid vaccination
+        const validVaccinations = pet.vaccinations.filter(
+          (vaccination) =>
+            vaccination.vaccine_name !== null &&
+            vaccination.administered_by !== undefined
+        );
+        if (validVaccinations.length > 0) {
+          htmlContent += `<div class='table-column'>`;
+          htmlContent += `<h3>Vaccinations</h3>`;
+          htmlContent += `<table>`;
+          htmlContent += `<tr><th>Vaccine Name</th><th>Date Administered</th><th>Administered By</th></tr>`;
+          validVaccinations.forEach((vaccination) => {
+            htmlContent += `
                     <tr>
                         <td>${vaccination.vaccine_name}</td>
                         <td>${formatDate(vaccination.date_administered)}</td>
                         <td>${vaccination.administered_by}</td>
                     </tr>
                 `;
-            });
-            htmlContent += `</table>`;
-            htmlContent += `</div>`;
+          });
+          htmlContent += `</table>`;
+          htmlContent += `</div>`;
         }
 
         htmlContent += `</div></div>`;
-    }
+      }
 
-    htmlContent += `</div>`;
-});
+      htmlContent += `</div>`;
+    });
 
-htmlContent += `</body></html>`;
-return htmlContent;
-};
+    htmlContent += `</body></html>`;
+    return htmlContent;
+  };
 
-
-
-
-
-          
-
-
-
-const printHTML = (htmlContent) => {
-    const newWindow = window.open('', '_blank');
+  const printHTML = (htmlContent) => {
+    const newWindow = window.open("", "_blank");
     newWindow.document.open();
     newWindow.document.write(htmlContent);
     newWindow.document.close();
-};
-
-  
-
-
-
- 
-
-
-    
+  };
 
   const handlePrint = (targetId) => {
     const printableData = vetRecord.filter(
@@ -1535,6 +1608,19 @@ const printHTML = (htmlContent) => {
 
   const renderModal = () => (
     <>
+      <Modal
+        title="Add Remark"
+        visible={isModalVisible}
+        onOk={handleSubmitRemarks}
+        onCancel={handleCancel}
+      >
+        <Input.TextArea
+          value={remarks}
+          onChange={(e) => setRemarks(e.target.value)}
+          rows={4}
+          placeholder="Enter your remarks here"
+        />
+      </Modal>
       <Modal
         // other properties
         visible={optionModalVisible}

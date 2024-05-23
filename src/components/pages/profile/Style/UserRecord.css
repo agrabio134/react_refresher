@@ -5,6 +5,8 @@
     align-items: center !important;
 }
 
+
+
 .user-records-container .pet-record-card {
     position: relative;
     z-index: 1;
@@ -168,23 +170,84 @@
     align-items: center;
   }
 
-  .test .ant-table-wrapper {
-    width: 1400px !important;
+  .lazy-table {
+    width: 1000px;
+    display: flex;
+    /* justify-content: center; */
+    align-items: center;
+    /* gap: 20px; */
   }
 
   .test .ant-table-thead tr .ant-table-cell {
     background-color: var(--bg-ascend2) !important;
+    width: 1500px !important;
     color: var(--lightcolor);
     font-weight: bold;
-    font-size: 10px !important;
+    font-size: 14px !important;
   }
+
+  
 
   .test .ant-table-tbody tr .ant-table-cell {
     color: var(--darkcolor);
-    font-size: 10px !important;
+    font-size: 14px !important;
   }
 
   .appointment-selection {
     display: flex;
     gap: 20px;
+  }
+
+  .appointment-selection .appointment-button {
+    /* padding: 10px 20px; */
+    background-color: var(--bg-ascend2);
+
+    color: var(--lightcolor);
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+
+  .appointment-selection .appointment-button.active {
+    background-color: var(--btnPrimary);        /* Add any other styles you want for the active button */
+  }
+
+
+  
+
+  /* mobile res appointment-selection */
+  @media screen and (max-width: 768px) {
+    .appointment-selection {
+      flex-direction: column;
+      gap: 5px;
+      overflow: hidden;
+
+
+      
+    }
+    
+
+    .appointment-details {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      width: 100%;
+
+
+    }
+
+    .ant-modal-content {
+      width: 100%;
+    }
+
+    .ant-modal-body {
+      padding: 0;
+    }
+
+    .lazy-table {
+      width: 100%;
+    }
+
+    
+    
   }

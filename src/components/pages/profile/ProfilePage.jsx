@@ -343,6 +343,7 @@ const ProfilePage = () => {
                 <button className="recordsBtn" onClick={showModal}>
                   Pet Records
                 </button>
+                
                 <div className="custom-dropdown-container">
                   <div
                     className="dropdown-header"
