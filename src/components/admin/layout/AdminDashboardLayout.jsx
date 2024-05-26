@@ -50,17 +50,17 @@ const AdminDashboardLayout = ({ children }) => {
   return (
     <Layout style={{ minHeight: "100vh" }}>
       {/* Sider for larger screens */}
-      <Sider
-        width={130}
-        theme="dark"
+      <Sider  className="sider"
+        width={150}
+        // theme="dark"
         collapsedWidth={0}
         breakpoint="md"
         onBreakpoint={toggleDrawer}
       >
         <div className="logo" onClick={toggleDrawer}>
-        <img src="/page/LGHD.png" alt="" />
+          <img src="/page/NLHD.png" alt="" />
         </div>
-        <Menu theme="dark" mode="vertical" defaultSelectedKeys={["1"]}>
+        <Menu className="menu" mode="vertical" defaultSelectedKeys={["1"]}>
           <Menu.Item key="1" className="menu-item-text">
             <Link to="/admin/" className="menu-item-link">
               <BarChartOutlined className="menu-item-icon" />

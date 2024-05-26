@@ -28,7 +28,7 @@ const FooterPage = () => {
                 </div>
                 <div className="contacus-details">
                   <i className="fa-solid fa-envelope"></i>
-                  <h6>happypawsolongapo@gmail.com</h6>
+                  <h6>information@happypawsolongapo.com</h6>
                 </div>
               </div>
 

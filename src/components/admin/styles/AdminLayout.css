@@ -1,40 +1,78 @@
 /* AdminLayout.css */
 .logo {
-    height: 60px;
+    height: 90px;
     text-align: center;
     color: white;
     line-height: 60px;
     font-size: 1.2rem;
   }
+
+.logo img  {
+  width: 90px !important;
+}
   
   .menu-item-link {
     display: flex;
     align-items: center;
+    color: var(--darkcolor) !important;
   }
+
+  :where(.css-dev-only-do-not-override-dkbvqv).ant-menu .ant-menu-item a::before {
+    position: absolute;
+    inset: 0;
+    background-color: transparent !important;
+    border-bottom: solid 1px var(--darkcolor);
+    content: "";
+}
   
   .menu-item-icon {
     font-size: 1.2rem;
     margin-right: 8px;
+    color: var(--darkcolor) !important;
   }
   
   .menu-item-text {
     font-size: 1rem;
     margin-bottom: 8px;
+    color: var(--darkcolor) !important;
   }
   /* Add styles for the new logout button */
 .menu-item-logout {
   display: flex;
-  align-items: center;
-  justify-content: center;
   margin-top: 16px;
 }
 
 
 .logout-button {
-  color: #fff;
+  color: var(--darkcolor) !important;
   font-size: 1rem;
 }
 
 .logout-button:hover {
   color: #1890ff; /* Change the color on hover as desired */
+}
+
+.sider {
+  display: flex;
+  justify-content: center;
+  background-color: #ffffff !important;
+  border-right: solid 1px #d4d4d4 !important;
+}
+
+.menu {
+  width: 100%;
+  height: 100%;
+  margin-top: 40px !important;
+  background-color: #ffffff !important;
+}
+
+:where(.css-dev-only-do-not-override-dkbvqv).ant-layout .ant-layout-sider-children {
+  position: fixed;
+  height: 100%;
+  margin-top: -0.1px;
+  padding-top: 0.1px;
+}
+
+:where(.css-dev-only-do-not-override-dkbvqv).ant-menu-light.ant-menu-root.ant-menu-vertical {
+  border-inline-end: none;
 }
