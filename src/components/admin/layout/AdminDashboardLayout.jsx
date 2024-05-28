@@ -61,40 +61,49 @@ const AdminDashboardLayout = ({ children }) => {
           <img src="/page/NLHD.png" alt="" />
         </div>
         <Menu className="menu" mode="vertical" defaultSelectedKeys={["1"]}>
-          <Menu.Item key="1" className="menu-item-text">
-            <Link to="/admin/" className="menu-item-link">
-              <BarChartOutlined className="menu-item-icon" />
-              Dashboard
-            </Link>
-          </Menu.Item>
-          <Menu.Item key="4" className="menu-item-text">
-            <Link to="/admin/records" className="menu-item-link">
-              <HistoryOutlined className="menu-item-icon" />
-              Records
-            </Link>
-          </Menu.Item>
-          <Menu.Item key="3" className="menu-item-text">
-            <Link to="/admin/calendar" className="menu-item-link">
-              <CalendarOutlined className="menu-item-icon" />
-              Calendar
-            </Link>
-          </Menu.Item>
-          <Menu.Item key="5" className="menu-item-text">
-            <Link to="/admin/content" className="menu-item-link">
-              <FileOutlined className="menu-item-icon" />
-              Content
-            </Link>
-          </Menu.Item>
-          <Menu.Item key="6" className="menu-item-logout">
-            <Button
-              type="text"
-              icon={<LogoutOutlined />}
-              className="logout-button"
-              onClick={handleLogout}
-            >
-              Logout
-            </Button>
-          </Menu.Item>
+          <div className="menu-main-container">
+            <div className="menu-container-set1">
+              <Menu.Item key="1" className="menu-item-text">
+                <Link to="/admin/" className="menu-item-link">
+                  <BarChartOutlined className="menu-item-icon" />
+                  Dashboard
+                </Link>
+              </Menu.Item>
+              <Menu.Item key="4" className="menu-item-text">
+                <Link to="/admin/records" className="menu-item-link">
+                  <HistoryOutlined className="menu-item-icon" />
+                  Records
+                </Link>
+              </Menu.Item>
+              <Menu.Item key="3" className="menu-item-text">
+                <Link to="/admin/calendar" className="menu-item-link">
+                  <CalendarOutlined className="menu-item-icon" />
+                  Calendar
+                </Link>
+              </Menu.Item>
+              <Menu.Item key="5" className="menu-item-text">
+                <Link to="/admin/content" className="menu-item-link">
+                  <FileOutlined className="menu-item-icon" />
+                  Content
+                </Link>
+              </Menu.Item>
+            </div>
+            <div className="menu-container-set2">
+              <Menu.Item key="6" className="menu-item-logout">
+                <Button
+                  type="text"
+                  icon={<LogoutOutlined />}
+                  className="logout-button"
+                  onClick={handleLogout}
+                >
+                  Logout
+                </Button>
+              </Menu.Item>
+            </div>
+
+
+          </div>
+
         </Menu>
       </Sider>
 

@@ -27,7 +27,7 @@ const AdminContentPage = () => {
           className={activeTab === "blog" ? "active-tab" : ""}
           onClick={() => handleTabChange("blog")}
         >
-          News & Announcements
+          Promos
         </button>
         <button
           className={activeTab === "gallery" ? "active-tab" : ""}

@@ -29,8 +29,8 @@ const ServicePage = () => {
                 <div class="icon">
                   <i className="fa-solid fa-house-chimney-medical"></i>
                 </div>
-                  <h5>Deworming</h5>
-                  <p>Say goodbye to unwanted guests with our expert deworming treatments.</p>
+                  <h5>Open to All</h5>
+                  <p>General to any kind of pets thatcustomers might have</p>
               </div>
 
               <div className="service_content">

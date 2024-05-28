@@ -22,7 +22,7 @@
   transform: translateX(-50%);
   width: 90%; /* Adjust the line width as needed */
   height: 4px; /* Adjust the line height as needed */
-  background-color: #007bff; /* Line color */
+  background-color: var(--btnPrimary); /* Line color */
   opacity: 0;
   transition: opacity 0.2s;
 }
@@ -44,5 +44,5 @@
 
 .card svg {
   margin-bottom: 10px;
-  color: #3684d8; /* Icon color */
+  color: var(--btnPrimary); /* Icon color */
 }

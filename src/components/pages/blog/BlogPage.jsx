@@ -53,11 +53,11 @@ const BlogPage = () => {
     <section className='main-blog-container'>
     <div className='blog-welcome-container'>
     <div className="blog-content">
-          <h1><span className="span">News</span> & Announcements</h1>
+          <h1><span className="span">Our</span> Promos</h1>
           <ul className='blog-breadcrumbs'>
           <a href="/">Home </a>
           <li href="">/</li>
-          <a href="/blogs">News </a>
+          <a href="/blogs">Promos </a>
           </ul>
         </div>
     </div>
@@ -68,7 +68,9 @@ const BlogPage = () => {
         <ul className="blog-list">
           {blogData.map((post) => (
             <li key={post.id} className="blog-post">
-              <Image src={`${post.thumbnail}`} alt={post.title} />
+              <div className='promo-img-fixed-size'>
+                <Image src={`${post.thumbnail}`} alt={post.title} />
+              </div>
               <div className="blog-details">
                 <h2>{post.title}</h2>
                 <div className="blog-separator"></div>

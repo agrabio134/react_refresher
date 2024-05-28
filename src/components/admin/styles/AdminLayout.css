@@ -76,3 +76,10 @@
 :where(.css-dev-only-do-not-override-dkbvqv).ant-menu-light.ant-menu-root.ant-menu-vertical {
   border-inline-end: none;
 }
+
+.menu-main-container {
+  height: 83vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}

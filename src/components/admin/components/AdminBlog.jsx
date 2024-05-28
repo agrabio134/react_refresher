@@ -102,11 +102,11 @@ const AdminBlogSection = () => {
       // edit and delete button
       render: (id, record) => (
         <div className="ActionBtn">
-          <Button type="primary" onClick={() => handleEditClick(record)}>
+          <Button className="btn-warning" onClick={() => handleEditClick(record)}>
             Edit
           </Button>
           <Button
-            type="primary"
+            className="btn-danger"
             onClick={() => handleDeleteClick(record)}
             danger
           >
@@ -444,8 +444,9 @@ const AdminBlogSection = () => {
 
   return (
     <>
-<div className="form-container">
-  <h1>News and Announcements Post</h1>
+    <div className="admin-promos-main-container">
+    <div className="form-container">
+  <h1>Promos</h1>
   <form onSubmit={handleBlogFormSubmit} encType="multipart/form-data">
     <div className="file-container">
       <FileUploader onFileSelectSuccess={handleFileInput} />
@@ -566,6 +567,7 @@ const AdminBlogSection = () => {
           </Form>
         </Card>
       </Modal>
+    </div>
     </>
   );
 };

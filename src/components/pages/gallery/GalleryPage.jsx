@@ -155,8 +155,10 @@ const GalleryPage = () => {
         ]}
       >
         {currentImage && (
-          <div>
-            <Image src={`${currentImage.image}`} alt={currentImage.image} />
+          <div className="  ">
+            <div className="test">
+              <Image src={`${currentImage.image}`} alt={currentImage.image} />
+            </div>
             <div className="image-details">
               <p>{currentImage.description}</p>
               <Descriptions>

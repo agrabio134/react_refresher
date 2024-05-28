@@ -410,11 +410,11 @@ const AdminGallerySection = () => {
       key: "action",
       render: (id, record) => (
         <div className="ActionBtn">
-          <Button type="primary" onClick={() => handleEditClick(record)}>
+          <Button className="btn-warning" onClick={() => handleEditClick(record)}>
             Edit
           </Button>
           <Button
-            type="primary"
+            className="btn-danger"
             onClick={() => handleDeleteClick(record)}
             danger
           >
@@ -427,6 +427,7 @@ const AdminGallerySection = () => {
 
   return (
     <div className="form-container">
+      <div className="gallery-container">
       <h1>Image Upload Form</h1>
       <form onSubmit={handleImageFormSubmit} encType="multipart/form-data">
         <div className="file-container">
@@ -458,6 +459,8 @@ const AdminGallerySection = () => {
           Submit Image
         </button>
       </form>
+      </div>
+
 
       {isLoading ? (
         <p>Loading...</p>

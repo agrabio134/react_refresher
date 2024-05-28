@@ -106,11 +106,15 @@
   .blog-post:hover {
     transform: translateY(-5px);
   }
+
+  .promo-img-fixed-size .ant-image {
+    display: flex;
+    width: 400px !important;
+    height: 400px !important;
+  }
   
   .blog-post img {
-    width: 100%;
-    height: auto;
-    border-radius: 8px 8px 0 0;
+   object-fit: cover;
   }
   
   .blog-details {
