@@ -77,10 +77,19 @@
   }
   
   .image-item {
+    display: flex;;
     position: relative;
     border-radius: 8px;
     overflow: hidden;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+
+  .test-container {
+    margin-top: 20px;
+  }
+
+  .test {
+    width: 320px;
   }
   
  .image-item img {
@@ -88,6 +97,7 @@
     height: auto;
     border-radius: 8px 8px 0 0;
     transition: transform 0.3s ease;
+    object-fit: cover;
   }
   
   .image-item:hover img {

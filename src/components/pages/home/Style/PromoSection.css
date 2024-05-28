@@ -76,6 +76,10 @@
     height: 400px !important;
   }
 
+  /* .promo-post .ant-image img {
+    object-fit: cover;
+  } */
+
   /* SMALL SCREEN SIZE CSS */
 
   @media screen and (max-width: 1441px) {

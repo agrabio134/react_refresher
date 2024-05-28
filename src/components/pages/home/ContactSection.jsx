@@ -8,33 +8,6 @@ const ContactSection = () => {
         <div className="container">
         <h2>Contact Us</h2>
           <div class="bar"></div>
-            <div className="contact-info-container">
-
-                <div className="contact-info-card">
-                <div class="icon">
-                <i class="fa-solid fa-phone-volume"></i>
-                </div>
-                    <h5>Telephone</h5>
-                    <p>+63 923-960-1739</p>
-                </div>
-
-                <div className="contact-info-card">
-                <div class="icon">
-                <i class="fa-solid fa-location-dot"></i>
-                </div>
-                    <h5>Location</h5>
-                    <p>26 W 21st St, Olongapo, 2200 Zambales</p>
-                </div>
-
-                <div className="contact-info-card">
-                <div class="icon">
-                <i class="fa-solid fa-envelope"></i>
-                </div>
-                    <h5>Email</h5>
-                    <p>Example@gmail.com</p>
-                </div>
-
-            </div>
 
             <div className="contact-form-map-container">
                 <div className="contact-form-container">
@@ -69,6 +42,34 @@ const ContactSection = () => {
                   <VatanHP />
                 </div>
             </div>
+
+            <div className="contact-info-container">
+
+            <div className="contact-info-card">
+            <div class="icon">
+            <i class="fa-solid fa-phone-volume"></i>
+            </div>
+                <h5>Telephone</h5>
+                <p>+63 923-960-1739</p>
+            </div>
+
+            <div className="contact-info-card">
+            <div class="icon">
+            <i class="fa-solid fa-location-dot"></i>
+            </div>
+                <h5>Location</h5>
+                <p>26 W 21st St, Olongapo, 2200 Zambales</p>
+            </div>
+
+            <div className="contact-info-card">
+            <div class="icon">
+            <i class="fa-solid fa-envelope"></i>
+            </div>
+                <h5>Email</h5>
+                <p>information@happypawsolongapo.com</p>
+            </div>
+
+          </div>
             
           </div>
       </section>
