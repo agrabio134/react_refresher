@@ -125,12 +125,12 @@ html  {
   font-size: 18px;
 }
 
-.auth_item:hover {
+/* .auth_item:hover {
   color: black;
   align-items: center;
   text-decoration: none;
   height: 100%;
-}
+} */
 
 .auth_content {
   display: flex;

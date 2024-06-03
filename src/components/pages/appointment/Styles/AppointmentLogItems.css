@@ -156,14 +156,14 @@
   word-wrap: break-word;
 }
 
-.ant-modal-body {
+/* .ant-modal-body {
   max-height: 500px;
   overflow-y: auto;
   overflow-x: auto !important;
   padding: 1rem;
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
+} */
 
 
 
@@ -340,7 +340,7 @@
   word-wrap: break-word;
 }
 
-.ant-modal-body {
+/* .ant-modal-body {
   max-width: 100dvw;
   max-height: 500dvh !important;
   overflow-y: auto;
@@ -349,7 +349,7 @@
   background-color: #fff;
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
+} */
 
 
   }
