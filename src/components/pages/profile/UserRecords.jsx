@@ -426,27 +426,33 @@ const UserRecords = ({ id }) => {
           {selectedAppointment === "Consultation" && (
             <div className="appointment-details">
               <h3>Consultation Records</h3>
+              <div className="test-01">
               <Suspense fallback={<div>Loading...</div>}>
                 <LazyTable dataSource={vetRecord} columns={columns} className="test lazy-table"/>
               </Suspense>
+              </div>
             </div>
           )}
 
           {selectedAppointment === "Vaccination" && (
             <div className="appointment-details">
               <h3>Vaccination Records</h3>
+              <div className="test-01">
               <Suspense fallback={<div>Loading...</div>}>
                 <LazyTable dataSource={vetVaccineRecord} columns={vaccineColumns} className="test lazy-table" />
               </Suspense>
+              </div>
             </div>
           )}
 
           {selectedAppointment === "Grooming" && (
             <div className="appointment-details">
               <h3>Grooming Records</h3>
+              <div className="test-01">
               <Suspense fallback={<div>Loading...</div>}>
                 <LazyTable dataSource={vetGroomRecord} columns={groomColumn} className="test lazy-table"/>
               </Suspense>
+              </div>
             </div>
           )}
         </>

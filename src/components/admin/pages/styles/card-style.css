@@ -18,3 +18,39 @@
 .grooming-card:active {
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
 }
+
+.admin-pet-rec .admin-pet-card  {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 0;
+  margin: 0;
+  background-color: var(--lightcolor);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  -webkit-transition: 0.5s;
+  transition: 0.5s;
+  border-radius: 5px;
+}
+
+.admin-pet-rec .admin-pet-card  img {
+  width: 100%;
+  height: auto;
+  border-radius: 100%;
+  margin-bottom: 10px;
+}
+
+.admin-pet-rec  .admin-pet-card p {
+  margin-bottom: 10px;
+  -webkit-transition: 0.5s;
+  transition: 0.5s;
+}
+
+.admin-pet-rec .admin-pet-card  p b{
+  color: var(--c3);
+  -webkit-transition: 0.5s;
+  transition: 0.5s;
+}

@@ -212,6 +212,13 @@
     background-color: var(--btnPrimary);        /* Add any other styles you want for the active button */
   }
 
+  .appointment-details  {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    width: 1127px;
+  }
+
 
   
 
@@ -251,3 +258,12 @@
     
     
   }
+
+      /* MOBILE SIZE CSS */
+  
+      @media screen and (max-width: 426px) {
+       .test-01 {
+        overflow-x: auto;
+       }
+  
+      }

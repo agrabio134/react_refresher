@@ -1693,10 +1693,11 @@ const VeterinaryRecord = () => {
       >
         <h1>Users Pet</h1>
         {vetPetRecord.length > 0 ? (
-          <div style={{ display: "flex", flexWrap: "wrap", gap: "20px" }}>
+          <div className="admin-pet-rec" style={{ display: "flex", flexWrap: "wrap", gap: "20px" }}>
             {vetPetRecord.map((pet, index) => (
               <Card
                 key={index}
+                className="admin-pet-card"
                 style={{ width: 300, marginBottom: 20 }}
                 cover={<Image src={pet.image} alt="Animal" />}
               >
@@ -1704,13 +1705,13 @@ const VeterinaryRecord = () => {
                   title={pet.name}
                   description={
                     <div>
-                      <p>Type: {pet.type}</p>
-                      <p>Breed: {pet.breed}</p>
+                      <p>Type: <b>{pet.type}</b></p>
+                      <p>Breed: <b>{pet.breed}</b></p>
                       <p>
-                        Date of Birth:{" "}
-                        {moment(pet.birthdate).format("MMMM D, YYYY")}
+                        Date of Birth: <b>{" "}
+                        {moment(pet.birthdate).format("MMMM D, YYYY")}</b>
                       </p>
-                      <p>Age: {calculateAge(pet.birthdate)} years old</p>
+                      <p>Age: <b>{calculateAge(pet.birthdate)} years old</b></p>
                     </div>
                   }
                 />

@@ -1,6 +1,7 @@
 import AboutPage from "./AboutUs";
 import HowItWorksPage from "./HowItWorks";
 import WhyHappyPawsPage from "./WhyHappyPaws";
+import Prices from "./Prices";
 import ServicePage from "./Service";
 import EmergencyPage from "./Emergency";
 import PromoSection from "./PromoSection";
@@ -52,8 +53,9 @@ const HomePage = () => {
           </div>
 
       </section>
-      <AboutPage />
       <WhyHappyPawsPage />
+      <AboutPage />
+      <Prices />
       <PromoSection />
       <ServicePage />
       {/* <EmergencyPage /> */}

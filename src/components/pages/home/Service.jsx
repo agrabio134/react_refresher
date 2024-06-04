@@ -29,16 +29,16 @@ const ServicePage = () => {
                 <div class="icon">
                   <i className="fa-solid fa-house-chimney-medical"></i>
                 </div>
-                  <h5>Open to All</h5>
-                  <p>General to any kind of pets thatcustomers might have</p>
+                  <h5>Home Service</h5>
+                  <p>Vatan Animal Hospital offers convenient home service care for your furry friends, bringing top-notch veterinary attention directly to your doorstep.</p>
               </div>
 
               <div className="service_content">
                 <div class="icon">
                   <i className="fa-solid fa-parachute-box"></i>
                 </div>
-                  <h5>Pet Supplies</h5>
-                  <p>Offering a range of pet care products including food, toys, grooming tools, and accessories.</p>
+                  <h5>Open to All types of Pets</h5>
+                  <p>Our services are open to all types of your furry or feathery friends .</p>
               </div>
 
               <div className="service_content">
@@ -46,7 +46,7 @@ const ServicePage = () => {
                   <i className="fa-solid fa-kit-medical"></i>
                 </div>
                   <h5>Emergency Care</h5>
-                  <p>Services tailored for specific needs like senior pet care, special diets, or medical conditions.</p>
+                  <p>Access to emergency services and immediate attention in critical situations.</p>
               </div>
 
               <div className="service_content">
@@ -54,7 +54,7 @@ const ServicePage = () => {
                   <i className="fa-solid fa-truck-medical"></i>
                 </div>
                   <h5>Specialized Care</h5>
-                  <p>Access to emergency services and immediate attention in critical situations.</p>
+                  <p>Services tailored for specific needs like senior pet care, special diets, or medical conditions.</p>
               </div>
               
             </div>
