@@ -37,8 +37,8 @@ const ServicePage = () => {
                 <div class="icon">
                   <i className="fa-solid fa-parachute-box"></i>
                 </div>
-                  <h5>Pet Supplies</h5>
-                  <p>Offering a range of pet care products including food, toys, grooming tools, and accessories.</p>
+                  <h5>Open to All types of Pets</h5>
+                  <p>Our services are open to all types of your furry or feathery friends .</p>
               </div>
 
               <div className="service_content">
