@@ -20,7 +20,7 @@ const Prices = () => {
                   </div>
                   <div className="prices_content ">
                       <h5>Grooming</h5>
-                      <h6>₱300 - 900</h6>
+                      <h6>₱300 - ₱900</h6>
                       <p>Treat your pet to professional grooming.</p>
                   </div>
                 </div>
