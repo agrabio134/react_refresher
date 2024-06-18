@@ -448,7 +448,7 @@ const UserRecords = ({ id }) => {
           {selectedAppointment === "Grooming" && (
             <div className="appointment-details">
               <h3>Grooming Records</h3>
-              <div className="test-01">
+              <div className="test-02">
               <Suspense fallback={<div>Loading...</div>}>
                 <LazyTable dataSource={vetGroomRecord} columns={groomColumn} className="test lazy-table"/>
               </Suspense>
