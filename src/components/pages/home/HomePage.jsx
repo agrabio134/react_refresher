@@ -18,8 +18,9 @@ const HomePage = () => {
         <div className="home-main-box-container">
           <div className="home-content-container"> 
               <h1>Welcome to</h1>
-              <h2>Vatan <span>HP</span></h2>
-              <p>At Vatan HP, we understand that your furry friends are family. 
+              <h2>Vatan</h2> 
+              {/* <span>Animal Hospital</span> */}
+              <p>At Vatan Animal Hospital, we understand that your furry friends are family. 
                 That's why we've crafted an easy, convenient, and stress-free way to manage your pet's appointments. 
                 Our online system is designed with both you and your pet in mind, ensuring a seamless experience from booking to check-out.
               </p>

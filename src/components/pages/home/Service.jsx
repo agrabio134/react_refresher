@@ -38,7 +38,7 @@ const ServicePage = () => {
                   <i className="fa-solid fa-parachute-box"></i>
                 </div>
                   <h5>Open to All types of Pets</h5>
-                  <p>Our services are open to all types of your furry or feathery friends .</p>
+                  <p>Our services are open to all types of your furry or feathery friends.</p>
               </div>
 
               <div className="service_content">

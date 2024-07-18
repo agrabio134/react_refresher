@@ -38,7 +38,7 @@ const ContactSection = () => {
                 <div className="contact-map-container">
                   <h2>Get In Touch</h2>
                   <div class="bar"></div>
-                  <p>Vatan HP helps our customers by providing complete access 24/7, emergency hours start from 6:01 PM to 7:59 AM. This continual availability proves to be a helpful tool for pet owners who may require emergency services or supplies for their cherished animals beyond typical operating hours. We ensure convenience in addressing any immediate needs for their pets.</p>
+                  <p>Vatan Animal Hospital helps our customers by providing complete access 24/7, emergency hours start from 6:01 PM to 7:59 AM. This continual availability proves to be a helpful tool for pet owners who may require emergency services or supplies for their cherished animals beyond typical operating hours. We ensure convenience in addressing any immediate needs for their pets.</p>
                   <VatanHP />
                 </div>
             </div>

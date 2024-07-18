@@ -9,7 +9,7 @@ const FooterPage = () => {
             <div className="footer-content">
    
               <div className="happy-paws-content">
-                <img src="/page/NLHD.png" alt="" />
+                <img src="/page/VatanL.png" alt="" />
               </div>
 
                <div className="quick-links-content">
@@ -48,7 +48,7 @@ const FooterPage = () => {
         <div className="footer-color-2">
           <div className="container">
               <div className="copyright-content">
-                <h6>Copyright © 2023 Vatan HP. All Rights Reserved. Power</h6>
+                <h6>Copyright © 2023 Vatan Animal Hospital. All Rights Reserved. Power</h6>
               </div>  
           </div> 
         </div>     

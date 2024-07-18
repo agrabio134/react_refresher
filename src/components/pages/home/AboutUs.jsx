@@ -38,7 +38,7 @@ const AboutPage = () => {
                <h2>About Us</h2>
                <div class="bar"></div>
                <h3>Professional Health and Medical Care in Full Measure</h3>
-               <p> Vatan HP is a special place that focuses on taking great care of your pets. We're not just about regular vet services; we go the extra mile to make sure your furry friends are happy and healthy. In addition to basic vet care, we offer grooming, handpicked pet products, and other services designed to meet the specific needs of your pets. We're all about making sure your beloved animals are well taken care of in every way possible.</p>
+               <p> Vatan Animal Hospital is a special place that focuses on taking great care of your pets. We're not just about regular vet services; we go the extra mile to make sure your furry friends are happy and healthy. In addition to basic vet care, we offer grooming, handpicked pet products, and other services designed to meet the specific needs of your pets. We're all about making sure your beloved animals are well taken care of in every way possible.</p>
             </div>
          </div>
       </section>
