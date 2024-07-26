@@ -42,7 +42,7 @@ const BackOfficePage = () => {
         <div className="dashboard light-bg">
           <div className="dashboard-header">
             <div className="adminText">
-              <h1><span className="admin-span1">Vatan</span> <span className="admin-span2">HP</span>| Backoffice</h1>
+              <h1><span className="admin-span1">Vatan</span> <span className="admin-span2">Animal Hospital</span>| Backoffice</h1>
             </div>
      
           </div>

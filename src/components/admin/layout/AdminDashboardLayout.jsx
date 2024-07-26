@@ -58,7 +58,7 @@ const AdminDashboardLayout = ({ children }) => {
         onBreakpoint={toggleDrawer}
       >
         <div className="logo" onClick={toggleDrawer}>
-          <img src="/page/NLHD.png" alt="" />
+          <img src="/page/VatanL.png" alt="" />
         </div>
         <Menu className="menu" mode="vertical" defaultSelectedKeys={["1"]}>
           <div className="menu-main-container">

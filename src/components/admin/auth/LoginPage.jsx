@@ -91,7 +91,7 @@ const LoginPage = () => {
         <div className={`login-container ${blurBackground ? 'blur-background' : ''}`}>
           <div className="login-content">
             <Title level={2} className="login-header">
-              Welcome to Happy Paws Admin Portal
+              Welcome to Vatan Animal Hospital Admin Portal
             </Title>
             <Paragraph className="login-subtext">Please log in to access the admin features.</Paragraph>
 
