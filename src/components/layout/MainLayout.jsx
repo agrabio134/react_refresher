@@ -165,7 +165,7 @@ const MainLayout = () => {
         
       <div className="main-side-nav-header">
       <div className="side-nav-header_logo">
-      <img src="/page/NLHD.png" alt="" />
+      <img src="/page/VatanL.png" alt="" />
               <h1>PawsPro</h1>
             </div>
 

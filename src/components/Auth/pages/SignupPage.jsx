@@ -501,7 +501,7 @@ const SignupPage = () => {
           <div className="main-signup-container">
 
             <div className="signup-logo-container">
-              <img src="/page/NLHD.png" alt="" />
+              <img src="/page/VatanL.png" alt="" />
               {/* <h1>Paws Pro</h1> */}
             </div>
             <div className="main-user-signup-container">
