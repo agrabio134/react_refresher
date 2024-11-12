@@ -1,40 +1,27 @@
-name: Auto Screenshot with Puppeteer
+name: Auto Screenshot
 
 on:
   push:
     branches:
-      - main  # Adjust branch name if necessary
-  pull_request:
-    branches:
-      - main  # Trigger on pull requests to the main branch (adjust as necessary)
+      - main
 
 jobs:
-  screenshot:
-    runs-on: ubuntu-latest  # Use the latest Ubuntu runner, change if needed
-
+  build:
+    runs-on: ubuntu-latest
+    
     steps:
-      # Step 1: Checkout the code from the repository
-      - name: Checkout repository
-        uses: actions/checkout@v3  # Checks out your repository
+    - name: Checkout repository
+      uses: actions/checkout@v2
+      
+    - name: Set up Node.js
+      uses: actions/setup-node@v2
+      with:
+        node-version: '14'
 
-      # Step 2: Set up Node.js with the version specified
-      - name: Set up Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: '16'  # Adjust the Node.js version as needed
+    - name: Install dependencies
+      run: |
+        yarn install
 
-      # Step 3: Install dependencies using Yarn
-      - name: Install dependencies
-        run: yarn install  # This installs all the dependencies defined in package.json
-
-      # Step 4: Run Puppeteer script
-      - name: Run Puppeteer script
-        run: |
-          yarn run screenshot-script  # Replace with the script name defined in package.json
-
-      # Step 5: Upload screenshot artifact (optional, if you want to save the screenshot)
-      - name: Upload screenshot artifact
-        uses: actions/upload-artifact@v3
-        with:
-          name: screenshot-artifact
-          path: ./screenshot.png  # Path to your screenshot (adjust as needed)
+    - name: Run screenshot script
+      run: |
+        yarn run screenshot-script
