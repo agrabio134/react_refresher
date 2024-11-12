@@ -1,0 +1,42 @@
+name: Auto Screenshot of GitHub Repo Code
+
+on:
+  push:
+    branches:
+      - main  # This runs the workflow on pushes to the main branch
+
+jobs:
+  screenshot:
+    runs-on: ubuntu-latest  # Using Ubuntu to run the action
+
+    steps:
+      # Checkout repository to get access to the code
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      # Install dependencies (Puppeteer for screenshot)
+      - name: Install dependencies
+        run: |
+          sudo apt-get install -y libxss1 libappindicator3-1 libindicator7
+          npm install puppeteer
+
+      # Create the screenshot of the GitHub repository
+      - name: Take screenshot
+        run: |
+          node -e "
+          const puppeteer = require('puppeteer');
+          (async () => {
+            const browser = await puppeteer.launch();
+            const page = await browser.newPage();
+            await page.goto('https://github.com/agrabio134/react_refresher');  # Your GitHub repo URL here
+            await page.screenshot({ path: 'screenshot.png' });
+            await browser.close();
+          })();
+          "
+
+      # Upload the screenshot artifact
+      - name: Upload Screenshot
+        uses: actions/upload-artifact@v2
+        with:
+          name: screenshot
+          path: screenshot.png
