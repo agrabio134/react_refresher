@@ -34,9 +34,9 @@ jobs:
           })();
           "
 
-      # Upload the screenshot artifact
+      # Upload the screenshot artifact using the latest version (v3)
       - name: Upload Screenshot
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           name: screenshot
           path: screenshot.png
