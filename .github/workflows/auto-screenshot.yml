@@ -1,27 +1,29 @@
-name: Auto Screenshot
+name: Auto Screenshot Code Files
 
 on:
   push:
     branches:
       - main
+  pull_request:
+    branches:
+      - main
 
 jobs:
-  build:
+  screenshot:
     runs-on: ubuntu-latest
-    
+
     steps:
-    - name: Checkout repository
-      uses: actions/checkout@v2
-      
-    - name: Set up Node.js
-      uses: actions/setup-node@v2
-      with:
-        node-version: '14'
+      - name: Checkout code
+        uses: actions/checkout@v2
 
-    - name: Install dependencies
-      run: |
-        yarn install
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '14'
 
-    - name: Run screenshot script
-      run: |
-        yarn run screenshot-script
+      - name: Install dependencies
+        run: npm install puppeteer
+
+      - name: Run screenshot script
+        run: node screenshot.js
+
