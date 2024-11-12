@@ -6,7 +6,7 @@ import { promisify } from 'util';
 const readdir = promisify(fs.readdir);
 const stat = promisify(fs.stat);
 
-// List of file extensions to screenshot (you can add more if needed)
+// List of file extensions to screenshot
 const fileExtensions = ['.js', '.html', '.css', '.md'];
 
 async function getFiles(dir) {
@@ -30,10 +30,7 @@ async function getFiles(dir) {
 }
 
 async function screenshotFile(filePath, page) {
-    // Read the file content (can adjust based on type of file)
     const fileContent = fs.readFileSync(filePath, 'utf8');
-
-    // Open a page and inject the content
     await page.setContent(`
         <html>
             <head><title>${path.basename(filePath)}</title></head>
@@ -43,7 +40,6 @@ async function screenshotFile(filePath, page) {
         </html>
     `);
 
-    // Screenshot file content
     const screenshotPath = path.join('screenshots', `${path.basename(filePath)}.png`);
     await page.screenshot({
         path: screenshotPath,
@@ -62,6 +58,11 @@ async function takeScreenshots() {
     }
 
     await browser.close();
+}
+
+// Ensure screenshots directory exists
+if (!fs.existsSync('screenshots')) {
+    fs.mkdirSync('screenshots');
 }
 
 // Run the function to take screenshots
