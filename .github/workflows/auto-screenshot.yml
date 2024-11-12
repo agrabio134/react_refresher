@@ -7,34 +7,33 @@ on:
   pull_request:
     branches:
       - main
-
 jobs:
   screenshot:
     runs-on: ubuntu-latest
 
     steps:
-      # 1. Checkout the code
+      # Checkout code
       - name: Checkout code
         uses: actions/checkout@v2
 
-      # 2. Set up Node.js environment
+      # Set up Node.js environment
       - name: Set up Node.js
         uses: actions/setup-node@v2
         with:
           node-version: '14'
 
-      # 3. Install dependencies (puppeteer for screenshot)
+      # Install dependencies (puppeteer for screenshot)
       - name: Install dependencies
         run: |
           npm install puppeteer
 
-      # 4. Run the screenshot script
+      # Run the screenshot script
       - name: Run screenshot script
         run: node screenshot.js
 
-      # 5. Upload the screenshots as artifacts
+      # Upload the screenshots as artifacts (updated to v3)
       - name: Upload screenshots
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           name: code-screenshots
           path: screenshots/
