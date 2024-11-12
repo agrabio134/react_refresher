@@ -6,7 +6,6 @@ import { promisify } from 'util';
 const readdir = promisify(fs.readdir);
 const stat = promisify(fs.stat);
 
-// List of file extensions to screenshot
 const fileExtensions = ['.js', '.html', '.css', '.md'];
 
 async function getFiles(dir) {
@@ -18,10 +17,8 @@ async function getFiles(dir) {
         const fileStats = await stat(fullPath);
 
         if (fileStats.isDirectory() && file !== 'node_modules') {
-            // Recurse into subdirectories (excluding node_modules)
             fileList.push(...await getFiles(fullPath));
         } else if (fileExtensions.some(ext => file.endsWith(ext))) {
-            // Add file to list if it's a code file
             fileList.push(fullPath);
         }
     }
@@ -45,25 +42,35 @@ async function screenshotFile(filePath, page) {
         path: screenshotPath,
         fullPage: true
     });
-    console.log(`Screenshot saved: ${screenshotPath}`);
+
+    console.log(`Screenshot saved at ${screenshotPath}`);
 }
 
 async function takeScreenshots() {
-    const files = await getFiles('./');  // Starting point is the root of your repo
-    const browser = await puppeteer.launch({ headless: true });
+    const files = await getFiles('./');
+    const browser = await puppeteer.launch({
+        headless: true,
+        args: ['--no-sandbox', '--disable-setuid-sandbox']  // Add this line
+    });
     const page = await browser.newPage();
 
     for (const file of files) {
+        console.log(`Taking screenshot of ${file}`);
         await screenshotFile(file, page);
     }
 
     await browser.close();
+
+    console.log("Files in 'screenshots' directory:");
+    fs.readdirSync('screenshots').forEach(file => {
+        console.log(file);
+    });
 }
 
-// Ensure screenshots directory exists
 if (!fs.existsSync('screenshots')) {
     fs.mkdirSync('screenshots');
 }
 
-// Run the function to take screenshots
-takeScreenshots().catch(console.error);
+takeScreenshots().catch(error => {
+    console.error("Error taking screenshots:", error);
+});
