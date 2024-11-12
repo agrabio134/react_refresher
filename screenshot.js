@@ -13,8 +13,20 @@ async function captureScreenshot(filePath) {
   // Set up the page content with the code
   await page.setContent(`<html><body>${formattedCode}</body></html>`);
 
+  // Ensure the 'screenshots' directory exists
+  const screenshotsDir = 'screenshots';
+  if (!fs.existsSync(screenshotsDir)){
+    fs.mkdirSync(screenshotsDir);
+  }
+
   // Take screenshot and save to 'screenshots' directory
-  await page.screenshot({ path: `screenshots/${path.basename(filePath)}.png` });
+  const screenshotPath = `${screenshotsDir}/${path.basename(filePath)}.png`;
+  await page.screenshot({ path: screenshotPath });
+
+  // Log if the screenshot was taken and file size
+  const stats = fs.statSync(screenshotPath);
+  console.log(`Screenshot saved: ${screenshotPath}, size: ${stats.size} bytes`);
+
   await browser.close();
 }
 
