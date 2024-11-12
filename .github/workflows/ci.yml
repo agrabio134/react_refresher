@@ -1,4 +1,4 @@
-name: CI Pipeline
+name: Screenshot Workflow
 
 on:
   push:
@@ -8,33 +8,29 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-
+    
     steps:
-      # Checkout the code
-      - name: Checkout code
-        uses: actions/checkout@v3
+    # Checkout the repository
+    - name: Checkout repository
+      uses: actions/checkout@v3
 
-      # Set up Node.js
-      - name: Set up Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: '18'
+    # Set up Node.js environment
+    - name: Set up Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: '18'
 
-      # Install dependencies
-      - name: Install dependencies
-        run: npm install
+    # Install dependencies
+    - name: Install dependencies
+      run: npm install
 
-      # Run the screenshot script
-      - name: Run screenshot script
-        run: node screenshot.js
+    # Run the screenshot script
+    - name: Run screenshot.js
+      run: node screenshot.js
 
-      # Verify if the screenshot files exist
-      - name: Verify screenshot files
-        run: ls -lh screenshots/
-
-      # Upload all the screenshot artifacts
-      - name: Upload screenshot artifacts
-        uses: actions/upload-artifact@v3
-        with:
-          name: code-screenshots
-          path: screenshots/*.png  # Upload all .png screenshot files
+    # Optionally, upload artifacts like screenshots
+    - name: Upload screenshot artifact
+      uses: actions/upload-artifact@v3
+      with:
+        name: code-screenshots
+        path: screenshots/
