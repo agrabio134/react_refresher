@@ -1,39 +1,38 @@
-name: Auto Screenshot Code Files
+name: Screenshot and Upload
 
-on:
-  push:
-    branches:
-      - main
-  pull_request:
-    branches:
-      - main
+on: [push]
+
 jobs:
   screenshot:
     runs-on: ubuntu-latest
-
+    
     steps:
-      # Checkout code
       - name: Checkout code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
-      # Set up Node.js environment (Use Node.js 16 or higher)
       - name: Set up Node.js
-        uses: actions/setup-node@v2
+        uses: actions/setup-node@v3
         with:
-          node-version: '16'
+          node-version: '18'  # Ensure this matches Puppeteer's requirements
 
-      # Install dependencies (puppeteer for screenshot)
       - name: Install dependencies
         run: |
-          npm install puppeteer
+          npm install
 
-      # Run the screenshot script
       - name: Run screenshot script
-        run: node screenshot.js
+        run: |
+          node screenshot.js
+        continue-on-error: true  # Allow the script to continue even if it fails for debugging
 
-      # Upload the screenshots as artifacts (updated to v3)
-      - name: Upload screenshots
+      - name: Upload screenshot artifact
         uses: actions/upload-artifact@v3
         with:
           name: code-screenshots
           path: screenshots/
+          if-no-files-found: warn
+          include-hidden-files: false
+
+      - name: List files in screenshots directory
+        run: |
+          ls -lh screenshots/  # Verify if the screenshot file exists
+
