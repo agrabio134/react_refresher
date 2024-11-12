@@ -1,4 +1,4 @@
-name: CI Workflow
+name: Puppeteer Script
 
 on:
   push:
@@ -6,34 +6,19 @@ on:
       - main
 
 jobs:
-  build:
+  puppeteer:
     runs-on: ubuntu-latest
-
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v2
+      - name: Checkout repository
+        uses: actions/checkout@v3
 
-    - name: Install dependencies
-      run: |
-        npm install
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '16'  # Or the version you're using
 
-    - name: Run tests
-      run: |
-        npm test || echo "No tests specified"
-      continue-on-error: true  # This allows the workflow to continue even if no tests are defined
+      - name: Install dependencies
+        run: npm install puppeteer
 
-    - name: Upload artifact
-      uses: actions/upload-artifact@v3
-      with:
-        name: build-artifact
-        path: ./build  # Change this to the actual path of your build or artifacts
-
-    - name: Node script to open GitHub repo
-      run: |
-        const puppeteer = require('puppeteer');
-        (async () => {
-          const browser = await puppeteer.launch();
-          const page = await browser.newPage();
-          await page.goto('https://github.com/agrabio134/react_refresher');
-          await browser.close();
-        })();
+      - name: Run Puppeteer script
+        run: node your-script.js  # Replace 'your-script.js' with the actual script filename
