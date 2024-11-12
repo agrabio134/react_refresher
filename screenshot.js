@@ -1,44 +1,68 @@
 import puppeteer from 'puppeteer';
-import fs from 'fs';
 import path from 'path';
+import fs from 'fs';
+import { promisify } from 'util';
 
-async function captureScreenshot(filePath) {
-  const browser = await puppeteer.launch();
-  const page = await browser.newPage();
+const readdir = promisify(fs.readdir);
+const stat = promisify(fs.stat);
 
-  // Read the code from the file
-  const code = fs.readFileSync(filePath, 'utf-8');
-  const formattedCode = `<pre><code>${code}</code></pre>`;
+// List of file extensions to screenshot (you can add more if needed)
+const fileExtensions = ['.js', '.html', '.css', '.md'];
 
-  // Set up the page content with the code
-  await page.setContent(`<html><body>${formattedCode}</body></html>`);
+async function getFiles(dir) {
+    const files = await readdir(dir);
+    const fileList = [];
 
-  // Ensure the 'screenshots' directory exists
-  const screenshotsDir = 'screenshots';
-  if (!fs.existsSync(screenshotsDir)){
-    fs.mkdirSync(screenshotsDir);
-  }
+    for (let file of files) {
+        const fullPath = path.join(dir, file);
+        const fileStats = await stat(fullPath);
 
-  // Take screenshot and save to 'screenshots' directory
-  const screenshotPath = `${screenshotsDir}/${path.basename(filePath)}.png`;
-  await page.screenshot({ path: screenshotPath });
+        if (fileStats.isDirectory() && file !== 'node_modules') {
+            // Recurse into subdirectories (excluding node_modules)
+            fileList.push(...await getFiles(fullPath));
+        } else if (fileExtensions.some(ext => file.endsWith(ext))) {
+            // Add file to list if it's a code file
+            fileList.push(fullPath);
+        }
+    }
 
-  // Log if the screenshot was taken and file size
-  const stats = fs.statSync(screenshotPath);
-  console.log(`Screenshot saved: ${screenshotPath}, size: ${stats.size} bytes`);
-
-  await browser.close();
+    return fileList;
 }
 
-async function main() {
-  const codeDirectory = './src';  // Path to the directory with your code files
-  const filePaths = fs.readdirSync(codeDirectory)
-    .filter(file => file.endsWith('.js'))  // You can add other file extensions as needed
-    .map(file => path.join(codeDirectory, file));
+async function screenshotFile(filePath, page) {
+    // Read the file content (can adjust based on type of file)
+    const fileContent = fs.readFileSync(filePath, 'utf8');
 
-  for (const filePath of filePaths) {
-    await captureScreenshot(filePath);
-  }
+    // Open a page and inject the content
+    await page.setContent(`
+        <html>
+            <head><title>${path.basename(filePath)}</title></head>
+            <body style="font-family: monospace; white-space: pre-wrap; padding: 20px; max-width: 1000px;">
+                <pre>${fileContent}</pre>
+            </body>
+        </html>
+    `);
+
+    // Screenshot file content
+    const screenshotPath = path.join('screenshots', `${path.basename(filePath)}.png`);
+    await page.screenshot({
+        path: screenshotPath,
+        fullPage: true
+    });
+    console.log(`Screenshot saved: ${screenshotPath}`);
 }
 
-main().catch(console.error);
+async function takeScreenshots() {
+    const files = await getFiles('./');  // Starting point is the root of your repo
+    const browser = await puppeteer.launch({ headless: true });
+    const page = await browser.newPage();
+
+    for (const file of files) {
+        await screenshotFile(file, page);
+    }
+
+    await browser.close();
+}
+
+// Run the function to take screenshots
+takeScreenshots().catch(console.error);
