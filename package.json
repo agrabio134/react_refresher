@@ -10,9 +10,9 @@
     "deploy": "gh-pages -d dist",
     "build": "vite build",
     "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
-    "preview": "vite preview",
-     "test": "jest",
-     "screenshot-script": "node screenshot.js"
+    "preview": "vite preview",    
+    "screenshot-script": "node screenshot.js"
+
   },
   "dependencies": {
     "@emotion/react": "^11.11.1",
