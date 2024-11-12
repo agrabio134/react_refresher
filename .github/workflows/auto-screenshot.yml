@@ -18,12 +18,21 @@ jobs:
       - name: Install dependencies
         run: npm install
 
+      - name: Install Puppeteer dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y \
+            libxshmfence-dev \
+            libgbm-dev \
+            libxkbcommon-x11-0 \
+            libasound2
+
       - name: Create screenshots directory
         run: mkdir -p screenshots  # Ensure screenshots directory exists
 
       - name: Run screenshot script
         run: node screenshot.js
-        continue-on-error: true  # Allow the script to continue even if it fails for debugging
+        continue-on-error: true
 
       - name: Upload screenshot artifact
         uses: actions/upload-artifact@v3
