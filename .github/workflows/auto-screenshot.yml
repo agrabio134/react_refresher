@@ -1,42 +1,36 @@
-name: Auto Screenshot of GitHub Repo Code
+name: CI Workflow
 
 on:
   push:
     branches:
-      - main  # This runs the workflow on pushes to the main branch
+      - main
 
 jobs:
-  screenshot:
-    runs-on: ubuntu-latest  # Using Ubuntu to run the action
+  build:
+    runs-on: ubuntu-latest
 
     steps:
-      # Checkout repository to get access to the code
-      - name: Checkout repository
-        uses: actions/checkout@v2
+    - name: Checkout code
+      uses: actions/checkout@v2
 
-      # Install dependencies (Puppeteer for screenshot)
-      - name: Install dependencies
-        run: |
-          sudo apt-get install -y libxss1 libappindicator3-1 libindicator7
-          npm install puppeteer
+    - name: Install dependencies
+      run: |
+        npm install
 
-      # Create the screenshot of the GitHub repository
-      - name: Take screenshot
-        run: |
-          node -e "
-          const puppeteer = require('puppeteer');
-          (async () => {
-            const browser = await puppeteer.launch();
-            const page = await browser.newPage();
-            await page.goto('https://github.com/agrabio134/react_refresher');  # Your GitHub repo URL here
-            await page.screenshot({ path: 'screenshot.png' });
-            await browser.close();
-          })();
-          "
+    - name: Run tests
+      run: |
+        npm test
 
-      # Upload the screenshot artifact using the latest version (v3)
-      - name: Upload Screenshot
-        uses: actions/upload-artifact@v3
-        with:
-          name: screenshot
-          path: screenshot.png
+    - name: Upload artifact
+      uses: actions/upload-artifact@v3
+      with:
+        name: artifact-name
+        path: path/to/artifact
+
+    - name: Node script to open GitHub repo
+      run: |
+        node -e "
+        (async () => {
+          await page.goto('https://github.com/agrabio134/react_refresher');
+        })();
+        "
